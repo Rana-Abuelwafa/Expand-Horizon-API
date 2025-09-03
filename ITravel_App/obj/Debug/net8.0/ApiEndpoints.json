@@ -164,7 +164,13 @@
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "leaf",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -255,6 +261,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.TravelAdminController",
+    "Method": "GetTransfer_Categories",
+    "RelativePath": "api/TravelAdmin/GetTransfer_Categories",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -489,6 +505,22 @@
   },
   {
     "ContainingType": "ITravel_App.Controllers.TravelAdminController",
+    "Method": "SaveTransferCategory",
+    "RelativePath": "api/TravelAdmin/SaveTransferCategory",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "row",
+        "Type": "ITravelApp.Data.Models.Transfer.TransferCategorySaveReq",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.TravelAdminController",
     "Method": "SaveTripImage",
     "RelativePath": "api/TravelAdmin/SaveTripImage",
     "HttpMethod": "POST",
@@ -661,6 +693,22 @@
   },
   {
     "ContainingType": "ITravel_App.Controllers.TravelClientController",
+    "Method": "GetDestination_Tree",
+    "RelativePath": "api/TravelClient/GetDestination_Tree",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "ITravelApp.Data.Models.destination.DestinationReq",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.TravelClientController",
     "Method": "getDestinations",
     "RelativePath": "api/TravelClient/getDestinations",
     "HttpMethod": "POST",
@@ -735,6 +783,22 @@
         "Name": "req",
         "Type": "ITravelApp.Data.Models.trips.TripsReq",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.TravelClientController",
+    "Method": "GetWishListCount",
+    "RelativePath": "api/TravelClient/GetWishListCount",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clientId",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

@@ -1,12 +1,14 @@
 ﻿using ITravel_App.Services;
 using ITravelApp.Data.Entities;
 using ITravelApp.Data.Models.destination;
+using ITravelApp.Data.Models.Transfer;
 using ITravelApp.Data.Models.trips;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITravel_App.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class TravelAdminController : Controller
@@ -24,10 +26,10 @@ namespace ITravel_App.Controllers
         #region destination
 
         [HttpPost("GetDestinationMain")]
-        public async Task<IActionResult> GetDestination_Mains()
+        public async Task<IActionResult> GetDestination_Mains([FromQuery] bool leaf)
         {
 
-            return Ok(await _adminService.GetDestination_Mains());
+            return Ok(await _adminService.GetDestination_Mains(leaf));
         }
         [HttpPost("GetDestinationWithTranslations")]
         public IActionResult GetDestinationWithTranslations(DestinationReq row)
@@ -275,5 +277,24 @@ namespace ITravel_App.Controllers
             return Ok(_adminService.GetFacilityAllWithSelect(trip_id));
         }
         #endregion
+
+        #region transfer
+        [HttpPost("GetTransfer_Categories")]
+        public async Task<IActionResult> GetTransfer_Categories()
+        {
+
+            return Ok(await _adminService.GetTransfer_Categories());
+        }
+
+        [HttpPost("SaveTransferCategory")]
+        public IActionResult SaveTransferCategory(TransferCategorySaveReq row)
+        {
+            string? email = _loginUserData.client_email;
+            row.created_by = email;
+
+            return Ok(_adminService.SaveTransferCategory(row));
+        }
+        #endregion
+
     }
 }

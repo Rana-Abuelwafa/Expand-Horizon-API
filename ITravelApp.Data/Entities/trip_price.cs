@@ -20,4 +20,8 @@ public partial class trip_price
     public DateTime? updated_at { get; set; }
 
     public string? created_by { get; set; }
+
+    public decimal? child_price { get; set; }
+
+    public string? notes { get; set; }
 }

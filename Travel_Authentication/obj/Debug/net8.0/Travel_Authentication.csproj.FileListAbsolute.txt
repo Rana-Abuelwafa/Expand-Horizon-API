@@ -359,10 +359,10 @@ D:\horizen\api\ITravel_App\Travel_Authentication\obj\Debug\net8.0\staticwebasset
 D:\horizen\api\ITravel_App\Travel_Authentication\obj\Debug\net8.0\staticwebassets.build.json.cache
 D:\horizen\api\ITravel_App\Travel_Authentication\obj\Debug\net8.0\staticwebassets.development.json
 D:\horizen\api\ITravel_App\Travel_Authentication\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+D:\horizen\api\ITravel_App\Travel_Authentication\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\horizen\api\ITravel_App\Travel_Authentication\obj\Debug\net8.0\Travel_A.C4E23910.Up2Date
 D:\horizen\api\ITravel_App\Travel_Authentication\obj\Debug\net8.0\Travel_Authentication.dll
 D:\horizen\api\ITravel_App\Travel_Authentication\obj\Debug\net8.0\refint\Travel_Authentication.dll
 D:\horizen\api\ITravel_App\Travel_Authentication\obj\Debug\net8.0\Travel_Authentication.pdb
 D:\horizen\api\ITravel_App\Travel_Authentication\obj\Debug\net8.0\Travel_Authentication.genruntimeconfig.cache
 D:\horizen\api\ITravel_App\Travel_Authentication\obj\Debug\net8.0\ref\Travel_Authentication.dll
-D:\horizen\api\ITravel_App\Travel_Authentication\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

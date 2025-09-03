@@ -2,6 +2,7 @@
 using ITravelApp.Data.Models;
 using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
+using ITravelApp.Data.Models.Transfer;
 using ITravelApp.Data.Models.trips;
 
 namespace ITravel_App.Services
@@ -13,8 +14,10 @@ namespace ITravel_App.Services
         public ResponseCls saveDestinationImage(List<destination_img> row);
         public List<DestinationWithTranslations> GetDestinationWithTranslations(DestinationReq req);
         public Task<List<destination_img>> GetImgsByDestination(int? destination_id);
-        public Task<List<destination_main>> GetDestination_Mains();
+        public Task<List<destination_main>> GetDestination_Mains(bool leaf);
         public ResponseCls UpdateDestinationImage(DestinationImgUpdateReq cls);
+        public Task<List<transfer_category>> GetTransfer_Categories();
+        public ResponseCls SaveTransferCategory(TransferCategorySaveReq row);
 
 
         #region trips

@@ -72,6 +72,8 @@ namespace ITravel_App.Controllers
             req.client_id = clientId;
             return Ok(await _clientService.GetClientWishList(req));
         }
+
+        
         #endregion
 
 

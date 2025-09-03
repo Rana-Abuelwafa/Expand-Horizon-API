@@ -12,6 +12,7 @@ namespace ITravel_App.Services
     {
         #region destination
         public List<DestinationResponse> getDestinations(DestinationReq req);
+        public List<DestinationTree> GetDestination_Tree(DestinationReq req);
         #endregion
 
         #region trips
@@ -24,6 +25,7 @@ namespace ITravel_App.Services
         public ResponseCls SaveReviewForTrip(tbl_review row);
         public Task<List<TripsAll>> GetClientWishList(ClientWishListReq req);
         public ResponseCls AddTripToWishList(TripsWishlistReq row);
+        public Task<int> GetWishListCount(string client_id);
         #endregion
 
         #region "booking"

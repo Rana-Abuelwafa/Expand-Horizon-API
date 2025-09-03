@@ -29,5 +29,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\waslaa\api\WaslaAPI\Mails_App\Mails_App.csproj" />
   </ItemGroup>
-
 </Project>

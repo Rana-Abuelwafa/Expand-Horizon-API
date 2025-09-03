@@ -22,6 +22,12 @@ namespace ITravel_App.Controllers
         }
 
         #region destination
+        //get destination tree
+        [HttpPost("GetDestination_Tree")]
+        public IActionResult GetDestination_Tree(DestinationReq req)
+        {
+            return Ok(_clientService.GetDestination_Tree(req));
+        }
         //get destinations
         [HttpPost("getDestinations")]
         public IActionResult getDestinations(DestinationReq req)
@@ -64,7 +70,12 @@ namespace ITravel_App.Controllers
         {
             return Ok(await _clientService.GetClientsReviews(req));
         }
-
+        [HttpPost("GetWishListCount")]
+        public async Task<IActionResult> GetWishListCount([FromQuery] string? clientId)
+        {
+            
+            return Ok(await _clientService.GetWishListCount(clientId));
+        }
         #endregion
 
 

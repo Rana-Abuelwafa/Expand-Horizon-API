@@ -49,6 +49,11 @@ namespace ITravel_App.Services
             return _clientDAO.getDestinations(req);
         }
 
+        public List<DestinationTree> GetDestination_Tree(DestinationReq req)
+        {
+            return _clientDAO.GetDestination_Tree(req);
+        }
+
         public Task<List<TripsPickupResponse>> GetPickupsForTrip(PickupsReq req)
         {
             return _clientDAO.GetPickupsForTrip(req);
@@ -72,6 +77,11 @@ namespace ITravel_App.Services
         public Task<List<tripwithdetail>> GetTripsForSlider(TripsReq req)
         {
             return _clientDAO.GetTripsForSlider(req);
+        }
+
+        public Task<int> GetWishListCount(string client_id)
+        {
+            return _clientDAO.GetWishListCount(client_id);
         }
 
         public ResponseCls SaveClientBooking(BookingCls row)

@@ -3,6 +3,7 @@ using ITravelApp.Data.Entities;
 using ITravelApp.Data.Models;
 using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
+using ITravelApp.Data.Models.Transfer;
 using ITravelApp.Data.Models.trips;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
@@ -36,8 +37,7 @@ namespace ITravelApp.Data
             int maxId = 0;
             var msg = _localizer["DuplicateData"];
             try
-            {
-
+            { 
                 if (row.id == 0)
                 {
                     //check duplicate validation
@@ -185,10 +185,10 @@ namespace ITravelApp.Data
                              into dest_trans
 
                     from combinedDEST in dest_trans.DefaultIfEmpty() // LEFT JOIN Customers
-                    join img in _db.destination_imgs.Where(wr => wr.is_default == true)
+                    join PAR in _db.destination_mains.Where(wr => wr.parent_id == 0 && wr.active == true)
 
-                       on dest.id equals img.destination_id into DestAll
-                    from IMGDEST in DestAll.DefaultIfEmpty() // LEFT JOIN Payments
+                       on dest.parent_id equals PAR.id into DestAll
+                    from PARDEST in DestAll.DefaultIfEmpty() // LEFT JOIN Payments
                     select new DestinationResponse
                     {
                         destination_id = dest.id,
@@ -198,10 +198,13 @@ namespace ITravelApp.Data
                         dest_code = dest.dest_code,
                         dest_description = combinedDEST != null ? combinedDEST.dest_description : null,
                         dest_name = combinedDEST != null ? combinedDEST.dest_name : null,
-                        img_path = IMGDEST != null ? "http://api.raccoon24.de/" + IMGDEST.img_path : null,
+                        //img_path = IMGDEST != null ? "http://api.raccoon24.com/" + IMGDEST.img_path : null,
                         lang_code = combinedDEST != null ? combinedDEST.lang_code : null,
                         dest_default_name = dest.dest_default_name,
-                        route = dest.route
+                        route = dest.route,
+                        leaf = dest.leaf,
+                        parent_id = dest.parent_id,
+                        parent_name = PARDEST != null ? PARDEST.dest_default_name : null
                     };
 
                 //var result = from trans in _db.destination_translations.Where(wr => wr.active == true)
@@ -217,7 +220,7 @@ namespace ITravelApp.Data
                 //                 dest_code = dest.dest_code,
                 //                 dest_description = trans.dest_description,
                 //                 dest_name = trans.dest_name,
-                //                 img_path = combined != null ? "http://api.raccoon24.de/" + combined.img_path : null,
+                //                 img_path = combined != null ? "http://api.raccoon24.com/" + combined.img_path : null,
                 //                 lang_code = trans.lang_code,
                 //                 dest_default_name= dest.dest_default_name    ,
                 //                 route=dest.route
@@ -230,7 +233,10 @@ namespace ITravelApp.Data
                     grp.country_code,
                     grp.dest_default_name,
                     grp.route,
-                    grp.active
+                    grp.active,
+                    grp.parent_name,
+                    grp.parent_id,
+                    grp.leaf
 
                 }).Select(s => new DestinationWithTranslations
                 {
@@ -241,6 +247,9 @@ namespace ITravelApp.Data
                     dest_default_name = s.Key.dest_default_name,
                     route = s.Key.route,
                     active = s.Key.active,
+                    parent_id=s.Key.parent_id,
+                    parent_name=s.Key.parent_name,
+                    leaf=s.Key.leaf,
                     translations = result.Where(wr => wr.dest_code == s.Key.dest_code).ToList()
 
                 }).ToList();
@@ -261,8 +270,8 @@ namespace ITravelApp.Data
                                                     id = s.id,
                                                     img_height = s.img_height,
                                                     img_name = s.img_name,
-                                                    img_path = "http://api.raccoon24.de/" + s.img_path,
-                                                    img_resize_path = "http://api.raccoon24.de/" + s.img_resize_path,
+                                                    img_path = "http://api.raccoon24.com/" + s.img_path,
+                                                    img_resize_path = "http://api.raccoon24.com/" + s.img_resize_path,
                                                     img_width = s.img_width,
                                                     is_default = s.is_default,
                                                     destination_id = s.destination_id,
@@ -277,9 +286,9 @@ namespace ITravelApp.Data
             }
         }
 
-        public async Task<List<destination_main>> GetDestination_Mains()
+        public async Task<List<destination_main>> GetDestination_Mains(bool leaf)
         {
-            return await _db.destination_mains.Where(wr => wr.active == true).ToListAsync();
+            return await _db.destination_mains.Where(wr => wr.active == true && wr.leaf == (leaf == false ? wr.leaf : leaf)).ToListAsync();
         }
 
         //use to set destination image is default , and first should check if there is another image with same destination id is default or not
@@ -462,6 +471,9 @@ namespace ITravelApp.Data
                     trip_origin_price = row.trip_origin_price,
                     trip_sale_price = row.trip_sale_price,
                     created_by = row.created_by,
+                    notes=row.notes,
+                    child_price=row.child_price,
+
                     
                 };
                 if (row.delete == true)
@@ -1035,7 +1047,8 @@ namespace ITravelApp.Data
                                   country_code = DEST.country_code,
                                   dest_code = DEST.dest_code,
                                   dest_default_name = DEST.dest_default_name,
-                                  trip_type = TRIP.trip_type
+                                  trip_type = TRIP.trip_type,
+                                  transfer_category_id=TRIP.transfer_category_id,
                               }).OrderBy(d => d.id).ToListAsync();
 
 
@@ -1195,8 +1208,8 @@ namespace ITravelApp.Data
                     id = s.id,
                     img_height = s.img_height,
                     img_name = s.img_name,
-                    img_path = "http://api.raccoon24.de/" + s.img_path,
-                    img_resize_path = "http://api.raccoon24.de/" + s.img_resize_path,
+                    img_path = "http://api.raccoon24.com/" + s.img_path,
+                    img_resize_path = "http://api.raccoon24.com/" + s.img_resize_path,
                     img_width = s.img_width,
                     is_default = s.is_default,
                     trip_id = s.trip_id,
@@ -1208,6 +1221,81 @@ namespace ITravelApp.Data
             }
         }
 
+        #endregion
+
+        #region "transfer"
+        //get transfer category list
+          public async Task<List<transfer_category>> GetTransfer_Categories()
+        {
+            try
+            {
+                return await _db.transfer_categories.ToListAsync();
+            }catch(Exception ex)
+            {
+                return new List<transfer_category>();
+            }
+        }
+        //save transfer category
+        public ResponseCls SaveTransferCategory(TransferCategorySaveReq row)
+        {
+            ResponseCls response;
+            int maxId = 0;
+            try
+            {
+                transfer_category transfer = new transfer_category
+                {
+                    id = row.id,
+                   category_code=row.category_code,
+                   category_name=row.category_name,
+                   currency_code=row.currency_code,
+                   created_by=row.created_by,
+                   max_capacity= row.max_capacity,
+                   max_price= row.max_price,
+                   min_capacity= row.min_capacity,
+                   min_price=row.min_price,
+                   child_price=row.child_price,
+                   notes=row.notes
+
+                };
+                if (row.delete == true)
+                {
+                    _db.Remove(transfer);
+                    _db.SaveChanges();
+                    return new ResponseCls { errors = null, success = true };
+                }
+
+                if (row.id == 0)
+                {
+                    //check duplicate validation
+                    var result = _db.transfer_categories.Where(wr => wr.min_capacity == transfer.min_capacity && wr.max_capacity == transfer.max_capacity && wr.currency_code == transfer.currency_code).SingleOrDefault();
+                    if (result != null)
+                    {
+                        return new ResponseCls { success = false, errors = _localizer["DuplicateData"] };
+                    }
+                    if (_db.transfer_categories.Count() > 0)
+                    {
+                        maxId = _db.transfer_categories.Max(d => d.id);
+
+                    }
+                    transfer.id = maxId + 1;
+                    _db.transfer_categories.Add(transfer);
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    row.updated_at = DateTime.Now;
+                    _db.transfer_categories.Update(transfer);
+                    _db.SaveChanges();
+                }
+
+                response = new ResponseCls { errors = null, success = true, idOut = transfer.id };
+            }
+            catch (Exception ex)
+            {
+                response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
+            }
+            return response;
+        }
         #endregion
 
     }

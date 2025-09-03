@@ -49,7 +49,7 @@ namespace ITravelApp.Data
 								 dest_code = dest.dest_code,
 								 dest_description = trans.dest_description,
 								 dest_name = trans.dest_name,
-								 img_path = combined != null ? "http://api.raccoon24.de/" + combined.img_path : null,
+								 img_path = combined != null ? "http://api.raccoon24.com/" + combined.img_path : null,
 								 lang_code = trans.lang_code,
 								 dest_default_name=dest.dest_default_name,
 								 route=dest.route
@@ -62,12 +62,76 @@ namespace ITravelApp.Data
 				return null;
 			}
 		}
-		#endregion
 
-		#region trips
+        public List<DestinationTree> GetDestination_Tree(DestinationReq req)
+        {
 
-		//get facilities for specific trip
-		public List<TripFacility> getFacilityForTrip(decimal? trip_id, string lang_code)
+            try
+            {
+                var main = from trans in _db.destination_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.active == true)
+                             join dest in _db.destination_mains.Where(wr => wr.active == true && wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower())) on trans.destination_id equals dest.id         // INNER JOIN
+                             join img in _db.destination_imgs on trans.id equals img.destination_id into DestAll
+                             from combined in DestAll.DefaultIfEmpty()               // LEFT JOIN
+                             select new DestinationResponse
+                             {
+                                 destination_id = trans.destination_id,
+                                 id = trans.id,
+                                 country_code = dest.country_code,
+                                 active = dest.active,
+                                 dest_code = dest.dest_code,
+                                 dest_description = trans.dest_description,
+                                 dest_name = trans.dest_name,
+                                 img_path = combined != null ? "http://api.raccoon24.com/" + combined.img_path : null,
+                                 lang_code = trans.lang_code,
+                                 dest_default_name = dest.dest_default_name,
+                                 route = dest.route,
+								 leaf=dest.leaf,
+								 parent_id=dest.parent_id
+                             };
+                
+
+                var result = GetDestination_TreeMain(main.ToList(), 0).ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<DestinationTree> GetDestination_TreeMain(List<DestinationResponse> lst, int? parentId)
+        {
+
+            return lst
+                   .Where(x => x.parent_id == parentId)
+                   .ToList()
+                  .Select(s => new DestinationTree
+                  {
+                      leaf = s.leaf,
+                      lang_code = s.lang_code,
+					  parent_id=s.parent_id,
+					  active=s.active,
+					  country_code=s.country_code,
+					  destination_id=s.destination_id,
+					  dest_code=s.dest_code,
+					  dest_default_name=s.dest_default_name,
+					  dest_description=s.dest_description,
+					  dest_name=s.dest_name,
+					  id=s.id,
+					  img_path=s.img_path,
+					  route=s.route,
+					  children= GetDestination_TreeMain(lst, s.destination_id).ToList(),
+
+                  })
+                .ToList();
+        }
+
+        #endregion
+
+        #region trips
+
+        //get facilities for specific trip
+        public List<TripFacility> getFacilityForTrip(decimal? trip_id, string lang_code)
 		{
 			try
 			{
@@ -98,8 +162,8 @@ namespace ITravelApp.Data
 					id = s.id,
 					img_height=s.img_height,
 					img_name=s.img_name,
-					img_path= "http://api.raccoon24.de/" + s.img_path,
-					img_resize_path= "http://api.raccoon24.de/" + s.img_resize_path,
+					img_path= "http://api.raccoon24.com/" + s.img_path,
+					img_resize_path= "http://api.raccoon24.com/" + s.img_resize_path,
 					img_width=s.img_width,
 					is_default=s.is_default,
 					trip_id=s.trip_id,
@@ -136,14 +200,14 @@ namespace ITravelApp.Data
 		{
 			try
 			{
-				
-				
 				var trips = await _db.tripwithdetails
-					.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && 
-					             wr.trip_type == req.trip_type &&
-								 wr.show_in_top == (req.show_in_top == false ? wr.show_in_top : req.show_in_top) && 
+					.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
+								 wr.trip_type == (req.trip_type == 0 ? wr.trip_type  : req.trip_type) &&
+								 wr.show_in_top == (req.show_in_top == false ? wr.show_in_top : req.show_in_top) &&
 								 wr.destination_id == (req.destination_id == 0 ? wr.destination_id : req.destination_id) &&
-								 wr.currency_code.ToLower() == req.currency_code.ToLower() &&
+								 //wr.currency_code.ToLower() == req.currency_code.ToLower() &&
+                                 (string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
+                                 (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower()  == req.currency_code.ToLower()) &&
                                  wr.show_in_slider == (req.show_in_slider == false ? wr.show_in_slider : req.show_in_slider))
 					.ToListAsync();
 				return trips.Select(s => new TripsAll
@@ -152,7 +216,7 @@ namespace ITravelApp.Data
 					lang_code = s.lang_code,
 					country_code = s.country_code,
 					currency_code = s.currency_code,
-					default_img = "http://api.raccoon24.de/" + s.default_img,
+					default_img = "http://api.raccoon24.com/" + s.default_img,
 					dest_code = s.dest_code,
 					dest_default_name = s.dest_default_name,
 					pickup = s.pickup,
@@ -182,6 +246,19 @@ namespace ITravelApp.Data
 					important_info = s.important_info,
 					trip_details = s.trip_details,
 					trip_not_includes = s.trip_not_includes,
+					max_capacity=s.max_capacity,
+					min_capacity=s.min_capacity,
+					max_price=s.max_price,
+					min_price=s.min_price,
+					transfer_category_name=s.transfer_category_name,
+					transfer_category__code=s.transfer_category__code,
+					transfer_currency=s.transfer_currency,
+					trip_category_code=s.trip_category_code,
+					trip_category_name=s.trip_category_name,
+					transfer_category_notes=s.transfer_category_notes,
+					transfer_child_price=s.transfer_child_price,
+					trip_child_price=s.trip_child_price,
+					trip_price_notes=s.trip_price_notes,
 					total_reviews = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Count(),
 					review_rate = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Max(m => m.review_rate)
 				}).ToList();
@@ -198,13 +275,15 @@ namespace ITravelApp.Data
         {
             try
             {
-
-
                 var trips = await _db.tripwithdetails
                     .Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
                                  wr.trip_id == req.trip_id &&
 								 wr.trip_type == req.trip_type &&
-                                 wr.currency_code.ToLower() == req.currency_code.ToLower())
+                                  //wr.currency_code.ToLower() == req.currency_code.ToLower()
+                                  (string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
+                                 (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower())
+
+                                 )
                     .ToListAsync();
                 var result = trips.Select(s => new TripsAll
                 {
@@ -212,7 +291,7 @@ namespace ITravelApp.Data
                     lang_code = s.lang_code,
                     country_code = s.country_code,
                     currency_code = s.currency_code,
-                    default_img = "http://api.raccoon24.de/" + s.default_img,
+                    default_img = "http://api.raccoon24.com/" + s.default_img,
                     dest_code = s.dest_code,
                     dest_default_name = s.dest_default_name,
                     pickup = s.pickup,
@@ -242,6 +321,19 @@ namespace ITravelApp.Data
                     important_info = s.important_info,
                     trip_details = s.trip_details,
                     trip_not_includes = s.trip_not_includes,
+					trip_price_notes=s.trip_price_notes,
+					trip_child_price=s.trip_child_price,
+					transfer_child_price=s.transfer_child_price,
+					transfer_category_notes=s.transfer_category_notes,
+					transfer_currency=s.transfer_currency,
+					trip_category_name=s.trip_category_name,
+					trip_category_code=s.trip_category_code,
+					max_capacity=s.max_capacity,
+					max_price=s.max_price,
+					min_capacity=s.min_capacity,
+					min_price=s.min_price,
+					transfer_category_name=s.transfer_category_name,
+					transfer_category__code=s.transfer_category__code,
                     total_reviews = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Count(),
                     review_rate = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Max(m => m.review_rate)
                 }).ToList();
@@ -265,9 +357,13 @@ namespace ITravelApp.Data
 				var trips = await _db.tripwithdetails
 					.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && 
 								wr.show_in_slider == true && 
-								wr.trip_type == req.trip_type &&
+								wr.trip_type == (req.trip_type == 0 ? wr.trip_type: req.trip_type) &&
 								wr.destination_id == (req.destination_id == 0 ? wr.destination_id : req.destination_id) &&
-								wr.currency_code.ToLower() == req.currency_code.ToLower())
+                                 //wr.currency_code.ToLower() == req.currency_code.ToLower()
+                                 (string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
+                                 (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower())
+
+                                )
 					.ToListAsync();
 
 
@@ -448,7 +544,19 @@ namespace ITravelApp.Data
 			return response;
 		}
 
+		//get count of wishlist for specific client
 
+		public async Task<int> GetWishListCount(string client_id)
+		{
+			try
+			{
+				return await _db.trips_wishlists.Where(wr => wr.client_id == client_id).CountAsync();
+			}
+			catch(Exception ex)
+			{
+				return 0;
+			}
+		}
 		//get wish list for Specific client
 		public async Task<List<TripsAll>> GetClientWishList(ClientWishListReq req)
 		{
@@ -456,7 +564,10 @@ namespace ITravelApp.Data
 			{
                 var trips = await _db.tripwithdetails
 					 .Where(wr => wr.lang_code == req.lang_code &&
-								   wr.currency_code.ToLower() == req.currency_code.ToLower() && wr.trip_type ==(req.trip_type == 0 ? wr.trip_type : req.trip_type))
+                                   // wr.currency_code.ToLower() == req.currency_code.ToLower() && 
+                                   (string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
+                                 (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower()) &&
+                                   wr.trip_type ==(req.trip_type == 0 ? wr.trip_type : req.trip_type))
 					 .Join(_db.trips_wishlists.Where(wr => wr.client_id == req.client_id),
 						            TRIP => new { TRIP.trip_id},
                                     WSH => new { WSH.trip_id},
@@ -466,7 +577,7 @@ namespace ITravelApp.Data
                                         lang_code = TRIP.lang_code,
                                         country_code = TRIP.country_code,
                                         currency_code = TRIP.currency_code,
-                                        default_img = "http://api.raccoon24.de/" + TRIP.default_img,
+                                        default_img = "http://api.raccoon24.com/" + TRIP.default_img,
                                         dest_code = TRIP.dest_code,
                                         dest_default_name = TRIP.dest_default_name,
                                         pickup = TRIP.pickup,
@@ -493,7 +604,19 @@ namespace ITravelApp.Data
                                         route = TRIP.route,
                                         trip_not_includes = TRIP.trip_not_includes,
                                         trip_details = TRIP.trip_details,
-                                     
+                                        transfer_category__code= TRIP.transfer_category__code,
+										transfer_category_name= TRIP.transfer_category_name,
+										min_price= TRIP.min_price,
+										min_capacity= TRIP.min_capacity,
+										max_price= TRIP.max_price,
+										max_capacity= TRIP.max_capacity,
+										transfer_category_notes= TRIP.transfer_category_notes,
+										transfer_child_price= TRIP.transfer_child_price,
+										transfer_currency= TRIP.transfer_currency,
+										trip_category_code= TRIP.trip_category_code,
+										trip_category_name= TRIP.trip_category_name,
+										trip_child_price= TRIP.trip_child_price,
+										trip_price_notes= TRIP.trip_price_notes,
                                     }).ToListAsync();
 
                 return trips.Select(s => new TripsAll
@@ -533,7 +656,21 @@ namespace ITravelApp.Data
                     review_rate = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Max(m => m.review_rate),
                     facilities = getFacilityForTrip(s.trip_id, s.lang_code).ToList(),
 					imgs = GetImgsByTrip(s.trip_id).Result,
-				})
+                    transfer_category__code = s.transfer_category__code,
+                    transfer_category_name = s.transfer_category_name,
+                    min_price = s.min_price,
+                    min_capacity = s.min_capacity,
+                    max_price = s.max_price,
+                    max_capacity = s.max_capacity,
+                    transfer_category_notes = s.transfer_category_notes,
+                    transfer_child_price = s.transfer_child_price,
+                    transfer_currency = s.transfer_currency,
+                    trip_category_code = s.trip_category_code,
+                    trip_category_name = s.trip_category_name,
+                    trip_child_price = s.trip_child_price,
+                    trip_price_notes = s.trip_price_notes,
+
+                })
 				.ToList();
 			}
 			catch (Exception ex)
@@ -716,7 +853,7 @@ namespace ITravelApp.Data
                     client_id = s.client_id,
                     img_name = s.img_name,
                     type = s.type,
-                    img_path = "http://api.raccoon24.de/" + s.img_path
+                    img_path = "http://api.raccoon24.com/" + s.img_path
                 }).ToListAsync();
 
             }

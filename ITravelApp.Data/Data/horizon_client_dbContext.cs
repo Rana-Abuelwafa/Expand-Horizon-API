@@ -34,6 +34,8 @@ public partial class horizon_client_dbContext : DbContext
 
     public virtual DbSet<tbl_review> tbl_reviews { get; set; }
 
+    public virtual DbSet<transfer_category> transfer_categories { get; set; }
+
     public virtual DbSet<trip_category> trip_categories { get; set; }
 
     public virtual DbSet<trip_facility> trip_facilities { get; set; }
@@ -138,6 +140,7 @@ public partial class horizon_client_dbContext : DbContext
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.created_by).HasMaxLength(100);
             entity.Property(e => e.dest_code).HasMaxLength(20);
+            entity.Property(e => e.parent_id).HasDefaultValue(0);
             entity.Property(e => e.route).HasMaxLength(100);
             entity.Property(e => e.updated_at)
                 .HasDefaultValueSql("now()")
@@ -200,10 +203,32 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.trip_type).HasComment("1 = exercusion trip\n2 = transfer trip");
         });
 
+        modelBuilder.Entity<transfer_category>(entity =>
+        {
+            entity.HasKey(e => e.id).HasName("transfer_category_pkey");
+
+            entity.ToTable("transfer_category");
+
+            entity.Property(e => e.category_code).HasMaxLength(20);
+            entity.Property(e => e.category_name).HasMaxLength(100);
+            entity.Property(e => e.child_price).HasDefaultValueSql("0");
+            entity.Property(e => e.created_at)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone");
+            entity.Property(e => e.created_by).HasMaxLength(100);
+            entity.Property(e => e.currency_code).HasMaxLength(20);
+            entity.Property(e => e.updated_at)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone");
+        });
+
         modelBuilder.Entity<trip_category>(entity =>
         {
             entity.HasKey(e => e.id).HasName("trip_categories_pkey");
 
+            entity.ToTable("trip_category");
+
+            entity.Property(e => e.id).HasDefaultValueSql("nextval('trip_categories_id_seq'::regclass)");
             entity.Property(e => e.type_code).HasMaxLength(50);
             entity.Property(e => e.type_name).HasMaxLength(100);
         });
@@ -253,6 +278,7 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.created_by).HasMaxLength(100);
             entity.Property(e => e.pickup).HasMaxLength(20);
             entity.Property(e => e.route).HasMaxLength(100);
+            entity.Property(e => e.transfer_category_id).HasDefaultValue(0);
             entity.Property(e => e.trip_code).HasMaxLength(20);
             entity.Property(e => e.trip_default_name).HasMaxLength(50);
             entity.Property(e => e.trip_duration).HasMaxLength(20);
@@ -300,6 +326,7 @@ public partial class horizon_client_dbContext : DbContext
         {
             entity.HasKey(e => e.id).HasName("trip_prices_pkey");
 
+            entity.Property(e => e.child_price).HasDefaultValueSql("0");
             entity.Property(e => e.created_at)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone");
@@ -368,6 +395,11 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.lang_code).HasMaxLength(5);
             entity.Property(e => e.pickup).HasMaxLength(20);
             entity.Property(e => e.route).HasMaxLength(100);
+            entity.Property(e => e.transfer_category__code).HasMaxLength(20);
+            entity.Property(e => e.transfer_category_name).HasMaxLength(100);
+            entity.Property(e => e.transfer_currency).HasMaxLength(20);
+            entity.Property(e => e.trip_category_code).HasMaxLength(50);
+            entity.Property(e => e.trip_category_name).HasMaxLength(100);
             entity.Property(e => e.trip_code).HasMaxLength(20);
             entity.Property(e => e.trip_default_name).HasMaxLength(50);
             entity.Property(e => e.trip_duration).HasMaxLength(20);

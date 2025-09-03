@@ -32,4 +32,6 @@ public partial class trip_main
     public string? route { get; set; }
 
     public int? trip_type { get; set; }
+
+    public int? transfer_category_id { get; set; }
 }
