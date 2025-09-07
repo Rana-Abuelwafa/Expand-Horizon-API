@@ -12,6 +12,11 @@ namespace ITravelApp.Data.Models.global
         public bool? active { get; set; }
         public string? facility_code { get; set; }
         public string? facility_default_name { get; set; }
+        public bool? is_extra { get; set; }
+
+        public decimal? extra_price { get; set; }
+
+        public string? currency_code { get; set; }
     }
 
     public class FacilityWithTranslationGrp
@@ -20,6 +25,11 @@ namespace ITravelApp.Data.Models.global
         public long? facility_id { get; set; }
         public string? facility_code { get; set; }
         public string? facility_default_name { get; set; }
+        public bool? is_extra { get; set; }
+
+        public decimal? extra_price { get; set; }
+
+        public string? currency_code { get; set; }
         public List<FacilityWithTranslation> translations { get; set; }
     }
 }

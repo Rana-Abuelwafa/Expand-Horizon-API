@@ -24,6 +24,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tbl_review"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/tbl_review"
@@ -66,6 +71,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripsWishlistReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TripsWishlistReq"
@@ -108,6 +118,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientWishListReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ClientWishListReq"
@@ -150,6 +165,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingCls"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/BookingCls"
@@ -163,6 +183,253 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/BookingCls"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Booking/GetTrip_Extra_Mains": {
+      "post": {
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language for the response (e.g., en, ar, de)",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripExtraReq"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripExtraReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripExtraReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripExtraReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Booking/AssignExtraToBooking": {
+      "post": {
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language for the response (e.g., en, ar, de)",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/booking_extra"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/booking_extra"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/booking_extra"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/booking_extra"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Booking/CalculateBookingPrice": {
+      "post": {
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language for the response (e.g., en, ar, de)",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculateBookingPriceReq"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculateBookingPriceReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculateBookingPriceReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalculateBookingPriceReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Booking/GetBookingWithDetails": {
+      "post": {
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language for the response (e.g., en, ar, de)",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingReq"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Booking/ConfirmBooking": {
+      "post": {
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language for the response (e.g., en, ar, de)",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmBookingReq"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmBookingReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmBookingReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmBookingReq"
               }
             }
           }
@@ -281,6 +548,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientProfileCast"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ClientProfileCast"
@@ -346,6 +618,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/client_notification_setting"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/client_notification_setting"
@@ -418,6 +695,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DestinationReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/DestinationReq"
@@ -460,6 +742,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/destination_main"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/destination_main"
@@ -502,6 +789,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/destination_translation"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/destination_translation"
@@ -693,6 +985,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DestinationImgUpdateReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/DestinationImgUpdateReq"
@@ -797,6 +1094,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/trip_main"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/trip_main"
@@ -839,6 +1141,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripTranslationReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TripTranslationReq"
@@ -881,6 +1188,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripPricesReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TripPricesReq"
@@ -1048,6 +1360,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/facility_main"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/facility_main"
@@ -1090,6 +1407,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacilityTranslationReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/FacilityTranslationReq"
@@ -1132,6 +1454,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripFacilityAssignReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TripFacilityAssignReq"
@@ -1174,6 +1501,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripsPickupSaveReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TripsPickupSaveReq"
@@ -1216,6 +1548,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripsPickupTranslationSaveReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TripsPickupTranslationSaveReq"
@@ -1320,6 +1657,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PickupsReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/PickupsReq"
@@ -1393,6 +1735,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripImgUpdateReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TripImgUpdateReq"
@@ -1512,6 +1859,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransferCategorySaveReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TransferCategorySaveReq"
@@ -1554,6 +1906,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DestinationReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/DestinationReq"
@@ -1596,6 +1953,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DestinationReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/DestinationReq"
@@ -1638,6 +2000,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripDetailsReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TripDetailsReq"
@@ -1680,6 +2047,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripsReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TripsReq"
@@ -1722,6 +2094,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripsReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TripsReq"
@@ -1764,6 +2141,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PickupsReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/PickupsReq"
@@ -1806,6 +2188,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientsReviewsReq"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ClientsReviewsReq"
@@ -1929,12 +2316,102 @@
             "type": "string",
             "nullable": true
           },
+          "infant_num": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pickup_address": {
+            "type": "string",
+            "nullable": true
+          },
+          "client_phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "booking_code_auto": {
+            "type": "string",
+            "nullable": true
+          },
+          "client_nationality": {
+            "type": "string",
+            "nullable": true
+          },
+          "gift_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "trip_type": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "booking_dateStr": {
             "type": "string",
             "nullable": true
           },
           "trip_dateStr": {
             "type": "string",
+            "nullable": true
+          },
+          "currency_code": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BookingReq": {
+        "type": "object",
+        "properties": {
+          "booking_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "client_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "lang_code": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CalculateBookingPriceReq": {
+        "type": "object",
+        "properties": {
+          "booking_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "trip_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "adult_num": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "child_num": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "currency_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "extra_lst": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtraWithPrice"
+            },
             "nullable": true
           }
         },
@@ -2053,6 +2530,25 @@
         },
         "additionalProperties": false
       },
+      "ConfirmBookingReq": {
+        "type": "object",
+        "properties": {
+          "booking_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "client_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "lang_code": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "DestinationImgUpdateReq": {
         "type": "object",
         "properties": {
@@ -2129,6 +2625,22 @@
         },
         "additionalProperties": false
       },
+      "ExtraWithPrice": {
+        "type": "object",
+        "properties": {
+          "extra_price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "extra_count": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "FacilityTranslationReq": {
         "type": "object",
         "properties": {
@@ -2178,11 +2690,13 @@
         "properties": {
           "trip_id": {
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "nullable": true
           },
           "trip_type": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "lang_code": {
             "type": "string",
@@ -2282,6 +2796,25 @@
           "trip_type": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TripExtraReq": {
+        "type": "object",
+        "properties": {
+          "trip_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "lang_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "isExtra": {
+            "type": "boolean",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2681,6 +3214,45 @@
         },
         "additionalProperties": false
       },
+      "booking_extra": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "booking_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "extra_id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "created_by": {
+            "type": "string",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "extra_count": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "client_notification_setting": {
         "type": "object",
         "properties": {
@@ -2846,6 +3418,19 @@
           "created_by": {
             "type": "string",
             "nullable": true
+          },
+          "is_extra": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "extra_price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currency_code": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2957,6 +3542,10 @@
           "transfer_category_id": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "trip_code_auto": {
+            "type": "string",
             "nullable": true
           }
         },

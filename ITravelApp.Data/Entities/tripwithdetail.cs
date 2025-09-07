@@ -84,4 +84,6 @@ public partial class tripwithdetail
     public decimal? trip_child_price { get; set; }
 
     public string? trip_price_notes { get; set; }
+
+    public string? trip_code_auto { get; set; }
 }

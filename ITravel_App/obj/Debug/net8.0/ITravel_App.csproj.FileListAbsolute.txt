@@ -350,3 +350,12 @@ D:\horizen\api\ITravel_App\ITravel_App\obj\Debug\net8.0\refint\ITravel_App.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Debug\net8.0\ITravel_App.pdb
 D:\horizen\api\ITravel_App\ITravel_App\obj\Debug\net8.0\ITravel_App.genruntimeconfig.cache
 D:\horizen\api\ITravel_App\ITravel_App\obj\Debug\net8.0\ref\ITravel_App.dll
+D:\horizen\api\ITravel_App\ITravel_App\obj\Debug\net8.0\ITravel_App.RazorAssemblyInfo.cache
+D:\horizen\api\ITravel_App\ITravel_App\obj\Debug\net8.0\ITravel_App.RazorAssemblyInfo.cs
+D:\horizen\api\ITravel_App\ITravel_App\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\horizen\api\ITravel_App\ITravel_App\bin\Debug\net8.0\MailKit.dll
+D:\horizen\api\ITravel_App\ITravel_App\bin\Debug\net8.0\MimeKit.dll
+D:\horizen\api\ITravel_App\ITravel_App\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\horizen\api\ITravel_App\ITravel_App\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\horizen\api\ITravel_App\ITravel_App\bin\Debug\net8.0\Mails_App.dll
+D:\horizen\api\ITravel_App\ITravel_App\bin\Debug\net8.0\Mails_App.pdb

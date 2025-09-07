@@ -1,0 +1,404 @@
+[2025-09-06 14:02:45.138 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-06 14:02:45.776 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-06 14:02:45.777 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-06 14:02:46.109 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-06 14:02:46.110 +03:00  INF]  Hosting environment: Development
+[2025-09-06 14:02:46.110 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-06 14:02:47.075 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-06 14:02:47.804 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 740.8742ms
+[2025-09-06 14:02:47.882 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-06 14:02:47.882 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-06 14:02:47.892 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 9.5643ms
+[2025-09-06 14:02:48.142 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 260.4915ms
+[2025-09-06 14:02:48.486 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-06 14:02:48.770 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 283.6861ms
+[2025-09-06 14:05:58.918 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/SaveClientBooking - application/json 549
+[2025-09-06 14:06:00.320 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 14:06:00.322 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App)'
+[2025-09-06 14:06:00.342 +03:00  INF]  Route matched with {action = "SaveClientBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SaveClientBooking(ITravelApp.Data.Models.Bookings.BookingCls) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-09-06 14:06:02.688 +03:00  INF]  Executed DbCommand (75ms) [Parameters=[@__booking_trip_id_0='?' (DbType = Int64), @__booking_booking_status_1='?' (DbType = Int32), @__booking_client_id_2='?', @__booking_booking_date_3='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.booking_code, t.booking_code_auto, t.booking_date, t.booking_notes, t.booking_status, t.child_num, t.client_email, t.client_id, t.client_nationality, t.client_phone, t.currency_code, t.gift_code, t.infant_num, t.pickup_address, t.pickup_time, t.total_pax, t.total_price, t.trip_code, t.trip_date, t.trip_id, t.trip_type
+FROM trips_booking AS t
+WHERE t.trip_id = @__booking_trip_id_0 AND t.booking_status = @__booking_booking_status_1 AND t.client_id = @__booking_client_id_2 AND t.booking_date = @__booking_booking_date_3
+LIMIT 2
+[2025-09-06 14:06:02.734 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM trips_booking AS t
+[2025-09-06 14:06:02.759 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT max(t.id)
+FROM trips_booking AS t
+[2025-09-06 14:06:02.963 +03:00  INF]  Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Int64), @p1='?', @p2='?', @p3='?' (DbType = DateTime2), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?', @p13='?' (DbType = Int32), @p14='?', @p15='?', @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?', @p19='?' (DbType = DateTime2), @p20='?' (DbType = Int64), @p21='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO trips_booking (id, booking_code, booking_code_auto, booking_date, booking_notes, booking_status, child_num, client_email, client_id, client_nationality, client_phone, currency_code, gift_code, infant_num, pickup_address, pickup_time, total_pax, total_price, trip_code, trip_date, trip_id, trip_type)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21);
+[2025-09-06 14:06:03.011 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-09-06 14:06:03.022 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App) in 2675.9665ms
+[2025-09-06 14:06:03.022 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App)'
+[2025-09-06 14:06:03.038 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/SaveClientBooking - 200 null application/json; charset=utf-8 4120.2966ms
+[2025-09-06 14:08:12.843 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/GetTrip_Extra_Mains - application/json 58
+[2025-09-06 14:08:12.860 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 14:08:12.861 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.GetTrip_Extra_Mains (ITravel_App)'
+[2025-09-06 14:08:12.870 +03:00  INF]  Route matched with {action = "GetTrip_Extra_Mains", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTrip_Extra_Mains(ITravelApp.Data.Models.Bookings.TripExtraReq) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-09-06 14:08:13.060 +03:00  INF]  Executed DbCommand (7ms) [Parameters=[@__ToLower_1='?', @__isExtra_2='?' (DbType = Boolean), @__trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN f0.id IS NOT NULL THEN f0.facility_desc
+    ELSE ''
+END AS facility_desc, CASE
+    WHEN f0.id IS NOT NULL THEN f0.facility_name
+    ELSE ''
+END AS facility_name, CASE
+    WHEN f2.id IS NOT NULL THEN f2.extra_price
+    ELSE 0.0
+END AS extra_price, CASE
+    WHEN f2.id IS NOT NULL THEN f2.currency_code
+    ELSE ''
+END AS currency_code, CASE
+    WHEN f2.id IS NOT NULL THEN f2.is_extra
+    ELSE FALSE
+END AS is_extra, t.facility_id
+FROM trip_facility AS t
+LEFT JOIN (
+    SELECT f.id, f.facility_desc, f.facility_id, f.facility_name
+    FROM facility_translations AS f
+    WHERE lower(f.lang_code) = @__ToLower_1
+) AS f0 ON t.facility_id = f0.facility_id
+LEFT JOIN (
+    SELECT f1.id, f1.currency_code, f1.extra_price, f1.is_extra
+    FROM facility_main AS f1
+    WHERE f1.active AND f1.is_extra = @__isExtra_2
+) AS f2 ON t.facility_id = f2.id
+WHERE t.trip_id = @__trip_id_0
+[2025-09-06 14:08:13.061 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.trips.TripFacility, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-06 14:08:13.066 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.GetTrip_Extra_Mains (ITravel_App) in 194.7138ms
+[2025-09-06 14:08:13.066 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.GetTrip_Extra_Mains (ITravel_App)'
+[2025-09-06 14:08:13.066 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/GetTrip_Extra_Mains - 200 null application/json; charset=utf-8 225.5642ms
+[2025-09-06 14:29:00.542 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-06 14:29:01.141 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-06 14:29:01.151 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-06 14:29:02.700 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-06 14:29:02.700 +03:00  INF]  Hosting environment: Development
+[2025-09-06 14:29:02.700 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-06 14:29:02.779 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-06 14:29:04.544 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 1778.646ms
+[2025-09-06 14:29:05.134 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-06 14:29:05.146 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 11.9159ms
+[2025-09-06 14:29:06.438 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-06 14:29:06.526 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 87.4851ms
+[2025-09-06 14:29:07.656 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-06 14:29:07.753 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 96.711ms
+[2025-09-06 14:31:49.802 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - application/json 154
+[2025-09-06 14:31:50.192 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 14:31:50.196 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-09-06 14:31:50.239 +03:00  INF]  Route matched with {action = "AssignExtraToBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AssignExtraToBooking(System.Collections.Generic.List`1[ITravelApp.Data.Entities.booking_extra]) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-09-06 14:31:50.747 +03:00  INF]  Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+[2025-09-06 14:31:50.824 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App) in 575.3056ms
+[2025-09-06 14:31:50.824 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-09-06 14:31:50.832 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - 400 null application/problem+json; charset=utf-8 1029.8387ms
+[2025-09-06 14:32:02.134 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - application/json 155
+[2025-09-06 14:32:02.176 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 14:32:02.176 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-09-06 14:32:02.176 +03:00  INF]  Route matched with {action = "AssignExtraToBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AssignExtraToBooking(System.Collections.Generic.List`1[ITravelApp.Data.Entities.booking_extra]) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-09-06 14:32:05.011 +03:00  INF]  Executed DbCommand (143ms) [Parameters=[@__row_extra_id_0='?' (DbType = Int32), @__row_booking_id_1='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.id, b.booking_id, b.created_at, b.created_by, b.extra_count, b.extra_id, b.updated_at
+FROM booking_extra AS b
+WHERE b.extra_id = @__row_extra_id_0 AND b.booking_id = @__row_booking_id_1
+LIMIT 2
+[2025-09-06 14:32:05.103 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM booking_extra AS b
+[2025-09-06 14:32:05.464 +03:00  INF]  Executed DbCommand (20ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int64), @p2='?' (DbType = DateTime2), @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO booking_extra (id, booking_id, created_at, created_by, extra_count, extra_id)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING updated_at;
+[2025-09-06 14:32:05.518 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-09-06 14:32:05.535 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App) in 3358.9978ms
+[2025-09-06 14:32:05.536 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-09-06 14:32:05.552 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - 200 null application/json; charset=utf-8 3418.125ms
+[2025-09-06 14:34:25.108 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/CalculateBookingPrice - application/json 182
+[2025-09-06 14:34:25.129 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 14:34:25.129 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.CalculateBookingPrice (ITravel_App)'
+[2025-09-06 14:34:25.133 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-09-06 14:34:25.235 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.pickup, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-09-06 14:34:25.488 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[@__8__locals2_trip_id_0='?' (DbType = Int64), @__ToLower_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.child_price, t.created_at, t.created_by, t.currency_code, t.notes, t.trip_id, t.trip_origin_price, t.trip_sale_price, t.updated_at
+FROM trip_prices AS t
+WHERE t.trip_id = @__8__locals2_trip_id_0 AND lower(t.currency_code) = @__ToLower_1
+LIMIT 2
+[2025-09-06 14:34:25.512 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__8__locals1_req_booking_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.booking_code, t.booking_code_auto, t.booking_date, t.booking_notes, t.booking_status, t.child_num, t.client_email, t.client_id, t.client_nationality, t.client_phone, t.currency_code, t.gift_code, t.infant_num, t.pickup_address, t.pickup_time, t.total_pax, t.total_price, t.trip_code, t.trip_date, t.trip_id, t.trip_type
+FROM trips_booking AS t
+WHERE t.id = @__8__locals1_req_booking_id_0
+LIMIT 2
+[2025-09-06 14:34:25.709 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p21='?' (DbType = Int64), @p0='?', @p1='?', @p2='?' (DbType = DateTime2), @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?' (DbType = Int32), @p13='?', @p14='?', @p15='?' (DbType = Int32), @p16='?' (DbType = Decimal), @p17='?', @p18='?' (DbType = DateTime2), @p19='?' (DbType = Int64), @p20='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE trips_booking SET booking_code = @p0, booking_code_auto = @p1, booking_date = @p2, booking_notes = @p3, booking_status = @p4, child_num = @p5, client_email = @p6, client_id = @p7, client_nationality = @p8, client_phone = @p9, currency_code = @p10, gift_code = @p11, infant_num = @p12, pickup_address = @p13, pickup_time = @p14, total_pax = @p15, total_price = @p16, trip_code = @p17, trip_date = @p18, trip_id = @p19, trip_type = @p20
+WHERE id = @p21;
+[2025-09-06 14:34:25.789 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-09-06 14:34:25.789 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.CalculateBookingPrice (ITravel_App) in 655.6436ms
+[2025-09-06 14:34:25.789 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.CalculateBookingPrice (ITravel_App)'
+[2025-09-06 14:34:25.790 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/CalculateBookingPrice - 200 null application/json; charset=utf-8 681.2522ms
+[2025-09-06 14:35:01.766 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/CalculateBookingPrice - application/json 182
+[2025-09-06 14:35:01.773 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 14:35:01.773 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.CalculateBookingPrice (ITravel_App)'
+[2025-09-06 14:35:01.774 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-09-06 14:35:18.011 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.pickup, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-09-06 14:35:36.352 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals2_trip_id_0='?' (DbType = Int64), @__ToLower_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.child_price, t.created_at, t.created_by, t.currency_code, t.notes, t.trip_id, t.trip_origin_price, t.trip_sale_price, t.updated_at
+FROM trip_prices AS t
+WHERE t.trip_id = @__8__locals2_trip_id_0 AND lower(t.currency_code) = @__ToLower_1
+LIMIT 2
+[2025-09-06 14:36:03.132 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@__8__locals1_req_booking_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.booking_code, t.booking_code_auto, t.booking_date, t.booking_notes, t.booking_status, t.child_num, t.client_email, t.client_id, t.client_nationality, t.client_phone, t.currency_code, t.gift_code, t.infant_num, t.pickup_address, t.pickup_time, t.total_pax, t.total_price, t.trip_code, t.trip_date, t.trip_id, t.trip_type
+FROM trips_booking AS t
+WHERE t.id = @__8__locals1_req_booking_id_0
+LIMIT 2
+[2025-09-06 14:36:03.139 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p21='?' (DbType = Int64), @p0='?', @p1='?', @p2='?' (DbType = DateTime2), @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?' (DbType = Int32), @p13='?', @p14='?', @p15='?' (DbType = Int32), @p16='?' (DbType = Decimal), @p17='?', @p18='?' (DbType = DateTime2), @p19='?' (DbType = Int64), @p20='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE trips_booking SET booking_code = @p0, booking_code_auto = @p1, booking_date = @p2, booking_notes = @p3, booking_status = @p4, child_num = @p5, client_email = @p6, client_id = @p7, client_nationality = @p8, client_phone = @p9, currency_code = @p10, gift_code = @p11, infant_num = @p12, pickup_address = @p13, pickup_time = @p14, total_pax = @p15, total_price = @p16, trip_code = @p17, trip_date = @p18, trip_id = @p19, trip_type = @p20
+WHERE id = @p21;
+[2025-09-06 14:36:03.140 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-09-06 14:36:03.140 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.CalculateBookingPrice (ITravel_App) in 61366.561ms
+[2025-09-06 14:36:03.140 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.CalculateBookingPrice (ITravel_App)'
+[2025-09-06 14:36:03.141 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/CalculateBookingPrice - 200 null application/json; charset=utf-8 61379.0781ms
+[2025-09-06 14:36:47.070 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/CalculateBookingPrice - application/json 182
+[2025-09-06 14:36:47.078 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 14:36:47.080 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.CalculateBookingPrice (ITravel_App)'
+[2025-09-06 14:36:47.082 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-09-06 14:36:57.796 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.pickup, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-09-06 14:37:03.820 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals2_trip_id_0='?' (DbType = Int64), @__ToLower_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.child_price, t.created_at, t.created_by, t.currency_code, t.notes, t.trip_id, t.trip_origin_price, t.trip_sale_price, t.updated_at
+FROM trip_prices AS t
+WHERE t.trip_id = @__8__locals2_trip_id_0 AND lower(t.currency_code) = @__ToLower_1
+LIMIT 2
+[2025-09-06 14:37:35.804 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@__8__locals1_req_booking_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.booking_code, t.booking_code_auto, t.booking_date, t.booking_notes, t.booking_status, t.child_num, t.client_email, t.client_id, t.client_nationality, t.client_phone, t.currency_code, t.gift_code, t.infant_num, t.pickup_address, t.pickup_time, t.total_pax, t.total_price, t.trip_code, t.trip_date, t.trip_id, t.trip_type
+FROM trips_booking AS t
+WHERE t.id = @__8__locals1_req_booking_id_0
+LIMIT 2
+[2025-09-06 14:37:40.390 +03:00  INF]  Executed DbCommand (11ms) [Parameters=[@p21='?' (DbType = Int64), @p0='?', @p1='?', @p2='?' (DbType = DateTime2), @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?' (DbType = Int32), @p13='?', @p14='?', @p15='?' (DbType = Int32), @p16='?' (DbType = Decimal), @p17='?', @p18='?' (DbType = DateTime2), @p19='?' (DbType = Int64), @p20='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE trips_booking SET booking_code = @p0, booking_code_auto = @p1, booking_date = @p2, booking_notes = @p3, booking_status = @p4, child_num = @p5, client_email = @p6, client_id = @p7, client_nationality = @p8, client_phone = @p9, currency_code = @p10, gift_code = @p11, infant_num = @p12, pickup_address = @p13, pickup_time = @p14, total_pax = @p15, total_price = @p16, trip_code = @p17, trip_date = @p18, trip_id = @p19, trip_type = @p20
+WHERE id = @p21;
+[2025-09-06 14:37:41.806 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-09-06 14:37:41.808 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.CalculateBookingPrice (ITravel_App) in 54726.0777ms
+[2025-09-06 14:37:41.808 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.CalculateBookingPrice (ITravel_App)'
+[2025-09-06 14:37:41.809 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/CalculateBookingPrice - 200 null application/json; charset=utf-8 54739.6356ms
+[2025-09-06 14:38:35.122 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/CalculateBookingPrice - application/json 182
+[2025-09-06 14:38:35.123 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 14:38:35.123 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.CalculateBookingPrice (ITravel_App)'
+[2025-09-06 14:38:35.123 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-09-06 14:38:36.673 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.pickup, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-09-06 14:38:36.680 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@__8__locals2_trip_id_0='?' (DbType = Int64), @__ToLower_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.child_price, t.created_at, t.created_by, t.currency_code, t.notes, t.trip_id, t.trip_origin_price, t.trip_sale_price, t.updated_at
+FROM trip_prices AS t
+WHERE t.trip_id = @__8__locals2_trip_id_0 AND lower(t.currency_code) = @__ToLower_1
+LIMIT 2
+[2025-09-06 14:38:36.681 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals1_req_booking_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.booking_code, t.booking_code_auto, t.booking_date, t.booking_notes, t.booking_status, t.child_num, t.client_email, t.client_id, t.client_nationality, t.client_phone, t.currency_code, t.gift_code, t.infant_num, t.pickup_address, t.pickup_time, t.total_pax, t.total_price, t.trip_code, t.trip_date, t.trip_id, t.trip_type
+FROM trips_booking AS t
+WHERE t.id = @__8__locals1_req_booking_id_0
+LIMIT 2
+[2025-09-06 14:38:36.686 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p21='?' (DbType = Int64), @p0='?', @p1='?', @p2='?' (DbType = DateTime2), @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?' (DbType = Int32), @p13='?', @p14='?', @p15='?' (DbType = Int32), @p16='?' (DbType = Decimal), @p17='?', @p18='?' (DbType = DateTime2), @p19='?' (DbType = Int64), @p20='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE trips_booking SET booking_code = @p0, booking_code_auto = @p1, booking_date = @p2, booking_notes = @p3, booking_status = @p4, child_num = @p5, client_email = @p6, client_id = @p7, client_nationality = @p8, client_phone = @p9, currency_code = @p10, gift_code = @p11, infant_num = @p12, pickup_address = @p13, pickup_time = @p14, total_pax = @p15, total_price = @p16, trip_code = @p17, trip_date = @p18, trip_id = @p19, trip_type = @p20
+WHERE id = @p21;
+[2025-09-06 14:38:36.686 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-09-06 14:38:36.687 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.CalculateBookingPrice (ITravel_App) in 1563.7934ms
+[2025-09-06 14:38:36.687 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.CalculateBookingPrice (ITravel_App)'
+[2025-09-06 14:38:36.687 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/CalculateBookingPrice - 200 null application/json; charset=utf-8 1565.502ms
+[2025-09-06 14:41:34.856 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-06 14:41:35.310 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-06 14:41:35.311 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-06 14:41:35.796 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-06 14:41:35.796 +03:00  INF]  Hosting environment: Development
+[2025-09-06 14:41:35.796 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-06 14:41:36.642 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-06 14:41:37.064 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 437.1522ms
+[2025-09-06 14:41:37.891 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-06 14:41:37.899 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 7.9538ms
+[2025-09-06 14:41:37.947 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-06 14:41:38.009 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 61.6501ms
+[2025-09-06 14:41:38.197 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-06 14:41:38.276 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 79.1598ms
+[2025-09-06 15:03:31.711 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-06 15:03:32.314 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-06 15:03:32.315 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-06 15:03:32.571 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-06 15:03:32.571 +03:00  INF]  Hosting environment: Development
+[2025-09-06 15:03:32.571 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-06 15:03:33.877 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-06 15:03:34.398 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 544.8061ms
+[2025-09-06 15:03:38.054 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-06 15:03:38.064 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 10.028ms
+[2025-09-06 15:03:38.338 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-06 15:03:38.447 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 108.7609ms
+[2025-09-06 15:03:38.677 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-06 15:03:38.802 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 124.7231ms
+[2025-09-06 15:03:41.686 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - null null
+[2025-09-06 15:03:41.873 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 15:03:41.875 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - 204 null null 189.615ms
+[2025-09-06 15:03:41.878 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - application/json 2
+[2025-09-06 15:03:41.995 +03:00  INF]  Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/3/2025 12:51:58 PM', Current time (UTC): '9/6/2025 12:03:41 PM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+[2025-09-06 15:03:42.022 +03:00  INF]  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/3/2025 12:51:58 PM', Current time (UTC): '9/6/2025 12:03:41 PM'.
+[2025-09-06 15:03:42.040 +03:00  INF]  Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+[2025-09-06 15:03:42.057 +03:00  INF]  AuthenticationScheme: Bearer was challenged.
+[2025-09-06 15:03:42.057 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - 401 0 null 179.2394ms
+[2025-09-06 15:04:08.421 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - null null
+[2025-09-06 15:04:08.426 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 15:04:08.426 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - 204 null null 4.9219ms
+[2025-09-06 15:04:08.433 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - application/json 2
+[2025-09-06 15:04:08.436 +03:00  INF]  Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/3/2025 12:51:58 PM', Current time (UTC): '9/6/2025 12:04:08 PM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+[2025-09-06 15:04:08.438 +03:00  INF]  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '9/3/2025 12:51:58 PM', Current time (UTC): '9/6/2025 12:04:08 PM'.
+[2025-09-06 15:04:08.441 +03:00  INF]  Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+[2025-09-06 15:04:08.441 +03:00  INF]  AuthenticationScheme: Bearer was challenged.
+[2025-09-06 15:04:08.441 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - 401 0 null 8.6407ms
+[2025-09-06 15:04:49.036 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - null null
+[2025-09-06 15:04:49.037 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 15:04:49.039 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - 204 null null 1.9984ms
+[2025-09-06 15:04:49.050 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - application/json 2
+[2025-09-06 15:04:49.073 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 15:04:49.077 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetFacilityWithTranslation (ITravel_App)'
+[2025-09-06 15:04:49.135 +03:00  INF]  Route matched with {action = "GetFacilityWithTranslation", controller = "TravelAdmin"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetFacilityWithTranslation() on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-06 15:04:54.343 +03:00  INF]  Executed DbCommand (54ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT f.id AS facility_id, CASE
+    WHEN f0.id IS NOT NULL THEN f0.id
+    ELSE 0
+END AS id, f.facility_code, f.facility_default_name, f0.facility_desc, f0.facility_name, f0.lang_code, f.active, f.currency_code, f.extra_price, f.is_extra
+FROM facility_main AS f
+LEFT JOIN facility_translations AS f0 ON f.id = f0.facility_id
+[2025-09-06 15:04:54.461 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT f.id AS facility_id, CASE
+    WHEN f0.id IS NOT NULL THEN f0.id
+    ELSE 0
+END AS id, f.facility_code, f.facility_default_name, f0.facility_desc, f0.facility_name, f0.lang_code, f.active, f.currency_code, f.extra_price, f.is_extra
+FROM facility_main AS f
+LEFT JOIN facility_translations AS f0 ON f.id = f0.facility_id
+[2025-09-06 15:04:54.471 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.global.FacilityWithTranslationGrp, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-06 15:04:54.522 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetFacilityWithTranslation (ITravel_App) in 5380.8064ms
+[2025-09-06 15:04:54.522 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetFacilityWithTranslation (ITravel_App)'
+[2025-09-06 15:04:54.536 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - 200 null application/json; charset=utf-8 5486.4029ms
+[2025-09-06 15:05:13.739 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/SaveMainFacility - null null
+[2025-09-06 15:05:13.740 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 15:05:13.740 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/SaveMainFacility - 204 null null 1.0431ms
+[2025-09-06 15:05:13.742 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/SaveMainFacility - application/json 130
+[2025-09-06 15:05:13.744 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 15:05:13.744 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.SaveMainFacility (ITravel_App)'
+[2025-09-06 15:05:13.759 +03:00  INF]  Route matched with {action = "SaveMainFacility", controller = "TravelAdmin"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SaveMainFacility(ITravelApp.Data.Entities.facility_main) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-06 15:05:14.112 +03:00  INF]  Executed DbCommand (17ms) [Parameters=[@__row_facility_code_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT f.id, f.active, f.created_at, f.created_by, f.currency_code, f.extra_price, f.facility_code, f.facility_default_name, f.is_extra, f.updated_at
+FROM facility_main AS f
+WHERE f.facility_code = @__row_facility_code_0
+LIMIT 2
+[2025-09-06 15:05:14.159 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM facility_main AS f
+[2025-09-06 15:05:14.192 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT max(f.id)
+FROM facility_main AS f
+[2025-09-06 15:05:14.597 +03:00  INF]  Executed DbCommand (12ms) [Parameters=[@p0='?' (DbType = Int64), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = Decimal), @p5='?', @p6='?', @p7='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO facility_main (id, active, created_by, currency_code, extra_price, facility_code, facility_default_name, is_extra)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)
+RETURNING created_at, updated_at;
+[2025-09-06 15:05:14.661 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-09-06 15:05:14.675 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.SaveMainFacility (ITravel_App) in 916.1323ms
+[2025-09-06 15:05:14.675 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.SaveMainFacility (ITravel_App)'
+[2025-09-06 15:05:14.677 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/SaveMainFacility - 200 null application/json; charset=utf-8 934.5013ms
+[2025-09-06 15:05:14.690 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - null null
+[2025-09-06 15:05:14.691 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 15:05:14.691 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - 204 null null 0.8571ms
+[2025-09-06 15:05:14.693 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - application/json 2
+[2025-09-06 15:05:14.694 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 15:05:14.694 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetFacilityWithTranslation (ITravel_App)'
+[2025-09-06 15:05:14.694 +03:00  INF]  Route matched with {action = "GetFacilityWithTranslation", controller = "TravelAdmin"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetFacilityWithTranslation() on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-06 15:05:18.223 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT f.id AS facility_id, CASE
+    WHEN f0.id IS NOT NULL THEN f0.id
+    ELSE 0
+END AS id, f.facility_code, f.facility_default_name, f0.facility_desc, f0.facility_name, f0.lang_code, f.active, f.currency_code, f.extra_price, f.is_extra
+FROM facility_main AS f
+LEFT JOIN facility_translations AS f0 ON f.id = f0.facility_id
+[2025-09-06 15:05:18.225 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT f.id AS facility_id, CASE
+    WHEN f0.id IS NOT NULL THEN f0.id
+    ELSE 0
+END AS id, f.facility_code, f.facility_default_name, f0.facility_desc, f0.facility_name, f0.lang_code, f.active, f.currency_code, f.extra_price, f.is_extra
+FROM facility_main AS f
+LEFT JOIN facility_translations AS f0 ON f.id = f0.facility_id
+[2025-09-06 15:05:18.226 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT f.id AS facility_id, CASE
+    WHEN f0.id IS NOT NULL THEN f0.id
+    ELSE 0
+END AS id, f.facility_code, f.facility_default_name, f0.facility_desc, f0.facility_name, f0.lang_code, f.active, f.currency_code, f.extra_price, f.is_extra
+FROM facility_main AS f
+LEFT JOIN facility_translations AS f0 ON f.id = f0.facility_id
+[2025-09-06 15:05:18.227 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.global.FacilityWithTranslationGrp, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-06 15:05:18.227 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetFacilityWithTranslation (ITravel_App) in 3532.7201ms
+[2025-09-06 15:05:18.227 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetFacilityWithTranslation (ITravel_App)'
+[2025-09-06 15:05:18.227 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - 200 null application/json; charset=utf-8 3533.9722ms
+[2025-09-06 15:05:35.885 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/SaveMainFacility - null null
+[2025-09-06 15:05:35.886 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 15:05:35.886 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/SaveMainFacility - 204 null null 1.184ms
+[2025-09-06 15:05:35.888 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/SaveMainFacility - application/json 135
+[2025-09-06 15:05:35.888 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 15:05:35.889 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.SaveMainFacility (ITravel_App)'
+[2025-09-06 15:05:35.889 +03:00  INF]  Route matched with {action = "SaveMainFacility", controller = "TravelAdmin"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SaveMainFacility(ITravelApp.Data.Entities.facility_main) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-06 15:05:35.917 +03:00  INF]  Executed DbCommand (7ms) [Parameters=[@p9='?' (DbType = Int64), @p0='?' (DbType = Boolean), @p1='?' (DbType = DateTime2), @p2='?', @p3='?', @p4='?' (DbType = Decimal), @p5='?', @p6='?', @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+UPDATE facility_main SET active = @p0, created_at = @p1, created_by = @p2, currency_code = @p3, extra_price = @p4, facility_code = @p5, facility_default_name = @p6, is_extra = @p7, updated_at = @p8
+WHERE id = @p9;
+[2025-09-06 15:05:35.918 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-09-06 15:05:35.918 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.SaveMainFacility (ITravel_App) in 29.3842ms
+[2025-09-06 15:05:35.918 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.SaveMainFacility (ITravel_App)'
+[2025-09-06 15:05:35.918 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/SaveMainFacility - 200 null application/json; charset=utf-8 31.0252ms
+[2025-09-06 15:05:35.931 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - null null
+[2025-09-06 15:05:35.932 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 15:05:35.932 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - 204 null null 0.6093ms
+[2025-09-06 15:05:35.934 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - application/json 2
+[2025-09-06 15:05:35.935 +03:00  INF]  CORS policy execution successful.
+[2025-09-06 15:05:35.935 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetFacilityWithTranslation (ITravel_App)'
+[2025-09-06 15:05:35.935 +03:00  INF]  Route matched with {action = "GetFacilityWithTranslation", controller = "TravelAdmin"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetFacilityWithTranslation() on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-06 15:05:37.268 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT f.id AS facility_id, CASE
+    WHEN f0.id IS NOT NULL THEN f0.id
+    ELSE 0
+END AS id, f.facility_code, f.facility_default_name, f0.facility_desc, f0.facility_name, f0.lang_code, f.active, f.currency_code, f.extra_price, f.is_extra
+FROM facility_main AS f
+LEFT JOIN facility_translations AS f0 ON f.id = f0.facility_id
+[2025-09-06 15:05:37.269 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT f.id AS facility_id, CASE
+    WHEN f0.id IS NOT NULL THEN f0.id
+    ELSE 0
+END AS id, f.facility_code, f.facility_default_name, f0.facility_desc, f0.facility_name, f0.lang_code, f.active, f.currency_code, f.extra_price, f.is_extra
+FROM facility_main AS f
+LEFT JOIN facility_translations AS f0 ON f.id = f0.facility_id
+[2025-09-06 15:05:37.271 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT f.id AS facility_id, CASE
+    WHEN f0.id IS NOT NULL THEN f0.id
+    ELSE 0
+END AS id, f.facility_code, f.facility_default_name, f0.facility_desc, f0.facility_name, f0.lang_code, f.active, f.currency_code, f.extra_price, f.is_extra
+FROM facility_main AS f
+LEFT JOIN facility_translations AS f0 ON f.id = f0.facility_id
+[2025-09-06 15:05:37.271 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.global.FacilityWithTranslationGrp, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-06 15:05:37.271 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetFacilityWithTranslation (ITravel_App) in 1336.5384ms
+[2025-09-06 15:05:37.271 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetFacilityWithTranslation (ITravel_App)'
+[2025-09-06 15:05:37.272 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetFacilityWithTranslation - 200 null application/json; charset=utf-8 1337.726ms

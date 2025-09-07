@@ -17,6 +17,70 @@
   },
   {
     "ContainingType": "ITravel_App.Controllers.BookingController",
+    "Method": "AssignExtraToBooking",
+    "RelativePath": "api/Booking/AssignExtraToBooking",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lst",
+        "Type": "System.Collections.Generic.List\u00601[[ITravelApp.Data.Entities.booking_extra, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.BookingController",
+    "Method": "CalculateBookingPrice",
+    "RelativePath": "api/Booking/CalculateBookingPrice",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.BookingController",
+    "Method": "ConfirmBooking",
+    "RelativePath": "api/Booking/ConfirmBooking",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "ITravelApp.Data.Models.Bookings.ConfirmBookingReq",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.BookingController",
+    "Method": "GetBookingWithDetails",
+    "RelativePath": "api/Booking/GetBookingWithDetails",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "ITravelApp.Data.Models.Bookings.BookingReq",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.BookingController",
     "Method": "GetClient_Notification_Settings",
     "RelativePath": "api/Booking/GetClient_Notification_Settings",
     "HttpMethod": "POST",
@@ -59,6 +123,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.BookingController",
+    "Method": "GetTrip_Extra_Mains",
+    "RelativePath": "api/Booking/GetTrip_Extra_Mains",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "ITravelApp.Data.Models.Bookings.TripExtraReq",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

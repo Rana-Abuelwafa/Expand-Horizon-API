@@ -1,6 +1,8 @@
+using ITravel_App.services;
 using ITravel_App.Services;
 using ITravelApp.Data;
 using ITravelApp.Data.Data;
+using Mails_App;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
@@ -20,8 +22,13 @@ var logger = new LoggerConfiguration()
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 // Add services to the container.
-
-builder.Services.AddControllers();
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+builder.Services.AddRazorPages();
+builder.Services.AddControllers().AddJsonOptions(opt => opt.JsonSerializerOptions.PropertyNamingPolicy = null);
+//builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyAllowSpecificOrigins,
@@ -70,13 +77,18 @@ builder.Services.AddSwaggerGen(options =>
     });
     options.OperationFilter<AcceptLanguageHeaderOperationFilter>();
 });
+//mail
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddDbContext<horizon_client_dbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DBConnection")));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<ClientDAO>();
 builder.Services.AddScoped<AdminDAO>();
+builder.Services.AddScoped<MailSettingDao>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<CustomViewRendererService>();
+builder.Services.AddTransient<IMailService, MailService>();
 builder.Services.AddAuthentication()
     .AddJwtBearer(options =>
     {

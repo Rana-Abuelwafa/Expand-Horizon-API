@@ -156,4 +156,13 @@
   <data name="AddReviewDuplicate" xml:space="preserve">
     <value>You Already Added Review To this Trip</value>
   </data>
+  <data name="AddExtraDuplicate" xml:space="preserve">
+    <value>You Add This Extra before </value>
+  </data>
+  <data name="BookingExtraSaveError" xml:space="preserve">
+    <value>Error in save Extra List,Try Again or Check Admin</value>
+  </data>
+  <data name="UpdateBookingPrice" xml:space="preserve">
+    <value>Booking's price Updated Successfully</value>
+  </data>
 </root>

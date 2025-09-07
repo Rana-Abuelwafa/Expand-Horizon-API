@@ -156,4 +156,13 @@
   <data name="AddReviewDuplicate" xml:space="preserve">
     <value>Sie haben dieser Reise bereits eine Bewertung hinzugefügt</value>
   </data>
+  <data name="AddExtraDuplicate" xml:space="preserve">
+    <value>Dieses Extra fügen Sie vorher hinzu</value>
+  </data>
+  <data name="BookingExtraSaveError" xml:space="preserve">
+    <value>Fehler beim Speichern der zusätzlichen Liste. Versuchen Sie es erneut oder überprüfen Sie den Administrator.</value>
+  </data>
+  <data name="UpdateBookingPrice" xml:space="preserve">
+    <value>Buchungspreis erfolgreich aktualisiert</value>
+  </data>
 </root>

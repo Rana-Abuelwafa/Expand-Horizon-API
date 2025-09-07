@@ -18,6 +18,7 @@ namespace ITravel_App
             }
             userData.client_id = clientId;
             userData.client_email = email;
+            userData.FullName = FullName;
             return userData;
         }
     }

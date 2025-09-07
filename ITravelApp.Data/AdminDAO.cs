@@ -374,7 +374,9 @@ namespace ITravelApp.Data
                         maxId = _db.trip_mains.Max(d => d.id);
 
                     }
+                    
                     row.id = maxId + 1;
+                    row.trip_code_auto = "TRIP_" + row.id.ToString();
                     _db.trip_mains.Add(row);
                     _db.SaveChanges();
                 }
@@ -915,20 +917,30 @@ namespace ITravelApp.Data
                        facility_desc= combined != null ? combined.facility_desc : null,
                        facility_name= combined != null ? combined.facility_name : null,
                        lang_code= combined != null ? combined.lang_code : null,
-                       active=FM.active
+                       active=FM.active,
+                       currency_code = FM.currency_code,
+                       extra_price= FM.extra_price,
+                       is_extra= FM.is_extra
+
                    };
                return  result.ToList().GroupBy(grp => new
                 {
                     grp.facility_id,
                     grp.facility_default_name,
                     grp.facility_code,
-                    grp.active
+                    grp.active,
+                    grp.is_extra,
+                    grp.extra_price,
+                    grp.currency_code
                 }).Select(s => new FacilityWithTranslationGrp
                 {
                     facility_code=s.Key.facility_code,
                     facility_default_name=s.Key.facility_default_name,
                     facility_id=s.Key.facility_id,
                     active=s.Key.active,
+                    currency_code=s.Key.currency_code,
+                    extra_price=s.Key.extra_price,
+                    is_extra=s.Key.is_extra,
                     translations=result.ToList().Where(wr => wr.facility_id == s.Key.facility_id && wr.id !=0).ToList()
 
                 }).OrderBy(x => x.facility_id).ToList();
@@ -1027,7 +1039,6 @@ namespace ITravelApp.Data
         {
             try
             {
-
                 return await _db.trip_mains.Where(wr => wr.destination_id == (destination_id == 0 ? wr.destination_id : destination_id) && wr.trip_type ==(trip_type == 0 ? wr.trip_type : trip_type))
                       .Join(_db.destination_mains,
                               TRIP => new { TRIP.destination_id },
@@ -1049,6 +1060,7 @@ namespace ITravelApp.Data
                                   dest_default_name = DEST.dest_default_name,
                                   trip_type = TRIP.trip_type,
                                   transfer_category_id=TRIP.transfer_category_id,
+                                  trip_code_auto= TRIP.trip_code_auto
                               }).OrderBy(d => d.id).ToListAsync();
 
 

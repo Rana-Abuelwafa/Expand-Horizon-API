@@ -1,11 +1,14 @@
-﻿using ITravel_App.Services;
+﻿using ITravel_App.services;
+using ITravel_App.Services;
 using ITravelApp.Data.Entities;
 using ITravelApp.Data.Models.Bookings;
 using ITravelApp.Data.Models.global;
 using ITravelApp.Data.Models.profile;
 using ITravelApp.Data.Models.trips;
+using Mails_App;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace ITravel_App.Controllers
@@ -15,14 +18,18 @@ namespace ITravel_App.Controllers
     [ApiController]
     public class BookingController : Controller
     {
+        IMailService Mail_Service = null;
+        private readonly CustomViewRendererService _viewService;
         private readonly IClientService _clientService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly LoginUserData _loginUserData;
-        public BookingController(IHttpContextAccessor httpContextAccessor, IClientService clientService)
+        public BookingController(IMailService _MailService, CustomViewRendererService viewService, IHttpContextAccessor httpContextAccessor, IClientService clientService)
         {
+            _viewService = viewService;
             _clientService = clientService;
             _httpContextAccessor = httpContextAccessor;
             _loginUserData = Utils.getTokenData(httpContextAccessor);
+            Mail_Service = _MailService;
         }
 
         #region reviews
@@ -30,13 +37,7 @@ namespace ITravel_App.Controllers
         [HttpPost("SaveReviewForTrip")]
         public IActionResult SaveReviewForTrip(tbl_review row)
         {
-            string? clientId = string.Empty;
-
-            if (_httpContextAccessor.HttpContext is not null)
-            {
-                clientId = _httpContextAccessor.HttpContext.User.FindFirstValue("ClientId");
-
-            }
+            string? clientId = _loginUserData.client_id;
             row.client_id=clientId;
             return Ok(_clientService.SaveReviewForTrip(row));
         }
@@ -47,13 +48,7 @@ namespace ITravel_App.Controllers
         [HttpPost("AddTripToWishList")]
         public IActionResult AddTripToWishList(TripsWishlistReq row)
         {
-            string? clientId = string.Empty;
-
-            if (_httpContextAccessor.HttpContext is not null)
-            {
-                clientId = _httpContextAccessor.HttpContext.User.FindFirstValue("ClientId");
-
-            }
+            string? clientId = _loginUserData.client_id;
             row.client_id = clientId;
             return Ok(_clientService.AddTripToWishList(row));
         }
@@ -62,13 +57,7 @@ namespace ITravel_App.Controllers
         [HttpPost("GetClientWishList")]
         public async Task<IActionResult> GetClientWishList(ClientWishListReq req)
         {
-            string? clientId = string.Empty;
-
-            if (_httpContextAccessor.HttpContext is not null)
-            {
-                clientId = _httpContextAccessor.HttpContext.User.FindFirstValue("ClientId");
-
-            }
+            string? clientId = _loginUserData.client_id;
             req.client_id = clientId;
             return Ok(await _clientService.GetClientWishList(req));
         }
@@ -88,6 +77,56 @@ namespace ITravel_App.Controllers
             row.client_id = clientId;
             row.client_email = email;
             return Ok(_clientService.SaveClientBooking(row));
+        }
+        [HttpPost("GetTrip_Extra_Mains")]
+        public IActionResult GetTrip_Extra_Mains(TripExtraReq req)
+        {
+            return Ok( _clientService.getFacilityForTrip(req.trip_id,req.lang_code,req.isExtra));
+            //return Ok(await _clientService.GetTrip_Extra_Mains(req));
+        }
+        [HttpPost("AssignExtraToBooking")]
+        public IActionResult AssignExtraToBooking(List<booking_extra> lst)
+        {
+            return Ok( _clientService.AssignExtraToBooking(lst));
+        }
+        [HttpPost("CalculateBookingPrice")]
+        public IActionResult CalculateBookingPrice(CalculateBookingPriceReq req)
+        {
+            return Ok(_clientService.CalculateBookingPrice(req));
+        }
+
+        [HttpPost("GetBookingWithDetails")]
+        public async Task<IActionResult> GetBookingWithDetails(BookingReq req)
+        {
+            string? clientId = _loginUserData.client_id;
+            req.client_id = clientId;
+            return Ok(await _clientService.GetBookingWithDetails(req));
+        }
+
+        [HttpPost("ConfirmBooking")]
+        public async Task<IActionResult> ConfirmBooking(ConfirmBookingReq req)
+        {
+            string? clientId = _loginUserData.client_id;
+            string? client_email = _loginUserData.client_email;
+            string? FullName = _loginUserData.FullName;
+            req.client_id = clientId;
+            string fileName = "BookingClientEmail_" + req.lang_code.ToLower() + ".cshtml";
+            var templatePath = Path.Combine("/Views/Email" + "/", fileName);
+            BookingWithTripDetailsAll model = _clientService.ConfirmBooking(req);
+            if (model != null)
+            {
+                model.client_name = FullName;
+                var msg = await _viewService.RenderViewToStringAsync(templatePath, model, ControllerContext);
+                MailData Mail_Data = new MailData { EmailToId = client_email, EmailToName = FullName, EmailSubject = UtilsCls.GetMailSubjectByLang(req.lang_code, 3), EmailBody = msg };
+                return Ok(Mail_Service.SendMail(Mail_Data));
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    model);
+                //return BadRequest(model);
+            }
+            
         }
         #endregion
 

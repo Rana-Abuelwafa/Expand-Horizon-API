@@ -23,5 +23,11 @@ namespace ITravelApp.Data.Models.trips
         public string? facility_name { get; set; }
 
         public string? facility_desc { get; set; }
+        public bool? is_extra { get; set; }
+
+        public decimal? extra_price { get; set; }
+
+        public string? currency_code { get; set; }
+        public long? facility_id { get; set; }
     }
 }

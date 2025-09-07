@@ -34,4 +34,6 @@ public partial class trip_main
     public int? trip_type { get; set; }
 
     public int? transfer_category_id { get; set; }
+
+    public string? trip_code_auto { get; set; }
 }

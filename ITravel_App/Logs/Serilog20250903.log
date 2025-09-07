@@ -535,3 +535,397 @@ WHERE t.trip_id = @__trip_id_0
 [2025-09-03 10:43:59.016 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTrip_Prices (ITravel_App) in 149.199ms
 [2025-09-03 10:43:59.016 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Prices (ITravel_App)'
 [2025-09-03 10:43:59.017 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Prices?trip_id=1 - 200 null application/json; charset=utf-8 165.6237ms
+[2025-09-03 15:19:11.650 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-03 15:19:13.135 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-03 15:19:13.138 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-03 15:19:13.661 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-03 15:19:13.662 +03:00  INF]  Hosting environment: Development
+[2025-09-03 15:19:13.662 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-03 15:19:15.112 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-03 15:19:16.537 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 1438.8483ms
+[2025-09-03 15:19:16.844 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-03 15:19:16.923 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 79.0398ms
+[2025-09-03 15:19:16.973 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-03 15:19:17.259 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 285.6861ms
+[2025-09-03 15:19:17.431 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-03 15:19:17.672 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 244.8919ms
+[2025-09-03 15:22:04.365 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTripCategories - null null
+[2025-09-03 15:22:04.365 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - null null
+[2025-09-03 15:22:04.367 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - null null
+[2025-09-03 15:22:05.701 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:22:05.702 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:22:05.702 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:22:05.705 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - 204 null null 1340.4186ms
+[2025-09-03 15:22:05.707 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTripCategories - 204 null null 1343.6938ms
+[2025-09-03 15:22:05.708 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 204 null null 1343.0602ms
+[2025-09-03 15:22:05.714 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTripCategories - application/json 2
+[2025-09-03 15:22:05.714 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - application/json 2
+[2025-09-03 15:22:05.715 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - application/json 2
+[2025-09-03 15:22:05.842 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:22:05.842 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:22:05.842 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:22:05.844 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App)'
+[2025-09-03 15:22:05.844 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App)'
+[2025-09-03 15:22:05.844 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:22:05.872 +03:00  INF]  Route matched with {action = "GetTrip_Mains", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTrip_Mains(Int32, Int32) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:22:05.872 +03:00  INF]  Route matched with {action = "GetDestination_Mains", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDestination_Mains(Boolean) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:22:05.872 +03:00  INF]  Route matched with {action = "GetTripCategories", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTripCategories() on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:22:07.638 +03:00  INF]  Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.type_code, t.type_name
+FROM trip_category AS t
+[2025-09-03 15:22:07.638 +03:00  INF]  Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.destination_id, t.active, t.id, t.pickup, t.route, t.show_in_slider, t.show_in_top, t.trip_code, t.trip_default_name, t.trip_duration, d.country_code, d.dest_code, d.dest_default_name, t.trip_type, t.transfer_category_id
+FROM trip_main AS t
+INNER JOIN destination_main AS d ON t.destination_id = d.id
+WHERE t.trip_type = t.trip_type OR t.trip_type IS NULL
+ORDER BY t.id
+[2025-09-03 15:22:07.668 +03:00  INF]  Executed DbCommand (63ms) [Parameters=[@__leaf_0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SELECT d.id, d.active, d.country_code, d.created_at, d.created_by, d.dest_code, d.dest_default_name, d.leaf, d.parent_id, d.route, d.updated_at
+FROM destination_main AS d
+WHERE d.active AND d.leaf = @__leaf_0
+[2025-09-03 15:22:07.703 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.trips.TripMainCast, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:22:07.715 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.trip_category, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:22:07.730 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App) in 1853.1665ms
+[2025-09-03 15:22:07.730 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App)'
+[2025-09-03 15:22:07.731 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App) in 1858.4005ms
+[2025-09-03 15:22:07.732 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:22:07.740 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.destination_main, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:22:07.742 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTripCategories - 200 null application/json; charset=utf-8 2028.1699ms
+[2025-09-03 15:22:07.746 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 200 null application/json; charset=utf-8 2031.7437ms
+[2025-09-03 15:22:07.754 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App) in 1881.2474ms
+[2025-09-03 15:22:07.755 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App)'
+[2025-09-03 15:22:07.755 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - 200 null application/json; charset=utf-8 2040.8043ms
+[2025-09-03 15:22:40.291 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTripCategories - null null
+[2025-09-03 15:22:40.297 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:22:40.297 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - null null
+[2025-09-03 15:22:40.297 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTripCategories - 204 null null 5.8453ms
+[2025-09-03 15:22:40.296 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - null null
+[2025-09-03 15:22:40.298 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:22:40.298 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 204 null null 0.739ms
+[2025-09-03 15:22:40.298 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:22:40.298 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - 204 null null 1.6824ms
+[2025-09-03 15:22:40.308 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTripCategories - application/json 2
+[2025-09-03 15:22:40.308 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - application/json 2
+[2025-09-03 15:22:40.309 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - application/json 2
+[2025-09-03 15:22:40.313 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:22:40.313 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:22:40.313 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:22:40.313 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App)'
+[2025-09-03 15:22:40.313 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:22:40.313 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App)'
+[2025-09-03 15:22:40.313 +03:00  INF]  Route matched with {action = "GetTrip_Mains", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTrip_Mains(Int32, Int32) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:22:40.313 +03:00  INF]  Route matched with {action = "GetDestination_Mains", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDestination_Mains(Boolean) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:22:40.313 +03:00  INF]  Route matched with {action = "GetTripCategories", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTripCategories() on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:22:40.428 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.type_code, t.type_name
+FROM trip_category AS t
+[2025-09-03 15:22:40.430 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.trip_category, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:22:40.431 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App) in 117.3032ms
+[2025-09-03 15:22:40.431 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App)'
+[2025-09-03 15:22:40.431 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTripCategories - 200 null application/json; charset=utf-8 123.5005ms
+[2025-09-03 15:22:40.436 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__leaf_0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SELECT d.id, d.active, d.country_code, d.created_at, d.created_by, d.dest_code, d.dest_default_name, d.leaf, d.parent_id, d.route, d.updated_at
+FROM destination_main AS d
+WHERE d.active AND d.leaf = @__leaf_0
+[2025-09-03 15:22:40.439 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.destination_main, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:22:40.439 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.destination_id, t.active, t.id, t.pickup, t.route, t.show_in_slider, t.show_in_top, t.trip_code, t.trip_default_name, t.trip_duration, d.country_code, d.dest_code, d.dest_default_name, t.trip_type, t.transfer_category_id
+FROM trip_main AS t
+INNER JOIN destination_main AS d ON t.destination_id = d.id
+WHERE t.trip_type = t.trip_type OR t.trip_type IS NULL
+ORDER BY t.id
+[2025-09-03 15:22:40.439 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App) in 126.04ms
+[2025-09-03 15:22:40.440 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App)'
+[2025-09-03 15:22:40.440 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - 200 null application/json; charset=utf-8 131.538ms
+[2025-09-03 15:22:40.440 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.trips.TripMainCast, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:22:40.440 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App) in 126.8436ms
+[2025-09-03 15:22:40.440 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:22:40.440 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 200 null application/json; charset=utf-8 132.4692ms
+[2025-09-03 15:23:07.585 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTripCategories - null null
+[2025-09-03 15:23:07.590 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:07.590 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - null null
+[2025-09-03 15:23:07.590 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTripCategories - 204 null null 5.2346ms
+[2025-09-03 15:23:07.590 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:07.590 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - 204 null null 0.4329ms
+[2025-09-03 15:23:07.601 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTripCategories - application/json 2
+[2025-09-03 15:23:07.602 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - application/json 2
+[2025-09-03 15:23:07.607 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - null null
+[2025-09-03 15:23:07.607 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:07.607 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:07.607 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App)'
+[2025-09-03 15:23:07.608 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 204 null null 5.6068ms
+[2025-09-03 15:23:07.608 +03:00  INF]  Route matched with {action = "GetTripCategories", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTripCategories() on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:07.608 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:07.608 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App)'
+[2025-09-03 15:23:07.608 +03:00  INF]  Route matched with {action = "GetDestination_Mains", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDestination_Mains(Boolean) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:07.609 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - application/json 2
+[2025-09-03 15:23:07.610 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:07.611 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:23:07.611 +03:00  INF]  Route matched with {action = "GetTrip_Mains", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTrip_Mains(Int32, Int32) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:07.614 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.type_code, t.type_name
+FROM trip_category AS t
+[2025-09-03 15:23:07.619 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.trip_category, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:23:07.619 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App) in 11.7746ms
+[2025-09-03 15:23:07.619 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App)'
+[2025-09-03 15:23:07.620 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTripCategories - 200 null application/json; charset=utf-8 19.0102ms
+[2025-09-03 15:23:07.620 +03:00  INF]  Executed DbCommand (8ms) [Parameters=[@__leaf_0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SELECT d.id, d.active, d.country_code, d.created_at, d.created_by, d.dest_code, d.dest_default_name, d.leaf, d.parent_id, d.route, d.updated_at
+FROM destination_main AS d
+WHERE d.active AND d.leaf = @__leaf_0
+[2025-09-03 15:23:07.621 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.destination_main, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:23:07.621 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App) in 13.3109ms
+[2025-09-03 15:23:07.621 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App)'
+[2025-09-03 15:23:07.621 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - 200 null application/json; charset=utf-8 20.5837ms
+[2025-09-03 15:23:07.629 +03:00  INF]  Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.destination_id, t.active, t.id, t.pickup, t.route, t.show_in_slider, t.show_in_top, t.trip_code, t.trip_default_name, t.trip_duration, d.country_code, d.dest_code, d.dest_default_name, t.trip_type, t.transfer_category_id
+FROM trip_main AS t
+INNER JOIN destination_main AS d ON t.destination_id = d.id
+WHERE t.trip_type = t.trip_type OR t.trip_type IS NULL
+ORDER BY t.id
+[2025-09-03 15:23:07.639 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.trips.TripMainCast, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:23:07.639 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App) in 28.429ms
+[2025-09-03 15:23:07.639 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:23:07.640 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 200 null application/json; charset=utf-8 30.2705ms
+[2025-09-03 15:23:12.614 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTripCategories - null null
+[2025-09-03 15:23:12.616 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:12.616 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - null null
+[2025-09-03 15:23:12.616 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTripCategories - 204 null null 2.3911ms
+[2025-09-03 15:23:12.616 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:12.622 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - 204 null null 6.0403ms
+[2025-09-03 15:23:12.623 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - null null
+[2025-09-03 15:23:12.623 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:12.624 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 204 null null 0.9528ms
+[2025-09-03 15:23:12.624 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTripCategories - application/json 2
+[2025-09-03 15:23:12.624 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - application/json 2
+[2025-09-03 15:23:12.625 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:12.625 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:12.625 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App)'
+[2025-09-03 15:23:12.625 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App)'
+[2025-09-03 15:23:12.625 +03:00  INF]  Route matched with {action = "GetTripCategories", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTripCategories() on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:12.625 +03:00  INF]  Route matched with {action = "GetDestination_Mains", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDestination_Mains(Boolean) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:12.625 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - application/json 2
+[2025-09-03 15:23:12.626 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:12.626 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:23:12.626 +03:00  INF]  Route matched with {action = "GetTrip_Mains", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTrip_Mains(Int32, Int32) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:12.627 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.type_code, t.type_name
+FROM trip_category AS t
+[2025-09-03 15:23:12.630 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.trip_category, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:23:12.631 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App) in 5.8192ms
+[2025-09-03 15:23:12.631 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App)'
+[2025-09-03 15:23:12.631 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTripCategories - 200 null application/json; charset=utf-8 7.7498ms
+[2025-09-03 15:23:12.631 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@__leaf_0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SELECT d.id, d.active, d.country_code, d.created_at, d.created_by, d.dest_code, d.dest_default_name, d.leaf, d.parent_id, d.route, d.updated_at
+FROM destination_main AS d
+WHERE d.active AND d.leaf = @__leaf_0
+[2025-09-03 15:23:12.632 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.destination_main, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:23:12.632 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App) in 7.2114ms
+[2025-09-03 15:23:12.632 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App)'
+[2025-09-03 15:23:12.636 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - 200 null application/json; charset=utf-8 8.4706ms
+[2025-09-03 15:23:12.638 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.destination_id, t.active, t.id, t.pickup, t.route, t.show_in_slider, t.show_in_top, t.trip_code, t.trip_default_name, t.trip_duration, d.country_code, d.dest_code, d.dest_default_name, t.trip_type, t.transfer_category_id
+FROM trip_main AS t
+INNER JOIN destination_main AS d ON t.destination_id = d.id
+WHERE t.trip_type = t.trip_type OR t.trip_type IS NULL
+ORDER BY t.id
+[2025-09-03 15:23:12.640 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.trips.TripMainCast, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:23:12.640 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App) in 13.5774ms
+[2025-09-03 15:23:12.640 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:23:12.640 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 200 null application/json; charset=utf-8 14.7549ms
+[2025-09-03 15:23:28.138 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/SaveMainTrip - null null
+[2025-09-03 15:23:28.139 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:28.139 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/SaveMainTrip - 204 null null 1.3722ms
+[2025-09-03 15:23:28.141 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/SaveMainTrip - application/json 274
+[2025-09-03 15:23:28.147 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:28.147 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.SaveMainTrip (ITravel_App)'
+[2025-09-03 15:23:28.151 +03:00  INF]  Route matched with {action = "SaveMainTrip", controller = "TravelAdmin"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SaveMainTrip(ITravelApp.Data.Entities.trip_main) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:28.419 +03:00  INF]  Executed DbCommand (11ms) [Parameters=[@p14='?' (DbType = Int64), @p0='?' (DbType = Boolean), @p1='?' (DbType = DateTime2), @p2='?', @p3='?' (DbType = Int32), @p4='?', @p5='?', @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?', @p10='?', @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+UPDATE trip_main SET active = @p0, created_at = @p1, created_by = @p2, destination_id = @p3, pickup = @p4, route = @p5, show_in_slider = @p6, show_in_top = @p7, transfer_category_id = @p8, trip_code = @p9, trip_default_name = @p10, trip_duration = @p11, trip_type = @p12, updated_at = @p13
+WHERE id = @p14;
+[2025-09-03 15:23:28.432 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-09-03 15:23:28.441 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.SaveMainTrip (ITravel_App) in 289.6729ms
+[2025-09-03 15:23:28.443 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.SaveMainTrip (ITravel_App)'
+[2025-09-03 15:23:28.444 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/SaveMainTrip - 200 null application/json; charset=utf-8 303.2976ms
+[2025-09-03 15:23:28.459 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - null null
+[2025-09-03 15:23:28.459 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:28.459 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 204 null null 0.4961ms
+[2025-09-03 15:23:28.461 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - application/json 2
+[2025-09-03 15:23:28.462 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:28.462 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:23:28.462 +03:00  INF]  Route matched with {action = "GetTrip_Mains", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTrip_Mains(Int32, Int32) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:28.466 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.destination_id, t.active, t.id, t.pickup, t.route, t.show_in_slider, t.show_in_top, t.trip_code, t.trip_default_name, t.trip_duration, d.country_code, d.dest_code, d.dest_default_name, t.trip_type, t.transfer_category_id
+FROM trip_main AS t
+INNER JOIN destination_main AS d ON t.destination_id = d.id
+WHERE t.trip_type = t.trip_type OR t.trip_type IS NULL
+ORDER BY t.id
+[2025-09-03 15:23:28.466 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.trips.TripMainCast, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:23:28.467 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App) in 4.834ms
+[2025-09-03 15:23:28.467 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:23:28.467 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 200 null application/json; charset=utf-8 5.9533ms
+[2025-09-03 15:23:39.855 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTransfer_Categories - null null
+[2025-09-03 15:23:39.855 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:39.856 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTransfer_Categories - 204 null null 0.9257ms
+[2025-09-03 15:23:39.857 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTransfer_Categories - null 0
+[2025-09-03 15:23:39.858 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:39.858 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTransfer_Categories (ITravel_App)'
+[2025-09-03 15:23:39.863 +03:00  INF]  Route matched with {action = "GetTransfer_Categories", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTransfer_Categories() on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:39.881 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.category_code, t.category_name, t.child_price, t.created_at, t.created_by, t.currency_code, t.max_capacity, t.max_price, t.min_capacity, t.min_price, t.notes, t.updated_at
+FROM transfer_category AS t
+[2025-09-03 15:23:39.923 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.transfer_category, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:23:39.929 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTransfer_Categories (ITravel_App) in 66.8463ms
+[2025-09-03 15:23:39.930 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTransfer_Categories (ITravel_App)'
+[2025-09-03 15:23:39.930 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTransfer_Categories - 200 null application/json; charset=utf-8 72.6637ms
+[2025-09-03 15:23:45.611 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTripCategories - null null
+[2025-09-03 15:23:45.611 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - null null
+[2025-09-03 15:23:45.612 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:45.612 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:45.612 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTripCategories - 204 null null 0.9121ms
+[2025-09-03 15:23:45.612 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - 204 null null 0.6531ms
+[2025-09-03 15:23:45.612 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - null null
+[2025-09-03 15:23:45.612 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:45.612 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 204 null null 0.5289ms
+[2025-09-03 15:23:45.614 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTripCategories - application/json 2
+[2025-09-03 15:23:45.614 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - application/json 2
+[2025-09-03 15:23:45.614 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - application/json 2
+[2025-09-03 15:23:45.616 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:45.617 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:23:45.617 +03:00  INF]  Route matched with {action = "GetTrip_Mains", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTrip_Mains(Int32, Int32) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:45.617 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:45.617 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App)'
+[2025-09-03 15:23:45.617 +03:00  INF]  Route matched with {action = "GetDestination_Mains", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDestination_Mains(Boolean) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:45.617 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:45.617 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App)'
+[2025-09-03 15:23:45.617 +03:00  INF]  Route matched with {action = "GetTripCategories", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTripCategories() on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:45.619 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.destination_id, t.active, t.id, t.pickup, t.route, t.show_in_slider, t.show_in_top, t.trip_code, t.trip_default_name, t.trip_duration, d.country_code, d.dest_code, d.dest_default_name, t.trip_type, t.transfer_category_id
+FROM trip_main AS t
+INNER JOIN destination_main AS d ON t.destination_id = d.id
+WHERE t.trip_type = t.trip_type OR t.trip_type IS NULL
+ORDER BY t.id
+[2025-09-03 15:23:45.619 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.type_code, t.type_name
+FROM trip_category AS t
+[2025-09-03 15:23:45.621 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.trip_category, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:23:45.621 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.trips.TripMainCast, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:23:45.621 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App) in 4.2382ms
+[2025-09-03 15:23:45.621 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App) in 3.5035ms
+[2025-09-03 15:23:45.621 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTripCategories (ITravel_App)'
+[2025-09-03 15:23:45.621 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:23:45.621 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTripCategories - 200 null application/json; charset=utf-8 7.1196ms
+[2025-09-03 15:23:45.621 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 200 null application/json; charset=utf-8 6.8853ms
+[2025-09-03 15:23:45.623 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__leaf_0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SELECT d.id, d.active, d.country_code, d.created_at, d.created_by, d.dest_code, d.dest_default_name, d.leaf, d.parent_id, d.route, d.updated_at
+FROM destination_main AS d
+WHERE d.active AND d.leaf = @__leaf_0
+[2025-09-03 15:23:45.625 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.destination_main, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:23:45.625 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App) in 7.4108ms
+[2025-09-03 15:23:45.625 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetDestination_Mains (ITravel_App)'
+[2025-09-03 15:23:45.625 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetDestinationMain?leaf=true - 200 null application/json; charset=utf-8 11.046ms
+[2025-09-03 15:23:54.870 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/SaveMainTrip - null null
+[2025-09-03 15:23:54.871 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:54.871 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/SaveMainTrip - 204 null null 0.5701ms
+[2025-09-03 15:23:54.872 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/SaveMainTrip - application/json 276
+[2025-09-03 15:23:54.873 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:54.873 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.SaveMainTrip (ITravel_App)'
+[2025-09-03 15:23:54.873 +03:00  INF]  Route matched with {action = "SaveMainTrip", controller = "TravelAdmin"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SaveMainTrip(ITravelApp.Data.Entities.trip_main) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:54.882 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p14='?' (DbType = Int64), @p0='?' (DbType = Boolean), @p1='?' (DbType = DateTime2), @p2='?', @p3='?' (DbType = Int32), @p4='?', @p5='?', @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?', @p10='?', @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+UPDATE trip_main SET active = @p0, created_at = @p1, created_by = @p2, destination_id = @p3, pickup = @p4, route = @p5, show_in_slider = @p6, show_in_top = @p7, transfer_category_id = @p8, trip_code = @p9, trip_default_name = @p10, trip_duration = @p11, trip_type = @p12, updated_at = @p13
+WHERE id = @p14;
+[2025-09-03 15:23:54.883 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-09-03 15:23:54.883 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.SaveMainTrip (ITravel_App) in 9.8026ms
+[2025-09-03 15:23:54.883 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.SaveMainTrip (ITravel_App)'
+[2025-09-03 15:23:54.883 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/SaveMainTrip - 200 null application/json; charset=utf-8 10.9476ms
+[2025-09-03 15:23:54.900 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - null null
+[2025-09-03 15:23:54.901 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:54.901 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 204 null null 0.5612ms
+[2025-09-03 15:23:54.902 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - application/json 2
+[2025-09-03 15:23:54.902 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:23:54.902 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:23:54.902 +03:00  INF]  Route matched with {action = "GetTrip_Mains", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTrip_Mains(Int32, Int32) on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:23:54.905 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.destination_id, t.active, t.id, t.pickup, t.route, t.show_in_slider, t.show_in_top, t.trip_code, t.trip_default_name, t.trip_duration, d.country_code, d.dest_code, d.dest_default_name, t.trip_type, t.transfer_category_id
+FROM trip_main AS t
+INNER JOIN destination_main AS d ON t.destination_id = d.id
+WHERE t.trip_type = t.trip_type OR t.trip_type IS NULL
+ORDER BY t.id
+[2025-09-03 15:23:54.908 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.trips.TripMainCast, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:23:54.908 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App) in 5.976ms
+[2025-09-03 15:23:54.909 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTrip_Mains (ITravel_App)'
+[2025-09-03 15:23:54.909 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTrip_Mains?destination_id=0&&trip_type=0 - 200 null application/json; charset=utf-8 7.3566ms
+[2025-09-03 15:26:56.995 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-03 15:26:57.635 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-03 15:26:57.636 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-03 15:26:58.005 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-03 15:26:58.006 +03:00  INF]  Hosting environment: Development
+[2025-09-03 15:26:58.006 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-03 15:26:58.915 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-03 15:26:59.320 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 416.7104ms
+[2025-09-03 15:26:59.484 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-03 15:26:59.498 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 13.9621ms
+[2025-09-03 15:27:00.241 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-03 15:27:00.319 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 78.289ms
+[2025-09-03 15:27:00.596 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-03 15:27:00.653 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 57.0153ms
+[2025-09-03 15:30:23.141 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/SaveClientBooking - application/json 548
+[2025-09-03 15:30:23.341 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:30:23.343 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App)'
+[2025-09-03 15:30:23.369 +03:00  INF]  Route matched with {action = "SaveClientBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SaveClientBooking(ITravelApp.Data.Models.Bookings.BookingCls) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-09-03 15:30:56.495 +03:00  INF]  Executed DbCommand (85ms) [Parameters=[@__8__locals1_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.pickup, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_default_name, t.trip_duration, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_trip_id_0
+LIMIT 2
+[2025-09-03 15:31:17.732 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[@__8__locals2_trip_transfer_category_id_0='?' (DbType = Int32), @__capacity_1='?' (DbType = Int32), @__ToLower_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.category_code, t.category_name, t.child_price, t.created_at, t.created_by, t.currency_code, t.max_capacity, t.max_price, t.min_capacity, t.min_price, t.notes, t.updated_at
+FROM transfer_category AS t
+WHERE t.id = @__8__locals2_trip_transfer_category_id_0 AND t.min_capacity < @__capacity_1 AND t.max_capacity > @__capacity_1 AND lower(t.currency_code) = @__ToLower_2
+LIMIT 2
+[2025-09-03 15:31:47.658 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTransfer_Categories - null null
+[2025-09-03 15:31:49.487 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:31:50.179 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelAdmin/GetTransfer_Categories - 204 null null 5473.111ms
+[2025-09-03 15:31:50.198 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTransfer_Categories - null 0
+[2025-09-03 15:31:50.511 +03:00  INF]  CORS policy execution successful.
+[2025-09-03 15:31:50.512 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelAdminController.GetTransfer_Categories (ITravel_App)'
+[2025-09-03 15:31:50.792 +03:00  INF]  Route matched with {action = "GetTransfer_Categories", controller = "TravelAdmin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTransfer_Categories() on controller ITravel_App.Controllers.TravelAdminController (ITravel_App).
+[2025-09-03 15:31:51.274 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@__booking_trip_id_0='?' (DbType = Int64), @__booking_booking_status_1='?' (DbType = Int32), @__booking_client_id_2='?', @__booking_booking_date_3='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.booking_code, t.booking_code_auto, t.booking_date, t.booking_notes, t.booking_status, t.child_num, t.client_email, t.client_id, t.client_nationality, t.client_phone, t.gift_code, t.infant_num, t.pickup_address, t.pickup_time, t.total_pax, t.total_price, t.trip_code, t.trip_date, t.trip_id, t.trip_type
+FROM trips_booking AS t
+WHERE t.trip_id = @__booking_trip_id_0 AND t.booking_status = @__booking_booking_status_1 AND t.client_id = @__booking_client_id_2 AND t.booking_date = @__booking_booking_date_3
+LIMIT 2
+[2025-09-03 15:31:56.170 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.category_code, t.category_name, t.child_price, t.created_at, t.created_by, t.currency_code, t.max_capacity, t.max_price, t.min_capacity, t.min_price, t.notes, t.updated_at
+FROM transfer_category AS t
+[2025-09-03 15:31:56.225 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM trips_booking AS t
+[2025-09-03 15:31:56.238 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT max(t.id)
+FROM trips_booking AS t
+[2025-09-03 15:31:56.252 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.transfer_category, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-03 15:31:56.269 +03:00  INF]  Executed action ITravel_App.Controllers.TravelAdminController.GetTransfer_Categories (ITravel_App) in 5470.4064ms
+[2025-09-03 15:31:56.269 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelAdminController.GetTransfer_Categories (ITravel_App)'
+[2025-09-03 15:31:56.277 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelAdmin/GetTransfer_Categories - 200 null application/json; charset=utf-8 6080.236ms
+[2025-09-03 15:31:56.445 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Int64), @p1='?', @p2='?', @p3='?' (DbType = DateTime2), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?' (DbType = Int32), @p13='?', @p14='?', @p15='?' (DbType = Int32), @p16='?' (DbType = Decimal), @p17='?', @p18='?' (DbType = DateTime2), @p19='?' (DbType = Int64), @p20='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO trips_booking (id, booking_code, booking_code_auto, booking_date, booking_notes, booking_status, child_num, client_email, client_id, client_nationality, client_phone, gift_code, infant_num, pickup_address, pickup_time, total_pax, total_price, trip_code, trip_date, trip_id, trip_type)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20);
+[2025-09-03 15:31:56.489 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-09-03 15:31:56.493 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App) in 93122.5574ms
+[2025-09-03 15:31:56.493 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App)'
+[2025-09-03 15:31:56.493 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/SaveClientBooking - 200 null application/json; charset=utf-8 93352.4099ms
+[2025-09-03 15:33:03.268 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-03 15:33:03.722 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-03 15:33:03.722 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-03 15:33:04.475 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-03 15:33:04.475 +03:00  INF]  Hosting environment: Development
+[2025-09-03 15:33:04.475 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-03 15:33:04.607 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-03 15:33:05.752 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 1160.6871ms
+[2025-09-03 15:33:08.589 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-03 15:33:08.597 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 7.98ms
+[2025-09-03 15:33:08.738 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-03 15:33:08.803 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 64.7916ms
+[2025-09-03 15:33:10.857 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-03 15:33:10.935 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 78.2212ms

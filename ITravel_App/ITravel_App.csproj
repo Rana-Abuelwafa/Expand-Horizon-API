@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\waslaa\api\WaslaAPI\Mails_App\Mails_App.csproj" />
     <ProjectReference Include="..\ITravelApp.Data\ITravelApp.Data.csproj" />
   </ItemGroup>
 

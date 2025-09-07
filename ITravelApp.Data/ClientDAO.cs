@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
@@ -19,56 +20,24 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ITravelApp.Data
 {
-	public class ClientDAO
-	{
-		private readonly IStringLocalizer<Messages> _localizer;
-		private readonly horizon_client_dbContext _db;
+    public class ClientDAO
+    {
+        private readonly IStringLocalizer<Messages> _localizer;
+        private readonly horizon_client_dbContext _db;
 
-		public ClientDAO(horizon_client_dbContext db, IStringLocalizer<Messages> localizer)
-		{
-			_db = db;
-			_localizer = localizer;
-		}
-		#region destination
-
-		public List<DestinationResponse> getDestinations(DestinationReq req)
-		{
-			try
-			{
-
-				var result = from trans in _db.destination_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.active == true)
-							 join dest in _db.destination_mains.Where(wr => wr.active == true && wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower())) on trans.destination_id equals dest.id         // INNER JOIN
-							 join img in _db.destination_imgs on trans.id equals img.destination_id into DestAll
-							 from combined in DestAll.DefaultIfEmpty()               // LEFT JOIN
-							 select new DestinationResponse
-							 {
-								 destination_id = trans.destination_id,
-								 id = trans.id,
-								 country_code = dest.country_code,
-								 active = dest.active,
-								 dest_code = dest.dest_code,
-								 dest_description = trans.dest_description,
-								 dest_name = trans.dest_name,
-								 img_path = combined != null ? "http://api.raccoon24.com/" + combined.img_path : null,
-								 lang_code = trans.lang_code,
-								 dest_default_name=dest.dest_default_name,
-								 route=dest.route
-							 };
-
-				return result.ToList();
-			}
-			catch (Exception ex)
-			{
-				return null;
-			}
-		}
-
-        public List<DestinationTree> GetDestination_Tree(DestinationReq req)
+        public ClientDAO(horizon_client_dbContext db, IStringLocalizer<Messages> localizer)
         {
+            _db = db;
+            _localizer = localizer;
+        }
+        #region destination
 
+        public List<DestinationResponse> getDestinations(DestinationReq req)
+        {
             try
             {
-                var main = from trans in _db.destination_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.active == true)
+
+                var result = from trans in _db.destination_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.active == true)
                              join dest in _db.destination_mains.Where(wr => wr.active == true && wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower())) on trans.destination_id equals dest.id         // INNER JOIN
                              join img in _db.destination_imgs on trans.id equals img.destination_id into DestAll
                              from combined in DestAll.DefaultIfEmpty()               // LEFT JOIN
@@ -84,11 +53,43 @@ namespace ITravelApp.Data
                                  img_path = combined != null ? "http://api.raccoon24.com/" + combined.img_path : null,
                                  lang_code = trans.lang_code,
                                  dest_default_name = dest.dest_default_name,
-                                 route = dest.route,
-								 leaf=dest.leaf,
-								 parent_id=dest.parent_id
+                                 route = dest.route
                              };
-                
+
+                return result.ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<DestinationTree> GetDestination_Tree(DestinationReq req)
+        {
+
+            try
+            {
+                var main = from trans in _db.destination_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.active == true)
+                           join dest in _db.destination_mains.Where(wr => wr.active == true && wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower())) on trans.destination_id equals dest.id         // INNER JOIN
+                           join img in _db.destination_imgs on trans.id equals img.destination_id into DestAll
+                           from combined in DestAll.DefaultIfEmpty()               // LEFT JOIN
+                           select new DestinationResponse
+                           {
+                               destination_id = trans.destination_id,
+                               id = trans.id,
+                               country_code = dest.country_code,
+                               active = dest.active,
+                               dest_code = dest.dest_code,
+                               dest_description = trans.dest_description,
+                               dest_name = trans.dest_name,
+                               img_path = combined != null ? "http://api.raccoon24.com/" + combined.img_path : null,
+                               lang_code = trans.lang_code,
+                               dest_default_name = dest.dest_default_name,
+                               route = dest.route,
+                               leaf = dest.leaf,
+                               parent_id = dest.parent_id
+                           };
+
 
                 var result = GetDestination_TreeMain(main.ToList(), 0).ToList();
                 return result;
@@ -109,18 +110,18 @@ namespace ITravelApp.Data
                   {
                       leaf = s.leaf,
                       lang_code = s.lang_code,
-					  parent_id=s.parent_id,
-					  active=s.active,
-					  country_code=s.country_code,
-					  destination_id=s.destination_id,
-					  dest_code=s.dest_code,
-					  dest_default_name=s.dest_default_name,
-					  dest_description=s.dest_description,
-					  dest_name=s.dest_name,
-					  id=s.id,
-					  img_path=s.img_path,
-					  route=s.route,
-					  children= GetDestination_TreeMain(lst, s.destination_id).ToList(),
+                      parent_id = s.parent_id,
+                      active = s.active,
+                      country_code = s.country_code,
+                      destination_id = s.destination_id,
+                      dest_code = s.dest_code,
+                      dest_default_name = s.dest_default_name,
+                      dest_description = s.dest_description,
+                      dest_name = s.dest_name,
+                      id = s.id,
+                      img_path = s.img_path,
+                      route = s.route,
+                      children = GetDestination_TreeMain(lst, s.destination_id).ToList(),
 
                   })
                 .ToList();
@@ -131,144 +132,170 @@ namespace ITravelApp.Data
         #region trips
 
         //get facilities for specific trip
-        public List<TripFacility> getFacilityForTrip(decimal? trip_id, string lang_code)
-		{
-			try
-			{
-				var result = from TFAC in _db.trip_facilities.Where(wr => wr.trip_id == trip_id)
-							 join TRANS in _db.facility_translations.Where(wr => wr.lang_code.ToLower() == lang_code.ToLower()) on TFAC.facility_id equals TRANS.facility_id into TRIPFAC
-							 from m in TRIPFAC.DefaultIfEmpty()
-							 select new TripFacility
-							 {
-								 facility_desc = m.facility_desc,
-								 facility_name = m.facility_name,
+        public List<TripFacility> getFacilityForTrip(long? trip_id, string lang_code,bool? isExtra)
+        {
+            try
+            {
 
-							 };
-				return result.ToList();
-			}
-			catch (Exception ex)
-			{
-				return null;
-			}
-		}
-	   
-		//get images list for specific trip
-		public async Task<List<trip_img>> GetImgsByTrip(decimal? trip_id)
-		{
-			try
-			{
-				return await _db.trip_imgs.Where(wr => wr.trip_id == trip_id).Select(s => new trip_img
-				{
-					id = s.id,
-					img_height=s.img_height,
-					img_name=s.img_name,
-					img_path= "http://api.raccoon24.com/" + s.img_path,
-					img_resize_path= "http://api.raccoon24.com/" + s.img_resize_path,
-					img_width=s.img_width,
-					is_default=s.is_default,
-					trip_id=s.trip_id,
+                var result =
+                   from TFAC in _db.trip_facilities.Where(wr => wr.trip_id == trip_id)
+                   join TRANS in _db.facility_translations.Where(wr => wr.lang_code.ToLower() == lang_code.ToLower()) 
+                   on TFAC.facility_id equals TRANS.facility_id 
+                   into TRIPFAC
+                  
+                   from combinedFACT in TRIPFAC.DefaultIfEmpty() // LEFT JOIN Customers
+                   join FACM in _db.facility_mains.Where(wr => wr.active == true && wr.is_extra == isExtra)
+
+                      on TFAC.facility_id equals FACM.id into FacAll
+                   from combinedFACM in FacAll.DefaultIfEmpty() // LEFT JOIN Payments
+                   select new TripFacility
+                   {
+                       facility_desc = combinedFACT != null ? combinedFACT.facility_desc : "",
+                       facility_name = combinedFACT !=null ? combinedFACT.facility_name : "",
+                       extra_price= combinedFACM != null ?  combinedFACM.extra_price : 0,
+                       currency_code= combinedFACM != null ?  combinedFACM.currency_code : "",
+                       is_extra= combinedFACM !=null ? combinedFACM.is_extra : false,
+                       facility_id = TFAC.facility_id
+
+
+                   };
+
+                //var result = from TFAC in _db.trip_facilities.Where(wr => wr.trip_id == trip_id)
+                //             join TRANS in _db.facility_translations.Where(wr => wr.lang_code.ToLower() == lang_code.ToLower()) on TFAC.facility_id equals TRANS.facility_id into TRIPFAC
+                //             from m in TRIPFAC.DefaultIfEmpty()
+                //             select new TripFacility
+                //             {
+                //                 facility_desc = m.facility_desc,
+                //                 facility_name = m.facility_name,
+                                 
+
+                //             };
+                return result.ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        //get images list for specific trip
+        public async Task<List<trip_img>> GetImgsByTrip(decimal? trip_id)
+        {
+            try
+            {
+                return await _db.trip_imgs.Where(wr => wr.trip_id == trip_id).Select(s => new trip_img
+                {
+                    id = s.id,
+                    img_height = s.img_height,
+                    img_name = s.img_name,
+                    img_path = "http://api.raccoon24.com/" + s.img_path,
+                    img_resize_path = "http://api.raccoon24.com/" + s.img_resize_path,
+                    img_width = s.img_width,
+                    is_default = s.is_default,
+                    trip_id = s.trip_id,
                 }).ToListAsync();
-			}
-			catch (Exception ex)
-			{
-				return null;
-			}
-		}
-		//get trips and top trips with its details 
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        //get trips and top trips with its details 
 
-		public trips_wishlist CheckIfTripInWishList(long? trip_id,string client_id, int? trip_type)
-		{
-			try
-			{
-				var result =  _db.trips_wishlists.Where(wr => wr.trip_id == trip_id && wr.client_id == client_id && wr.trip_type == trip_type).SingleOrDefault();
-                if(result == null)
-				{
-					return new trips_wishlist();
-				}
-				else
-				{
-					return result;
+        public trips_wishlist CheckIfTripInWishList(long? trip_id, string client_id, int? trip_type)
+        {
+            try
+            {
+                var result = _db.trips_wishlists.Where(wr => wr.trip_id == trip_id && wr.client_id == client_id && wr.trip_type == trip_type).SingleOrDefault();
+                if (result == null)
+                {
+                    return new trips_wishlist();
+                }
+                else
+                {
+                    return result;
 
                 }
-			}
-			catch(Exception ex)
-			{
-				return new trips_wishlist();
-			}
-		}
-		public async Task<List<TripsAll>> GetTripsAll(TripsReq req)
-		{
-			try
-			{
-				var trips = await _db.tripwithdetails
-					.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
-								 wr.trip_type == (req.trip_type == 0 ? wr.trip_type  : req.trip_type) &&
-								 wr.show_in_top == (req.show_in_top == false ? wr.show_in_top : req.show_in_top) &&
-								 wr.destination_id == (req.destination_id == 0 ? wr.destination_id : req.destination_id) &&
-								 //wr.currency_code.ToLower() == req.currency_code.ToLower() &&
+            }
+            catch (Exception ex)
+            {
+                return new trips_wishlist();
+            }
+        }
+        public async Task<List<TripsAll>> GetTripsAll(TripsReq req)
+        {
+            try
+            {
+                var trips = await _db.tripwithdetails
+                    .Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
+                                 wr.trip_type == (req.trip_type == 0 ? wr.trip_type : req.trip_type) &&
+                                 wr.show_in_top == (req.show_in_top == false ? wr.show_in_top : req.show_in_top) &&
+                                 wr.destination_id == (req.destination_id == 0 ? wr.destination_id : req.destination_id) &&
+                                 //wr.currency_code.ToLower() == req.currency_code.ToLower() &&
                                  (string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
-                                 (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower()  == req.currency_code.ToLower()) &&
+                                 (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower()) &&
                                  wr.show_in_slider == (req.show_in_slider == false ? wr.show_in_slider : req.show_in_slider))
-					.ToListAsync();
-				return trips.Select(s => new TripsAll
-				{
-					destination_id = s.destination_id,
-					lang_code = s.lang_code,
-					country_code = s.country_code,
-					currency_code = s.currency_code,
-					default_img = "http://api.raccoon24.com/" + s.default_img,
-					dest_code = s.dest_code,
-					dest_default_name = s.dest_default_name,
-					pickup = s.pickup,
-					show_in_slider = s.show_in_slider,
-					show_in_top = s.show_in_top,
-					trip_code = s.trip_code,
-					trip_default_name = s.trip_default_name,
-					trip_description = s.trip_description,
-					trip_duration = s.trip_duration,
-					trip_highlight = s.trip_highlight,
-					trip_id = s.trip_id,
-					trip_includes = s.trip_includes,
-					trip_name = s.trip_name,
-					trip_origin_price = s.trip_origin_price,
-					trip_sale_price = s.trip_sale_price,
-					trip_trans_id = s.trip_trans_id,
-					isfavourite = string.IsNullOrEmpty(req.client_id) ? false : (CheckIfTripInWishList(s.trip_id, req.client_id,s.trip_type).id == 0 ? false : true),
-					trip_type = s.trip_type,
-					wish_id = string.IsNullOrEmpty(req.client_id) ? 0 : CheckIfTripInWishList(s.trip_id, req.client_id,s.trip_type).id,
-					wsh_created_at = string.IsNullOrEmpty(req.client_id) ? null : (CheckIfTripInWishList(s.trip_id, req.client_id,s.trip_type).created_at == null  ? null: CheckIfTripInWishList(s.trip_id, req.client_id,s.trip_type).created_at.Value.ToString("dd-MM-yyyy")),
-					//wsh_created_at = null,
+                    .ToListAsync();
+                return trips.Select(s => new TripsAll
+                {
+                    destination_id = s.destination_id,
+                    lang_code = s.lang_code,
+                    country_code = s.country_code,
+                    currency_code = s.currency_code,
+                    default_img = "http://api.raccoon24.com/" + s.default_img,
+                    dest_code = s.dest_code,
+                    dest_default_name = s.dest_default_name,
+                    pickup = s.pickup,
+                    show_in_slider = s.show_in_slider,
+                    show_in_top = s.show_in_top,
+                    trip_code = s.trip_code,
+                    trip_default_name = s.trip_default_name,
+                    trip_description = s.trip_description,
+                    trip_duration = s.trip_duration,
+                    trip_highlight = s.trip_highlight,
+                    trip_id = s.trip_id,
+                    trip_includes = s.trip_includes,
+                    trip_name = s.trip_name,
+                    trip_origin_price = s.trip_origin_price,
+                    trip_sale_price = s.trip_sale_price,
+                    trip_trans_id = s.trip_trans_id,
+                    isfavourite = string.IsNullOrEmpty(req.client_id) ? false : (CheckIfTripInWishList(s.trip_id, req.client_id, s.trip_type).id == 0 ? false : true),
+                    trip_type = s.trip_type,
+                    wish_id = string.IsNullOrEmpty(req.client_id) ? 0 : CheckIfTripInWishList(s.trip_id, req.client_id, s.trip_type).id,
+                    wsh_created_at = string.IsNullOrEmpty(req.client_id) ? null : (CheckIfTripInWishList(s.trip_id, req.client_id, s.trip_type).created_at == null ? null : CheckIfTripInWishList(s.trip_id, req.client_id, s.trip_type).created_at.Value.ToString("dd-MM-yyyy")),
+                    //wsh_created_at = null,
                     dest_route = s.dest_route,
-					route = s.route,
-					client_id = req.client_id,
-					facilities = getFacilityForTrip(s.trip_id, s.lang_code).ToList(),
-					imgs = GetImgsByTrip(s.trip_id).Result,
-					important_info = s.important_info,
-					trip_details = s.trip_details,
-					trip_not_includes = s.trip_not_includes,
-					max_capacity=s.max_capacity,
-					min_capacity=s.min_capacity,
-					max_price=s.max_price,
-					min_price=s.min_price,
-					transfer_category_name=s.transfer_category_name,
-					transfer_category__code=s.transfer_category__code,
-					transfer_currency=s.transfer_currency,
-					trip_category_code=s.trip_category_code,
-					trip_category_name=s.trip_category_name,
-					transfer_category_notes=s.transfer_category_notes,
-					transfer_child_price=s.transfer_child_price,
-					trip_child_price=s.trip_child_price,
-					trip_price_notes=s.trip_price_notes,
-					total_reviews = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Count(),
-					review_rate = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Max(m => m.review_rate)
-				}).ToList();
+                    route = s.route,
+                    client_id = req.client_id,
+                    facilities = getFacilityForTrip(s.trip_id, s.lang_code,false).ToList(),
+                    imgs = GetImgsByTrip(s.trip_id).Result,
+                    important_info = s.important_info,
+                    trip_details = s.trip_details,
+                    trip_not_includes = s.trip_not_includes,
+                    max_capacity = s.max_capacity,
+                    min_capacity = s.min_capacity,
+                    max_price = s.max_price,
+                    min_price = s.min_price,
+                    transfer_category_name = s.transfer_category_name,
+                    transfer_category__code = s.transfer_category__code,
+                    transfer_currency = s.transfer_currency,
+                    trip_category_code = s.trip_category_code,
+                    trip_category_name = s.trip_category_name,
+                    transfer_category_notes = s.transfer_category_notes,
+                    transfer_child_price = s.transfer_child_price,
+                    trip_child_price = s.trip_child_price,
+                    trip_price_notes = s.trip_price_notes,
+                    trip_code_auto =s.trip_code_auto,
+                    total_reviews = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Count(),
+                    review_rate = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Max(m => m.review_rate)
+                }).ToList();
 
-			}
-			catch (Exception ex)
-			{
-				return null;
-			}
-		}
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
 
         public async Task<TripsAll> GetTripDetails(TripDetailsReq req)
@@ -278,7 +305,7 @@ namespace ITravelApp.Data
                 var trips = await _db.tripwithdetails
                     .Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
                                  wr.trip_id == req.trip_id &&
-								 wr.trip_type == req.trip_type &&
+                                 wr.trip_type == req.trip_type &&
                                   //wr.currency_code.ToLower() == req.currency_code.ToLower()
                                   (string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
                                  (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower())
@@ -308,41 +335,42 @@ namespace ITravelApp.Data
                     trip_origin_price = s.trip_origin_price,
                     trip_sale_price = s.trip_sale_price,
                     trip_trans_id = s.trip_trans_id,
-                    isfavourite = string.IsNullOrEmpty(req.client_id) ? false : (CheckIfTripInWishList(s.trip_id, req.client_id,s.trip_type).id == 0 ? false : true),
+                    isfavourite = string.IsNullOrEmpty(req.client_id) ? false : (CheckIfTripInWishList(s.trip_id, req.client_id, s.trip_type).id == 0 ? false : true),
                     trip_type = s.trip_type,
                     wish_id = string.IsNullOrEmpty(req.client_id) ? 0 : CheckIfTripInWishList(s.trip_id, req.client_id, s.trip_type).id,
-                    wsh_created_at = string.IsNullOrEmpty(req.client_id) ? null : (CheckIfTripInWishList(s.trip_id, req.client_id, s.trip_type).created_at == null ? null : CheckIfTripInWishList(s.trip_id, req.client_id,s.trip_type).created_at.Value.ToString("dd-MM-yyyy")),
+                    wsh_created_at = string.IsNullOrEmpty(req.client_id) ? null : (CheckIfTripInWishList(s.trip_id, req.client_id, s.trip_type).created_at == null ? null : CheckIfTripInWishList(s.trip_id, req.client_id, s.trip_type).created_at.Value.ToString("dd-MM-yyyy")),
                     //wsh_created_at = null,
                     dest_route = s.dest_route,
                     route = s.route,
                     client_id = req.client_id,
-                    facilities = getFacilityForTrip(s.trip_id, s.lang_code).ToList(),
+                    facilities = getFacilityForTrip(s.trip_id, s.lang_code,false).ToList(),
                     imgs = GetImgsByTrip(s.trip_id).Result,
                     important_info = s.important_info,
                     trip_details = s.trip_details,
                     trip_not_includes = s.trip_not_includes,
-					trip_price_notes=s.trip_price_notes,
-					trip_child_price=s.trip_child_price,
-					transfer_child_price=s.transfer_child_price,
-					transfer_category_notes=s.transfer_category_notes,
-					transfer_currency=s.transfer_currency,
-					trip_category_name=s.trip_category_name,
-					trip_category_code=s.trip_category_code,
-					max_capacity=s.max_capacity,
-					max_price=s.max_price,
-					min_capacity=s.min_capacity,
-					min_price=s.min_price,
-					transfer_category_name=s.transfer_category_name,
-					transfer_category__code=s.transfer_category__code,
+                    trip_price_notes = s.trip_price_notes,
+                    trip_child_price = s.trip_child_price,
+                    transfer_child_price = s.transfer_child_price,
+                    transfer_category_notes = s.transfer_category_notes,
+                    transfer_currency = s.transfer_currency,
+                    trip_category_name = s.trip_category_name,
+                    trip_category_code = s.trip_category_code,
+                    max_capacity = s.max_capacity,
+                    max_price = s.max_price,
+                    min_capacity = s.min_capacity,
+                    min_price = s.min_price,
+                    trip_code_auto=s.trip_code_auto,
+                    transfer_category_name = s.transfer_category_name,
+                    transfer_category__code = s.transfer_category__code,
                     total_reviews = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Count(),
                     review_rate = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Max(m => m.review_rate)
                 }).ToList();
 
-				if(result != null)
-				{
+                if (result != null)
+                {
                     return result.SingleOrDefault();
                 }
-				return new TripsAll();
+                return new TripsAll();
             }
             catch (Exception ex)
             {
@@ -351,228 +379,228 @@ namespace ITravelApp.Data
         }
         //get trips which shown in home page slider
         public async Task<List<tripwithdetail>> GetTripsForSlider(TripsReq req)
-		{
-			try
-			{
-				var trips = await _db.tripwithdetails
-					.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && 
-								wr.show_in_slider == true && 
-								wr.trip_type == (req.trip_type == 0 ? wr.trip_type: req.trip_type) &&
-								wr.destination_id == (req.destination_id == 0 ? wr.destination_id : req.destination_id) &&
+        {
+            try
+            {
+                var trips = await _db.tripwithdetails
+                    .Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
+                                wr.show_in_slider == true &&
+                                wr.trip_type == (req.trip_type == 0 ? wr.trip_type : req.trip_type) &&
+                                wr.destination_id == (req.destination_id == 0 ? wr.destination_id : req.destination_id) &&
                                  //wr.currency_code.ToLower() == req.currency_code.ToLower()
                                  (string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
                                  (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower())
 
                                 )
-					.ToListAsync();
+                    .ToListAsync();
 
 
-				return trips;
+                return trips;
 
-			}
-			catch (Exception ex)
-			{
-				return null;
-			}
-		}
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
-		//get Pickups for spicifics trips
-		public async Task<List<TripsPickupResponse>> GetPickupsForTrip(PickupsReq req)
-		{
-			try
-			{
-				var result = await _db.trip_pickups_mains.Where(wr => wr.trip_id == req.trip_id && wr.trip_type == req.trip_type)
-								   .Join(_db.trip_pickups_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower()),
-										MAIN => new { trip_pickup_id = MAIN.id },
-										TRANS => new {TRANS.trip_pickup_id },
-										(MAIN, TRANS) => new TripsPickupResponse
-										{
-											trip_pickup_id = MAIN.id,
-											lang_code = TRANS.lang_code,
-											order = MAIN.order,
-											pickup_code = MAIN.pickup_code,
-											pickup_default_name = MAIN.pickup_default_name,
-											pickup_description = TRANS.pickup_description,
-											pickup_name = TRANS.pickup_name,
-											trip_id = MAIN.trip_id,
-											trip_type = MAIN.trip_type,
-											duration=MAIN.duration
-										}
-									   ).OrderBy(x => x.order).ToListAsync();
-				return result;
-			}
-			catch (Exception ex)
-			{
-				return null;
-			}
-		}
+        //get Pickups for spicifics trips
+        public async Task<List<TripsPickupResponse>> GetPickupsForTrip(PickupsReq req)
+        {
+            try
+            {
+                var result = await _db.trip_pickups_mains.Where(wr => wr.trip_id == req.trip_id && wr.trip_type == req.trip_type)
+                                   .Join(_db.trip_pickups_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower()),
+                                        MAIN => new { trip_pickup_id = MAIN.id },
+                                        TRANS => new { TRANS.trip_pickup_id },
+                                        (MAIN, TRANS) => new TripsPickupResponse
+                                        {
+                                            trip_pickup_id = MAIN.id,
+                                            lang_code = TRANS.lang_code,
+                                            order = MAIN.order,
+                                            pickup_code = MAIN.pickup_code,
+                                            pickup_default_name = MAIN.pickup_default_name,
+                                            pickup_description = TRANS.pickup_description,
+                                            pickup_name = TRANS.pickup_name,
+                                            trip_id = MAIN.trip_id,
+                                            trip_type = MAIN.trip_type,
+                                            duration = MAIN.duration
+                                        }
+                                       ).OrderBy(x => x.order).ToListAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
-		//get clients reviews for specific trip 
-		//used for exercusion trip && transfer trip
-		//trip_type = 1 mean exercusion 
-		//trip_type = 2 mean transfer
-		// pageNumber = 1; // Current page number (1-based)
-		// pageSize = 10;  // Number of items per page
-		public async Task<ClientsReviewsResponse> GetClientsReviews(ClientsReviewsReq req)
-		{
-			
-			try
-			{
-				var totalRecords = await _db.tbl_reviews.Where(wr => wr.trip_id == req.trip_id && wr.trip_type == req.trip_type).CountAsync();
+        //get clients reviews for specific trip 
+        //used for exercusion trip && transfer trip
+        //trip_type = 1 mean exercusion 
+        //trip_type = 2 mean transfer
+        // pageNumber = 1; // Current page number (1-based)
+        // pageSize = 10;  // Number of items per page
+        public async Task<ClientsReviewsResponse> GetClientsReviews(ClientsReviewsReq req)
+        {
+
+            try
+            {
+                var totalRecords = await _db.tbl_reviews.Where(wr => wr.trip_id == req.trip_id && wr.trip_type == req.trip_type).CountAsync();
                 var average_review_rate = await _db.tbl_reviews.Where(wr => wr.trip_id == req.trip_id && wr.trip_type == req.trip_type).MaxAsync(m => m.review_rate);
                 var reviews = await _db.tbl_reviews.Where(wr => wr.trip_id == req.trip_id && wr.trip_type == req.trip_type)
-											.Select(s => new ClientsReviews
-											{
-												trip_id = s.trip_id,
-												client_id = s.client_id,
-												entry_date= s.entry_date,
-												entry_dateStr=s.entry_date.ToString(),
-												id = s.id,
-												review_description= s.review_description,
-												review_rate= s.review_rate,
-												review_title= s.review_title,
-												trip_type= s.trip_type,
-											})
-											 .Skip((req.pageNumber - 1) * req.pageSize)
-											 .Take(req.pageSize)
-											.ToListAsync();
+                                            .Select(s => new ClientsReviews
+                                            {
+                                                trip_id = s.trip_id,
+                                                client_id = s.client_id,
+                                                entry_date = s.entry_date,
+                                                entry_dateStr = s.entry_date.ToString(),
+                                                id = s.id,
+                                                review_description = s.review_description,
+                                                review_rate = s.review_rate,
+                                                review_title = s.review_title,
+                                                trip_type = s.trip_type,
+                                            })
+                                             .Skip((req.pageNumber - 1) * req.pageSize)
+                                             .Take(req.pageSize)
+                                            .ToListAsync();
 
-				return new ClientsReviewsResponse
-				{
-					reviews = reviews,
-                    average_review_rate= average_review_rate,
+                return new ClientsReviewsResponse
+                {
+                    reviews = reviews,
+                    average_review_rate = average_review_rate,
                     totalPages = totalRecords
-				};
-			}
-			catch (Exception ex)
-			{
-				return null;
-			}
-		}
-
-		//save client reviews for trip
-		public ResponseCls SaveReviewForTrip(tbl_review row)
-		{
-			ResponseCls response;
-			long maxId = 0;
-			try
-			{
-				row.entry_date = DateTime.Now;
-				if (row.id == 0)
-				{
-					//check duplicate validation
-					var result = _db.tbl_reviews.Where(wr => wr.client_id == row.client_id && wr.trip_id == row.trip_id).SingleOrDefault();
-					if (result != null)
-					{
-						return new ResponseCls { success = false, errors = _localizer["AddReviewDuplicate"] };
-					}
-					if (_db.tbl_reviews.Count() > 0)
-					{
-						maxId = _db.tbl_reviews.Max(d => d.id);
-
-					}
-					row.id = maxId + 1;
-					_db.tbl_reviews.Add(row);
-					_db.SaveChanges();
-				}
-				else
-				{
-					_db.tbl_reviews.Update(row);
-					_db.SaveChanges();
-				}
-
-				response = new ResponseCls { errors = null, success = true, idOut = row.id };
-			}
-			catch (Exception ex)
-			{
-				response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
-			}
-			return response;
-		}
-
-		//save client wishList
-		
-		public ResponseCls AddTripToWishList(TripsWishlistReq cls)
-		{
-			ResponseCls response;
-			long maxId = 0;
-			try
-			{
-				trips_wishlist row = new trips_wishlist
-				{
-					client_id = cls.client_id,
-					created_at= DateTime.Now,
-					id= cls.id,
-					trip_id= cls.trip_id,
-					trip_type= cls.trip_type
                 };
-				if(cls.delete == true)
-				{
-					_db.Remove(row);
-					_db.SaveChanges();
-                   return new ResponseCls { errors = null, success = true };
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        //save client reviews for trip
+        public ResponseCls SaveReviewForTrip(tbl_review row)
+        {
+            ResponseCls response;
+            long maxId = 0;
+            try
+            {
+                row.entry_date = DateTime.Now;
+                if (row.id == 0)
+                {
+                    //check duplicate validation
+                    var result = _db.tbl_reviews.Where(wr => wr.client_id == row.client_id && wr.trip_id == row.trip_id).SingleOrDefault();
+                    if (result != null)
+                    {
+                        return new ResponseCls { success = false, errors = _localizer["AddReviewDuplicate"] };
+                    }
+                    if (_db.tbl_reviews.Count() > 0)
+                    {
+                        maxId = _db.tbl_reviews.Max(d => d.id);
+
+                    }
+                    row.id = maxId + 1;
+                    _db.tbl_reviews.Add(row);
+                    _db.SaveChanges();
                 }
-				if (row.id == 0)
-				{
-					//check duplicate validation
-					var result = _db.trips_wishlists.Where(wr => wr.client_id == row.client_id && wr.trip_id == row.trip_id).SingleOrDefault();
-					if (result != null)
-					{
-						return new ResponseCls { success = false, errors = _localizer["DuplicateData"] };
-					}
-					if (_db.trips_wishlists.Count() > 0)
-					{
-						maxId = _db.trips_wishlists.Max(d => d.id);
+                else
+                {
+                    _db.tbl_reviews.Update(row);
+                    _db.SaveChanges();
+                }
 
-					}
-					row.id = maxId + 1;
-					_db.trips_wishlists.Add(row);
-					_db.SaveChanges();
-				}
-				else
-				{
-					_db.trips_wishlists.Update(row);
-					_db.SaveChanges();
-				}
+                response = new ResponseCls { errors = null, success = true, idOut = row.id };
+            }
+            catch (Exception ex)
+            {
+                response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
+            }
+            return response;
+        }
 
-				response = new ResponseCls { errors = null, success = true, idOut = row.id };
-			}
-			catch (Exception ex)
-			{
-				response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
-			}
-			return response;
-		}
+        //save client wishList
 
-		//get count of wishlist for specific client
+        public ResponseCls AddTripToWishList(TripsWishlistReq cls)
+        {
+            ResponseCls response;
+            long maxId = 0;
+            try
+            {
+                trips_wishlist row = new trips_wishlist
+                {
+                    client_id = cls.client_id,
+                    created_at = DateTime.Now,
+                    id = cls.id,
+                    trip_id = cls.trip_id,
+                    trip_type = cls.trip_type
+                };
+                if (cls.delete == true)
+                {
+                    _db.Remove(row);
+                    _db.SaveChanges();
+                    return new ResponseCls { errors = null, success = true };
+                }
+                if (row.id == 0)
+                {
+                    //check duplicate validation
+                    var result = _db.trips_wishlists.Where(wr => wr.client_id == row.client_id && wr.trip_id == row.trip_id).SingleOrDefault();
+                    if (result != null)
+                    {
+                        return new ResponseCls { success = false, errors = _localizer["DuplicateData"] };
+                    }
+                    if (_db.trips_wishlists.Count() > 0)
+                    {
+                        maxId = _db.trips_wishlists.Max(d => d.id);
 
-		public async Task<int> GetWishListCount(string client_id)
-		{
-			try
-			{
-				return await _db.trips_wishlists.Where(wr => wr.client_id == client_id).CountAsync();
-			}
-			catch(Exception ex)
-			{
-				return 0;
-			}
-		}
-		//get wish list for Specific client
-		public async Task<List<TripsAll>> GetClientWishList(ClientWishListReq req)
-		{
-			try
-			{
+                    }
+                    row.id = maxId + 1;
+                    _db.trips_wishlists.Add(row);
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    _db.trips_wishlists.Update(row);
+                    _db.SaveChanges();
+                }
+
+                response = new ResponseCls { errors = null, success = true, idOut = row.id };
+            }
+            catch (Exception ex)
+            {
+                response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
+            }
+            return response;
+        }
+
+        //get count of wishlist for specific client
+
+        public async Task<int> GetWishListCount(string client_id)
+        {
+            try
+            {
+                return await _db.trips_wishlists.Where(wr => wr.client_id == client_id).CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+        //get wish list for Specific client
+        public async Task<List<TripsAll>> GetClientWishList(ClientWishListReq req)
+        {
+            try
+            {
                 var trips = await _db.tripwithdetails
-					 .Where(wr => wr.lang_code == req.lang_code &&
+                     .Where(wr => wr.lang_code == req.lang_code &&
                                    // wr.currency_code.ToLower() == req.currency_code.ToLower() && 
                                    (string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
                                  (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower()) &&
-                                   wr.trip_type ==(req.trip_type == 0 ? wr.trip_type : req.trip_type))
-					 .Join(_db.trips_wishlists.Where(wr => wr.client_id == req.client_id),
-						            TRIP => new { TRIP.trip_id},
-                                    WSH => new { WSH.trip_id},
-									(TRIP , WSH) => new TripsAll
-									{
+                                   wr.trip_type == (req.trip_type == 0 ? wr.trip_type : req.trip_type))
+                     .Join(_db.trips_wishlists.Where(wr => wr.client_id == req.client_id),
+                                    TRIP => new { TRIP.trip_id },
+                                    WSH => new { WSH.trip_id },
+                                    (TRIP, WSH) => new TripsAll
+                                    {
                                         destination_id = TRIP.destination_id,
                                         lang_code = TRIP.lang_code,
                                         country_code = TRIP.country_code,
@@ -596,7 +624,7 @@ namespace ITravelApp.Data
                                         trip_trans_id = TRIP.trip_trans_id,
                                         wish_id = WSH.id,
                                         client_id = WSH.client_id,
-                                        wsh_created_at = (WSH != null && WSH.created_at !=null) ? WSH.created_at.Value.ToString("dd-MM-yyyy") : null,
+                                        wsh_created_at = (WSH != null && WSH.created_at != null) ? WSH.created_at.Value.ToString("dd-MM-yyyy") : null,
                                         trip_type = TRIP.trip_type,
                                         isfavourite = (WSH != null && WSH.id != 0) ? true : false,
                                         dest_route = TRIP.dest_route,
@@ -604,58 +632,58 @@ namespace ITravelApp.Data
                                         route = TRIP.route,
                                         trip_not_includes = TRIP.trip_not_includes,
                                         trip_details = TRIP.trip_details,
-                                        transfer_category__code= TRIP.transfer_category__code,
-										transfer_category_name= TRIP.transfer_category_name,
-										min_price= TRIP.min_price,
-										min_capacity= TRIP.min_capacity,
-										max_price= TRIP.max_price,
-										max_capacity= TRIP.max_capacity,
-										transfer_category_notes= TRIP.transfer_category_notes,
-										transfer_child_price= TRIP.transfer_child_price,
-										transfer_currency= TRIP.transfer_currency,
-										trip_category_code= TRIP.trip_category_code,
-										trip_category_name= TRIP.trip_category_name,
-										trip_child_price= TRIP.trip_child_price,
-										trip_price_notes= TRIP.trip_price_notes,
+                                        transfer_category__code = TRIP.transfer_category__code,
+                                        transfer_category_name = TRIP.transfer_category_name,
+                                        min_price = TRIP.min_price,
+                                        min_capacity = TRIP.min_capacity,
+                                        max_price = TRIP.max_price,
+                                        max_capacity = TRIP.max_capacity,
+                                        transfer_category_notes = TRIP.transfer_category_notes,
+                                        transfer_child_price = TRIP.transfer_child_price,
+                                        transfer_currency = TRIP.transfer_currency,
+                                        trip_category_code = TRIP.trip_category_code,
+                                        trip_category_name = TRIP.trip_category_name,
+                                        trip_child_price = TRIP.trip_child_price,
+                                        trip_price_notes = TRIP.trip_price_notes,
                                     }).ToListAsync();
 
                 return trips.Select(s => new TripsAll
-				{
-					destination_id = s.destination_id,
-					lang_code = s.lang_code,
-					country_code = s.country_code,
-					currency_code = s.currency_code,
-					default_img = s.default_img,
-					dest_code = s.dest_code,
-					dest_default_name = s.dest_default_name,
-					pickup = s.pickup,
-					show_in_slider = s.show_in_slider,
-					show_in_top = s.show_in_top,
-					trip_code = s.trip_code,
-					trip_default_name = s.trip_default_name,
-					trip_description = s.trip_description,
-					trip_duration = s.trip_duration,
-					trip_highlight = s.trip_highlight,
-					trip_id = s.trip_id,
-					trip_includes = s.trip_includes,
-					trip_name = s.trip_name,
-					trip_origin_price = s.trip_origin_price,
-					trip_sale_price = s.trip_sale_price,
-					trip_trans_id = s.trip_trans_id,
-					wish_id = s.wish_id,
-					client_id = s.client_id,
-					wsh_created_at = s.wsh_created_at,
-					trip_type = s.trip_type,
-					isfavourite= s.isfavourite,
-					dest_route=s.dest_route,
-					important_info=s.important_info,
-					route=s.route,
-					trip_not_includes=s.trip_not_includes,
-					trip_details=s.trip_details,
+                {
+                    destination_id = s.destination_id,
+                    lang_code = s.lang_code,
+                    country_code = s.country_code,
+                    currency_code = s.currency_code,
+                    default_img = s.default_img,
+                    dest_code = s.dest_code,
+                    dest_default_name = s.dest_default_name,
+                    pickup = s.pickup,
+                    show_in_slider = s.show_in_slider,
+                    show_in_top = s.show_in_top,
+                    trip_code = s.trip_code,
+                    trip_default_name = s.trip_default_name,
+                    trip_description = s.trip_description,
+                    trip_duration = s.trip_duration,
+                    trip_highlight = s.trip_highlight,
+                    trip_id = s.trip_id,
+                    trip_includes = s.trip_includes,
+                    trip_name = s.trip_name,
+                    trip_origin_price = s.trip_origin_price,
+                    trip_sale_price = s.trip_sale_price,
+                    trip_trans_id = s.trip_trans_id,
+                    wish_id = s.wish_id,
+                    client_id = s.client_id,
+                    wsh_created_at = s.wsh_created_at,
+                    trip_type = s.trip_type,
+                    isfavourite = s.isfavourite,
+                    dest_route = s.dest_route,
+                    important_info = s.important_info,
+                    route = s.route,
+                    trip_not_includes = s.trip_not_includes,
+                    trip_details = s.trip_details,
                     total_reviews = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Count(),
                     review_rate = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Max(m => m.review_rate),
-                    facilities = getFacilityForTrip(s.trip_id, s.lang_code).ToList(),
-					imgs = GetImgsByTrip(s.trip_id).Result,
+                    facilities = getFacilityForTrip(s.trip_id, s.lang_code,false).ToList(),
+                    imgs = GetImgsByTrip(s.trip_id).Result,
                     transfer_category__code = s.transfer_category__code,
                     transfer_category_name = s.transfer_category_name,
                     min_price = s.min_price,
@@ -671,70 +699,276 @@ namespace ITravelApp.Data
                     trip_price_notes = s.trip_price_notes,
 
                 })
-				.ToList();
-			}
-			catch (Exception ex)
-			{
-				return null;
-			}
-		}
-		#endregion
-
-		#region "booking"
-		  public ResponseCls SaveClientBooking(BookingCls row)
-		{
-			long maxId = 0;
-			ResponseCls response = null;
-			try
-			{
-				string bookCode = "BK"+"-" + row.trip_code + "-" +DateTime.Now.ToString("yyyyMMdd");
-				trips_booking booking = new trips_booking
-				{
-					booking_code = bookCode,
-					booking_date= DateTime.Today,
-					booking_notes = row.booking_notes,
-					booking_status = row.booking_status,
-					child_num = row.child_num,
-					client_email = row.client_email,
-					client_id=row.client_id,
-					id = row.id,
-					pickup_time = row.pickup_time,
-					total_pax = row.total_pax,
-					total_price = row.total_price,
-					trip_code = row.trip_code,
-					trip_id=row.trip_id,
-					trip_date=DateTime.Parse(row.trip_dateStr),
-
-				};
-				if (row.id == 0)
-				{
-					//check duplicate validation
-					var result = _db.trips_bookings.Where(wr => wr.trip_id == booking.trip_id && wr.booking_status == booking.booking_status && wr.client_id == booking.client_id && wr.booking_date == booking.booking_date).SingleOrDefault();
-					if (result != null)
-					{
-						return new ResponseCls { success = false, errors = _localizer["DuplicateData"] };
-					}
-					if (_db.trips_bookings.Count() > 0)
-					{
-						maxId = _db.trips_bookings.Max(d => d.id);
-
-					}
-					booking.id = maxId + 1;
-					_db.trips_bookings.Add(booking);
-					_db.SaveChanges();
-				}
-				else
-				{
-					_db.trips_bookings.Update(booking);
-					_db.SaveChanges();
-				}
-                response = new ResponseCls { errors = null, success = true, idOut = booking.id ,msg= _localizer["BookingMsg"] };
+                .ToList();
             }
-			catch (Exception ex) {
-				response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
-			}
-			return response;
-		}
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+        #region "booking"
+
+        public async Task<bookingwithdetail> GetBookingWithDetails(BookingReq req)
+        {
+            try
+            {
+                var result = await _db.bookingwithdetails.Where(
+                                                        wr => wr.lang_code == req.lang_code &&
+                                                              wr.booking_id == req.booking_id &&
+                                                              wr.client_id == req.client_id
+                                                         ).SingleOrDefaultAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new bookingwithdetail();
+            }
+        }
+
+        public BookingWithTripDetailsAll ConfirmBooking(ConfirmBookingReq req)
+        {
+            
+            try
+            {
+                trips_booking booking = _db.trips_bookings.Where(wr => wr.id == req.booking_id).SingleOrDefault();
+                 if(booking != null)
+                {
+                    booking.booking_status = 2;
+                    _db.trips_bookings.Update(booking);
+                    _db.SaveChanges();
+                    var result =  _db.bookingwithdetails.Where(
+                                                       wr => wr.lang_code == req.lang_code &&
+                                                             wr.booking_id == req.booking_id &&
+                                                             wr.client_id == req.client_id
+                                                        ).SingleOrDefault();
+                    return new BookingWithTripDetailsAll
+                    {
+                        booking_code = result.booking_code,
+                        booking_datestr = result.booking_datestr,
+                        booking_id = result.booking_id,
+                        child_num = result.child_num,
+                        client_email = result.client_email,
+                        client_id = result.client_id,
+                        client_nationality = result.client_nationality,
+                        client_phone = result.client_phone,
+                        currency_code = result.currency_code,
+                        gift_code = result.gift_code,
+                        infant_num = result.infant_num,
+                        lang_code = result.lang_code,
+                        pickup_address = result.pickup_address,
+                        pickup_time = result.pickup_time,
+                        review_rate = result.review_rate,
+                        total_pax = result.total_pax,
+                        total_price = result.total_price,
+                        trip_code = result.trip_code,
+                        trip_datestr = result.trip_datestr,
+                        trip_name = result.trip_name,
+                        pickups = GetPickupsForTrip(new PickupsReq { lang_code = req.lang_code, trip_id = result.trip_id, trip_type = result.trip_type }).Result
+
+
+                    };
+                    //send mail to client && horizon reservation team
+
+                }
+                return new BookingWithTripDetailsAll();
+            }
+            catch(Exception ex)
+            {
+                return new BookingWithTripDetailsAll ();
+            }
+         
+        }
+        //public ResponseCls CalculateBookingPrice(long? booking_id , long? trip_id , int? adult_num, int? child_num,string currency,decimal extras_price)
+        public ResponseCls CalculateBookingPrice(CalculateBookingPriceReq req)
+        {
+            decimal? total_price = 0;
+            decimal? final_price = 0;
+            decimal? extras_price = 0;
+            if(req.extra_lst !=null && req.extra_lst.Count > 0)
+            {
+                foreach (var item in req.extra_lst)
+                {
+                    extras_price = extras_price + (item.extra_price * item.extra_count);
+                }
+            }
+            ResponseCls response = new ResponseCls();
+            try
+            {
+                   //get trip details
+                var trip =  _db.trip_mains.Where(wr => wr.id == req.trip_id).SingleOrDefault();
+                if(trip != null)
+                {
+                    var capacity = req.adult_num + req.child_num;
+                    //mean it trip is transfer type, get price data from tbl transfer_categories 
+                    if (trip.trip_type == 2)
+                    {
+                        var transfer =  _db.transfer_categories.Where(wr => wr.id == trip.transfer_category_id && wr.min_capacity <= capacity && wr.max_capacity >= capacity && wr.currency_code.ToLower() == req.currency_code.ToLower()).SingleOrDefault();
+                        total_price = transfer?.max_price ;
+                    }
+                    else
+                    {
+                        //mean trip is diving or excursion get price data from tbl trip_prices
+                        var price = _db.trip_prices.Where(wr => wr.trip_id == trip.id && wr.currency_code.ToLower() == req.currency_code.ToLower()).SingleOrDefault();
+                        total_price = (price?.child_price * req.child_num) + (price?.trip_sale_price * req.adult_num);
+                    }
+                }
+                final_price = total_price + extras_price;
+                //update booking
+                var booking = _db.trips_bookings.Where(wr => wr.id == req.booking_id).SingleOrDefault();
+               
+                if (booking != null) {
+                    booking.total_price = final_price;
+                    _db.trips_bookings.Update(booking);
+                    _db.SaveChanges();
+                    response = new ResponseCls { errors = null, success = true, idOut = booking.id, msg = _localizer["UpdateBookingPrice"] };
+                }
+            }
+            catch (Exception ex)
+            {
+                //final_price = 0;
+                response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
+            }
+            return response;
+        }
+        public ResponseCls SaveClientBooking(BookingCls row)
+        {
+            long maxId = 0;
+            ResponseCls response = null;
+            try
+            {
+                string bookCode = "BK" + "-" + row.trip_code + "-" + DateTime.Now.ToString("yyyyMMdd");
+                trips_booking booking = new trips_booking
+                {
+                    booking_code = bookCode,
+                    booking_date = DateTime.Today,
+                    booking_notes = row.booking_notes,
+                    booking_status = row.booking_status,
+                    child_num = row.child_num,
+                    client_email = row.client_email,
+                    client_id = row.client_id,
+                    id = row.id,
+                    pickup_time = row.pickup_time,
+                    total_pax = row.total_pax,
+                    //total_price = row.total_price,
+                    trip_code = row.trip_code,
+                    trip_id = row.trip_id,
+                    trip_date = DateTime.Parse(row.trip_dateStr),
+                    //booking_code_auto="BK"+
+                    client_nationality = row.client_nationality,
+                    client_phone = row.client_phone,
+                    gift_code = row.gift_code,
+                    infant_num = row.infant_num,
+                    pickup_address = row.pickup_address
+
+                };
+               // booking.total_price = CalculateBookingPrice(booking.trip_id, booking.total_pax, booking.child_num, row.currency_code);
+                if (row.id == 0)
+                {
+                    //check duplicate validation
+                    var result = _db.trips_bookings.Where(wr => wr.trip_id == booking.trip_id && wr.booking_status == booking.booking_status && wr.client_id == booking.client_id && wr.booking_date == booking.booking_date).SingleOrDefault();
+                    if (result != null)
+                    {
+                        return new ResponseCls { success = false, errors = _localizer["DuplicateData"] };
+                    }
+                    if (_db.trips_bookings.Count() > 0)
+                    {
+                        maxId = _db.trips_bookings.Max(d => d.id);
+
+                    }
+                    booking.id = maxId + 1;
+                    booking.booking_code_auto = "BK_" + booking.id.ToString();
+                    _db.trips_bookings.Add(booking);
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    _db.trips_bookings.Update(booking);
+                    _db.SaveChanges();
+                }
+                response = new ResponseCls { errors = null, success = true, idOut = booking.id, msg = _localizer["BookingMsg"] };
+            }
+            catch (Exception ex)
+            {
+                response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
+            }
+            return response;
+        }
+        public async Task<List<TripExtraCast>> GetTrip_Extra_Mains(LangReq req)
+        {
+            try
+            {
+                return await _db.trip_extra_translations.Where(wr => wr.lang_code == req.lang_code)
+                                                        .Join(_db.trip_extra_mains,
+                                                                TRANS => new { TRANS.extra_id },
+                                                                EXTRA => new { extra_id = EXTRA.id },
+                                                                (TRANS, EXTRA) => new TripExtraCast
+                                                                {
+                                                                    id=TRANS.id,
+                                                                    extra_id= TRANS.extra_id,
+                                                                    lang_code=TRANS.lang_code,
+                                                                    currency_code= EXTRA.currency_code,
+                                                                    extra_code= TRANS.extra_code,
+                                                                    extra_name=TRANS.extra_name,
+                                                                    extra_price= EXTRA.extra_price
+                                                                }).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return new List<TripExtraCast>();
+            }
+        }
+        public ResponseCls AssignExtraToBooking(List<booking_extra> lst)
+        {
+            ResponseCls response;
+            int maxId = 0;
+            int count = 0;
+            try
+            {
+                foreach (var row in lst)
+                {
+                    row.created_at = DateTime.Now;
+                    if (row.id == 0)
+                    {
+                        //check duplicate validation
+                        var result = _db.booking_extras.Where(wr => wr.extra_id == row.extra_id && wr.booking_id == row.booking_id).SingleOrDefault();
+                        if (result != null)
+                        {
+                            return new ResponseCls { success = false, errors = _localizer["AddExtraDuplicate"] };
+                        }
+                        if (_db.booking_extras.Count() > 0)
+                        {
+                            maxId = _db.booking_extras.Max(d => d.id);
+
+                        }
+                        row.id = maxId + 1;
+                        _db.booking_extras.Add(row);
+                        _db.SaveChanges();
+                    }
+                    else
+                    {
+                        _db.booking_extras.Update(row);
+                        _db.SaveChanges();
+                    }
+                    count++;
+                }
+                if(count == lst.Count)
+                {
+                    response = new ResponseCls { errors = null, success = true };
+                }
+                else
+                {
+                    response = new ResponseCls { errors = _localizer["BookingExtraSaveError"], success = false, idOut = 0 };
+                }
+            }
+            catch (Exception ex)
+            {
+                response = new ResponseCls { errors = _localizer["BookingExtraSaveError"], success = false, idOut = 0 };
+            }
+            return response;
+        }
+
         #endregion
 
         #region "Profile"
@@ -795,7 +1029,7 @@ namespace ITravelApp.Data
                 }
                 else
                 {
-                    profile.updated_at= DateTime.Now;
+                    profile.updated_at = DateTime.Now;
                     _db.Update(profile);
                 }
                 _db.SaveChanges();
@@ -842,7 +1076,7 @@ namespace ITravelApp.Data
             return response;
         }
 
-		//get profile image for specific client
+        //get profile image for specific client
         public async Task<List<client_image>> GetProfileImage(string clientId)
         {
             try
@@ -862,44 +1096,44 @@ namespace ITravelApp.Data
                 return null;
             }
         }
-		//save clients notification setting
-		public ResponseCls SaveClientNotificationSetting(client_notification_setting row)
-		{
-			ResponseCls response;
+        //save clients notification setting
+        public ResponseCls SaveClientNotificationSetting(client_notification_setting row)
+        {
+            ResponseCls response;
             long maxId = 0;
-			try
-			{
-				if (row.id == 0)
-				{
-					if (_db.client_notification_settings.Count() > 0)
-					{
-						//check validate
-						if (_db.client_notification_settings.Where(wr => wr.client_id == row.client_id).Count() == 0)
-						{
-							maxId = _db.client_notification_settings.Max(d => d.id);
-						}
-						else
-						{
-							//do no thing duplicate data
-							return new ResponseCls { success = false, errors = _localizer["DuplicateData"] };
-						}
-					}
+            try
+            {
+                if (row.id == 0)
+                {
+                    if (_db.client_notification_settings.Count() > 0)
+                    {
+                        //check validate
+                        if (_db.client_notification_settings.Where(wr => wr.client_id == row.client_id).Count() == 0)
+                        {
+                            maxId = _db.client_notification_settings.Max(d => d.id);
+                        }
+                        else
+                        {
+                            //do no thing duplicate data
+                            return new ResponseCls { success = false, errors = _localizer["DuplicateData"] };
+                        }
+                    }
                     row.id = maxId + 1;
-					_db.client_notification_settings.Add(row);
-				}
-				else
-				{
-					_db.Update(row);
-				}
-				_db.SaveChanges();
-				response = new ResponseCls { success = true, errors = null, idOut = row.id };
-			}
-			catch (Exception ex)
-			{
-				response = new ResponseCls { success = false, errors = _localizer["CheckAdmin"], idOut = 0 };
-			}
-			return response;
-		}
+                    _db.client_notification_settings.Add(row);
+                }
+                else
+                {
+                    _db.Update(row);
+                }
+                _db.SaveChanges();
+                response = new ResponseCls { success = true, errors = null, idOut = row.id };
+            }
+            catch (Exception ex)
+            {
+                response = new ResponseCls { success = false, errors = _localizer["CheckAdmin"], idOut = 0 };
+            }
+            return response;
+        }
 
 
         //get notification setting for specific client
