@@ -64,4 +64,6 @@ public partial class bookingwithdetail
     public string? booking_datestr { get; set; }
 
     public int? trip_type { get; set; }
+
+    public string? cancelation_policy { get; set; }
 }

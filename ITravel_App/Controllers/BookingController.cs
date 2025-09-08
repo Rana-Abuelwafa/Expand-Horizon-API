@@ -95,7 +95,7 @@ namespace ITravel_App.Controllers
             return Ok(_clientService.CalculateBookingPrice(req));
         }
 
-        [HttpPost("GetBookingWithDetails")]
+        [HttpPost("GetBookingSummary")]
         public async Task<IActionResult> GetBookingWithDetails(BookingReq req)
         {
             string? clientId = _loginUserData.client_id;

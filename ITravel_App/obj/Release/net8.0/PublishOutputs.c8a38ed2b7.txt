@@ -6,6 +6,8 @@ D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\ITravel_App
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\ITravel_App.pdb
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\de\ITravel_App.resources.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\en\ITravel_App.resources.dll
+D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\BouncyCastle.Cryptography.dll
+D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\MailKit.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.JsonPatch.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
@@ -34,6 +36,7 @@ D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Microsoft.I
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Microsoft.OpenApi.dll
+D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\MimeKit.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Newtonsoft.Json.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Newtonsoft.Json.Bson.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Npgsql.dll
@@ -53,10 +56,14 @@ D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Swashbuckle
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\System.Diagnostics.DiagnosticSource.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\System.IO.Pipelines.dll
+D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\System.Security.Cryptography.Pkcs.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\System.Text.Encodings.Web.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\System.Text.Json.dll
+D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\ITravelApp.Data.dll
+D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Mails_App.dll
+D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\Mails_App.pdb
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\ITravelApp.Data.pdb
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\de\ITravelApp.Data.resources.dll
 D:\horizen\api\ITravel_App\ITravel_App\obj\Release\net8.0\PubTmp\Out\en\ITravelApp.Data.resources.dll

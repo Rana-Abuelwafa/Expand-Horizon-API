@@ -347,7 +347,7 @@
         }
       }
     },
-    "/api/Booking/GetBookingWithDetails": {
+    "/api/Booking/GetBookingSummary": {
       "post": {
         "tags": [
           "Booking"
@@ -2980,6 +2980,16 @@
             "type": "string",
             "nullable": true
           },
+          "pax_from": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pax_to": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "delete": {
             "type": "boolean"
           }
@@ -3041,6 +3051,10 @@
             "nullable": true
           },
           "trip_not_includes": {
+            "type": "string",
+            "nullable": true
+          },
+          "cancelation_policy": {
             "type": "string",
             "nullable": true
           },

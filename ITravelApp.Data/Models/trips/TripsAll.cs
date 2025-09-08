@@ -15,6 +15,9 @@ namespace ITravelApp.Data.Models.trips
         public bool? isfavourite {  get; set; }
         public int? total_reviews {  get; set; }
         public decimal? review_rate { get; set; }
+        public decimal? trip_min_price { get; set; }
+        public decimal? trip_max_price { get; set; }
+        public string currency_code { get; set; }
         public List<TripFacility> facilities { get; set; }
         public List<trip_img> imgs {  get; set; }
     }

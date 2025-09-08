@@ -24,4 +24,8 @@ public partial class trip_price
     public decimal? child_price { get; set; }
 
     public string? notes { get; set; }
+
+    public int? pax_from { get; set; }
+
+    public int? pax_to { get; set; }
 }

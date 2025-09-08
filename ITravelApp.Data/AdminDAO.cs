@@ -416,7 +416,8 @@ namespace ITravelApp.Data
                     important_info = row.important_info,
                     trip_details = row.trip_details,
                     trip_not_includes = row.trip_not_includes,
-                    created_by = row.created_by
+                    created_by = row.created_by,
+                    cancelation_policy = row.cancelation_policy,
                 };
                 if (row.delete == true)
                 {
@@ -475,8 +476,8 @@ namespace ITravelApp.Data
                     created_by = row.created_by,
                     notes=row.notes,
                     child_price=row.child_price,
-
-                    
+                    pax_from=row.pax_from,
+                    pax_to=row.pax_to 
                 };
                 if (row.delete == true)
                 {
@@ -487,7 +488,7 @@ namespace ITravelApp.Data
                 if (price.id == 0)
                 {
                     //check duplicate validation
-                    var result = _db.trip_prices.Where(wr => wr.trip_id == price.trip_id && wr.currency_code == price.currency_code).SingleOrDefault();
+                    var result = _db.trip_prices.Where(wr => wr.trip_id == price.trip_id && wr.currency_code == price.currency_code && wr.pax_from == price.pax_from && wr.pax_to == price.pax_to).SingleOrDefault();
                     if (result != null)
                     {
                         return new ResponseCls { success = false, errors = _localizer["DuplicateData"] };

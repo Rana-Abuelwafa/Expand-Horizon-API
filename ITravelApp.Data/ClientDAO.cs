@@ -232,8 +232,8 @@ namespace ITravelApp.Data
                                  wr.show_in_top == (req.show_in_top == false ? wr.show_in_top : req.show_in_top) &&
                                  wr.destination_id == (req.destination_id == 0 ? wr.destination_id : req.destination_id) &&
                                  //wr.currency_code.ToLower() == req.currency_code.ToLower() &&
-                                 (string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
-                                 (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower()) &&
+                                 //(string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
+                                 //(string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower()) &&
                                  wr.show_in_slider == (req.show_in_slider == false ? wr.show_in_slider : req.show_in_slider))
                     .ToListAsync();
                 return trips.Select(s => new TripsAll
@@ -241,7 +241,7 @@ namespace ITravelApp.Data
                     destination_id = s.destination_id,
                     lang_code = s.lang_code,
                     country_code = s.country_code,
-                    currency_code = s.currency_code,
+                    currency_code = req.currency_code,
                     default_img = "http://api.raccoon24.com/" + s.default_img,
                     dest_code = s.dest_code,
                     dest_default_name = s.dest_default_name,
@@ -256,8 +256,8 @@ namespace ITravelApp.Data
                     trip_id = s.trip_id,
                     trip_includes = s.trip_includes,
                     trip_name = s.trip_name,
-                    trip_origin_price = s.trip_origin_price,
-                    trip_sale_price = s.trip_sale_price,
+                    //trip_origin_price = s.trip_origin_price,
+                    //trip_sale_price = s.trip_sale_price,
                     trip_trans_id = s.trip_trans_id,
                     isfavourite = string.IsNullOrEmpty(req.client_id) ? false : (CheckIfTripInWishList(s.trip_id, req.client_id, s.trip_type).id == 0 ? false : true),
                     trip_type = s.trip_type,
@@ -272,20 +272,22 @@ namespace ITravelApp.Data
                     important_info = s.important_info,
                     trip_details = s.trip_details,
                     trip_not_includes = s.trip_not_includes,
-                    max_capacity = s.max_capacity,
-                    min_capacity = s.min_capacity,
-                    max_price = s.max_price,
-                    min_price = s.min_price,
-                    transfer_category_name = s.transfer_category_name,
-                    transfer_category__code = s.transfer_category__code,
-                    transfer_currency = s.transfer_currency,
+                    //max_capacity = s.max_capacity,
+                    //min_capacity = s.min_capacity,
+                    //max_price = s.max_price,
+                    //min_price = s.min_price,
+                    //transfer_category_name = s.transfer_category_name,
+                    //transfer_category__code = s.transfer_category__code,
+                    //transfer_currency = s.transfer_currency,
                     trip_category_code = s.trip_category_code,
                     trip_category_name = s.trip_category_name,
-                    transfer_category_notes = s.transfer_category_notes,
-                    transfer_child_price = s.transfer_child_price,
-                    trip_child_price = s.trip_child_price,
-                    trip_price_notes = s.trip_price_notes,
+                    //transfer_category_notes = s.transfer_category_notes,
+                    //transfer_child_price = s.transfer_child_price,
+                    //trip_child_price = s.trip_child_price,
+                    //trip_price_notes = s.trip_price_notes,
                     trip_code_auto =s.trip_code_auto,
+                    trip_max_price = _db.trip_prices.Where(wr => wr.trip_id == s.trip_id && wr.currency_code == req.currency_code).Max(m => m.trip_sale_price),
+                    trip_min_price = _db.trip_prices.Where(wr => wr.trip_id == s.trip_id && wr.currency_code == req.currency_code).Min(m => m.trip_sale_price),
                     total_reviews = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Count(),
                     review_rate = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Max(m => m.review_rate)
                 }).ToList();
@@ -305,10 +307,10 @@ namespace ITravelApp.Data
                 var trips = await _db.tripwithdetails
                     .Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
                                  wr.trip_id == req.trip_id &&
-                                 wr.trip_type == req.trip_type &&
-                                  //wr.currency_code.ToLower() == req.currency_code.ToLower()
-                                  (string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
-                                 (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower())
+                                 wr.trip_type == req.trip_type
+                                 //&& wr.currency_code.ToLower() == req.currency_code.ToLower()
+                                 //(string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower())
+                                 //&& (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower())
 
                                  )
                     .ToListAsync();
@@ -317,7 +319,7 @@ namespace ITravelApp.Data
                     destination_id = s.destination_id,
                     lang_code = s.lang_code,
                     country_code = s.country_code,
-                    currency_code = s.currency_code,
+                    currency_code = req.currency_code,
                     default_img = "http://api.raccoon24.com/" + s.default_img,
                     dest_code = s.dest_code,
                     dest_default_name = s.dest_default_name,
@@ -332,8 +334,8 @@ namespace ITravelApp.Data
                     trip_id = s.trip_id,
                     trip_includes = s.trip_includes,
                     trip_name = s.trip_name,
-                    trip_origin_price = s.trip_origin_price,
-                    trip_sale_price = s.trip_sale_price,
+                    //trip_origin_price = s.trip_origin_price,
+                    //trip_sale_price = s.trip_sale_price,
                     trip_trans_id = s.trip_trans_id,
                     isfavourite = string.IsNullOrEmpty(req.client_id) ? false : (CheckIfTripInWishList(s.trip_id, req.client_id, s.trip_type).id == 0 ? false : true),
                     trip_type = s.trip_type,
@@ -343,25 +345,28 @@ namespace ITravelApp.Data
                     dest_route = s.dest_route,
                     route = s.route,
                     client_id = req.client_id,
-                    facilities = getFacilityForTrip(s.trip_id, s.lang_code,false).ToList(),
+                    facilities = getFacilityForTrip(s.trip_id, s.lang_code, false).ToList(),
                     imgs = GetImgsByTrip(s.trip_id).Result,
                     important_info = s.important_info,
                     trip_details = s.trip_details,
                     trip_not_includes = s.trip_not_includes,
-                    trip_price_notes = s.trip_price_notes,
-                    trip_child_price = s.trip_child_price,
-                    transfer_child_price = s.transfer_child_price,
-                    transfer_category_notes = s.transfer_category_notes,
-                    transfer_currency = s.transfer_currency,
+                    //trip_price_notes = s.trip_price_notes,
+                    //trip_child_price = s.trip_child_price,
+                    //transfer_child_price = s.transfer_child_price,
+                    //transfer_category_notes = s.transfer_category_notes,
+                    //transfer_currency = s.transfer_currency,
                     trip_category_name = s.trip_category_name,
                     trip_category_code = s.trip_category_code,
-                    max_capacity = s.max_capacity,
-                    max_price = s.max_price,
-                    min_capacity = s.min_capacity,
-                    min_price = s.min_price,
-                    trip_code_auto=s.trip_code_auto,
-                    transfer_category_name = s.transfer_category_name,
-                    transfer_category__code = s.transfer_category__code,
+                    //max_capacity = s.max_capacity,
+                    //max_price = s.max_price,
+                    //min_capacity = s.min_capacity,
+                    //min_price = s.min_price,
+                    trip_code_auto = s.trip_code_auto,
+                    //transfer_category_name = s.transfer_category_name,
+                    //transfer_category__code = s.transfer_category__code,
+                    cancelation_policy = s.cancelation_policy,
+                    trip_max_price = _db.trip_prices.Where(wr => wr.trip_id == s.trip_id && wr.currency_code == req.currency_code).Max(m => m.trip_sale_price),
+                    trip_min_price= _db.trip_prices.Where(wr => wr.trip_id == s.trip_id && wr.currency_code == req.currency_code).Min(m => m.trip_sale_price),
                     total_reviews = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Count(),
                     review_rate = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Max(m => m.review_rate)
                 }).ToList();
@@ -386,10 +391,10 @@ namespace ITravelApp.Data
                     .Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
                                 wr.show_in_slider == true &&
                                 wr.trip_type == (req.trip_type == 0 ? wr.trip_type : req.trip_type) &&
-                                wr.destination_id == (req.destination_id == 0 ? wr.destination_id : req.destination_id) &&
+                                wr.destination_id == (req.destination_id == 0 ? wr.destination_id : req.destination_id) 
                                  //wr.currency_code.ToLower() == req.currency_code.ToLower()
-                                 (string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
-                                 (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower())
+                                 //(string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower())
+                                //&& (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower())
 
                                 )
                     .ToListAsync();
@@ -593,8 +598,8 @@ namespace ITravelApp.Data
                 var trips = await _db.tripwithdetails
                      .Where(wr => wr.lang_code == req.lang_code &&
                                    // wr.currency_code.ToLower() == req.currency_code.ToLower() && 
-                                   (string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
-                                 (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower()) &&
+                                   //(string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
+                                   //&& (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower()) &&
                                    wr.trip_type == (req.trip_type == 0 ? wr.trip_type : req.trip_type))
                      .Join(_db.trips_wishlists.Where(wr => wr.client_id == req.client_id),
                                     TRIP => new { TRIP.trip_id },
@@ -604,7 +609,7 @@ namespace ITravelApp.Data
                                         destination_id = TRIP.destination_id,
                                         lang_code = TRIP.lang_code,
                                         country_code = TRIP.country_code,
-                                        currency_code = TRIP.currency_code,
+                                        //currency_code = TRIP.currency_code,
                                         default_img = "http://api.raccoon24.com/" + TRIP.default_img,
                                         dest_code = TRIP.dest_code,
                                         dest_default_name = TRIP.dest_default_name,
@@ -619,8 +624,8 @@ namespace ITravelApp.Data
                                         trip_id = TRIP.trip_id,
                                         trip_includes = TRIP.trip_includes,
                                         trip_name = TRIP.trip_name,
-                                        trip_origin_price = TRIP.trip_origin_price,
-                                        trip_sale_price = TRIP.trip_sale_price,
+                                        //trip_origin_price = TRIP.trip_origin_price,
+                                        //trip_sale_price = TRIP.trip_sale_price,
                                         trip_trans_id = TRIP.trip_trans_id,
                                         wish_id = WSH.id,
                                         client_id = WSH.client_id,
@@ -632,19 +637,24 @@ namespace ITravelApp.Data
                                         route = TRIP.route,
                                         trip_not_includes = TRIP.trip_not_includes,
                                         trip_details = TRIP.trip_details,
-                                        transfer_category__code = TRIP.transfer_category__code,
-                                        transfer_category_name = TRIP.transfer_category_name,
-                                        min_price = TRIP.min_price,
-                                        min_capacity = TRIP.min_capacity,
-                                        max_price = TRIP.max_price,
-                                        max_capacity = TRIP.max_capacity,
-                                        transfer_category_notes = TRIP.transfer_category_notes,
-                                        transfer_child_price = TRIP.transfer_child_price,
-                                        transfer_currency = TRIP.transfer_currency,
+                                        //transfer_category__code = TRIP.transfer_category__code,
+                                        //transfer_category_name = TRIP.transfer_category_name,
+                                        //min_price = TRIP.min_price,
+                                        //min_capacity = TRIP.min_capacity,
+                                        //max_price = TRIP.max_price,
+                                        //max_capacity = TRIP.max_capacity,
+                                        //transfer_category_notes = TRIP.transfer_category_notes,
+                                        //transfer_child_price = TRIP.transfer_child_price,
+                                        //transfer_currency = TRIP.transfer_currency,
                                         trip_category_code = TRIP.trip_category_code,
                                         trip_category_name = TRIP.trip_category_name,
-                                        trip_child_price = TRIP.trip_child_price,
-                                        trip_price_notes = TRIP.trip_price_notes,
+                                        //trip_child_price = TRIP.trip_child_price,
+                                        //trip_price_notes = TRIP.trip_price_notes,
+                                        cancelation_policy= TRIP.cancelation_policy,
+                                        currency_code=req.currency_code,
+                                        trip_code_auto=TRIP.trip_code_auto,
+                                       
+                                      
                                     }).ToListAsync();
 
                 return trips.Select(s => new TripsAll
@@ -652,7 +662,7 @@ namespace ITravelApp.Data
                     destination_id = s.destination_id,
                     lang_code = s.lang_code,
                     country_code = s.country_code,
-                    currency_code = s.currency_code,
+                    //currency_code = s.currency_code,
                     default_img = s.default_img,
                     dest_code = s.dest_code,
                     dest_default_name = s.dest_default_name,
@@ -667,8 +677,8 @@ namespace ITravelApp.Data
                     trip_id = s.trip_id,
                     trip_includes = s.trip_includes,
                     trip_name = s.trip_name,
-                    trip_origin_price = s.trip_origin_price,
-                    trip_sale_price = s.trip_sale_price,
+                    //trip_origin_price = s.trip_origin_price,
+                    //trip_sale_price = s.trip_sale_price,
                     trip_trans_id = s.trip_trans_id,
                     wish_id = s.wish_id,
                     client_id = s.client_id,
@@ -684,19 +694,24 @@ namespace ITravelApp.Data
                     review_rate = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Max(m => m.review_rate),
                     facilities = getFacilityForTrip(s.trip_id, s.lang_code,false).ToList(),
                     imgs = GetImgsByTrip(s.trip_id).Result,
-                    transfer_category__code = s.transfer_category__code,
-                    transfer_category_name = s.transfer_category_name,
-                    min_price = s.min_price,
-                    min_capacity = s.min_capacity,
-                    max_price = s.max_price,
-                    max_capacity = s.max_capacity,
-                    transfer_category_notes = s.transfer_category_notes,
-                    transfer_child_price = s.transfer_child_price,
-                    transfer_currency = s.transfer_currency,
+                    //transfer_category__code = s.transfer_category__code,
+                    //transfer_category_name = s.transfer_category_name,
+                    //min_price = s.min_price,
+                    //min_capacity = s.min_capacity,
+                    //max_price = s.max_price,
+                    //max_capacity = s.max_capacity,
+                    //transfer_category_notes = s.transfer_category_notes,
+                    //transfer_child_price = s.transfer_child_price,
+                    //transfer_currency = s.transfer_currency,
                     trip_category_code = s.trip_category_code,
                     trip_category_name = s.trip_category_name,
-                    trip_child_price = s.trip_child_price,
-                    trip_price_notes = s.trip_price_notes,
+                    //trip_child_price = s.trip_child_price,
+                    //trip_price_notes = s.trip_price_notes,
+                    trip_code_auto=s.trip_code_auto,
+                    cancelation_policy=s.cancelation_policy,
+                    currency_code=s.currency_code,
+                    trip_max_price = _db.trip_prices.Where(wr => wr.trip_id == s.trip_id && wr.currency_code == req.currency_code).Max(m => m.trip_sale_price),
+                    trip_min_price = _db.trip_prices.Where(wr => wr.trip_id == s.trip_id && wr.currency_code == req.currency_code).Min(m => m.trip_sale_price)
 
                 })
                 .ToList();
@@ -801,18 +816,18 @@ namespace ITravelApp.Data
                 if(trip != null)
                 {
                     var capacity = req.adult_num + req.child_num;
-                    //mean it trip is transfer type, get price data from tbl transfer_categories 
-                    if (trip.trip_type == 2)
-                    {
-                        var transfer =  _db.transfer_categories.Where(wr => wr.id == trip.transfer_category_id && wr.min_capacity <= capacity && wr.max_capacity >= capacity && wr.currency_code.ToLower() == req.currency_code.ToLower()).SingleOrDefault();
-                        total_price = transfer?.max_price ;
-                    }
-                    else
-                    {
-                        //mean trip is diving or excursion get price data from tbl trip_prices
-                        var price = _db.trip_prices.Where(wr => wr.trip_id == trip.id && wr.currency_code.ToLower() == req.currency_code.ToLower()).SingleOrDefault();
+                    ////mean it trip is transfer type, get price data from tbl transfer_categories 
+                    //if (trip.trip_type == 2)
+                    //{
+                    //    var transfer =  _db.transfer_categories.Where(wr => wr.id == trip.transfer_category_id && wr.min_capacity <= capacity && wr.max_capacity >= capacity && wr.currency_code.ToLower() == req.currency_code.ToLower()).SingleOrDefault();
+                    //    total_price = transfer?.max_price ;
+                    //}
+                    //else
+                    //{
+                        //mean trip is diving or excursion or transfer get price data from tbl trip_prices depend on pax capacity
+                        var price = _db.trip_prices.Where(wr => wr.trip_id == trip.id && wr.currency_code.ToLower() == req.currency_code.ToLower() && wr.pax_from <= capacity && wr.pax_to >= capacity).SingleOrDefault();
                         total_price = (price?.child_price * req.child_num) + (price?.trip_sale_price * req.adult_num);
-                    }
+                    //}
                 }
                 final_price = total_price + extras_price;
                 //update booking
@@ -860,7 +875,10 @@ namespace ITravelApp.Data
                     client_phone = row.client_phone,
                     gift_code = row.gift_code,
                     infant_num = row.infant_num,
-                    pickup_address = row.pickup_address
+                    pickup_address = row.pickup_address,
+                    currency_code=row.currency_code,
+                    trip_type=row.trip_type,
+
 
                 };
                // booking.total_price = CalculateBookingPrice(booking.trip_id, booking.total_pax, booking.child_num, row.currency_code);
@@ -899,20 +917,21 @@ namespace ITravelApp.Data
         {
             try
             {
-                return await _db.trip_extra_translations.Where(wr => wr.lang_code == req.lang_code)
-                                                        .Join(_db.trip_extra_mains,
-                                                                TRANS => new { TRANS.extra_id },
-                                                                EXTRA => new { extra_id = EXTRA.id },
-                                                                (TRANS, EXTRA) => new TripExtraCast
-                                                                {
-                                                                    id=TRANS.id,
-                                                                    extra_id= TRANS.extra_id,
-                                                                    lang_code=TRANS.lang_code,
-                                                                    currency_code= EXTRA.currency_code,
-                                                                    extra_code= TRANS.extra_code,
-                                                                    extra_name=TRANS.extra_name,
-                                                                    extra_price= EXTRA.extra_price
-                                                                }).ToListAsync();
+                //return await _db.trip_extra_translations.Where(wr => wr.lang_code == req.lang_code)
+                //                                        .Join(_db.trip_extra_mains,
+                //                                                TRANS => new { TRANS.extra_id },
+                //                                                EXTRA => new { extra_id = EXTRA.id },
+                //                                                (TRANS, EXTRA) => new TripExtraCast
+                //                                                {
+                //                                                    id=TRANS.id,
+                //                                                    extra_id= TRANS.extra_id,
+                //                                                    lang_code=TRANS.lang_code,
+                //                                                    currency_code= EXTRA.currency_code,
+                //                                                    extra_code= TRANS.extra_code,
+                //                                                    extra_name=TRANS.extra_name,
+                //                                                    extra_price= EXTRA.extra_price
+                //                                                }).ToListAsync();
+                return new List<TripExtraCast>();
             }
             catch (Exception ex)
             {

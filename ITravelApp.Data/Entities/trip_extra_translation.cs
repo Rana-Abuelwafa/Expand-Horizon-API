@@ -7,7 +7,7 @@ public partial class trip_extra_translation
 {
     public int id { get; set; }
 
-    public int extra_id { get; set; }
+    public int? extra_id { get; set; }
 
     public string? lang_code { get; set; }
 

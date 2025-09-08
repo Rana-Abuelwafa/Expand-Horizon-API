@@ -417,6 +417,8 @@ public partial class horizon_client_dbContext : DbContext
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.created_by).HasMaxLength(100);
             entity.Property(e => e.currency_code).HasMaxLength(5);
+            entity.Property(e => e.pax_from).HasDefaultValue(0);
+            entity.Property(e => e.pax_to).HasDefaultValue(0);
             entity.Property(e => e.updated_at)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone");
@@ -478,16 +480,12 @@ public partial class horizon_client_dbContext : DbContext
                 .ToView("tripwithdetails");
 
             entity.Property(e => e.country_code).HasMaxLength(20);
-            entity.Property(e => e.currency_code).HasMaxLength(5);
             entity.Property(e => e.default_img).HasMaxLength(50);
             entity.Property(e => e.dest_code).HasMaxLength(20);
             entity.Property(e => e.dest_route).HasMaxLength(100);
             entity.Property(e => e.lang_code).HasMaxLength(5);
             entity.Property(e => e.pickup).HasMaxLength(20);
             entity.Property(e => e.route).HasMaxLength(100);
-            entity.Property(e => e.transfer_category__code).HasMaxLength(20);
-            entity.Property(e => e.transfer_category_name).HasMaxLength(100);
-            entity.Property(e => e.transfer_currency).HasMaxLength(20);
             entity.Property(e => e.trip_category_code).HasMaxLength(50);
             entity.Property(e => e.trip_category_name).HasMaxLength(100);
             entity.Property(e => e.trip_code).HasMaxLength(20);
