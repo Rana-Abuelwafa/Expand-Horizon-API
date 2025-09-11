@@ -239,6 +239,22 @@
   },
   {
     "ContainingType": "ITravel_App.Controllers.TravelAdminController",
+    "Method": "GetAllBooking",
+    "RelativePath": "api/TravelAdmin/GetAllBooking",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "ITravelApp.Data.Models.Bookings.Admin.BookingAllReq",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.TravelAdminController",
     "Method": "GetDestination_Mains",
     "RelativePath": "api/TravelAdmin/GetDestinationMain",
     "HttpMethod": "POST",

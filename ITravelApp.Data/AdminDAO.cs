@@ -1,6 +1,7 @@
 ﻿using ITravelApp.Data.Data;
 using ITravelApp.Data.Entities;
 using ITravelApp.Data.Models;
+using ITravelApp.Data.Models.Bookings.Admin;
 using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
 using ITravelApp.Data.Models.Transfer;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -225,6 +227,7 @@ namespace ITravelApp.Data
                 //                 dest_default_name= dest.dest_default_name    ,
                 //                 route=dest.route
                 //             };
+             
                 return result.ToList().GroupBy(grp => new
                 {
                     grp.dest_code,
@@ -253,10 +256,11 @@ namespace ITravelApp.Data
                     translations = result.Where(wr => wr.dest_code == s.Key.dest_code).ToList()
 
                 }).ToList();
+               
             }
             catch (Exception ex)
             {
-                return null;
+                return new List<DestinationWithTranslations>();
             }
         }
         //get images list for specific trip
@@ -1061,7 +1065,8 @@ namespace ITravelApp.Data
                                   dest_default_name = DEST.dest_default_name,
                                   trip_type = TRIP.trip_type,
                                   transfer_category_id=TRIP.transfer_category_id,
-                                  trip_code_auto= TRIP.trip_code_auto
+                                  trip_code_auto= TRIP.trip_code_auto,
+                                  release_days= TRIP.release_days,
                               }).OrderBy(d => d.id).ToListAsync();
 
 
@@ -1311,5 +1316,29 @@ namespace ITravelApp.Data
         }
         #endregion
 
+        #region "booking"
+         public async Task<BookingAll> GetAllBooking(BookingAllReq req)
+        {
+            DateTime dateFrom = DateTime.ParseExact(req.date_from, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+            DateTime dateTo = DateTime.ParseExact(req.date_to, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+            int count = await _db.bookingwithdetails.Where(
+                                                           wr => wr.lang_code == "en" &&
+                                                           wr.trip_id == (req.trip_id == 0 ? wr.trip_id : req.trip_id) &&
+                                                           wr.client_email == (string.IsNullOrEmpty(req.client_email) ? wr.client_email : req.client_email) &&
+                                                           wr.booking_code == (string.IsNullOrEmpty(req.booking_code) ? wr.booking_code : req.booking_code) &&
+                                                            (wr.trip_date >= dateFrom && wr.trip_date <= dateTo)
+                                                          ).CountAsync();
+            var result= await _db.bookingwithdetails.Where(
+                                                           wr => wr.lang_code == "en" &&
+                                                           wr.trip_id == (req.trip_id == 0 ? wr.trip_id : req.trip_id) &&
+                                                           wr.client_email == (string.IsNullOrEmpty(req.client_email) ? wr.client_email : req.client_email ) &&
+                                                           wr.booking_code == (string.IsNullOrEmpty(req.booking_code) ? wr.booking_code : req.booking_code) &&
+                                                            (wr.trip_date >= dateFrom && wr.trip_date <= dateTo) 
+                                                          )
+                                                     .Skip((req.pageNumber - 1) * req.pageSize)
+                                             .Take(req.pageSize).ToListAsync();
+            return new BookingAll { totalPages = count, bookings = result };
+        }
+        #endregion
     }
 }

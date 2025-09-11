@@ -1,6 +1,7 @@
 ﻿using ITravelApp.Data;
 using ITravelApp.Data.Entities;
 using ITravelApp.Data.Models;
+using ITravelApp.Data.Models.Bookings.Admin;
 using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
 using ITravelApp.Data.Models.Transfer;
@@ -21,6 +22,11 @@ namespace ITravel_App.Services
         public ResponseCls AssignFacilityToTrip(TripFacilityAssignReq row)
         {
             return _adminDAO.AssignFacilityToTrip(row);
+        }
+
+        public Task<BookingAll> GetAllBooking(BookingAllReq req)
+        {
+            return _adminDAO.GetAllBooking(req);
         }
 
         public List<DestinationWithTranslations> GetDestinationWithTranslations(DestinationReq req)

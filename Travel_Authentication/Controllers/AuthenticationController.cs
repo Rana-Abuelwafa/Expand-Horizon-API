@@ -1,5 +1,6 @@
 ﻿using Mails_App;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
@@ -22,6 +23,7 @@ namespace Travel_Authentication.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        //private static Dictionary<string, string> refreshTokens = new();
         IMailService Mail_Service = null;
         public AuthenticationController(IStringLocalizer<Messages> localizer, RoleManager<IdentityRole>? roleManager, UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager, IMailService _MailService, IConfiguration configuration, ILogger<AuthenticationController> logger)
@@ -669,6 +671,30 @@ namespace Travel_Authentication.Controllers
                 });
             }
         }
+
+
+        //[HttpPost("refresh")]
+        //public async Task<IActionResult> Refresh([FromBody] Models.RefreshRequest request)
+        //{
+        //    var handler = new JwtSecurityTokenHandler();
+        //    var jwtToken = handler.ReadJwtToken(request.Token);
+
+        //    var userId = jwtToken.Subject;
+        //    if (userId == null || !refreshTokens.ContainsKey(userId)) return Unauthorized();
+
+        //    if (refreshTokens[userId] != request.RefreshToken) return Unauthorized();
+
+        //    var user = await _userManager.FindByIdAsync(userId);
+        //    if (user == null) return Unauthorized();
+
+        //    // New tokens
+        //    var newJwt = await GenerateJwtTokenAsync(user);
+        //    var newRefresh = Guid.NewGuid().ToString();
+
+        //    refreshTokens[user.Id] = newRefresh;
+
+        //    return Ok(new { token = newJwt, refreshToken = newRefresh });
+        //}
 
     }
 }

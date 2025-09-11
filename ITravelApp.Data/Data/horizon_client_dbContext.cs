@@ -106,6 +106,7 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.lang_code).HasMaxLength(5);
             entity.Property(e => e.pickup_time).HasMaxLength(20);
             entity.Property(e => e.trip_code).HasMaxLength(20);
+            entity.Property(e => e.trip_code_auto).HasMaxLength(20);
             entity.Property(e => e.trip_date).HasColumnType("timestamp without time zone");
             entity.Property(e => e.trip_name).HasMaxLength(50);
         });
@@ -361,6 +362,7 @@ public partial class horizon_client_dbContext : DbContext
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.created_by).HasMaxLength(100);
             entity.Property(e => e.pickup).HasMaxLength(20);
+            entity.Property(e => e.release_days).HasDefaultValue(1);
             entity.Property(e => e.route).HasMaxLength(100);
             entity.Property(e => e.transfer_category_id).HasDefaultValue(0);
             entity.Property(e => e.trip_code).HasMaxLength(20);

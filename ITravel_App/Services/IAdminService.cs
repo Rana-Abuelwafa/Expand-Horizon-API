@@ -1,5 +1,6 @@
 ﻿using ITravelApp.Data.Entities;
 using ITravelApp.Data.Models;
+using ITravelApp.Data.Models.Bookings.Admin;
 using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
 using ITravelApp.Data.Models.Transfer;
@@ -44,6 +45,10 @@ namespace ITravel_App.Services
         public List<FacilityWithTranslationGrp> GetFacilityWithTranslation();
 
         public List<FacilityAllWithSelect> GetFacilityAllWithSelect(long? trip_id);
+        #endregion
+
+        #region "booking"
+        public Task<BookingAll> GetAllBooking(BookingAllReq req);
         #endregion
     }
 }

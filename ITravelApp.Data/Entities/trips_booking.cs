@@ -53,4 +53,6 @@ public partial class trips_booking
     public int? trip_type { get; set; }
 
     public string? currency_code { get; set; }
+
+    public string? client_name { get; set; }
 }

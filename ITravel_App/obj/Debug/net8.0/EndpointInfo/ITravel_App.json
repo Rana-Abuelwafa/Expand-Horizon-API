@@ -1888,6 +1888,53 @@
         }
       }
     },
+    "/api/TravelAdmin/GetAllBooking": {
+      "post": {
+        "tags": [
+          "TravelAdmin"
+        ],
+        "parameters": [
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language for the response (e.g., en, ar, de)",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingAllReq"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingAllReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingAllReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingAllReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/TravelClient/GetDestination_Tree": {
       "post": {
         "tags": [
@@ -2250,6 +2297,41 @@
   },
   "components": {
     "schemas": {
+      "BookingAllReq": {
+        "type": "object",
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "client_email": {
+            "type": "string",
+            "nullable": true
+          },
+          "booking_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "trip_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "date_from": {
+            "type": "string",
+            "nullable": true
+          },
+          "date_to": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "BookingCls": {
         "type": "object",
         "properties": {
@@ -2344,6 +2426,10 @@
           "trip_type": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "client_name": {
+            "type": "string",
             "nullable": true
           },
           "booking_dateStr": {
@@ -2620,6 +2706,10 @@
           },
           "country_code": {
             "type": "string",
+            "nullable": true
+          },
+          "leaf": {
+            "type": "boolean",
             "nullable": true
           }
         },
@@ -3242,7 +3332,7 @@
           },
           "extra_id": {
             "type": "integer",
-            "format": "int32",
+            "format": "int64",
             "nullable": true
           },
           "created_at": {
@@ -3560,6 +3650,11 @@
           },
           "trip_code_auto": {
             "type": "string",
+            "nullable": true
+          },
+          "release_days": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },

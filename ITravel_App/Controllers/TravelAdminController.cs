@@ -1,5 +1,6 @@
 ﻿using ITravel_App.Services;
 using ITravelApp.Data.Entities;
+using ITravelApp.Data.Models.Bookings.Admin;
 using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.Transfer;
 using ITravelApp.Data.Models.trips;
@@ -296,5 +297,13 @@ namespace ITravel_App.Controllers
         }
         #endregion
 
+
+        #region "Booking"
+        [HttpPost("GetAllBooking")]
+        public async Task<IActionResult> GetAllBooking(BookingAllReq req)
+        {
+            return Ok(await _adminService.GetAllBooking(req));
+        }
+        #endregion
     }
 }

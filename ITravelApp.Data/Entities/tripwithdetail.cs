@@ -60,4 +60,6 @@ public partial class tripwithdetail
     public string? trip_code_auto { get; set; }
 
     public string? cancelation_policy { get; set; }
+
+    public int? release_days { get; set; }
 }

@@ -2,6 +2,7 @@
 using ITravelApp.Data.Entities;
 using ITravelApp.Data.Models;
 using ITravelApp.Data.Models.Bookings;
+using ITravelApp.Data.Models.Bookings.Client;
 using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
 using ITravelApp.Data.Models.profile;
@@ -39,7 +40,7 @@ namespace ITravel_App.Services
             return _clientDAO.ConfirmBooking(req);
         }
 
-        public Task<bookingwithdetail> GetBookingWithDetails(BookingReq req)
+        public Task<BookingSummary> GetBookingWithDetails(BookingReq req)
         {
             return _clientDAO.GetBookingWithDetails(req);
         }

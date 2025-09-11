@@ -1,6 +1,7 @@
 ﻿using ITravelApp.Data.Entities;
 using ITravelApp.Data.Models;
 using ITravelApp.Data.Models.Bookings;
+using ITravelApp.Data.Models.Bookings.Client;
 using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
 using ITravelApp.Data.Models.profile;
@@ -34,7 +35,7 @@ namespace ITravel_App.Services
         public List<TripFacility> getFacilityForTrip(long? trip_id, string lang_code, bool? isExtra);
         public ResponseCls AssignExtraToBooking(List<booking_extra> lst);
         public ResponseCls CalculateBookingPrice(CalculateBookingPriceReq req);
-        public Task<bookingwithdetail> GetBookingWithDetails(BookingReq req);
+        public Task<BookingSummary> GetBookingWithDetails(BookingReq req);
         public BookingWithTripDetailsAll ConfirmBooking(ConfirmBookingReq req);
         #endregion
 

@@ -17,6 +17,7 @@ namespace ITravelApp.Data.Models.trips
         public decimal? review_rate { get; set; }
         public decimal? trip_min_price { get; set; }
         public decimal? trip_max_price { get; set; }
+        public int? trip_max_capacity { get; set; }
         public string currency_code { get; set; }
         public List<TripFacility> facilities { get; set; }
         public List<trip_img> imgs {  get; set; }

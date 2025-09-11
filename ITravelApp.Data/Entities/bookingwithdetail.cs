@@ -66,4 +66,10 @@ public partial class bookingwithdetail
     public int? trip_type { get; set; }
 
     public string? cancelation_policy { get; set; }
+
+    public string? client_name { get; set; }
+
+    public string? trip_code_auto { get; set; }
+
+    public int? release_days { get; set; }
 }

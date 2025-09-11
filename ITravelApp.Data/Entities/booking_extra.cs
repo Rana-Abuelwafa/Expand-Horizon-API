@@ -9,7 +9,7 @@ public partial class booking_extra
 
     public long? booking_id { get; set; }
 
-    public int? extra_id { get; set; }
+    public long? extra_id { get; set; }
 
     public DateTime? created_at { get; set; }
 
