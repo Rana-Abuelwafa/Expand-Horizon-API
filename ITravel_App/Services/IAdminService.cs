@@ -22,6 +22,8 @@ namespace ITravel_App.Services
 
 
         #region trips
+        public Task<List<child_policy_setting>> GetTrip_ChildPolicy(long? trip_id);
+        public ResponseCls SaveTripChildPolicy(ChildPolicyPricesReq row);
         public Task<List<trip_category>> GetTripCategories();
         public Task<List<trip_price>> GetTrip_Prices(long? trip_id);
         public Task<List<TripTranslationGrp>> GetTripTranslationGrp(long? trip_id);

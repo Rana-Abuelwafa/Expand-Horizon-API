@@ -30,6 +30,8 @@ namespace ITravel_App.Services
         #endregion
 
         #region "booking"
+        public Task<int> GetMyBookingCount(string client_id);
+        public Task<List<BookingSummary>> GetMyBooking(LangReq req, string client_id);
         public ResponseCls SaveClientBooking(BookingCls row);
         public  Task<List<TripExtraCast>> GetTrip_Extra_Mains(LangReq req);
         public List<TripFacility> getFacilityForTrip(long? trip_id, string lang_code, bool? isExtra);

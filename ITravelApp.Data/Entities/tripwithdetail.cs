@@ -62,4 +62,6 @@ public partial class tripwithdetail
     public string? cancelation_policy { get; set; }
 
     public int? release_days { get; set; }
+
+    public int? trip_order { get; set; }
 }

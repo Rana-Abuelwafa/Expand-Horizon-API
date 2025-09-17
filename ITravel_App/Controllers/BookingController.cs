@@ -23,13 +23,15 @@ namespace ITravel_App.Controllers
         private readonly IClientService _clientService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly LoginUserData _loginUserData;
-        public BookingController(IMailService _MailService, CustomViewRendererService viewService, IHttpContextAccessor httpContextAccessor, IClientService clientService)
+        private readonly BookingPdfService _pdfService;
+        public BookingController(BookingPdfService pdfService,IMailService _MailService, CustomViewRendererService viewService, IHttpContextAccessor httpContextAccessor, IClientService clientService)
         {
             _viewService = viewService;
             _clientService = clientService;
             _httpContextAccessor = httpContextAccessor;
             _loginUserData = Utils.getTokenData(httpContextAccessor);
             Mail_Service = _MailService;
+            _pdfService = pdfService;
         }
 
         #region reviews
@@ -117,7 +119,19 @@ namespace ITravel_App.Controllers
             {
                 model.client_name = FullName;
                 var msg = await _viewService.RenderViewToStringAsync(templatePath, model, ControllerContext);
-                MailData Mail_Data = new MailData { EmailToId = client_email, EmailToName = FullName, EmailSubject = UtilsCls.GetMailSubjectByLang(req.lang_code, 3), EmailBody = msg };
+                //generate pdf from chtml 
+
+                //byte[] pdf = await _pdfService.GeneratePdfFromHtmlAsync(msg);
+                var pdfBytes = _pdfService.GenerateBookingPdf(model);
+                MailData Mail_Data = new MailData {
+                    EmailToId = client_email, EmailToName = FullName,
+                    EmailSubject = UtilsCls.GetMailSubjectByLang(req.lang_code, 3),
+                    EmailBody = msg,
+                    withAttatch = true,
+                    pdfBytes = pdfBytes,
+                    FileName = req.lang_code.ToLower() == "en" ? $"BookingConfirmation.pdf" : $"Buchungsbestätigung.pdf"
+
+                };
                 return Ok(Mail_Service.SendMail(Mail_Data));
             }
             else
@@ -127,6 +141,12 @@ namespace ITravel_App.Controllers
                 //return BadRequest(model);
             }
             
+        }
+        [HttpPost("GetMyBooking")]
+        public async Task<IActionResult> GetMyBooking(LangReq req)
+        {
+            string? clientId = _loginUserData.client_id;
+            return Ok(await _clientService.GetMyBooking(req,clientId));
         }
         #endregion
 

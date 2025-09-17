@@ -277,6 +277,19 @@ namespace ITravel_App.Controllers
         {
             return Ok(_adminService.GetFacilityAllWithSelect(trip_id));
         }
+
+        [HttpPost("GetTrip_ChildPolicy")]
+        public async Task<IActionResult> GetTrip_ChildPolicy([FromQuery] long trip_id)
+        {
+            return Ok(await _adminService.GetTrip_ChildPolicy(trip_id));
+        }
+        [HttpPost("SaveTripChildPolicy")]
+        public IActionResult SaveTripChildPolicy(ChildPolicyPricesReq trip)
+        {
+            string email = _loginUserData.client_email;
+            trip.created_by = email;
+            return Ok(_adminService.SaveTripChildPolicy(trip));
+        }
         #endregion
 
         #region transfer

@@ -20,6 +20,8 @@ public partial class horizon_client_dbContext : DbContext
 
     public virtual DbSet<bookingwithdetail> bookingwithdetails { get; set; }
 
+    public virtual DbSet<child_policy_setting> child_policy_settings { get; set; }
+
     public virtual DbSet<client_Profile> client_Profiles { get; set; }
 
     public virtual DbSet<client_image> client_images { get; set; }
@@ -111,6 +113,23 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.trip_name).HasMaxLength(50);
         });
 
+        modelBuilder.Entity<child_policy_setting>(entity =>
+        {
+            entity.HasKey(e => e.policy_id).HasName("child_policy_setting_pkey");
+
+            entity.ToTable("child_policy_setting");
+
+            entity.Property(e => e.code_auto).HasMaxLength(20);
+            entity.Property(e => e.created_at)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone");
+            entity.Property(e => e.created_by).HasMaxLength(50);
+            entity.Property(e => e.pricing_type).HasComment("1 =Free\n2=% of Adult Price\n3=Fixed Amount");
+            entity.Property(e => e.updated_at)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone");
+        });
+
         modelBuilder.Entity<client_Profile>(entity =>
         {
             entity.HasKey(e => e.profile_id).HasName("client_Profile_pkey");
@@ -187,6 +206,7 @@ public partial class horizon_client_dbContext : DbContext
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.created_by).HasMaxLength(100);
             entity.Property(e => e.dest_code).HasMaxLength(20);
+            entity.Property(e => e.order).HasDefaultValue(1);
             entity.Property(e => e.parent_id).HasDefaultValue(0);
             entity.Property(e => e.route).HasMaxLength(100);
             entity.Property(e => e.updated_at)
@@ -343,6 +363,7 @@ public partial class horizon_client_dbContext : DbContext
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.created_by).HasMaxLength(100);
             entity.Property(e => e.img_name).HasMaxLength(100);
+            entity.Property(e => e.img_order).HasDefaultValue(1);
             entity.Property(e => e.img_path).HasMaxLength(50);
             entity.Property(e => e.img_resize_path).HasMaxLength(100);
             entity.Property(e => e.trip_type).HasDefaultValue(0);
@@ -369,6 +390,7 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.trip_code_auto).HasMaxLength(20);
             entity.Property(e => e.trip_default_name).HasMaxLength(50);
             entity.Property(e => e.trip_duration).HasMaxLength(20);
+            entity.Property(e => e.trip_order).HasDefaultValue(1);
             entity.Property(e => e.trip_type).HasDefaultValue(0);
             entity.Property(e => e.updated_at)
                 .HasDefaultValueSql("now()")

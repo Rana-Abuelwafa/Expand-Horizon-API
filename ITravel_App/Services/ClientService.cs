@@ -80,6 +80,16 @@ namespace ITravel_App.Services
             return _clientDAO.getFacilityForTrip(trip_id, lang_code, isExtra); 
         }
 
+        public Task<List<BookingSummary>> GetMyBooking(LangReq req, string client_id)
+        {
+            return _clientDAO.GetMyBooking(req, client_id);
+        }
+
+        public Task<int> GetMyBookingCount(string client_id)
+        {
+            return _clientDAO.GetMyBookingCount(client_id);
+        }
+
         public Task<List<TripsPickupResponse>> GetPickupsForTrip(PickupsReq req)
         {
             return _clientDAO.GetPickupsForTrip(req);

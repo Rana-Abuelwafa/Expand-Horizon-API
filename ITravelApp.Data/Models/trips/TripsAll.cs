@@ -21,6 +21,7 @@ namespace ITravelApp.Data.Models.trips
         public string currency_code { get; set; }
         public List<TripFacility> facilities { get; set; }
         public List<trip_img> imgs {  get; set; }
+        public int? max_child_age { get; set; }
     }
     public class TripFacility
     {

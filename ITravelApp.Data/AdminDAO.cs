@@ -42,6 +42,11 @@ namespace ITravelApp.Data
             { 
                 if (row.id == 0)
                 {
+                    //check duplicate order (in add new row)
+                    if (_db.destination_mains.Where(wr => wr.order == row.order && wr.active == row.active).SingleOrDefault() != null)
+                    {
+                        return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
+                    }
                     //check duplicate validation
                     var result = _db.destination_mains.Where(wr => wr.dest_code == row.dest_code && wr.active == row.active).SingleOrDefault();
                     if (result != null)
@@ -59,6 +64,11 @@ namespace ITravelApp.Data
                 }
                 else
                 {
+                    //check duplicate order (in update row)
+                    if (_db.destination_mains.Where(wr => wr.order == row.order && wr.active == row.active && wr.id != row.id && wr.parent_id == row.parent_id).SingleOrDefault() != null)
+                    {
+                        return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
+                    }
                     row.updated_at = DateTime.Now;
                     _db.destination_mains.Update(row);
                     _db.SaveChanges();
@@ -206,7 +216,9 @@ namespace ITravelApp.Data
                         route = dest.route,
                         leaf = dest.leaf,
                         parent_id = dest.parent_id,
-                        parent_name = PARDEST != null ? PARDEST.dest_default_name : null
+                        parent_name = PARDEST != null ? PARDEST.dest_default_name : null,
+                        order=dest.order,
+                       // parent_order = PARDEST != null ? PARDEST.order : 0,
                     };
 
                 //var result = from trans in _db.destination_translations.Where(wr => wr.active == true)
@@ -239,7 +251,8 @@ namespace ITravelApp.Data
                     grp.active,
                     grp.parent_name,
                     grp.parent_id,
-                    grp.leaf
+                    grp.leaf,
+                    grp.order
 
                 }).Select(s => new DestinationWithTranslations
                 {
@@ -253,6 +266,7 @@ namespace ITravelApp.Data
                     parent_id=s.Key.parent_id,
                     parent_name=s.Key.parent_name,
                     leaf=s.Key.leaf,
+                    order = s.Key.order,
                     translations = result.Where(wr => wr.dest_code == s.Key.dest_code).ToList()
 
                 }).ToList();
@@ -367,6 +381,11 @@ namespace ITravelApp.Data
             {
                 if (row.id == 0)
                 {
+                    //check duplicate order (in add new row)
+                    if (_db.trip_mains.Where(wr => wr.trip_order == row.trip_order && wr.active == row.active).SingleOrDefault() != null)
+                    {
+                        return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
+                    }
                     //check duplicate validation
                     var result = _db.trip_mains.Where(wr => wr.trip_code == row.trip_code && wr.active == row.active && wr.destination_id == row.destination_id).SingleOrDefault();
                     if (result != null)
@@ -386,6 +405,11 @@ namespace ITravelApp.Data
                 }
                 else
                 {
+                    //check duplicate order (in update row)
+                    if (_db.trip_mains.Where(wr => wr.trip_order == row.trip_order && wr.active == row.active && wr.id != row.id).SingleOrDefault() != null)
+                    {
+                        return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
+                    }
                     row.updated_at = DateTime.Now;
                     _db.trip_mains.Update(row);
                     _db.SaveChanges();
@@ -536,13 +560,19 @@ namespace ITravelApp.Data
                     img_name = cls.img_name,
                     img_path =cls.img_path,
                     created_by= cls.created_by,
-                    trip_type=cls.trip_type
+                    trip_type=cls.trip_type,
+                    img_order=cls.img_order
                 };
                 if (cls.delete == true)
                 {
                     _db.Remove(trip);
                     _db.SaveChanges();
                     return new ResponseCls { errors = null, success = true };
+                }
+                //check duplicate order (in add new row)
+                if (_db.trip_imgs.Where(wr => wr.img_order == trip.img_order && wr.id != trip.id).SingleOrDefault() != null)
+                {
+                    return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
                 }
                 if (trip.is_default == true)
                 {
@@ -586,6 +616,11 @@ namespace ITravelApp.Data
                 foreach (var trip in lst) {
                     if (trip.id == 0)
                     {
+                        //check duplicate order (in add new row)
+                        if (_db.trip_imgs.Where(wr => wr.img_order == trip.img_order).SingleOrDefault() != null)
+                        {
+                            return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
+                        }
                         //check duplicate validation
                         var result = _db.trip_imgs.Where(wr => wr.trip_id == trip.trip_id && wr.is_default == (trip.is_default == true ? trip.is_default : null)).SingleOrDefault();
                         if (result != null)
@@ -603,7 +638,12 @@ namespace ITravelApp.Data
                     }
                     else
                     {
-                         trip.updated_at = DateTime.Now;
+                        //check duplicate order (in update row)
+                        if (_db.trip_imgs.Where(wr => wr.img_order == trip.img_order && wr.id != trip.id).SingleOrDefault() != null)
+                        {
+                            return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
+                        }
+                        trip.updated_at = DateTime.Now;
                         _db.trip_imgs.Update(trip);
                         _db.SaveChanges();
                     }
@@ -1067,6 +1107,7 @@ namespace ITravelApp.Data
                                   transfer_category_id=TRIP.transfer_category_id,
                                   trip_code_auto= TRIP.trip_code_auto,
                                   release_days= TRIP.release_days,
+                                  trip_order=TRIP.trip_order,
                               }).OrderBy(d => d.id).ToListAsync();
 
 
@@ -1239,11 +1280,87 @@ namespace ITravelApp.Data
             }
         }
 
+        //get child policy plan for trip
+        public async Task<List<child_policy_setting>> GetTrip_ChildPolicy(long? trip_id)
+        {
+            try
+            {
+                return await _db.child_policy_settings.Where(wr => wr.trip_id == trip_id).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        //assign prices with different currency to trips
+        public ResponseCls SaveTripChildPolicy(ChildPolicyPricesReq row)
+        {
+            ResponseCls response;
+            int maxId = 0;
+            try
+            {
+                child_policy_setting price = new child_policy_setting
+                {
+                    
+                     created_by = row.created_by,
+                     notes = row.notes,
+                     child_price = row.child_price,
+                      age_from=row.age_from,
+                      age_to=row.age_to,
+                      policy_id=row.policy_id,
+                      pricing_type=row.pricing_type,
+                      trip_id=row.trip_id,
+                      code_auto=row.code_auto,
+                      currency_code=row.currency_code,
+                      
+                };
+                if (row.delete == true)
+                {
+                    _db.Remove(price);
+                    _db.SaveChanges();
+                    return new ResponseCls { errors = null, success = true };
+                }
+                if (price.policy_id == 0)
+                {
+                    //check duplicate validation
+                    var result = _db.child_policy_settings.Where(wr => wr.trip_id == price.trip_id && wr.currency_code == price.currency_code && wr.age_from == price.age_from && wr.age_to == price.age_to).SingleOrDefault();
+                    if (result != null)
+                    {
+                        return new ResponseCls { success = false, errors = _localizer["DuplicateData"] };
+                    }
+                    if (_db.child_policy_settings.Count() > 0)
+                    {
+                        maxId = _db.child_policy_settings.Max(d => d.policy_id);
+
+                    }
+                    price.created_at = DateTime.Now;
+                    price.policy_id = maxId + 1;
+                    price.code_auto = "CHDPO_"+price.policy_id;
+                    _db.child_policy_settings.Add(price);
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    row.updated_at = DateTime.Now;
+                    _db.child_policy_settings.Update(price);
+                    _db.SaveChanges();
+                }
+
+                response = new ResponseCls { errors = null, success = true, idOut = price.policy_id };
+            }
+            catch (Exception ex)
+            {
+                response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
+            }
+            return response;
+        }
         #endregion
 
         #region "transfer"
         //get transfer category list
-          public async Task<List<transfer_category>> GetTransfer_Categories()
+        public async Task<List<transfer_category>> GetTransfer_Categories()
         {
             try
             {

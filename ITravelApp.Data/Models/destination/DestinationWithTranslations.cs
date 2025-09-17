@@ -19,6 +19,7 @@ namespace ITravelApp.Data.Models.destination
         public int? parent_id { get; set; }
         public bool? leaf { get; set; }
         public string? parent_name { get; set; }
+        public int? order { get; set; }
         public List<DestinationResponse> translations { get; set; }
         //public List<destination_img> images { get; set; }
     }

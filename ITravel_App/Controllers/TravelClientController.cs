@@ -76,6 +76,12 @@ namespace ITravel_App.Controllers
             
             return Ok(await _clientService.GetWishListCount(clientId));
         }
+        [HttpPost("GetMyBookingCount")]
+        public async Task<IActionResult> GetMyBookingCount([FromQuery] string? clientId)
+        {
+
+            return Ok(await _clientService.GetMyBookingCount(clientId));
+        }
         #endregion
 
 

@@ -79,6 +79,11 @@ namespace ITravel_App.Services
             return _adminDAO.GetTripTranslationGrp(trip_id);
         }
 
+        public Task<List<child_policy_setting>> GetTrip_ChildPolicy(long? trip_id)
+        {
+            return _adminDAO.GetTrip_ChildPolicy(trip_id);
+        }
+
         public Task<List<TripMainCast>> GetTrip_Mains(int destination_id, int trip_type)
         {
             return _adminDAO.GetTrip_Mains(destination_id, trip_type);
@@ -127,6 +132,11 @@ namespace ITravel_App.Services
         public ResponseCls SaveTransferCategory(TransferCategorySaveReq row)
         {
             return _adminDAO.SaveTransferCategory(row);
+        }
+
+        public ResponseCls SaveTripChildPolicy(ChildPolicyPricesReq row)
+        {
+            return _adminDAO.SaveTripChildPolicy(row);
         }
 
         public ResponseCls saveTripImage(List<trip_img> lst)

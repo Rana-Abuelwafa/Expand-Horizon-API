@@ -26,4 +26,6 @@ public partial class destination_main
     public int? parent_id { get; set; }
 
     public bool? leaf { get; set; }
+
+    public int? order { get; set; }
 }

@@ -2,6 +2,7 @@
 using ITravelApp.Data.Entities;
 using ITravelApp.Data.Models;
 using ITravelApp.Data.Models.Bookings;
+using ITravelApp.Data.Models.Bookings.Admin;
 using ITravelApp.Data.Models.Bookings.Client;
 using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
@@ -57,7 +58,7 @@ namespace ITravelApp.Data
                                  route = dest.route
                              };
 
-                return result.ToList();
+                return result.OrderBy(x => x.order).ToList();
             }
             catch (Exception ex)
             {
@@ -88,7 +89,8 @@ namespace ITravelApp.Data
                                dest_default_name = dest.dest_default_name,
                                route = dest.route,
                                leaf = dest.leaf,
-                               parent_id = dest.parent_id
+                               parent_id = dest.parent_id,
+                               order= dest.order,
                            };
 
 
@@ -122,9 +124,10 @@ namespace ITravelApp.Data
                       id = s.id,
                       img_path = s.img_path,
                       route = s.route,
-                      children = GetDestination_TreeMain(lst, s.destination_id).ToList(),
+                      children = GetDestination_TreeMain(lst, s.destination_id).OrderBy(x => x.order).ToList(),
 
                   })
+                  .OrderBy(x => x.order)
                 .ToList();
         }
 
@@ -194,7 +197,9 @@ namespace ITravelApp.Data
                     img_width = s.img_width,
                     is_default = s.is_default,
                     trip_id = s.trip_id,
-                }).ToListAsync();
+                })
+                    //.OrderBy(o => o.img_order)
+                    .ToListAsync();
             }
             catch (Exception ex)
             {
@@ -236,6 +241,7 @@ namespace ITravelApp.Data
                                  //(string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower()) &&
                                  //(string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower()) &&
                                  wr.show_in_slider == (req.show_in_slider == false ? wr.show_in_slider : req.show_in_slider))
+                    .OrderBy(o => o.trip_order)
                     .ToListAsync();
 
                 return trips.Select(s => MapToTripsAll(s, req.currency_code,req.client_id)).ToList();
@@ -390,7 +396,6 @@ namespace ITravelApp.Data
                 return new TripsAll();
             }
         }
-
         //get wish list for Specific client
         public async Task<List<TripsAll>> GetClientWishList(ClientWishListReq req)
         {
@@ -552,7 +557,11 @@ namespace ITravelApp.Data
                     .Count(),
                 review_rate = _db.tbl_reviews
                     .Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type)
-                    .Max(m => m.review_rate)
+                    .Max(m => m.review_rate),
+                max_child_age = _db.child_policy_settings
+                    .Where(wr => wr.trip_id == s.trip_id && wr.currency_code.ToLower() == currency_code.ToLower())
+                    .Max(m => m.age_to),
+                trip_order = s.trip_order
             };
         }
 
@@ -571,6 +580,7 @@ namespace ITravelApp.Data
                                 //&& (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower())
 
                                 )
+                    .OrderBy(o => o.trip_order)
                     .ToListAsync();
 
 
@@ -885,7 +895,86 @@ namespace ITravelApp.Data
          
         }
         //public ResponseCls CalculateBookingPrice(long? booking_id , long? trip_id , int? adult_num, int? child_num,string currency,decimal extras_price)
+
         public ResponseCls CalculateBookingPrice(CalculateBookingPriceReq req)
+        {
+            decimal? total_price = 0;
+            decimal? total_adult_price = 0;
+            decimal? total_child_price = 0;
+            decimal? final_price = 0;
+            decimal? extras_price = 0;
+            if (req.extra_lst != null && req.extra_lst.Count > 0)
+            {
+                foreach (var item in req.extra_lst)
+                {
+                    extras_price = extras_price + (item.extra_price * item.extra_count);
+                }
+            }
+            ResponseCls response = new ResponseCls();
+            try
+            {
+                //get trip details
+                var trip = _db.trip_mains.Where(wr => wr.id == req.trip_id).SingleOrDefault();
+                if (trip != null)
+                {
+                    var capacity = req.adult_num + req.child_num;
+                    ////mean it trip is transfer type, get price data from tbl transfer_categories 
+                    //if (trip.trip_type == 2)
+                    //{
+                    //    var transfer =  _db.transfer_categories.Where(wr => wr.id == trip.transfer_category_id && wr.min_capacity <= capacity && wr.max_capacity >= capacity && wr.currency_code.ToLower() == req.currency_code.ToLower()).SingleOrDefault();
+                    //    total_price = transfer?.max_price ;
+                    //}
+                    //else
+                    //{
+                    //mean trip is diving or excursion or transfer get price data from tbl trip_prices depend on pax capacity
+                    //if trip price doesnot contain pax range so skip check againt capacity
+                    var price = _db.trip_prices.Where(wr => wr.trip_id == trip.id && wr.currency_code.ToLower() == req.currency_code.ToLower() && wr.pax_from <= capacity && (wr.pax_to >= capacity || wr.pax_to == 0)).SingleOrDefault();
+                    total_adult_price = (price?.trip_sale_price * req.adult_num);
+
+                    //calculte child price depend on policy assigned to trip
+                    foreach (var age in req.childAges)
+                    {
+                        var policy = _db.child_policy_settings.FirstOrDefault(p => age >= p.age_from && age <= p.age_to);
+                        if (policy == null) continue;
+                        decimal? child_price = 0;
+                        switch (policy.pricing_type)
+                        {
+                            case 1:
+                                child_price = 0;
+                                break;
+                            case 2:
+                                child_price = price?.trip_sale_price * (policy.child_price / 100);
+                                break;
+                            case 3:
+                                child_price = policy.child_price;
+                                break;
+                            
+                        }
+
+                        total_child_price += child_price;
+                    }
+                    //}
+                }
+                final_price = total_adult_price + total_child_price + extras_price;
+                //update booking
+                var booking = _db.trips_bookings.Where(wr => wr.id == req.booking_id).SingleOrDefault();
+
+                if (booking != null)
+                {
+                    booking.total_price = final_price;
+                    _db.trips_bookings.Update(booking);
+                    _db.SaveChanges();
+                    response = new ResponseCls { errors = null, success = true, idOut = booking.id, msg = _localizer["UpdateBookingPrice"] };
+                }
+            }
+            catch (Exception ex)
+            {
+                //final_price = 0;
+                response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
+            }
+            return response;
+        }
+        public ResponseCls CalculateBookingPriceOld(CalculateBookingPriceReq req)
         {
             decimal? total_price = 0;
             decimal? final_price = 0;
@@ -955,7 +1044,7 @@ namespace ITravelApp.Data
                     id = row.id,
                     pickup_time = row.pickup_time,
                     total_pax = row.total_pax,
-                    //total_price = row.total_price,
+                    total_price = row.total_price,
                     trip_code = row.trip_code,
                     trip_id = row.trip_id,
                     trip_date = DateTime.Parse(row.trip_dateStr),
@@ -968,7 +1057,7 @@ namespace ITravelApp.Data
                     currency_code=row.currency_code,
                     trip_type=row.trip_type,
                     client_name = row.client_name,
-
+                    booking_code_auto=row.booking_code_auto,
                 };
                // booking.total_price = CalculateBookingPrice(booking.trip_id, booking.total_pax, booking.child_num, row.currency_code);
                 if (row.id == 0)
@@ -1102,6 +1191,68 @@ namespace ITravelApp.Data
                 return new List<BookingExtraCast>();
             }
         }
+        public async Task<List<BookingSummary>> GetMyBooking(LangReq req, string client_id)
+        {
+            try
+            {
+                var records = await _db.bookingwithdetails.Where(wr => wr.client_id == client_id && wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.currency_code.ToLower() == req.currency_code.ToLower()).ToListAsync();
+                   
+                    return records.Select(result => new  BookingSummary
+                      {
+                          client_name = result.client_name,
+                          trip_type = result.trip_type,
+                          trip_id = result.trip_id,
+                          booking_code = result.booking_code,
+                          booking_code_auto = result.booking_code_auto,
+                          booking_date = result.booking_date,
+                          booking_datestr = result.booking_datestr,
+                          booking_id = result.booking_id,
+                          booking_notes = result.booking_notes,
+                          booking_status = result.booking_status,
+                          booking_status_id = result.booking_status_id,
+                          cancelation_policy = result.cancelation_policy,
+                          child_num = result.child_num,
+                          client_email = result.client_email,
+                          client_id = result.client_id,
+                          client_nationality = result.client_nationality,
+                          client_phone = result.client_phone,
+                          currency_code = result.currency_code,
+                          default_img = result.default_img,
+                          gift_code = result.gift_code,
+                          infant_num = result.infant_num,
+                          lang_code = result.lang_code,
+                          pickup_address = result.pickup_address,
+                          pickup_time = result.pickup_time,
+                          review_rate = result.review_rate,
+                          total_pax = result.total_pax,
+                          total_price = result.total_price,
+                          trip_code = result.trip_code,
+                          trip_date = result.trip_date,
+                          trip_datestr = result.trip_datestr,
+                          trip_description = result.trip_description,
+                          trip_name = result.trip_name,
+                          release_days = result.release_days,
+                          trip_code_auto = result.trip_code_auto,
+                          extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code).ToList()
+                      }).ToList();
+            }
+            catch (Exception ex)
+            {
+                return new List<BookingSummary>();
+            }
+        }
+        public async Task<int> GetMyBookingCount(string client_id)
+        {
+            try
+            {
+                return await _db.trips_bookings.Where(wr => wr.client_id == client_id).CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
         #endregion
 
         #region "Profile"

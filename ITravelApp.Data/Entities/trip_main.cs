@@ -38,4 +38,6 @@ public partial class trip_main
     public string? trip_code_auto { get; set; }
 
     public int? release_days { get; set; }
+
+    public int? trip_order { get; set; }
 }

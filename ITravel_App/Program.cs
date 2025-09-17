@@ -1,3 +1,4 @@
+
 using ITravel_App.services;
 using ITravel_App.Services;
 using ITravelApp.Data;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
+using QuestPDF.Infrastructure;
 using Serilog;
 using System.Text;
 
@@ -21,6 +23,8 @@ var logger = new LoggerConfiguration()
 
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
+// Configure QuestPDF license
+QuestPDF.Settings.License = LicenseType.Community;
 // Add services to the container.
 builder.Services.AddControllersWithViews()
     .AddNewtonsoftJson(options =>
@@ -77,6 +81,8 @@ builder.Services.AddSwaggerGen(options =>
     });
     options.OperationFilter<AcceptLanguageHeaderOperationFilter>();
 });
+// Register DinkToPdf converter
+//builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 //mail
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddDbContext<horizon_client_dbContext>(options =>
@@ -88,6 +94,7 @@ builder.Services.AddScoped<MailSettingDao>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<CustomViewRendererService>();
+builder.Services.AddScoped<BookingPdfService>();
 builder.Services.AddTransient<IMailService, MailService>();
 builder.Services.AddAuthentication()
     .AddJwtBearer(options =>
@@ -119,6 +126,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(MyAllowSpecificOrigins);
 //localization
 var locOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
 app.UseRequestLocalization(locOptions.Value);
@@ -130,10 +138,10 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/images"
 });
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseRouting();
 app.UseAuthorization();
-app.UseCors(MyAllowSpecificOrigins);
 app.MapControllers();
 
 app.Run();
