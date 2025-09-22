@@ -24,6 +24,19 @@ namespace ITravel_App.Controllers
             _loginUserData = Utils.getTokenData(httpContextAccessor);
         }
 
+        #region "Main_setting"
+
+        [HttpPost("Get_Currencies")]
+        public async Task<IActionResult> Get_Currencies()
+        {
+            return Ok(await _adminService.Get_Currencies());
+        }
+        [HttpPost("Get_Languages")]
+        public async Task<IActionResult> Get_Languages()
+        {
+            return Ok(await _adminService.Get_Languages());
+        }
+        #endregion
         #region destination
 
         [HttpPost("GetDestinationMain")]

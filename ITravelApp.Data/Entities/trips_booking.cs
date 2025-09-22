@@ -5,8 +5,6 @@ namespace ITravelApp.Data.Entities;
 
 public partial class trips_booking
 {
-    public long id { get; set; }
-
     public long? trip_id { get; set; }
 
     public string? client_id { get; set; }
@@ -26,7 +24,7 @@ public partial class trips_booking
     public string? pickup_time { get; set; }
 
     /// <summary>
-    /// 1 = pending
+    /// 1 = requested
     /// 2 = confirmed
     /// 3 = canceled
     /// </summary>
@@ -53,6 +51,8 @@ public partial class trips_booking
     public int? trip_type { get; set; }
 
     public string? currency_code { get; set; }
+
+    public long id { get; set; }
 
     public string? client_name { get; set; }
 }

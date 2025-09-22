@@ -25,9 +25,9 @@ public partial class transfer_category
 
     public DateTime? updated_at { get; set; }
 
-    public int id { get; set; }
-
     public decimal? child_price { get; set; }
 
     public string? notes { get; set; }
+
+    public int id { get; set; }
 }

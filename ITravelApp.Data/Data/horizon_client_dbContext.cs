@@ -34,19 +34,21 @@ public partial class horizon_client_dbContext : DbContext
 
     public virtual DbSet<destination_translation> destination_translations { get; set; }
 
+    public virtual DbSet<destinationwithdetail> destinationwithdetails { get; set; }
+
     public virtual DbSet<facility_main> facility_mains { get; set; }
 
     public virtual DbSet<facility_translation> facility_translations { get; set; }
+
+    public virtual DbSet<tbl_currency> tbl_currencies { get; set; }
+
+    public virtual DbSet<tbl_language> tbl_languages { get; set; }
 
     public virtual DbSet<tbl_review> tbl_reviews { get; set; }
 
     public virtual DbSet<transfer_category> transfer_categories { get; set; }
 
     public virtual DbSet<trip_category> trip_categories { get; set; }
-
-    public virtual DbSet<trip_extra_main> trip_extra_mains { get; set; }
-
-    public virtual DbSet<trip_extra_translation> trip_extra_translations { get; set; }
 
     public virtual DbSet<trip_facility> trip_facilities { get; set; }
 
@@ -103,7 +105,7 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.client_nationality).HasMaxLength(50);
             entity.Property(e => e.client_phone).HasMaxLength(50);
             entity.Property(e => e.currency_code).HasMaxLength(20);
-            entity.Property(e => e.default_img).HasMaxLength(50);
+            entity.Property(e => e.default_img).HasMaxLength(100);
             entity.Property(e => e.gift_code).HasMaxLength(50);
             entity.Property(e => e.lang_code).HasMaxLength(5);
             entity.Property(e => e.pickup_time).HasMaxLength(20);
@@ -124,6 +126,7 @@ public partial class horizon_client_dbContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.created_by).HasMaxLength(50);
+            entity.Property(e => e.currency_code).HasMaxLength(20);
             entity.Property(e => e.pricing_type).HasComment("1 =Free\n2=% of Adult Price\n3=Fixed Amount");
             entity.Property(e => e.updated_at)
                 .HasDefaultValueSql("now()")
@@ -206,7 +209,7 @@ public partial class horizon_client_dbContext : DbContext
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.created_by).HasMaxLength(100);
             entity.Property(e => e.dest_code).HasMaxLength(20);
-            entity.Property(e => e.order).HasDefaultValue(1);
+            entity.Property(e => e.order).HasDefaultValue(0);
             entity.Property(e => e.parent_id).HasDefaultValue(0);
             entity.Property(e => e.route).HasMaxLength(100);
             entity.Property(e => e.updated_at)
@@ -227,6 +230,21 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.updated_at)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone");
+        });
+
+        modelBuilder.Entity<destinationwithdetail>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("destinationwithdetails");
+
+            entity.Property(e => e.country_code).HasMaxLength(20);
+            entity.Property(e => e.dest_code).HasMaxLength(20);
+            entity.Property(e => e.dest_name).HasMaxLength(50);
+            entity.Property(e => e.img_name).HasMaxLength(100);
+            entity.Property(e => e.img_path).HasMaxLength(100);
+            entity.Property(e => e.lang_code).HasMaxLength(20);
+            entity.Property(e => e.route).HasMaxLength(100);
         });
 
         modelBuilder.Entity<facility_main>(entity =>
@@ -260,6 +278,24 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.updated_at)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone");
+        });
+
+        modelBuilder.Entity<tbl_currency>(entity =>
+        {
+            entity.HasKey(e => e.id).HasName("tbl_currency_pkey");
+
+            entity.ToTable("tbl_currency");
+
+            entity.Property(e => e.currency_code).HasMaxLength(5);
+            entity.Property(e => e.currency_name).HasMaxLength(20);
+        });
+
+        modelBuilder.Entity<tbl_language>(entity =>
+        {
+            entity.HasKey(e => e.id).HasName("tbl_languages_pkey");
+
+            entity.Property(e => e.lang_code).HasMaxLength(5);
+            entity.Property(e => e.lang_name).HasMaxLength(20);
         });
 
         modelBuilder.Entity<tbl_review>(entity =>
@@ -302,42 +338,6 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.type_name).HasMaxLength(100);
         });
 
-        modelBuilder.Entity<trip_extra_main>(entity =>
-        {
-            entity.HasKey(e => e.id).HasName("trip_extra_main_pkey");
-
-            entity.ToTable("trip_extra_main");
-
-            entity.Property(e => e.created_at)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone");
-            entity.Property(e => e.created_by).HasMaxLength(50);
-            entity.Property(e => e.currency_code).HasMaxLength(20);
-            entity.Property(e => e.extra_default_code).HasMaxLength(50);
-            entity.Property(e => e.extra_default_name).HasMaxLength(100);
-            entity.Property(e => e.updated_at)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone");
-        });
-
-        modelBuilder.Entity<trip_extra_translation>(entity =>
-        {
-            entity.HasKey(e => e.id).HasName("trip_extra_translation_pkey");
-
-            entity.ToTable("trip_extra_translation");
-
-            entity.Property(e => e.created_at)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone");
-            entity.Property(e => e.created_by).HasMaxLength(50);
-            entity.Property(e => e.extra_code).HasMaxLength(20);
-            entity.Property(e => e.extra_name).HasMaxLength(50);
-            entity.Property(e => e.lang_code).HasMaxLength(20);
-            entity.Property(e => e.updated_at)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone");
-        });
-
         modelBuilder.Entity<trip_facility>(entity =>
         {
             entity.HasKey(e => e.id).HasName("trip_facility_pkey");
@@ -363,7 +363,7 @@ public partial class horizon_client_dbContext : DbContext
                 .HasColumnType("timestamp without time zone");
             entity.Property(e => e.created_by).HasMaxLength(100);
             entity.Property(e => e.img_name).HasMaxLength(100);
-            entity.Property(e => e.img_order).HasDefaultValue(1);
+            entity.Property(e => e.img_order).HasDefaultValue(0);
             entity.Property(e => e.img_path).HasMaxLength(50);
             entity.Property(e => e.img_resize_path).HasMaxLength(100);
             entity.Property(e => e.trip_type).HasDefaultValue(0);
@@ -390,7 +390,7 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.trip_code_auto).HasMaxLength(20);
             entity.Property(e => e.trip_default_name).HasMaxLength(50);
             entity.Property(e => e.trip_duration).HasMaxLength(20);
-            entity.Property(e => e.trip_order).HasDefaultValue(1);
+            entity.Property(e => e.trip_order).HasDefaultValue(0);
             entity.Property(e => e.trip_type).HasDefaultValue(0);
             entity.Property(e => e.updated_at)
                 .HasDefaultValueSql("now()")
@@ -472,7 +472,7 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.booking_code).HasMaxLength(50);
             entity.Property(e => e.booking_code_auto).HasMaxLength(20);
             entity.Property(e => e.booking_date).HasColumnType("timestamp without time zone");
-            entity.Property(e => e.booking_status).HasComment("1 = pending\n2 = confirmed\n3 = canceled");
+            entity.Property(e => e.booking_status).HasComment("1 = requested\n2 = confirmed\n3 = canceled");
             entity.Property(e => e.client_email).HasMaxLength(100);
             entity.Property(e => e.client_id).HasMaxLength(100);
             entity.Property(e => e.client_nationality).HasMaxLength(50);

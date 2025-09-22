@@ -30,6 +30,16 @@ namespace ITravelApp.Data
             _localizer = localizer;
         }
 
+        #region "main_Setting"
+        public async Task<List<tbl_currency>> Get_Currencies()
+        {
+            return await _db.tbl_currencies.ToListAsync();
+        }
+        public async Task<List<tbl_language>> Get_Languages()
+        {
+            return await _db.tbl_languages.ToListAsync();
+        }
+        #endregion
         #region destination
 
         //save main destination data by admin
@@ -1108,6 +1118,7 @@ namespace ITravelApp.Data
                                   trip_code_auto= TRIP.trip_code_auto,
                                   release_days= TRIP.release_days,
                                   trip_order=TRIP.trip_order,
+                                  is_comm_soon=TRIP.is_comm_soon
                               }).OrderBy(d => d.id).ToListAsync();
 
 
@@ -1123,13 +1134,22 @@ namespace ITravelApp.Data
             try
             {
                 var result = await _db.trip_translations.Where(wr => wr.trip_id == trip_id).ToListAsync();
+                List<tbl_language> langs = await _db.tbl_languages.ToListAsync();
 
-                List<TripTranslationGrp> translations = new List<TripTranslationGrp>
-                        {
-                            new TripTranslationGrp { lang_code="en",translation=result.ToList().Where(wr => wr.lang_code == "en").SingleOrDefault() },
-                            new TripTranslationGrp { lang_code="de",translation=result.ToList().Where(wr => wr.lang_code == "de").SingleOrDefault() },
+                List<TripTranslationGrp> translations = new List<TripTranslationGrp>();
+                foreach (var item in langs)
+                {
+                    TripTranslationGrp row = new TripTranslationGrp { lang_code = item.lang_code.ToLower(), translation = result.ToList().Where(wr => wr.lang_code.ToLower() == item.lang_code.ToLower()).SingleOrDefault() };
+                     translations.Add(row);
 
-                        };
+                    };
+                //List<TripTranslationGrp> translations = new List<TripTranslationGrp>
+                //{
+                //    new TripTranslationGrp { lang_code = "en", translation = result.ToList().Where(wr => wr.lang_code == "en").SingleOrDefault() },
+                //    new TripTranslationGrp { lang_code = "de", translation = result.ToList().Where(wr => wr.lang_code == "de").SingleOrDefault() },
+
+                //};
+
                 return translations;
                 //if (result.Count > 0)
                 //{

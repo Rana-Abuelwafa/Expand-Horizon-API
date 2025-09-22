@@ -24,12 +24,13 @@ public partial class child_policy_setting
 
     public long? trip_id { get; set; }
 
-    public int policy_id { get; set; }
-
     public DateTime? created_at { get; set; }
 
     public string? created_by { get; set; }
 
     public DateTime? updated_at { get; set; }
+
     public string? currency_code { get; set; }
+
+    public int policy_id { get; set; }
 }

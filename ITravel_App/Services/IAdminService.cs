@@ -10,6 +10,10 @@ namespace ITravel_App.Services
 {
     public interface IAdminService
     {
+        #region "Main_setting"
+        public  Task<List<tbl_currency>> Get_Currencies();
+        public Task<List<tbl_language>> Get_Languages();
+        #endregion
         public ResponseCls SaveMainDestination(destination_main row);
         public ResponseCls SaveDestinationTranslations(destination_translation row);
         public ResponseCls saveDestinationImage(List<destination_img> row);

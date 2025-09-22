@@ -2,7 +2,6 @@
 using ITravelApp.Data.Entities;
 using ITravelApp.Data.Models;
 using ITravelApp.Data.Models.Bookings;
-using ITravelApp.Data.Models.Bookings.Admin;
 using ITravelApp.Data.Models.Bookings.Client;
 using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
@@ -10,15 +9,7 @@ using ITravelApp.Data.Models.profile;
 using ITravelApp.Data.Models.trips;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ITravelApp.Data
 {
@@ -34,64 +25,128 @@ namespace ITravelApp.Data
         }
         #region destination
 
-        public List<DestinationResponse> getDestinations(DestinationReq req)
+        public async Task<List<destinationwithdetail>> getDestinations(DestinationReq req)
         {
             try
             {
+                return await _db.destinationwithdetails.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
+                                                                  wr.active == true &&
+                                                                  wr.trans_active == true &&
+                                                                  wr.leaf == req.leaf &&
+                                                                  wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower())
+                                                                  )
+                                                                  .OrderBy(x => x.order)
+                                                                  .ToListAsync();
 
-                var result = from trans in _db.destination_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.active == true)
-                             join dest in _db.destination_mains.Where(wr => wr.active == true && wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower()) && wr.leaf == req.leaf) on trans.destination_id equals dest.id         // INNER JOIN
-                             join img in _db.destination_imgs on trans.id equals img.destination_id into DestAll
-                             from combined in DestAll.DefaultIfEmpty()               // LEFT JOIN
-                             select new DestinationResponse
-                             {
-                                 destination_id = trans.destination_id,
-                                 id = trans.id,
-                                 country_code = dest.country_code,
-                                 active = dest.active,
-                                 dest_code = dest.dest_code,
-                                 dest_description = trans.dest_description,
-                                 dest_name = trans.dest_name,
-                                 img_path = combined != null ? "http://api.raccoon24.com/" + combined.img_path : null,
-                                 lang_code = trans.lang_code,
-                                 dest_default_name = dest.dest_default_name,
-                                 route = dest.route
-                             };
+                //var result = from trans in _db.destination_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.active == true)
+                //             join dest in _db.destination_mains.Where(wr => wr.active == true && wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower()) && wr.leaf == req.leaf) on trans.destination_id equals dest.id         // INNER JOIN
+                //             join img in _db.destination_imgs on trans.id equals img.destination_id into DestAll
+                //             from combined in DestAll.DefaultIfEmpty()               // LEFT JOIN
+                //             select new DestinationResponse
+                //             {
+                //                 destination_id = trans.destination_id,
+                //                 id = trans.id,
+                //                 country_code = dest.country_code,
+                //                 active = dest.active,
+                //                 dest_code = dest.dest_code,
+                //                 dest_description = trans.dest_description,
+                //                 dest_name = trans.dest_name,
+                //                 img_path = combined != null ? "http://api.raccoon24.com/" + combined.img_path : null,
+                //                 lang_code = trans.lang_code,
+                //                 dest_default_name = dest.dest_default_name,
+                //                 route = dest.route
+                //             };
 
-                return result.OrderBy(x => x.order).ToList();
+                //return result.OrderBy(x => x.order).ToList();
             }
             catch (Exception ex)
             {
-                return null;
+                return new List<destinationwithdetail>();
             }
         }
 
         public List<DestinationTree> GetDestination_Tree(DestinationReq req)
         {
-
             try
             {
-                var main = from trans in _db.destination_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.active == true)
-                           join dest in _db.destination_mains.Where(wr => wr.active == true && wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower())) on trans.destination_id equals dest.id         // INNER JOIN
-                           join img in _db.destination_imgs on trans.id equals img.destination_id into DestAll
-                           from combined in DestAll.DefaultIfEmpty()               // LEFT JOIN
-                           select new DestinationResponse
+                var main = _db.destinationwithdetails.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
+                                                                  wr.active == true &&
+                                                                  wr.trans_active == true &&
+                                                                  wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower())
+                                                           )
+                    .Join(_db.trip_mains.Where(wr => wr.trip_type == req.trip_type && wr.active == true),
+                           DEST => new { DEST.destination_id },
+                           TRIP => new { TRIP.destination_id },
+                           (DEST, TRIP) => new DestinationResponse
                            {
-                               destination_id = trans.destination_id,
-                               id = trans.id,
-                               country_code = dest.country_code,
-                               active = dest.active,
-                               dest_code = dest.dest_code,
-                               dest_description = trans.dest_description,
-                               dest_name = trans.dest_name,
-                               img_path = combined != null ? "http://api.raccoon24.com/" + combined.img_path : null,
-                               lang_code = trans.lang_code,
-                               dest_default_name = dest.dest_default_name,
-                               route = dest.route,
-                               leaf = dest.leaf,
-                               parent_id = dest.parent_id,
-                               order= dest.order,
-                           };
+                               destination_id = DEST.destination_id,
+                               id = DEST.id,
+                               country_code = DEST.country_code,
+                               active = DEST.active,
+                               dest_code = DEST.dest_code,
+                               dest_description = DEST.dest_description,
+                               dest_name = DEST.dest_name,
+                               img_path = DEST.img_path,
+                               lang_code = DEST.lang_code,
+                               dest_default_name = DEST.dest_default_name,
+                               route = DEST.route,
+                               leaf = DEST.leaf,
+                               parent_id = DEST.parent_id,
+                               order = DEST.order
+                           }).GroupBy(g => new
+                           {
+                               g.route,
+                               g.parent_id,
+                               g.destination_id,
+                               g.img_path,
+                               g.active,
+                               g.country_code,
+                               g.dest_code,
+                               g.dest_default_name,
+                               g.dest_description,
+                               g.dest_name,
+                               g.lang_code,
+                               g.order,
+                               g.leaf,
+                               g.id
+                           }).Select(s => new DestinationResponse
+                           {
+                               destination_id = s.Key.destination_id,
+                               id = s.Key.id,
+                               country_code = s.Key.country_code,
+                               active = s.Key.active,
+                               dest_code = s.Key.dest_code,
+                               dest_description = s.Key.dest_description,
+                               dest_name = s.Key.dest_name,
+                               img_path = s.Key.img_path,
+                               lang_code = s.Key.lang_code,
+                               dest_default_name = s.Key.dest_default_name,
+                               route = s.Key.route,
+                               leaf = s.Key.leaf,
+                               parent_id = s.Key.parent_id,
+                               order = s.Key.order,
+                           }).ToList();
+                //var main = from trans in _db.destination_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.active == true)
+                //           join dest in _db.destination_mains.Where(wr => wr.active == true && wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower())) on trans.destination_id equals dest.id         // INNER JOIN
+                //           join img in _db.destination_imgs.Where(wr => wr.is_default == true) on trans.id equals img.destination_id into DestAll
+                //           from combined in DestAll.DefaultIfEmpty()               // LEFT JOIN
+                //           select new DestinationResponse
+                //           {
+                //               destination_id = trans.destination_id,
+                //               id = trans.id,
+                //               country_code = dest.country_code,
+                //               active = dest.active,
+                //               dest_code = dest.dest_code,
+                //               dest_description = trans.dest_description,
+                //               dest_name = trans.dest_name,
+                //               img_path = combined != null ? "http://api.raccoon24.com/" + combined.img_path : null,
+                //               lang_code = trans.lang_code,
+                //               dest_default_name = dest.dest_default_name,
+                //               route = dest.route,
+                //               leaf = dest.leaf,
+                //               parent_id = dest.parent_id,
+                //               order = dest.order,
+                //           };
 
 
                 var result = GetDestination_TreeMain(main.ToList(), 0).ToList();
@@ -134,19 +189,23 @@ namespace ITravelApp.Data
         #endregion
 
         #region trips
-
+        //get main categories for trip
+        public async Task<List<trip_category>> GetTripCategories()
+        {
+            return await _db.trip_categories.ToListAsync();
+        }
         //get facilities for specific trip
-        public List<TripFacility> getFacilityForTrip(long? trip_id, string lang_code,bool? isExtra)
+        public List<TripFacility> getFacilityForTrip(long? trip_id, string lang_code, bool? isExtra)
         {
             try
             {
 
                 var result =
                    from TFAC in _db.trip_facilities.Where(wr => wr.trip_id == trip_id)
-                   join TRANS in _db.facility_translations.Where(wr => wr.lang_code.ToLower() == lang_code.ToLower()) 
-                   on TFAC.facility_id equals TRANS.facility_id 
+                   join TRANS in _db.facility_translations.Where(wr => wr.lang_code.ToLower() == lang_code.ToLower())
+                   on TFAC.facility_id equals TRANS.facility_id
                    into TRIPFAC
-                  
+
                    from combinedFACT in TRIPFAC.DefaultIfEmpty() // LEFT JOIN Customers
                    join FACM in _db.facility_mains.Where(wr => wr.active == true && wr.is_extra == isExtra)
 
@@ -155,10 +214,10 @@ namespace ITravelApp.Data
                    select new TripFacility
                    {
                        facility_desc = combinedFACT != null ? combinedFACT.facility_desc : "",
-                       facility_name = combinedFACT !=null ? combinedFACT.facility_name : "",
-                       extra_price= combinedFACM != null ?  combinedFACM.extra_price : 0,
-                       currency_code= combinedFACM != null ?  combinedFACM.currency_code : "",
-                       is_extra= combinedFACM !=null ? combinedFACM.is_extra : false,
+                       facility_name = combinedFACT != null ? combinedFACT.facility_name : "",
+                       extra_price = combinedFACM != null ? combinedFACM.extra_price : 0,
+                       currency_code = combinedFACM != null ? combinedFACM.currency_code : "",
+                       is_extra = combinedFACM != null ? combinedFACM.is_extra : false,
                        facility_id = TFAC.facility_id
 
 
@@ -171,7 +230,7 @@ namespace ITravelApp.Data
                 //             {
                 //                 facility_desc = m.facility_desc,
                 //                 facility_name = m.facility_name,
-                                 
+
 
                 //             };
                 return result.ToList();
@@ -244,7 +303,7 @@ namespace ITravelApp.Data
                     .OrderBy(o => o.trip_order)
                     .ToListAsync();
 
-                return trips.Select(s => MapToTripsAll(s, req.currency_code,req.client_id)).ToList();
+                return trips.Select(s => MapToTripsAll(s, req.currency_code, req.client_id)).ToList();
                 //return trips.Select(s => new TripsAll
                 //{
                 //    destination_id = s.destination_id,
@@ -446,6 +505,7 @@ namespace ITravelApp.Data
                                         currency_code = req.currency_code,
                                         trip_code_auto = TRIP.trip_code_auto,
                                         release_days = TRIP.release_days,
+                                        is_comm_soon = TRIP.is_comm_soon
                                     }).ToListAsync();
 
                 return trips.Select(s => new TripsAll
@@ -489,7 +549,9 @@ namespace ITravelApp.Data
                     cancelation_policy = s.cancelation_policy,
                     release_days = s.release_days,
                     trip_max_price = _db.trip_prices.Where(wr => wr.trip_id == s.trip_id && wr.currency_code == req.currency_code).Max(m => m.trip_sale_price),
-                    trip_min_price = _db.trip_prices.Where(wr => wr.trip_id == s.trip_id && wr.currency_code == req.currency_code).Min(m => m.trip_sale_price)
+                    trip_min_price = _db.trip_prices.Where(wr => wr.trip_id == s.trip_id && wr.currency_code == req.currency_code).Min(m => m.trip_sale_price),
+                    is_comm_soon = s.is_comm_soon,
+
                 }).ToList();
             }
             catch (Exception ex)
@@ -499,12 +561,12 @@ namespace ITravelApp.Data
         }
 
 
-        private TripsAll MapToTripsAll(tripwithdetail s, string? currency_code,string? client_id)
+        private TripsAll MapToTripsAll(tripwithdetail s, string? currency_code, string? client_id)
         {
-           
-                var wishlist =  (string.IsNullOrEmpty(client_id)
-                ? null
-                : CheckIfTripInWishList(s.trip_id, client_id, s.trip_type));
+
+            var wishlist = (string.IsNullOrEmpty(client_id)
+            ? null
+            : CheckIfTripInWishList(s.trip_id, client_id, s.trip_type));
             return new TripsAll
             {
                 destination_id = s.destination_id,
@@ -526,7 +588,7 @@ namespace ITravelApp.Data
                 trip_includes = s.trip_includes,
                 trip_name = s.trip_name,
                 trip_trans_id = s.trip_trans_id,
-                isfavourite =  (wishlist != null && wishlist.id != 0),
+                isfavourite = (wishlist != null && wishlist.id != 0),
                 trip_type = s.trip_type,
                 wish_id = wishlist?.id ?? 0,
                 wsh_created_at = wishlist?.created_at?.ToString("dd-MM-yyyy"),
@@ -561,7 +623,8 @@ namespace ITravelApp.Data
                 max_child_age = _db.child_policy_settings
                     .Where(wr => wr.trip_id == s.trip_id && wr.currency_code.ToLower() == currency_code.ToLower())
                     .Max(m => m.age_to),
-                trip_order = s.trip_order
+                trip_order = s.trip_order,
+                is_comm_soon = s.is_comm_soon
             };
         }
 
@@ -574,9 +637,9 @@ namespace ITravelApp.Data
                     .Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
                                 wr.show_in_slider == true &&
                                 wr.trip_type == (req.trip_type == 0 ? wr.trip_type : req.trip_type) &&
-                                wr.destination_id == (req.destination_id == 0 ? wr.destination_id : req.destination_id) 
-                                 //wr.currency_code.ToLower() == req.currency_code.ToLower()
-                                 //(string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower())
+                                wr.destination_id == (req.destination_id == 0 ? wr.destination_id : req.destination_id)
+                                //wr.currency_code.ToLower() == req.currency_code.ToLower()
+                                //(string.IsNullOrEmpty(wr.currency_code) || wr.currency_code.ToLower() == req.currency_code.ToLower())
                                 //&& (string.IsNullOrEmpty(wr.transfer_currency) || wr.transfer_currency.ToLower() == req.currency_code.ToLower())
 
                                 )
@@ -774,7 +837,7 @@ namespace ITravelApp.Data
                 return 0;
             }
         }
-       
+
         #endregion
 
         #region "booking"
@@ -792,41 +855,41 @@ namespace ITravelApp.Data
                 {
                     return new BookingSummary
                     {
-                        client_name= result.client_name,
-                        trip_type=result.trip_type,
-                        trip_id= result.trip_id,
-                        booking_code= result.booking_code,
-                        booking_code_auto= result.booking_code_auto,
-                        booking_date=result.booking_date,
-                        booking_datestr= result.booking_datestr,
-                        booking_id=result.booking_id,
-                        booking_notes= result.booking_notes,
-                        booking_status=result.booking_status,
-                        booking_status_id=result.booking_status_id,
-                        cancelation_policy= result.cancelation_policy,
-                        child_num= result.child_num,
-                        client_email=result.client_email,
-                        client_id=result.client_id,
-                        client_nationality= result.client_nationality,
-                        client_phone= result.client_phone,
-                        currency_code=result.currency_code,
-                        default_img=result.default_img,
-                        gift_code=result.gift_code,
-                        infant_num=result.infant_num,
-                        lang_code=result.lang_code,
-                        pickup_address= result.pickup_address,
-                        pickup_time=result.pickup_time,
-                        review_rate=result.review_rate,
-                        total_pax=result.total_pax,
-                        total_price=result.total_price,
-                        trip_code=result.trip_code,
-                        trip_date=result.trip_date,
-                        trip_datestr=result.trip_datestr,
-                        trip_description=result.trip_description,
-                        trip_name=result.trip_name,
-                        release_days=result.release_days,
-                        trip_code_auto=result.trip_code_auto,
-                        extras= GetExtraAssignedToBooking(result.booking_id,req.lang_code).ToList()
+                        client_name = result.client_name,
+                        trip_type = result.trip_type,
+                        trip_id = result.trip_id,
+                        booking_code = result.booking_code,
+                        booking_code_auto = result.booking_code_auto,
+                        booking_date = result.booking_date,
+                        booking_datestr = result.booking_datestr,
+                        booking_id = result.booking_id,
+                        booking_notes = result.booking_notes,
+                        booking_status = result.booking_status,
+                        booking_status_id = result.booking_status_id,
+                        cancelation_policy = result.cancelation_policy,
+                        child_num = result.child_num,
+                        client_email = result.client_email,
+                        client_id = result.client_id,
+                        client_nationality = result.client_nationality,
+                        client_phone = result.client_phone,
+                        currency_code = result.currency_code,
+                        default_img = result.default_img,
+                        gift_code = result.gift_code,
+                        infant_num = result.infant_num,
+                        lang_code = result.lang_code,
+                        pickup_address = result.pickup_address,
+                        pickup_time = result.pickup_time,
+                        review_rate = result.review_rate,
+                        total_pax = result.total_pax,
+                        total_price = result.total_price,
+                        trip_code = result.trip_code,
+                        trip_date = result.trip_date,
+                        trip_datestr = result.trip_datestr,
+                        trip_description = result.trip_description,
+                        trip_name = result.trip_name,
+                        release_days = result.release_days,
+                        trip_code_auto = result.trip_code_auto,
+                        extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code).ToList()
                     };
                 }
                 return new BookingSummary();
@@ -839,16 +902,16 @@ namespace ITravelApp.Data
 
         public BookingWithTripDetailsAll ConfirmBooking(ConfirmBookingReq req)
         {
-            
+
             try
             {
                 trips_booking booking = _db.trips_bookings.Where(wr => wr.id == req.booking_id).SingleOrDefault();
-                 if(booking != null)
+                if (booking != null)
                 {
-                     booking.booking_status = 2;
+                    booking.booking_status = 2;
                     _db.trips_bookings.Update(booking);
                     _db.SaveChanges();
-                    var result =  _db.bookingwithdetails.Where(
+                    var result = _db.bookingwithdetails.Where(
                                                        wr => wr.lang_code == req.lang_code &&
                                                              wr.booking_id == req.booking_id &&
                                                              wr.client_id == req.client_id
@@ -875,9 +938,9 @@ namespace ITravelApp.Data
                         trip_code = result.trip_code,
                         trip_datestr = result.trip_datestr,
                         trip_name = result.trip_name,
-                        client_name=result.client_name,
-                        trip_id=result.trip_id,
-                        trip_type=result.trip_type,
+                        client_name = result.client_name,
+                        trip_id = result.trip_id,
+                        trip_type = result.trip_type,
 
                         pickups = GetPickupsForTrip(new PickupsReq { lang_code = req.lang_code, trip_id = result.trip_id, trip_type = result.trip_type }).Result
 
@@ -888,11 +951,11 @@ namespace ITravelApp.Data
                 }
                 return new BookingWithTripDetailsAll();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return new BookingWithTripDetailsAll ();
+                return new BookingWithTripDetailsAll();
             }
-         
+
         }
         //public ResponseCls CalculateBookingPrice(long? booking_id , long? trip_id , int? adult_num, int? child_num,string currency,decimal extras_price)
 
@@ -948,7 +1011,7 @@ namespace ITravelApp.Data
                             case 3:
                                 child_price = policy.child_price;
                                 break;
-                            
+
                         }
 
                         total_child_price += child_price;
@@ -979,7 +1042,7 @@ namespace ITravelApp.Data
             decimal? total_price = 0;
             decimal? final_price = 0;
             decimal? extras_price = 0;
-            if(req.extra_lst !=null && req.extra_lst.Count > 0)
+            if (req.extra_lst != null && req.extra_lst.Count > 0)
             {
                 foreach (var item in req.extra_lst)
                 {
@@ -989,9 +1052,9 @@ namespace ITravelApp.Data
             ResponseCls response = new ResponseCls();
             try
             {
-                   //get trip details
-                var trip =  _db.trip_mains.Where(wr => wr.id == req.trip_id).SingleOrDefault();
-                if(trip != null)
+                //get trip details
+                var trip = _db.trip_mains.Where(wr => wr.id == req.trip_id).SingleOrDefault();
+                if (trip != null)
                 {
                     var capacity = req.adult_num + req.child_num;
                     ////mean it trip is transfer type, get price data from tbl transfer_categories 
@@ -1002,16 +1065,17 @@ namespace ITravelApp.Data
                     //}
                     //else
                     //{
-                        //mean trip is diving or excursion or transfer get price data from tbl trip_prices depend on pax capacity
-                        var price = _db.trip_prices.Where(wr => wr.trip_id == trip.id && wr.currency_code.ToLower() == req.currency_code.ToLower() && wr.pax_from <= capacity && wr.pax_to >= capacity).SingleOrDefault();
-                        total_price = (price?.child_price * req.child_num) + (price?.trip_sale_price * req.adult_num);
+                    //mean trip is diving or excursion or transfer get price data from tbl trip_prices depend on pax capacity
+                    var price = _db.trip_prices.Where(wr => wr.trip_id == trip.id && wr.currency_code.ToLower() == req.currency_code.ToLower() && wr.pax_from <= capacity && wr.pax_to >= capacity).SingleOrDefault();
+                    total_price = (price?.child_price * req.child_num) + (price?.trip_sale_price * req.adult_num);
                     //}
                 }
                 final_price = total_price + extras_price;
                 //update booking
                 var booking = _db.trips_bookings.Where(wr => wr.id == req.booking_id).SingleOrDefault();
-               
-                if (booking != null) {
+
+                if (booking != null)
+                {
                     booking.total_price = final_price;
                     _db.trips_bookings.Update(booking);
                     _db.SaveChanges();
@@ -1054,12 +1118,12 @@ namespace ITravelApp.Data
                     gift_code = row.gift_code,
                     infant_num = row.infant_num,
                     pickup_address = row.pickup_address,
-                    currency_code=row.currency_code,
-                    trip_type=row.trip_type,
+                    currency_code = row.currency_code,
+                    trip_type = row.trip_type,
                     client_name = row.client_name,
-                    booking_code_auto=row.booking_code_auto,
+                    booking_code_auto = row.booking_code_auto,
                 };
-               // booking.total_price = CalculateBookingPrice(booking.trip_id, booking.total_pax, booking.child_num, row.currency_code);
+                // booking.total_price = CalculateBookingPrice(booking.trip_id, booking.total_pax, booking.child_num, row.currency_code);
                 if (row.id == 0)
                 {
                     //check duplicate validation
@@ -1150,7 +1214,7 @@ namespace ITravelApp.Data
                     }
                     count++;
                 }
-                if(count == lst.Count)
+                if (count == lst.Count)
                 {
                     response = new ResponseCls { errors = null, success = true };
                 }
@@ -1166,7 +1230,7 @@ namespace ITravelApp.Data
             return response;
         }
 
-        public List<BookingExtraCast> GetExtraAssignedToBooking(long? booking_id,string lang_code)
+        public List<BookingExtraCast> GetExtraAssignedToBooking(long? booking_id, string lang_code)
         {
             try
             {
@@ -1176,14 +1240,14 @@ namespace ITravelApp.Data
                              join FAC in _db.facility_mains on TRANS.facility_id equals FAC.id
                              select new BookingExtraCast
                              {
-                                 extra_id= BOOK.extra_id,
-                                 booking_id= BOOK.booking_id,
-                                 extra_count= BOOK.extra_count,
-                                 extra_name=TRANS.facility_name,
-                                 extra_price= FAC.extra_price,
-                                 id= BOOK.id
+                                 extra_id = BOOK.extra_id,
+                                 booking_id = BOOK.booking_id,
+                                 extra_count = BOOK.extra_count,
+                                 extra_name = TRANS.facility_name,
+                                 extra_price = FAC.extra_price,
+                                 id = BOOK.id
                              };
-               
+
                 return result.ToList();
             }
             catch (Exception ex)
@@ -1196,45 +1260,45 @@ namespace ITravelApp.Data
             try
             {
                 var records = await _db.bookingwithdetails.Where(wr => wr.client_id == client_id && wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.currency_code.ToLower() == req.currency_code.ToLower()).ToListAsync();
-                   
-                    return records.Select(result => new  BookingSummary
-                      {
-                          client_name = result.client_name,
-                          trip_type = result.trip_type,
-                          trip_id = result.trip_id,
-                          booking_code = result.booking_code,
-                          booking_code_auto = result.booking_code_auto,
-                          booking_date = result.booking_date,
-                          booking_datestr = result.booking_datestr,
-                          booking_id = result.booking_id,
-                          booking_notes = result.booking_notes,
-                          booking_status = result.booking_status,
-                          booking_status_id = result.booking_status_id,
-                          cancelation_policy = result.cancelation_policy,
-                          child_num = result.child_num,
-                          client_email = result.client_email,
-                          client_id = result.client_id,
-                          client_nationality = result.client_nationality,
-                          client_phone = result.client_phone,
-                          currency_code = result.currency_code,
-                          default_img = result.default_img,
-                          gift_code = result.gift_code,
-                          infant_num = result.infant_num,
-                          lang_code = result.lang_code,
-                          pickup_address = result.pickup_address,
-                          pickup_time = result.pickup_time,
-                          review_rate = result.review_rate,
-                          total_pax = result.total_pax,
-                          total_price = result.total_price,
-                          trip_code = result.trip_code,
-                          trip_date = result.trip_date,
-                          trip_datestr = result.trip_datestr,
-                          trip_description = result.trip_description,
-                          trip_name = result.trip_name,
-                          release_days = result.release_days,
-                          trip_code_auto = result.trip_code_auto,
-                          extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code).ToList()
-                      }).ToList();
+
+                return records.Select(result => new BookingSummary
+                {
+                    client_name = result.client_name,
+                    trip_type = result.trip_type,
+                    trip_id = result.trip_id,
+                    booking_code = result.booking_code,
+                    booking_code_auto = result.booking_code_auto,
+                    booking_date = result.booking_date,
+                    booking_datestr = result.booking_datestr,
+                    booking_id = result.booking_id,
+                    booking_notes = result.booking_notes,
+                    booking_status = result.booking_status,
+                    booking_status_id = result.booking_status_id,
+                    cancelation_policy = result.cancelation_policy,
+                    child_num = result.child_num,
+                    client_email = result.client_email,
+                    client_id = result.client_id,
+                    client_nationality = result.client_nationality,
+                    client_phone = result.client_phone,
+                    currency_code = result.currency_code,
+                    default_img = result.default_img,
+                    gift_code = result.gift_code,
+                    infant_num = result.infant_num,
+                    lang_code = result.lang_code,
+                    pickup_address = result.pickup_address,
+                    pickup_time = result.pickup_time,
+                    review_rate = result.review_rate,
+                    total_pax = result.total_pax,
+                    total_price = result.total_price,
+                    trip_code = result.trip_code,
+                    trip_date = result.trip_date,
+                    trip_datestr = result.trip_datestr,
+                    trip_description = result.trip_description,
+                    trip_name = result.trip_name,
+                    release_days = result.release_days,
+                    trip_code_auto = result.trip_code_auto,
+                    extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code).ToList()
+                }).ToList();
             }
             catch (Exception ex)
             {

@@ -65,7 +65,7 @@ namespace ITravel_App.Services
             return _clientDAO.GetClient_Notification_Settings(clientId);
         }
 
-        public List<DestinationResponse> getDestinations(DestinationReq req)
+        public Task<List<destinationwithdetail>> getDestinations(DestinationReq req)
         {
             return _clientDAO.getDestinations(req);
         }
@@ -98,6 +98,11 @@ namespace ITravel_App.Services
         public Task<List<client_image>> GetProfileImage(string clientId)
         {
             return _clientDAO.GetProfileImage(clientId);
+        }
+
+        public Task<List<trip_category>> GetTripCategories()
+        {
+            return _clientDAO.GetTripCategories();
         }
 
         public Task<TripsAll> GetTripDetails(TripDetailsReq req)

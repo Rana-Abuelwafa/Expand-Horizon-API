@@ -30,13 +30,20 @@ namespace ITravel_App.Controllers
         }
         //get destinations
         [HttpPost("getDestinations")]
-        public IActionResult getDestinations(DestinationReq req)
+        public async Task<IActionResult> getDestinations(DestinationReq req)
         {
 
-            return Ok(_clientService.getDestinations(req));
+            return Ok(await _clientService.getDestinations(req));
         }
         #endregion
         #region trips
+        //get main categories for trips
+
+        [HttpPost("GetTripCategories")]
+        public async Task<IActionResult> GetTripCategories()
+        {
+            return Ok(await _clientService.GetTripCategories());
+        }
         //get specific trip details
         [HttpPost("GetTripDetails")]
         public async Task<IActionResult> GetTripDetails(TripDetailsReq req)

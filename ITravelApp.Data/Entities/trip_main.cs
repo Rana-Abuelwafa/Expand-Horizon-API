@@ -40,4 +40,6 @@ public partial class trip_main
     public int? release_days { get; set; }
 
     public int? trip_order { get; set; }
+
+    public bool? is_comm_soon { get; set; }
 }

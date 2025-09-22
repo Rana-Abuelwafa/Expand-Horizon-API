@@ -5,11 +5,9 @@ namespace ITravelApp.Data.Entities;
 
 public partial class booking_extra
 {
-    public int id { get; set; }
-
     public long? booking_id { get; set; }
 
-    public long? extra_id { get; set; }
+    public int? extra_id { get; set; }
 
     public DateTime? created_at { get; set; }
 
@@ -18,4 +16,6 @@ public partial class booking_extra
     public DateTime? updated_at { get; set; }
 
     public int? extra_count { get; set; }
+
+    public int id { get; set; }
 }

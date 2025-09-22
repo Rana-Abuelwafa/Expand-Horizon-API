@@ -94,6 +94,16 @@ namespace ITravel_App.Services
             return _adminDAO.GetTrip_Prices(trip_id);
         }
 
+        public Task<List<tbl_currency>> Get_Currencies()
+        {
+            return _adminDAO.Get_Currencies();
+        }
+
+        public Task<List<tbl_language>> Get_Languages()
+        {
+            return _adminDAO.Get_Languages();
+        }
+
         public ResponseCls saveDestinationImage(List<destination_img> row)
         {
             return _adminDAO.saveDestinationImage(row);

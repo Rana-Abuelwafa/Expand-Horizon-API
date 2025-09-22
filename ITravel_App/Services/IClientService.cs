@@ -12,11 +12,12 @@ namespace ITravel_App.Services
     public interface IClientService
     {
         #region destination
-        public List<DestinationResponse> getDestinations(DestinationReq req);
+        public Task<List<destinationwithdetail>> getDestinations(DestinationReq req);
         public List<DestinationTree> GetDestination_Tree(DestinationReq req);
         #endregion
 
         #region trips
+        public Task<List<trip_category>> GetTripCategories();
         public Task<TripsAll> GetTripDetails(TripDetailsReq req);
         public Task<List<TripsAll>> GetTripsAll(TripsReq req);
         public Task<List<tripwithdetail>> GetTripsForSlider(TripsReq req);

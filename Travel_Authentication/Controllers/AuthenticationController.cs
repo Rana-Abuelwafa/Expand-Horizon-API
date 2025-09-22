@@ -23,7 +23,7 @@ namespace Travel_Authentication.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        //private static Dictionary<string, string> refreshTokens = new();
+        private static Dictionary<string, string> refreshTokens = new();
         IMailService Mail_Service = null;
         public AuthenticationController(IStringLocalizer<Messages> localizer, RoleManager<IdentityRole>? roleManager, UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager, IMailService _MailService, IConfiguration configuration, ILogger<AuthenticationController> logger)
