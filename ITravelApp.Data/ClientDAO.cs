@@ -1339,6 +1339,9 @@ namespace ITravelApp.Data
                     phone_number = slc.phone_number,
                     profile_id = slc.profile_id,
                     address = slc.address,
+                    client_first_name=slc.client_first_name,
+                    client_last_name=slc.client_last_name,
+                    
                 }).ToListAsync();
             }
             catch (Exception ex)
@@ -1352,6 +1355,7 @@ namespace ITravelApp.Data
             decimal maxId = 0;
             try
             {
+
                 if (profile.client_birthdayStr != null)
                 {
                     profile.client_birthday = DateOnly.Parse(profile.client_birthdayStr, CultureInfo.InvariantCulture);
@@ -1359,6 +1363,7 @@ namespace ITravelApp.Data
 
                 if (profile.profile_id == 0)
                 {
+                    profile.created_at = DateTime.Now;
                     if (_db.client_Profiles.Count() > 0)
                     {
                         //check validate
@@ -1377,6 +1382,7 @@ namespace ITravelApp.Data
                 }
                 else
                 {
+                    profile.updated_at = DateTime.Now;
                     profile.updated_at = DateTime.Now;
                     _db.Update(profile);
                 }

@@ -3,7 +3,7 @@
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>D:\horizen\api\publish\auth</_PublishTargetUrl>
-    <History>True|2025-09-03T08:58:36.3055237Z||;True|2025-08-31T10:34:36.7743708+03:00||;</History>
+    <History>True|2025-09-25T10:49:20.3453251Z||;True|2025-09-03T11:58:36.3055237+03:00||;True|2025-08-31T10:34:36.7743708+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

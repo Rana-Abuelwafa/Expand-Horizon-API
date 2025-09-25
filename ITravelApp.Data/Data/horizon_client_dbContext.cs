@@ -140,7 +140,9 @@ public partial class horizon_client_dbContext : DbContext
             entity.ToTable("client_Profile");
 
             entity.Property(e => e.client_email).HasMaxLength(50);
+            entity.Property(e => e.client_first_name).HasMaxLength(50);
             entity.Property(e => e.client_id).HasColumnType("character varying");
+            entity.Property(e => e.client_last_name).HasMaxLength(50);
             entity.Property(e => e.client_name).HasMaxLength(50);
             entity.Property(e => e.created_at)
                 .HasDefaultValueSql("now()")

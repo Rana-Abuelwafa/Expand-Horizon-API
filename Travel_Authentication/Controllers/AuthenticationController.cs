@@ -342,33 +342,25 @@ namespace Travel_Authentication.Controllers
                 if (user != null)
                 {
                     var roles = await _userManager.GetRolesAsync(user);
-                    var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-                    if (result.Succeeded)
-                    {
-                        var token = await GenerateJwtTokenAsync(user);
-                        return Ok(new ResponseCls
-                        {
-                            isSuccessed = true,
-                            message = _localizer["SuccessPassChange"],
-                            errors = null,
-                            user = new User
-                            {
-                                UserName = user.UserName,
-                                FirstName = user.FirstName,
-                                LastName = user.LastName,
-                                Email = user.Email,
-                                GoogleId = user.GoogleId,
-                                AccessToken = token,
-                                RefreshToken = token,
-                                Id = user.Id,
-                                role = roles.FirstOrDefault()
+                    // Check if user has a password
+                    var hasPassword = await _userManager.HasPasswordAsync(user);
 
-                            }
-                        });
-                       
+                    IdentityResult result;
+
+                    if (hasPassword)
+                    {
+                        // Regular flow (old password required)
+                        result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
                     }
                     else
                     {
+                        // External login user (no password yet) → set new password directly
+                        result = await _userManager.AddPasswordAsync(user, model.NewPassword);
+                    }
+
+                    if (!result.Succeeded)
+                    {
+                        //return BadRequest(result.Errors);
                         List<IdentityError> errorList = result.Errors.ToList();
                         var errors = string.Join(", ", errorList.Select(e => e.Description));
                         // _logger.LogError(errors);
@@ -379,6 +371,64 @@ namespace Travel_Authentication.Controllers
 
                         });
                     }
+                    var token = await GenerateJwtTokenAsync(user);
+                    return Ok(new ResponseCls
+                    {
+                        isSuccessed = true,
+                        message = _localizer["SuccessPassChange"],
+                        errors = null,
+                        user = new User
+                        {
+                            UserName = user.UserName,
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
+                            Email = user.Email,
+                            GoogleId = user.GoogleId,
+                            AccessToken = token,
+                            RefreshToken = token,
+                            Id = user.Id,
+                            role = roles.FirstOrDefault()
+
+                        }
+                    });
+                    //var roles = await _userManager.GetRolesAsync(user);
+                    //var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    //if (result.Succeeded)
+                    //{
+                    //    var token = await GenerateJwtTokenAsync(user);
+                    //    return Ok(new ResponseCls
+                    //    {
+                    //        isSuccessed = true,
+                    //        message = _localizer["SuccessPassChange"],
+                    //        errors = null,
+                    //        user = new User
+                    //        {
+                    //            UserName = user.UserName,
+                    //            FirstName = user.FirstName,
+                    //            LastName = user.LastName,
+                    //            Email = user.Email,
+                    //            GoogleId = user.GoogleId,
+                    //            AccessToken = token,
+                    //            RefreshToken = token,
+                    //            Id = user.Id,
+                    //            role = roles.FirstOrDefault()
+
+                        //        }
+                        //    });
+
+                        //}
+                    //else
+                    //{
+                    //    List<IdentityError> errorList = result.Errors.ToList();
+                    //    var errors = string.Join(", ", errorList.Select(e => e.Description));
+                    //    // _logger.LogError(errors);
+                    //    return BadRequest(new ResponseCls
+                    //    {
+                    //        isSuccessed = false,
+                    //        message = errors,
+
+                    //    });
+                    //}
 
 
                 }

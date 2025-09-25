@@ -14,7 +14,8 @@ public partial class client_notification_setting
     public bool? deals_reminder { get; set; }
 
     public bool? travel_guide_reminder { get; set; }
-
+    public bool? travel_inspiration { get; set; }
+    
     public long id { get; set; }
 
     public decimal? profile_id { get; set; }

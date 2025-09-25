@@ -171,6 +171,7 @@ namespace ITravel_App.Controllers
         public async Task<IActionResult> SaveProfileImage(ImgCls cls)
         {
             string? clientId = _loginUserData.client_id;
+            string? email = _loginUserData.client_email;
             var path = Path.Combine("images" + "//", cls.img.FileName);
             //var path = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Images" + "//", cls.img.FileName);
             using (FileStream stream = new FileStream(path, FileMode.Create))
@@ -196,10 +197,11 @@ namespace ITravel_App.Controllers
         {
             string? clientId = _loginUserData.client_id;
             string? email = _loginUserData.client_email;
-            string? FullName = _loginUserData.FullName;
+            //string? FullName = _loginUserData.FullName;
             profile.client_id = clientId;
-            profile.client_name = FullName;
-            profile.client_email = email;
+            //profile.client_name = FullName;
+            //profile.client_email = email;
+            profile.created_by = email;
             return Ok(_clientService.SaveMainProfile(profile));
         }
         [HttpPost("GetClient_Notification_Settings")]

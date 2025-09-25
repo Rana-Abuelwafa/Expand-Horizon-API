@@ -53,10 +53,10 @@ namespace ITravelApp.Data
                 if (row.id == 0)
                 {
                     //check duplicate order (in add new row)
-                    if (_db.destination_mains.Where(wr => wr.order == row.order && wr.active == row.active).SingleOrDefault() != null)
-                    {
-                        return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
-                    }
+                    //if (_db.destination_mains.Where(wr => wr.order == row.order && wr.active == row.active).SingleOrDefault() != null)
+                    //{
+                    //    return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
+                    //}
                     //check duplicate validation
                     var result = _db.destination_mains.Where(wr => wr.dest_code == row.dest_code && wr.active == row.active).SingleOrDefault();
                     if (result != null)
@@ -69,16 +69,17 @@ namespace ITravelApp.Data
 
                     }
                     row.id = maxId + 1;
+                    row.order = _db.destination_mains.Max(d => d.order) + 1;
                     _db.destination_mains.Add(row);
                     _db.SaveChanges();
                 }
                 else
                 {
                     //check duplicate order (in update row)
-                    if (_db.destination_mains.Where(wr => wr.order == row.order && wr.active == row.active && wr.id != row.id && wr.parent_id == row.parent_id).SingleOrDefault() != null)
-                    {
-                        return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
-                    }
+                    //if (_db.destination_mains.Where(wr => wr.order == row.order && wr.active == row.active && wr.id != row.id && wr.parent_id == row.parent_id).SingleOrDefault() != null)
+                    //{
+                    //    return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
+                    //}
                     row.updated_at = DateTime.Now;
                     _db.destination_mains.Update(row);
                     _db.SaveChanges();
@@ -97,7 +98,7 @@ namespace ITravelApp.Data
         public ResponseCls SaveDestinationTranslations(destination_translation row)
         {
             ResponseCls response;
-            int maxId = 0;
+            int? maxId = 0;
             try
             {
                 if (row.active == false)
@@ -131,7 +132,7 @@ namespace ITravelApp.Data
                     _db.SaveChanges();
                 }
 
-                response = new ResponseCls { errors = null, success = true, idOut = row.id };
+                response = new ResponseCls { errors = null, success = true};
             }
 
             catch (Exception ex)
@@ -392,10 +393,10 @@ namespace ITravelApp.Data
                 if (row.id == 0)
                 {
                     //check duplicate order (in add new row)
-                    if (_db.trip_mains.Where(wr => wr.trip_order == row.trip_order && wr.active == row.active).SingleOrDefault() != null)
-                    {
-                        return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
-                    }
+                    //if (_db.trip_mains.Where(wr => wr.trip_order == row.trip_order && wr.active == row.active).SingleOrDefault() != null)
+                    //{
+                    //    return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
+                    //}
                     //check duplicate validation
                     var result = _db.trip_mains.Where(wr => wr.trip_code == row.trip_code && wr.active == row.active && wr.destination_id == row.destination_id).SingleOrDefault();
                     if (result != null)
@@ -409,6 +410,7 @@ namespace ITravelApp.Data
                     }
                     
                     row.id = maxId + 1;
+                    row.trip_order = _db.trip_mains.Max(d => d.trip_order) + 1;
                     row.trip_code_auto = "TRIP_" + row.id.ToString();
                     _db.trip_mains.Add(row);
                     _db.SaveChanges();
@@ -416,10 +418,10 @@ namespace ITravelApp.Data
                 else
                 {
                     //check duplicate order (in update row)
-                    if (_db.trip_mains.Where(wr => wr.trip_order == row.trip_order && wr.active == row.active && wr.id != row.id).SingleOrDefault() != null)
-                    {
-                        return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
-                    }
+                    //if (_db.trip_mains.Where(wr => wr.trip_order == row.trip_order && wr.active == row.active && wr.id != row.id).SingleOrDefault() != null)
+                    //{
+                    //    return new ResponseCls { success = false, errors = _localizer["DuplicateOrder"] };
+                    //}
                     row.updated_at = DateTime.Now;
                     _db.trip_mains.Update(row);
                     _db.SaveChanges();

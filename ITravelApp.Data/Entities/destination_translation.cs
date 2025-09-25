@@ -5,7 +5,7 @@ namespace ITravelApp.Data.Entities;
 
 public partial class destination_translation
 {
-    public int id { get; set; }
+    public int? id { get; set; }
 
     public int destination_id { get; set; }
 
