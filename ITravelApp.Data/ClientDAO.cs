@@ -9,7 +9,9 @@ using ITravelApp.Data.Models.profile;
 using ITravelApp.Data.Models.trips;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 
 namespace ITravelApp.Data
 {
@@ -64,68 +66,220 @@ namespace ITravelApp.Data
                 return new List<destinationwithdetail>();
             }
         }
-
         public List<DestinationTree> GetDestination_Tree(DestinationReq req)
         {
             try
             {
-                var main = _db.destinationwithdetails.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
-                                                                  wr.active == true &&
-                                                                  wr.trans_active == true &&
-                                                                  wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower())
-                                                           )
-                    .Join(_db.trip_mains.Where(wr => wr.trip_type == req.trip_type && wr.active == true),
-                           DEST => new { DEST.destination_id },
-                           TRIP => new { TRIP.destination_id },
-                           (DEST, TRIP) => new DestinationResponse
-                           {
-                               destination_id = DEST.destination_id,
-                               id = DEST.id,
-                               country_code = DEST.country_code,
-                               active = DEST.active,
-                               dest_code = DEST.dest_code,
-                               dest_description = DEST.dest_description,
-                               dest_name = DEST.dest_name,
-                               img_path = DEST.img_path,
-                               lang_code = DEST.lang_code,
-                               dest_default_name = DEST.dest_default_name,
-                               route = DEST.route,
-                               leaf = DEST.leaf,
-                               parent_id = DEST.parent_id,
-                               order = DEST.order
-                           }).GroupBy(g => new
-                           {
-                               g.route,
-                               g.parent_id,
-                               g.destination_id,
-                               g.img_path,
-                               g.active,
-                               g.country_code,
-                               g.dest_code,
-                               g.dest_default_name,
-                               g.dest_description,
-                               g.dest_name,
-                               g.lang_code,
-                               g.order,
-                               g.leaf,
-                               g.id
-                           }).Select(s => new DestinationResponse
-                           {
-                               destination_id = s.Key.destination_id,
-                               id = s.Key.id,
-                               country_code = s.Key.country_code,
-                               active = s.Key.active,
-                               dest_code = s.Key.dest_code,
-                               dest_description = s.Key.dest_description,
-                               dest_name = s.Key.dest_name,
-                               img_path = s.Key.img_path,
-                               lang_code = s.Key.lang_code,
-                               dest_default_name = s.Key.dest_default_name,
-                               route = s.Key.route,
-                               leaf = s.Key.leaf,
-                               parent_id = s.Key.parent_id,
-                               order = s.Key.order,
-                           }).ToList();
+                // 1. Get all destination_ids that have trips of the given type
+                var tripDestinations = _db.trip_mains
+                    .Where(t => t.trip_type == req.trip_type && t.active == true)
+                    .Select(t => t.destination_id)
+                    .Distinct()
+                    .ToList();
+
+                // 2. Get all destinations (with filters)
+                var allDestinations = _db.destinationwithdetails
+                    .Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower()
+                                 && wr.active == true
+                                 && wr.trans_active == true
+                                 && wr.country_code.ToLower() == (string.IsNullOrEmpty(req.country_code)
+                                        ? wr.country_code.ToLower()
+                                        : req.country_code.ToLower()))
+                    .Select(dest => new DestinationResponse
+                    {
+                        destination_id = dest.destination_id,
+                        id = dest.id,
+                        country_code = dest.country_code,
+                        active = dest.active,
+                        dest_code = dest.dest_code,
+                        dest_description = dest.dest_description,
+                        dest_name = dest.dest_name,
+                        img_path = dest.img_path,
+                        lang_code = dest.lang_code,
+                        dest_default_name = dest.dest_default_name,
+                        route = dest.route,
+                        leaf = dest.leaf,
+                        parent_id = dest.parent_id,
+                        order = dest.order
+                    })
+                    .ToList();
+
+                //// 3. Keep only destinations that either have trips or are ancestors of those
+                //var filtered = allDestinations
+                //    .Where(d =>
+                //        tripDestinations.Contains((int)d.destination_id) 
+
+
+                //    )
+                //    .ToList();
+                var neededDestinations = new HashSet<int?>();
+
+                foreach (var destId in tripDestinations)
+                {
+                    var current = allDestinations.FirstOrDefault(d => d.destination_id == destId);
+                    while (current != null && !neededDestinations.Contains(current.destination_id))
+                    {
+                        neededDestinations.Add(current.destination_id);
+                        current = allDestinations.FirstOrDefault(d => d.destination_id == current.parent_id);
+                    }
+                }
+
+                // 4. Filter only the needed destinations
+                var filtered = allDestinations
+                    .Where(d => neededDestinations.Contains(d.destination_id))
+                    .ToList();
+                // 4. Build tree recursively
+                var tree = GetDestination_TreeMain(filtered, 0); // assuming parent=0 is root
+                return tree;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<DestinationTree> GetDestination_TreeOld(DestinationReq req)
+        {
+            try
+            {
+                var records = from dest in _db.destinationwithdetails.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
+                                                                 wr.active == true &&
+                                                                 wr.trans_active == true &&
+                                                                 wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower())
+
+                                                          )
+                              join trip in _db.trip_mains.Where(wr => wr.trip_type == req.trip_type && wr.active == true) on dest.destination_id equals trip.destination_id into DestAll
+                              from combined in DestAll.DefaultIfEmpty()               // LEFT JOIN
+                              select new DestinationResponse
+                              {
+                                  destination_id = dest.destination_id,
+                                  id = dest.id,
+                                  country_code = dest.country_code,
+                                  active = dest.active,
+                                  dest_code = dest.dest_code,
+                                  dest_description = dest.dest_description,
+                                  dest_name = dest.dest_name,
+                                  img_path = dest.img_path,
+                                  lang_code = dest.lang_code,
+                                  dest_default_name = dest.dest_default_name,
+                                  route = dest.route,
+                                  leaf = dest.leaf,
+                                  parent_id = dest.parent_id,
+                                  order = dest.order,
+                                  trip_type = combined != null ? combined.trip_type : 0
+                              };
+                var main = records.ToList().GroupBy(g => new
+                               {
+                                   g.route,
+                                   g.parent_id,
+                                   g.destination_id,
+                                   g.img_path,
+                                   g.active,
+                                   g.country_code,
+                                   g.dest_code,
+                                   g.dest_default_name,
+                                   g.dest_description,
+                                   g.dest_name,
+                                   g.lang_code,
+                                   g.order,
+                                   g.leaf,
+                                   g.id
+                               }).Select(s => new DestinationResponse
+                {
+                    destination_id = s.Key.destination_id,
+                    id = s.Key.id,
+                    country_code = s.Key.country_code,
+                    active = s.Key.active,
+                    dest_code = s.Key.dest_code,
+                    dest_description = s.Key.dest_description,
+                    dest_name = s.Key.dest_name,
+                    img_path = s.Key.img_path,
+                    lang_code = s.Key.lang_code,
+                    dest_default_name = s.Key.dest_default_name,
+                    route = s.Key.route,
+                    leaf = s.Key.leaf,
+                    parent_id = s.Key.parent_id,
+                    order = s.Key.order,
+                }).ToList();
+                //var main = _db.destinationwithdetails.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() &&
+                //                                                  wr.active == true &&
+                //                                                  wr.trans_active == true &&
+                //                                                  wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower()) 
+
+                //                                           )
+
+                //    .Select(s => new DestinationResponse
+                //                                           {
+                //                                               destination_id = s.destination_id,
+                //                                               id = s.id,
+                //                                               country_code = s.country_code,
+                //                                               active = s.active,
+                //                                               dest_code = s.dest_code,
+                //                                               dest_description = s.dest_description,
+                //                                               dest_name = s.dest_name,
+                //                                               img_path = s.img_path,
+                //                                               lang_code = s.lang_code,
+                //                                               dest_default_name = s.dest_default_name,
+                //                                               route = s.route,
+                //                                               leaf = s.leaf,
+                //                                               parent_id = s.parent_id,
+                //                                               order = s.order,
+                //                                               trip_type=s.trip_type
+                //                                           }).ToList();
+                //.Join(_db.trip_mains.Where(wr => wr.trip_type == req.trip_type && wr.active == true),
+                //       DEST => new { DEST.destination_id },
+                //       TRIP => new { TRIP.destination_id },
+                //       (DEST, TRIP) => new DestinationResponse
+                //       {
+                //           destination_id = DEST.destination_id,
+                //           id = DEST.id,
+                //           country_code = DEST.country_code,
+                //           active = DEST.active,
+                //           dest_code = DEST.dest_code,
+                //           dest_description = DEST.dest_description,
+                //           dest_name = DEST.dest_name,
+                //           img_path = DEST.img_path,
+                //           lang_code = DEST.lang_code,
+                //           dest_default_name = DEST.dest_default_name,
+                //           route = DEST.route,
+                //           leaf = DEST.leaf,
+                //           parent_id = DEST.parent_id,
+                //           order = DEST.order
+                //       })
+
+                //.GroupBy(g => new
+                //       {
+                //           g.route,
+                //           g.parent_id,
+                //           g.destination_id,
+                //           g.img_path,
+                //           g.active,
+                //           g.country_code,
+                //           g.dest_code,
+                //           g.dest_default_name,
+                //           g.dest_description,
+                //           g.dest_name,
+                //           g.lang_code,
+                //           g.order,
+                //           g.leaf,
+                //           g.id
+                //       }).Select(s => new DestinationResponse
+                //       {
+                //           destination_id = s.Key.destination_id,
+                //           id = s.Key.id,
+                //           country_code = s.Key.country_code,
+                //           active = s.Key.active,
+                //           dest_code = s.Key.dest_code,
+                //           dest_description = s.Key.dest_description,
+                //           dest_name = s.Key.dest_name,
+                //           img_path = s.Key.img_path,
+                //           lang_code = s.Key.lang_code,
+                //           dest_default_name = s.Key.dest_default_name,
+                //           route = s.Key.route,
+                //           leaf = s.Key.leaf,
+                //           parent_id = s.Key.parent_id,
+                //           order = s.Key.order,
+                //       }).ToList();
                 //var main = from trans in _db.destination_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.active == true)
                 //           join dest in _db.destination_mains.Where(wr => wr.active == true && wr.country_code.ToLower() == (System.String.IsNullOrEmpty(req.country_code) ? wr.country_code.ToLower() : req.country_code.ToLower())) on trans.destination_id equals dest.id         // INNER JOIN
                 //           join img in _db.destination_imgs.Where(wr => wr.is_default == true) on trans.id equals img.destination_id into DestAll
@@ -149,7 +303,13 @@ namespace ITravelApp.Data
                 //           };
 
 
-                var result = GetDestination_TreeMain(main.ToList(), 0).ToList();
+                var result = GetDestination_TreeMain(main.ToList(),0)
+                         
+               // .Where(r => r.children != null && r.children.Any() && r.children.Count > 0)
+                .ToList();
+                //var result = GetDestination_TreeMain(main, 0, req.trip_type)
+                //       .Where(r => r != null) // remove null roots
+                //       .ToList();
                 return result;
             }
             catch (Exception ex)
@@ -158,6 +318,13 @@ namespace ITravelApp.Data
             }
         }
 
+        //private bool HasTripType1(DestinationTree node)
+        //{
+        //    if (node.trip_type == 1)
+        //        return true;
+
+        //    return node.children != null && node.children.Any(HasTripType1);
+        //}
         public List<DestinationTree> GetDestination_TreeMain(List<DestinationResponse> lst, int? parentId)
         {
 
@@ -185,7 +352,51 @@ namespace ITravelApp.Data
                   .OrderBy(x => x.order)
                 .ToList();
         }
+//        public List<DestinationTree> GetDestination_TreeMain(List<DestinationResponse> lst, int? parentId, int tripType)
+//        {
+//#pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
+//            return lst
+//                .Where(x => x.parent_id == parentId)
+//                .Select(s =>
+//                {
+//                    // children must match tripType
+//                    var children = GetDestination_TreeMain(lst.Where(c => c.trip_type == tripType).ToList(), s.destination_id, tripType);
 
+//                    // ✅ keep node if it matches tripType or has matching children
+//                    if (s.trip_type == tripType || children.Any())
+//                    {
+//                        return new DestinationTree
+//                        {
+//                            leaf = s.leaf,
+//                            lang_code = s.lang_code,
+//                            parent_id = s.parent_id,
+//                            active = s.active,
+//                            country_code = s.country_code,
+//                            destination_id = s.destination_id,
+//                            dest_code = s.dest_code,
+//                            dest_default_name = s.dest_default_name,
+//                            dest_description = s.dest_description,
+//                            dest_name = s.dest_name,
+//                            id = s.id,
+//                            img_path = s.img_path,
+//                            route = s.route,
+//                            trip_type = s.trip_type,
+//                            children = children.OrderBy(x => x.order).ToList(),
+//                            order = s.order
+//                        };
+//                    }
+//                    else
+//                    {
+//                        return null;
+//                    }
+
+//                    //return null;
+//                })
+//                .Where(node => node != null) // remove pruned nodes
+//                .OrderBy(x => x.order)
+//                .ToList();
+//#pragma warning restore CS8619 // Nullability of reference types in value doesn't match target type.
+//        }
         #endregion
 
         #region trips

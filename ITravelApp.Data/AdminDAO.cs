@@ -98,7 +98,7 @@ namespace ITravelApp.Data
         public ResponseCls SaveDestinationTranslations(destination_translation row)
         {
             ResponseCls response;
-            int? maxId = 0;
+            int maxId = 0;
             try
             {
                 if (row.active == false)

@@ -3714,10 +3714,6 @@
             "type": "boolean",
             "nullable": true
           },
-          "travel_inspiration": {
-            "type": "boolean",
-            "nullable": true
-          },
           "id": {
             "type": "integer",
             "format": "int64"
@@ -3725,6 +3721,10 @@
           "profile_id": {
             "type": "number",
             "format": "double",
+            "nullable": true
+          },
+          "travel_inspiration": {
+            "type": "boolean",
             "nullable": true
           }
         },
@@ -3793,12 +3793,12 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "destination_id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "lang_code": {
             "type": "string",

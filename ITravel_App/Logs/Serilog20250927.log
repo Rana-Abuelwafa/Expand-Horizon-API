@@ -1,0 +1,897 @@
+[2025-09-27 10:44:07.330 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 10:44:08.573 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 10:44:08.574 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 10:44:09.049 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 10:44:09.050 +03:00  INF]  Hosting environment: Development
+[2025-09-27 10:44:09.050 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 10:44:12.551 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 10:44:13.059 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 527.6095ms
+[2025-09-27 10:44:13.091 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 10:44:13.096 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 10:44:13.125 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 34.6358ms
+[2025-09-27 10:44:13.276 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 179.457ms
+[2025-09-27 10:44:13.443 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 10:44:13.552 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 108.7553ms
+[2025-09-27 10:47:16.544 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 103
+[2025-09-27 10:47:16.557 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 10:47:20.419 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 10:47:20.499 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 10:47:27.101 +03:00  INF]  Executed DbCommand (165ms) [Parameters=[@__ToLower_0='?', @__req_trip_type_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL) AND d.trip_type = @__req_trip_type_1
+GROUP BY d.route, d.parent_id, d.destination_id, d.img_path, d.active, d.country_code, d.dest_code, d.dest_default_name, d.dest_description, d.dest_name, d.lang_code, d."order", d.leaf, d.id
+[2025-09-27 10:47:27.184 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 10:47:27.307 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 6787.9074ms
+[2025-09-27 10:47:27.307 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 10:47:27.323 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 810 application/json; charset=utf-8 10778.851ms
+[2025-09-27 10:47:52.437 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 103
+[2025-09-27 10:47:52.438 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 10:47:52.445 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 10:47:52.445 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 10:48:05.552 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@__ToLower_0='?', @__req_trip_type_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL) AND d.trip_type = @__req_trip_type_1
+GROUP BY d.route, d.parent_id, d.destination_id, d.img_path, d.active, d.country_code, d.dest_code, d.dest_default_name, d.dest_description, d.dest_name, d.lang_code, d."order", d.leaf, d.id
+[2025-09-27 10:49:03.112 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 10:49:03.133 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 70686.251ms
+[2025-09-27 10:49:03.133 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 10:49:03.144 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 810 application/json; charset=utf-8 70706.9893ms
+[2025-09-27 10:53:28.722 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 103
+[2025-09-27 10:53:28.726 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 10:53:28.730 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 10:53:28.731 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 10:53:40.725 +03:00  INF]  Executed DbCommand (14ms) [Parameters=[@__ToLower_0='?', @__req_trip_type_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL) AND d.trip_type = @__req_trip_type_1
+GROUP BY d.route, d.parent_id, d.destination_id, d.img_path, d.active, d.country_code, d.dest_code, d.dest_default_name, d.dest_description, d.dest_name, d.lang_code, d."order", d.leaf, d.id
+[2025-09-27 10:54:25.944 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 10:54:25.949 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 57218.5694ms
+[2025-09-27 10:54:25.950 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 10:54:25.966 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 810 application/json; charset=utf-8 57236.0459ms
+[2025-09-27 10:57:29.770 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 103
+[2025-09-27 10:57:29.770 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 10:57:29.771 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 10:57:29.771 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 10:57:41.221 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@__ToLower_0='?', @__req_trip_type_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL) AND d.trip_type = @__req_trip_type_1
+GROUP BY d.route, d.parent_id, d.destination_id, d.img_path, d.active, d.country_code, d.dest_code, d.dest_default_name, d.dest_description, d.dest_name, d.lang_code, d."order", d.leaf, d.id
+[2025-09-27 10:58:28.058 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 10:58:28.063 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 58291.9905ms
+[2025-09-27 10:58:28.065 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 10:58:28.065 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 810 application/json; charset=utf-8 58295.4572ms
+[2025-09-27 12:15:18.510 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 12:15:18.886 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 12:15:18.887 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 12:15:19.016 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 12:15:19.017 +03:00  INF]  Hosting environment: Development
+[2025-09-27 12:15:19.017 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 12:15:19.490 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 12:15:19.844 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 379.7239ms
+[2025-09-27 12:15:19.947 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 12:15:20.035 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 12:15:20.039 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 92.7089ms
+[2025-09-27 12:15:20.115 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 79.5745ms
+[2025-09-27 12:15:20.298 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 12:15:20.424 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 125.6906ms
+[2025-09-27 12:15:37.932 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 12:15:37.937 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 12:15:39.261 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 12:15:39.283 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 12:15:43.731 +03:00  INF]  Executed DbCommand (238ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 12:15:43.800 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 12:15:43.854 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 4568.5274ms
+[2025-09-27 12:15:43.855 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 12:15:43.865 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 8368 application/json; charset=utf-8 5933.0093ms
+[2025-09-27 12:16:57.728 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 12:16:58.300 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 12:16:58.301 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 12:16:58.446 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 12:16:58.447 +03:00  INF]  Hosting environment: Development
+[2025-09-27 12:16:58.447 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 12:16:59.185 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 12:16:59.437 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 256.6483ms
+[2025-09-27 12:16:59.472 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 12:16:59.486 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 12:16:59.488 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 16.6461ms
+[2025-09-27 12:16:59.591 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 105.1089ms
+[2025-09-27 12:16:59.659 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 12:16:59.763 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 103.632ms
+[2025-09-27 12:23:52.184 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 12:23:52.747 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 12:23:52.748 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 12:23:52.944 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 12:23:52.944 +03:00  INF]  Hosting environment: Development
+[2025-09-27 12:23:52.944 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 12:23:53.484 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 12:23:53.750 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 293.7274ms
+[2025-09-27 12:23:53.766 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 12:23:53.769 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 12:23:53.778 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 12.0029ms
+[2025-09-27 12:23:53.830 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 60.2519ms
+[2025-09-27 12:23:53.920 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 12:23:54.040 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 120.3885ms
+[2025-09-27 12:29:12.628 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 12:29:13.043 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 12:29:13.044 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 12:29:13.181 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 12:29:13.181 +03:00  INF]  Hosting environment: Development
+[2025-09-27 12:29:13.181 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 12:29:13.668 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 12:29:13.992 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 338.3823ms
+[2025-09-27 12:29:14.071 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 12:29:14.112 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 12:29:14.115 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 44.2711ms
+[2025-09-27 12:29:14.171 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 59.1812ms
+[2025-09-27 12:29:14.235 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 12:29:14.330 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 95.6645ms
+[2025-09-27 12:29:30.405 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 12:29:30.410 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 12:29:30.519 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 12:29:30.544 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 12:29:35.038 +03:00  INF]  Executed DbCommand (76ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order", d.trip_type
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 12:29:35.076 +03:00  ERR]  An exception occurred while iterating over the results of a query for context type 'ITravelApp.Data.Data.horizon_client_dbContext'.
+System.InvalidCastException: Column 'trip_type' is null.
+   at Npgsql.ThrowHelper.ThrowInvalidCastException_NoValue(FieldDescription field)
+   at Npgsql.NpgsqlDataReader.DbNullValueOrThrow[T](Int32 ordinal)
+   at Npgsql.NpgsqlDataReader.GetFieldValueCore[T](Int32 ordinal)
+   at Npgsql.NpgsqlDataReader.GetInt32(Int32 ordinal)
+   at lambda_method40(Closure, QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+System.InvalidCastException: Column 'trip_type' is null.
+   at Npgsql.ThrowHelper.ThrowInvalidCastException_NoValue(FieldDescription field)
+   at Npgsql.NpgsqlDataReader.DbNullValueOrThrow[T](Int32 ordinal)
+   at Npgsql.NpgsqlDataReader.GetFieldValueCore[T](Int32 ordinal)
+   at Npgsql.NpgsqlDataReader.GetInt32(Int32 ordinal)
+   at lambda_method40(Closure, QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+[2025-09-27 12:29:35.146 +03:00  INF]  Executing OkObjectResult, writing value of type 'null'.
+[2025-09-27 12:29:35.150 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 4602.4589ms
+[2025-09-27 12:29:35.151 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 12:29:35.162 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 204 null null 4757.8915ms
+[2025-09-27 12:34:55.922 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 12:34:56.393 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 12:34:56.394 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 12:34:56.508 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 12:34:56.509 +03:00  INF]  Hosting environment: Development
+[2025-09-27 12:34:56.509 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 12:34:57.137 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 12:34:57.374 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 250.1609ms
+[2025-09-27 12:34:57.404 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 12:34:57.404 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 12:34:57.413 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 9.0921ms
+[2025-09-27 12:34:57.481 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 76.3086ms
+[2025-09-27 12:34:57.598 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 12:34:57.724 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 131.073ms
+[2025-09-27 12:35:19.024 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 12:35:19.036 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 12:35:19.158 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 12:35:19.191 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 12:35:22.335 +03:00  INF]  Executed DbCommand (65ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order", d.trip_type
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 12:35:22.392 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 12:35:22.478 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 3281.1531ms
+[2025-09-27 12:35:22.479 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 12:35:22.492 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 4222 application/json; charset=utf-8 3471.0526ms
+[2025-09-27 12:40:10.377 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 12:40:10.378 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 12:40:10.385 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 12:40:10.386 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 12:40:16.925 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order", d.trip_type
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 12:41:02.436 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 12:41:02.445 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 52058.5846ms
+[2025-09-27 12:41:02.445 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 12:41:02.446 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 4222 application/json; charset=utf-8 52069.1126ms
+[2025-09-27 12:48:52.009 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 12:48:52.386 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 12:48:52.387 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 12:48:52.485 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 12:48:52.486 +03:00  INF]  Hosting environment: Development
+[2025-09-27 12:48:52.486 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 12:48:53.098 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 12:48:53.315 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 230.8294ms
+[2025-09-27 12:48:53.345 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 12:48:53.345 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 12:48:53.378 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 33.7049ms
+[2025-09-27 12:48:53.422 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 77.547ms
+[2025-09-27 12:48:53.466 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 12:48:53.574 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 108.1289ms
+[2025-09-27 12:49:16.707 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 12:49:16.720 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 12:49:16.844 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 12:49:16.867 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 12:49:20.377 +03:00  INF]  Executed DbCommand (95ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order", d.trip_type
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 12:49:20.428 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 12:49:20.663 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 3750.4238ms
+[2025-09-27 12:49:20.663 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 12:49:20.678 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 4192 application/json; charset=utf-8 3971.0827ms
+[2025-09-27 13:00:41.840 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:00:42.220 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:00:42.221 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:00:42.308 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:00:42.308 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:00:42.308 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:00:43.194 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:00:43.512 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 332.9379ms
+[2025-09-27 13:00:43.573 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:00:43.573 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:00:43.579 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 5.1915ms
+[2025-09-27 13:00:43.612 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 38.8056ms
+[2025-09-27 13:00:43.658 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:00:43.781 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 122.9301ms
+[2025-09-27 13:01:13.533 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:01:13.546 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:01:13.688 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:01:13.719 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:01:17.286 +03:00  INF]  Executed DbCommand (85ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:01:17.326 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:01:17.385 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 3660.0353ms
+[2025-09-27 13:01:17.386 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:01:17.395 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 17533 application/json; charset=utf-8 3861.9145ms
+[2025-09-27 13:07:59.105 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:07:59.615 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:07:59.616 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:07:59.725 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:07:59.725 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:07:59.725 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:08:00.745 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:08:01.151 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 419.9469ms
+[2025-09-27 13:08:01.170 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:08:01.170 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:08:01.181 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 10.1133ms
+[2025-09-27 13:08:01.247 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 76.4996ms
+[2025-09-27 13:08:01.292 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:08:01.414 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 121.8534ms
+[2025-09-27 13:08:20.731 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:08:20.738 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:08:20.847 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:08:20.872 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:08:24.899 +03:00  INF]  Executed DbCommand (93ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:08:24.968 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:08:25.050 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 4170.2305ms
+[2025-09-27 13:08:25.050 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:08:25.062 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 16819 application/json; charset=utf-8 4330.6068ms
+[2025-09-27 13:12:58.656 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:12:59.229 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:12:59.229 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:12:59.422 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:12:59.424 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:12:59.424 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:12:59.950 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:13:00.266 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 318.4567ms
+[2025-09-27 13:13:00.292 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:13:00.304 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:13:00.307 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 14.8195ms
+[2025-09-27 13:13:00.384 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 79.5193ms
+[2025-09-27 13:13:00.442 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:13:00.557 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 114.5511ms
+[2025-09-27 13:14:06.351 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:14:06.365 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:14:06.462 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:14:06.485 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:14:10.112 +03:00  INF]  Executed DbCommand (131ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:14:10.187 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:14:10.305 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 3815.5929ms
+[2025-09-27 13:14:10.306 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:14:10.319 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 4180 application/json; charset=utf-8 3968.1381ms
+[2025-09-27 13:17:00.451 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:17:00.887 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:17:00.888 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:17:01.017 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:17:01.024 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:17:01.024 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:17:01.873 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:17:02.091 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 216.5391ms
+[2025-09-27 13:17:02.137 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:17:02.145 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:17:02.155 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 17.7183ms
+[2025-09-27 13:17:02.234 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 88.5455ms
+[2025-09-27 13:17:02.279 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:17:02.394 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 114.806ms
+[2025-09-27 13:17:20.872 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:17:20.877 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:17:20.982 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:17:21.005 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:17:26.568 +03:00  INF]  Executed DbCommand (72ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:17:26.609 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:17:26.639 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 5628.917ms
+[2025-09-27 13:17:26.639 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:17:26.649 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 2 application/json; charset=utf-8 5777.2661ms
+[2025-09-27 13:19:46.872 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:19:47.385 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:19:47.386 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:19:47.521 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:19:47.522 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:19:47.522 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:19:48.231 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:19:48.550 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 315.9625ms
+[2025-09-27 13:19:48.584 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:19:48.603 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:19:48.608 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 24.3074ms
+[2025-09-27 13:19:48.700 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 97.4229ms
+[2025-09-27 13:19:48.765 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:19:48.900 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 134.6143ms
+[2025-09-27 13:20:03.796 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:20:03.802 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:20:03.923 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:20:03.960 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:20:08.189 +03:00  INF]  Executed DbCommand (81ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:20:08.243 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:20:08.318 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 4351.4007ms
+[2025-09-27 13:20:08.318 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:20:08.330 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 5050 application/json; charset=utf-8 4533.7054ms
+[2025-09-27 13:23:32.648 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:23:33.122 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:23:33.123 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:23:33.297 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:23:33.298 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:23:33.298 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:23:33.777 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:23:34.108 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:23:34.108 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:23:34.112 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 348.299ms
+[2025-09-27 13:23:34.122 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 14.7022ms
+[2025-09-27 13:23:34.166 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 57.9406ms
+[2025-09-27 13:23:34.265 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:23:34.361 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 95.3305ms
+[2025-09-27 13:23:47.128 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:23:47.134 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:23:47.258 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:23:47.287 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:23:52.285 +03:00  INF]  Executed DbCommand (67ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:23:52.329 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:23:52.379 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 5086.8329ms
+[2025-09-27 13:23:52.380 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:23:52.394 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 4180 application/json; charset=utf-8 5266.0241ms
+[2025-09-27 13:27:23.317 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:27:23.843 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:27:23.844 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:27:23.972 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:27:23.973 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:27:23.973 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:27:24.730 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:27:25.043 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 321.4004ms
+[2025-09-27 13:27:25.077 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:27:25.079 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:27:25.092 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 14.5631ms
+[2025-09-27 13:27:25.172 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 94.0101ms
+[2025-09-27 13:27:25.284 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:27:25.378 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 94.2574ms
+[2025-09-27 13:27:38.310 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:27:38.315 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:27:38.420 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:27:38.451 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:27:42.619 +03:00  INF]  Executed DbCommand (89ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:27:42.663 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:27:42.735 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 4278.0732ms
+[2025-09-27 13:27:42.736 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:27:42.750 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 4180 application/json; charset=utf-8 4440.6942ms
+[2025-09-27 13:30:42.093 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/getDestinations - application/json-patch+json 102
+[2025-09-27 13:30:42.095 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:30:42.110 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.getDestinations (ITravel_App)'
+[2025-09-27 13:30:42.118 +03:00  INF]  Route matched with {action = "getDestinations", controller = "TravelClient"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] getDestinations(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:30:42.236 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationResponse, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:30:42.239 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.getDestinations (ITravel_App) in 121.047ms
+[2025-09-27 13:30:42.239 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.getDestinations (ITravel_App)'
+[2025-09-27 13:30:42.239 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/getDestinations - 200 2 application/json; charset=utf-8 166.1173ms
+[2025-09-27 13:32:06.082 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:32:06.450 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:32:06.450 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:32:06.549 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:32:06.549 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:32:06.549 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:32:07.113 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:32:07.392 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 297.9214ms
+[2025-09-27 13:32:07.432 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:32:07.450 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:32:07.476 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 43.7518ms
+[2025-09-27 13:32:07.517 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 67.2208ms
+[2025-09-27 13:32:07.602 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:32:07.700 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 98.1634ms
+[2025-09-27 13:32:25.478 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:32:25.484 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:32:25.588 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:32:25.614 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:32:29.163 +03:00  INF]  Executed DbCommand (86ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:32:29.207 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:32:29.273 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 3655.3152ms
+[2025-09-27 13:32:29.277 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:32:29.296 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 4180 application/json; charset=utf-8 3818.2842ms
+[2025-09-27 13:33:18.382 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:33:18.390 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:33:18.397 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:33:18.398 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:34:18.681 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:34:39.063 +03:00  ERR]  Failed executing DbCommand (6ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:34:39.086 +03:00  ERR]  An exception occurred while iterating over the results of a query for context type 'ITravelApp.Data.Data.horizon_client_dbContext'.
+Npgsql.NpgsqlOperationInProgressException (0x80004005): A command is already in progress: SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+   at Npgsql.ThrowHelper.ThrowNpgsqlOperationInProgressException(NpgsqlCommand command)
+   at Npgsql.Internal.NpgsqlConnector.<StartUserAction>g__DoStartUserAction|282_0(ConnectorState newState, NpgsqlCommand command, CancellationToken cancellationToken, Boolean attemptPgCancellation)
+   at Npgsql.Internal.NpgsqlConnector.StartUserAction(ConnectorState newState, NpgsqlCommand command, CancellationToken cancellationToken, Boolean attemptPgCancellation)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.<>c.<MoveNext>b__21_0(DbContext _, Enumerator enumerator)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+Npgsql.NpgsqlOperationInProgressException (0x80004005): A command is already in progress: SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+   at Npgsql.ThrowHelper.ThrowNpgsqlOperationInProgressException(NpgsqlCommand command)
+   at Npgsql.Internal.NpgsqlConnector.<StartUserAction>g__DoStartUserAction|282_0(ConnectorState newState, NpgsqlCommand command, CancellationToken cancellationToken, Boolean attemptPgCancellation)
+   at Npgsql.Internal.NpgsqlConnector.StartUserAction(ConnectorState newState, NpgsqlCommand command, CancellationToken cancellationToken, Boolean attemptPgCancellation)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.<>c.<MoveNext>b__21_0(DbContext _, Enumerator enumerator)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+[2025-09-27 13:34:39.211 +03:00  INF]  Executing OkObjectResult, writing value of type 'null'.
+[2025-09-27 13:34:39.212 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 80813.3907ms
+[2025-09-27 13:34:39.212 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:34:39.215 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 204 null null 80832.4466ms
+[2025-09-27 13:34:52.782 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:34:52.783 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:34:52.785 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:34:52.785 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:34:54.080 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:34:54.081 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:34:54.087 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 1299.3633ms
+[2025-09-27 13:34:54.088 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:34:54.090 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 4180 application/json; charset=utf-8 1307.9962ms
+[2025-09-27 13:36:50.913 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7045/api/TravelClient/GetTripsAll - null null
+[2025-09-27 13:36:50.914 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:36:50.916 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7045/api/TravelClient/GetTripsAll - 204 null null 2.9438ms
+[2025-09-27 13:36:50.918 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetTripsAll - application/json 132
+[2025-09-27 13:36:50.919 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:36:50.951 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetTripsAll (ITravel_App)'
+[2025-09-27 13:36:50.958 +03:00  INF]  Route matched with {action = "GetTripsAll", controller = "TravelClient"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTripsAll(ITravelApp.Data.Models.trips.TripsReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:36:51.089 +03:00  INF]  Executed DbCommand (18ms) [Parameters=[@__ToLower_0='?', @__req_trip_type_1='?' (DbType = Int32), @__req_destination_id_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.cancelation_policy, t.country_code, t.default_img, t.dest_code, t.dest_default_name, t.dest_route, t.destination_id, t.important_info, t.is_comm_soon, t.lang_code, t.pickup, t.release_days, t.route, t.show_in_slider, t.show_in_top, t.trip_category_code, t.trip_category_name, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_description, t.trip_details, t.trip_duration, t.trip_highlight, t.trip_id, t.trip_includes, t.trip_name, t.trip_not_includes, t.trip_order, t.trip_trans_id, t.trip_type
+FROM tripwithdetails AS t
+WHERE lower(t.lang_code) = @__ToLower_0 AND t.trip_type = @__req_trip_type_1 AND (t.show_in_top = t.show_in_top OR t.show_in_top IS NULL) AND t.destination_id = @__req_destination_id_2 AND (t.show_in_slider = t.show_in_slider OR t.show_in_slider IS NULL)
+ORDER BY t.trip_order
+[2025-09-27 13:36:51.180 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[@__ToLower_1='?', @__isExtra_2='?' (DbType = Boolean), @__trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN f0.id IS NOT NULL THEN f0.facility_desc
+    ELSE ''
+END AS facility_desc, CASE
+    WHEN f0.id IS NOT NULL THEN f0.facility_name
+    ELSE ''
+END AS facility_name, CASE
+    WHEN f2.id IS NOT NULL THEN f2.extra_price
+    ELSE 0.0
+END AS extra_price, CASE
+    WHEN f2.id IS NOT NULL THEN f2.currency_code
+    ELSE ''
+END AS currency_code, CASE
+    WHEN f2.id IS NOT NULL THEN f2.is_extra
+    ELSE FALSE
+END AS is_extra, t.facility_id
+FROM trip_facility AS t
+LEFT JOIN (
+    SELECT f.id, f.facility_desc, f.facility_id, f.facility_name
+    FROM facility_translations AS f
+    WHERE lower(f.lang_code) = @__ToLower_1
+) AS f0 ON t.facility_id = f0.facility_id
+LEFT JOIN (
+    SELECT f1.id, f1.currency_code, f1.extra_price, f1.is_extra
+    FROM facility_main AS f1
+    WHERE f1.active AND f1.is_extra = @__isExtra_2
+) AS f2 ON t.facility_id = f2.id
+WHERE t.trip_id = @__trip_id_0
+[2025-09-27 13:36:51.208 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@__trip_id_0='?' (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.img_height, t.img_name, 'http://api.raccoon24.com/' || COALESCE(t.img_path, '') AS img_path, 'http://api.raccoon24.com/' || COALESCE(t.img_resize_path, '') AS img_resize_path, t.img_width, t.is_default, t.trip_id
+FROM trip_imgs AS t
+WHERE t.trip_id::numeric = @__trip_id_0
+[2025-09-27 13:36:51.242 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__s_trip_id_0='?' (DbType = Int64), @__ToLower_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT max(t.trip_sale_price)
+FROM trip_prices AS t
+WHERE t.trip_id = @__s_trip_id_0 AND lower(t.currency_code) = @__ToLower_1
+[2025-09-27 13:36:51.248 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__s_trip_id_0='?' (DbType = Int64), @__ToLower_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT min(t.trip_sale_price)
+FROM trip_prices AS t
+WHERE t.trip_id = @__s_trip_id_0 AND lower(t.currency_code) = @__ToLower_1
+[2025-09-27 13:36:51.262 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__s_trip_id_0='?' (DbType = Int64), @__ToLower_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT max(t.pax_to)
+FROM trip_prices AS t
+WHERE t.trip_id = @__s_trip_id_0 AND lower(t.currency_code) = @__ToLower_1
+[2025-09-27 13:36:51.289 +03:00  INF]  Executed DbCommand (13ms) [Parameters=[@__s_trip_id_0='?' (DbType = Int64), @__s_trip_type_1='?' (DbType = Int16)], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM tbl_reviews AS t
+WHERE t.trip_id = @__s_trip_id_0 AND t.trip_type = @__s_trip_type_1
+[2025-09-27 13:36:51.295 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[@__s_trip_id_0='?' (DbType = Int64), @__s_trip_type_1='?' (DbType = Int16)], CommandType='"Text"', CommandTimeout='30']
+SELECT max(t.review_rate)
+FROM tbl_reviews AS t
+WHERE t.trip_id = @__s_trip_id_0 AND t.trip_type = @__s_trip_type_1
+[2025-09-27 13:36:51.305 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__s_trip_id_0='?' (DbType = Int64), @__ToLower_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT max(c.age_to)
+FROM child_policy_setting AS c
+WHERE c.trip_id = @__s_trip_id_0 AND lower(c.currency_code) = @__ToLower_1
+[2025-09-27 13:36:51.307 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.trips.TripsAll, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:36:51.336 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetTripsAll (ITravel_App) in 377.7059ms
+[2025-09-27 13:36:51.336 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetTripsAll (ITravel_App)'
+[2025-09-27 13:36:51.336 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetTripsAll - 200 17078 application/json; charset=utf-8 418.4781ms
+[2025-09-27 13:38:16.560 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:38:17.016 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:38:17.017 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:38:17.195 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:38:17.196 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:38:17.196 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:38:17.940 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:38:18.150 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 223.4607ms
+[2025-09-27 13:38:18.180 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:38:18.180 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:38:18.189 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 8.8213ms
+[2025-09-27 13:38:18.230 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 49.9919ms
+[2025-09-27 13:38:18.308 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:38:18.453 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 144.7127ms
+[2025-09-27 13:38:35.672 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:38:35.677 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:38:35.814 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:38:35.840 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:38:39.717 +03:00  INF]  Executed DbCommand (132ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:38:39.808 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:38:39.871 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 4024.6831ms
+[2025-09-27 13:38:39.871 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:38:39.885 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 5050 application/json; charset=utf-8 4213.2837ms
+[2025-09-27 13:38:46.045 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:38:46.046 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:38:46.050 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:38:46.051 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:38:48.940 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.destination_id
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:38:48.941 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:38:48.944 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 2893.1489ms
+[2025-09-27 13:38:48.944 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:38:48.945 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 5050 application/json; charset=utf-8 2899.4704ms
+[2025-09-27 13:42:08.299 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:42:08.721 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:42:08.722 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:42:09.340 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:42:09.411 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:42:09.411 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:42:09.503 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:42:09.865 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 374.6835ms
+[2025-09-27 13:42:09.883 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:42:09.883 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:42:09.892 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 9.282ms
+[2025-09-27 13:42:09.959 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 76.8675ms
+[2025-09-27 13:42:10.016 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:42:10.138 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 122.5493ms
+[2025-09-27 13:42:25.754 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:42:25.760 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:42:25.862 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:42:25.888 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:42:31.597 +03:00  INF]  Executed DbCommand (81ms) [Parameters=[@__req_trip_type_1='?' (DbType = Int32), @__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order", CASE
+    WHEN t0.id IS NOT NULL THEN t0.trip_type
+    ELSE 0
+END AS trip_type
+FROM destinationwithdetails AS d
+LEFT JOIN (
+    SELECT t.id, t.destination_id, t.trip_type
+    FROM trip_main AS t
+    WHERE t.trip_type = @__req_trip_type_1 AND t.active
+) AS t0 ON d.destination_id = t0.destination_id
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:42:31.635 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:42:31.675 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 5783.6923ms
+[2025-09-27 13:42:31.675 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:42:31.695 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 844 application/json; charset=utf-8 5941.4261ms
+[2025-09-27 13:48:49.783 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:48:50.191 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:48:50.192 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:48:50.370 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:48:50.371 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:48:50.371 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:48:50.863 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:48:51.160 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 299.3313ms
+[2025-09-27 13:48:51.181 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:48:51.181 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:48:51.191 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 10.6001ms
+[2025-09-27 13:48:51.263 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 81.6769ms
+[2025-09-27 13:48:51.331 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:48:51.429 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 98.6048ms
+[2025-09-27 13:49:05.832 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:49:05.837 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:49:05.948 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:49:05.978 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:49:07.614 +03:00  INF]  Executed DbCommand (63ms) [Parameters=[@__req_trip_type_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT t.destination_id
+FROM trip_main AS t
+WHERE t.trip_type = @__req_trip_type_0 AND t.active
+[2025-09-27 13:49:07.711 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:49:07.725 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:49:07.782 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 1797.6858ms
+[2025-09-27 13:49:07.782 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:49:07.792 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 844 application/json; charset=utf-8 1960.5373ms
+[2025-09-27 13:53:58.954 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:53:59.401 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:53:59.402 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:53:59.539 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:53:59.540 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:53:59.542 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:54:00.389 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:54:00.583 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 204.9083ms
+[2025-09-27 13:54:00.643 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:54:00.644 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:54:00.654 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 10.6672ms
+[2025-09-27 13:54:00.743 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 98.746ms
+[2025-09-27 13:54:00.884 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:54:00.974 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 90.2736ms
+[2025-09-27 13:54:26.641 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:54:26.647 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:54:26.765 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:54:26.789 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:54:28.376 +03:00  INF]  Executed DbCommand (60ms) [Parameters=[@__req_trip_type_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT t.destination_id
+FROM trip_main AS t
+WHERE t.trip_type = @__req_trip_type_0 AND t.active
+[2025-09-27 13:54:28.481 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:54:28.495 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:54:28.541 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 1746.0139ms
+[2025-09-27 13:54:28.541 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:54:28.549 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 844 application/json; charset=utf-8 1907.2941ms
+[2025-09-27 13:55:53.976 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 13:55:54.453 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 13:55:54.453 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 13:55:54.570 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 13:55:54.570 +03:00  INF]  Hosting environment: Development
+[2025-09-27 13:55:54.570 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 13:55:55.287 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 13:55:55.564 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 289.8493ms
+[2025-09-27 13:55:55.598 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 13:55:55.599 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 13:55:55.619 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 21.0531ms
+[2025-09-27 13:55:55.664 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 64.7575ms
+[2025-09-27 13:55:55.737 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 13:55:55.911 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 174.0855ms
+[2025-09-27 13:56:07.581 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:56:07.586 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:56:07.700 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:56:07.726 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:56:09.360 +03:00  INF]  Executed DbCommand (69ms) [Parameters=[@__req_trip_type_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT t.destination_id
+FROM trip_main AS t
+WHERE t.trip_type = @__req_trip_type_0 AND t.active
+[2025-09-27 13:56:09.456 +03:00  INF]  Executed DbCommand (8ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:56:09.472 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:56:09.515 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 1784.4388ms
+[2025-09-27 13:56:09.515 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:56:09.526 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 2560 application/json; charset=utf-8 1944.5671ms
+[2025-09-27 13:56:23.568 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:56:23.569 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:56:23.575 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:56:23.576 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:56:23.633 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__req_trip_type_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT t.destination_id
+FROM trip_main AS t
+WHERE t.trip_type = @__req_trip_type_0 AND t.active
+[2025-09-27 13:56:23.636 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:56:23.637 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:56:23.637 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 61.6154ms
+[2025-09-27 13:56:23.637 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:56:23.638 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 914 application/json; charset=utf-8 69.6875ms
+[2025-09-27 13:56:31.618 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 13:56:31.619 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:56:31.621 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:56:31.622 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:56:31.711 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[@__req_trip_type_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT t.destination_id
+FROM trip_main AS t
+WHERE t.trip_type = @__req_trip_type_0 AND t.active
+[2025-09-27 13:56:31.713 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 13:56:31.713 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:56:31.714 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 91.9424ms
+[2025-09-27 13:56:31.714 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 13:56:31.714 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 438 application/json; charset=utf-8 96.227ms
+[2025-09-27 13:56:54.739 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/getDestinations - application/json-patch+json 102
+[2025-09-27 13:56:54.740 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:56:54.741 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.getDestinations (ITravel_App)'
+[2025-09-27 13:56:54.744 +03:00  INF]  Route matched with {action = "getDestinations", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult getDestinations(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 13:56:56.221 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationResponse, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 13:56:56.224 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.getDestinations (ITravel_App) in 1480.5251ms
+[2025-09-27 13:56:56.225 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.getDestinations (ITravel_App)'
+[2025-09-27 13:56:56.225 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/getDestinations - 200 2 application/json; charset=utf-8 1485.6325ms
+[2025-09-27 13:57:40.240 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/getDestinations - application/json-patch+json 102
+[2025-09-27 13:57:40.242 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 13:57:40.243 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.getDestinations (ITravel_App)'
+[2025-09-27 13:57:40.243 +03:00  INF]  Route matched with {action = "getDestinations", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult getDestinations(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 14:01:32.957 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-27 14:01:33.447 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-27 14:01:33.448 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-27 14:01:33.582 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-27 14:01:33.582 +03:00  INF]  Hosting environment: Development
+[2025-09-27 14:01:33.582 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-27 14:01:34.299 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-27 14:01:34.503 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 215.3039ms
+[2025-09-27 14:01:34.552 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-27 14:01:34.552 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-27 14:01:34.559 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 7.111ms
+[2025-09-27 14:01:34.611 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 59.3467ms
+[2025-09-27 14:01:34.704 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-27 14:01:34.840 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 136.5252ms
+[2025-09-27 14:01:56.775 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/getDestinations - application/json-patch+json 102
+[2025-09-27 14:01:56.781 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 14:01:56.895 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.getDestinations (ITravel_App)'
+[2025-09-27 14:01:56.924 +03:00  INF]  Route matched with {action = "getDestinations", controller = "TravelClient"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] getDestinations(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 14:02:02.088 +03:00  INF]  Executed DbCommand (85ms) [Parameters=[@__ToLower_0='?', @__req_leaf_1='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SELECT d.active, d.country_code, d.dest_code, d.dest_default_name, d.dest_description, d.dest_name, d.destination_id, d.id, d.img_name, d.img_path, d.is_default, d.lang_code, d.leaf, d."order", d.parent_id, d.route, d.trans_active
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND d.leaf = @__req_leaf_1 AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+ORDER BY d."order"
+[2025-09-27 14:02:02.136 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Entities.destinationwithdetail, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 14:02:02.186 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.getDestinations (ITravel_App) in 5258.8766ms
+[2025-09-27 14:02:02.187 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.getDestinations (ITravel_App)'
+[2025-09-27 14:02:02.201 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/getDestinations - 200 2647 application/json; charset=utf-8 5425.786ms
+[2025-09-27 14:02:16.406 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - application/json-patch+json 102
+[2025-09-27 14:02:16.407 +03:00  INF]  CORS policy execution successful.
+[2025-09-27 14:02:16.412 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 14:02:16.417 +03:00  INF]  Route matched with {action = "GetDestination_Tree", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDestination_Tree(ITravelApp.Data.Models.destination.DestinationReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-09-27 14:02:16.477 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__req_trip_type_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT t.destination_id
+FROM trip_main AS t
+WHERE t.trip_type = @__req_trip_type_0 AND t.active
+[2025-09-27 14:02:16.494 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT d.destination_id, d.id, d.country_code, d.active, d.dest_code, d.dest_description, d.dest_name, d.img_path, d.lang_code, d.dest_default_name, d.route, d.leaf, d.parent_id, d."order"
+FROM destinationwithdetails AS d
+WHERE lower(d.lang_code) = @__ToLower_0 AND d.active AND d.trans_active AND (lower(d.country_code) = lower(d.country_code) OR d.country_code IS NULL)
+[2025-09-27 14:02:16.501 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ITravelApp.Data.Models.destination.DestinationTree, ITravelApp.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2025-09-27 14:02:16.507 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App) in 89.7247ms
+[2025-09-27 14:02:16.508 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.GetDestination_Tree (ITravel_App)'
+[2025-09-27 14:02:16.508 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/GetDestination_Tree - 200 2560 application/json; charset=utf-8 102.7915ms

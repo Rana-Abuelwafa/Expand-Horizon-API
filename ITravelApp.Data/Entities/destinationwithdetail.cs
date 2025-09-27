@@ -11,9 +11,9 @@ public partial class destinationwithdetail
 
     public string? dest_name { get; set; }
 
-    public int destination_id { get; set; }
+    public int? destination_id { get; set; }
 
-    public int? id { get; set; }
+    public int id { get; set; }
 
     public string? lang_code { get; set; }
 

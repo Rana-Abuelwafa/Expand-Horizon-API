@@ -33,7 +33,7 @@ namespace ITravel_App.Controllers
         public async Task<IActionResult> getDestinations(DestinationReq req)
         {
 
-            return Ok(await _clientService.getDestinations(req));
+            return Ok( await _clientService.getDestinations(req));
         }
         #endregion
         #region trips

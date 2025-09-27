@@ -65,9 +65,9 @@ namespace ITravel_App.Services
             return _clientDAO.GetClient_Notification_Settings(clientId);
         }
 
-        public Task<List<destinationwithdetail>> getDestinations(DestinationReq req)
+        public async Task<List<destinationwithdetail>> getDestinations(DestinationReq req)
         {
-            return _clientDAO.getDestinations(req);
+            return await _clientDAO.getDestinations(req);
         }
 
         public List<DestinationTree> GetDestination_Tree(DestinationReq req)
