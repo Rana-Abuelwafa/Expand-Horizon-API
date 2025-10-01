@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using Travel_Authentication.Models;
 using Travel_Authentication.Services;
+using static System.Net.WebRequestMethods;
 
 namespace Travel_Authentication.Controllers
 {
@@ -746,5 +747,13 @@ namespace Travel_Authentication.Controllers
         //    return Ok(new { token = newJwt, refreshToken = newRefresh });
         //}
 
+        [HttpPost("SendMAil")]
+        public async Task<IActionResult> SendMAil()
+        {
+            MailData mailData = Utils.GetOTPMailData("en","Rana Mohamed", "1324252r5", "ranaelsherif91@gmail.com");
+            Mail_Service.SendMail(mailData);
+            return Ok();
+        }
+       
     }
 }

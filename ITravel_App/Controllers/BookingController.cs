@@ -91,11 +91,11 @@ namespace ITravel_App.Controllers
         {
             return Ok( _clientService.AssignExtraToBooking(lst));
         }
-        [HttpPost("CalculateBookingPrice")]
-        public IActionResult CalculateBookingPrice(CalculateBookingPriceReq req)
-        {
-            return Ok(_clientService.CalculateBookingPrice(req));
-        }
+        //[HttpPost("CalculateBookingPrice")]
+        //public IActionResult CalculateBookingPrice(CalculateBookingPriceReq req)
+        //{
+        //    return Ok(_clientService.CalculateBookingPrice(req));
+        //}
 
         [HttpPost("GetBookingSummary")]
         public async Task<IActionResult> GetBookingWithDetails(BookingReq req)
@@ -129,6 +129,7 @@ namespace ITravel_App.Controllers
                     EmailBody = msg,
                     withAttatch = true,
                     pdfBytes = pdfBytes,
+                    ccEmails = new List<string> { "booking@expand-horizons.de" },
                     FileName = req.lang_code.ToLower() == "en" ? $"BookingConfirmation.pdf" : $"Buchungsbestätigung.pdf"
 
                 };

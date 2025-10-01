@@ -40,6 +40,8 @@ public partial class horizon_client_dbContext : DbContext
 
     public virtual DbSet<facility_translation> facility_translations { get; set; }
 
+    public virtual DbSet<newsletter_subscriber> newsletter_subscribers { get; set; }
+
     public virtual DbSet<tbl_currency> tbl_currencies { get; set; }
 
     public virtual DbSet<tbl_language> tbl_languages { get; set; }
@@ -278,6 +280,22 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.created_by).HasMaxLength(100);
             entity.Property(e => e.lang_code).HasMaxLength(5);
             entity.Property(e => e.updated_at)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone");
+        });
+
+        modelBuilder.Entity<newsletter_subscriber>(entity =>
+        {
+            entity.HasKey(e => e.id).HasName("newsletter_subscribers_pkey");
+
+            entity.HasIndex(e => e.client_email, "newsletter_subscribers_client_email_key").IsUnique();
+
+            entity.Property(e => e.client_email).HasMaxLength(255);
+            entity.Property(e => e.client_id).HasMaxLength(100);
+            entity.Property(e => e.client_name).HasMaxLength(100);
+            entity.Property(e => e.is_confirmed).HasDefaultValue(false);
+            entity.Property(e => e.language_code).HasMaxLength(10);
+            entity.Property(e => e.subscribed_at)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone");
         });

@@ -1301,7 +1301,6 @@ namespace ITravelApp.Data
                 return null;
             }
         }
-
         //get child policy plan for trip
         public async Task<List<child_policy_setting>> GetTrip_ChildPolicy(long? trip_id)
         {

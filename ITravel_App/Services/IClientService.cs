@@ -37,7 +37,7 @@ namespace ITravel_App.Services
         public  Task<List<TripExtraCast>> GetTrip_Extra_Mains(LangReq req);
         public List<TripFacility> getFacilityForTrip(long? trip_id, string lang_code, bool? isExtra);
         public ResponseCls AssignExtraToBooking(List<booking_extra> lst);
-        public ResponseCls CalculateBookingPrice(CalculateBookingPriceReq req);
+        public BookingPrice CalculateBookingPrice(CalculateBookingPriceReq req);
         public Task<BookingSummary> GetBookingWithDetails(BookingReq req);
         public BookingWithTripDetailsAll ConfirmBooking(ConfirmBookingReq req);
         #endregion
@@ -49,6 +49,10 @@ namespace ITravel_App.Services
         public Task<List<client_image>> GetProfileImage(string clientId);
         public ResponseCls SaveClientNotificationSetting(client_notification_setting row);
         public Task<List<client_notification_setting>> GetClient_Notification_Settings(string clientId);
+        #endregion
+
+        #region "Contact"
+        public ResponseCls SubscribeNewSletter(newsletter_subscriber row);
         #endregion
     }
 }

@@ -778,6 +778,9 @@ namespace ITravelApp.Data
             var wishlist = (string.IsNullOrEmpty(client_id)
             ? null
             : CheckIfTripInWishList(s.trip_id, client_id, s.trip_type));
+            decimal? trip_max_price = _db.trip_prices
+                    .Where(wr => wr.trip_id == s.trip_id && wr.currency_code.ToLower() == currency_code.ToLower())
+                    .Max(m => m.trip_sale_price);
             return new TripsAll
             {
                 destination_id = s.destination_id,
@@ -816,9 +819,7 @@ namespace ITravelApp.Data
                 trip_code_auto = s.trip_code_auto,
                 cancelation_policy = s.cancelation_policy,
                 release_days = s.release_days,
-                trip_max_price = _db.trip_prices
-                    .Where(wr => wr.trip_id == s.trip_id && wr.currency_code.ToLower() == currency_code.ToLower())
-                    .Max(m => m.trip_sale_price),
+                trip_max_price = trip_max_price,
                 trip_min_price = _db.trip_prices
                     .Where(wr => wr.trip_id == s.trip_id && wr.currency_code.ToLower() == currency_code.ToLower())
                     .Min(m => m.trip_sale_price),
@@ -835,10 +836,34 @@ namespace ITravelApp.Data
                     .Where(wr => wr.trip_id == s.trip_id && wr.currency_code.ToLower() == currency_code.ToLower())
                     .Max(m => m.age_to),
                 trip_order = s.trip_order,
-                is_comm_soon = s.is_comm_soon
+                is_comm_soon = s.is_comm_soon,
+               // child_lst = GetChild_Prices(currency_code ,s.trip_id, trip_max_price)
             };
         }
 
+        public List<Child_Prices> GetChild_Prices(string? currency_code,long? trip_id , decimal? adult_price)
+        {
+            /// <summary>
+            /// 1 =Free
+            /// 2=% of Adult Price
+            /// 3=Fixed Amount
+            /// </summary>
+            try
+            {
+                var recorded = _db.child_policy_settings
+                    .Where(wr => wr.trip_id == trip_id && wr.currency_code!.ToLower() == currency_code!.ToLower() && wr.pricing_type != 1).ToList();
+                return recorded.Select(s => new Child_Prices
+                {
+                    age_from = s.age_from,
+                    age_to =s.age_to,
+                    child_price = s.pricing_type  == 3  ? s.child_price : (adult_price * s.child_price)
+                }).ToList();
+            }
+            catch(Exception ex)
+            {
+                return new List<Child_Prices>();
+            }
+        }
         //get trips which shown in home page slider
         public async Task<List<tripwithdetail>> GetTripsForSlider(TripsReq req)
         {
@@ -1170,8 +1195,9 @@ namespace ITravelApp.Data
         }
         //public ResponseCls CalculateBookingPrice(long? booking_id , long? trip_id , int? adult_num, int? child_num,string currency,decimal extras_price)
 
-        public ResponseCls CalculateBookingPrice(CalculateBookingPriceReq req)
+        public BookingPrice CalculateBookingPrice(CalculateBookingPriceReq req)
         {
+            BookingPrice response = new BookingPrice();
             decimal? total_price = 0;
             decimal? total_adult_price = 0;
             decimal? total_child_price = 0;
@@ -1184,7 +1210,7 @@ namespace ITravelApp.Data
                     extras_price = extras_price + (item.extra_price * item.extra_count);
                 }
             }
-            ResponseCls response = new ResponseCls();
+           
             try
             {
                 //get trip details
@@ -1230,21 +1256,26 @@ namespace ITravelApp.Data
                     //}
                 }
                 final_price = total_adult_price + total_child_price + extras_price;
-                //update booking
-                var booking = _db.trips_bookings.Where(wr => wr.id == req.booking_id).SingleOrDefault();
-
-                if (booking != null)
+                if(req.booking_id > 0)
                 {
-                    booking.total_price = final_price;
-                    _db.trips_bookings.Update(booking);
-                    _db.SaveChanges();
-                    response = new ResponseCls { errors = null, success = true, idOut = booking.id, msg = _localizer["UpdateBookingPrice"] };
+                    //update booking
+                    var booking = _db.trips_bookings.Where(wr => wr.id == req.booking_id).SingleOrDefault();
+
+                    if (booking != null)
+                    {
+                        booking.total_price = final_price;
+                        _db.trips_bookings.Update(booking);
+                        _db.SaveChanges();
+                        response = new BookingPrice { success = true, message = _localizer["UpdateBookingPrice"],final_price = final_price, total_adult_price = total_adult_price, total_child_price = total_child_price };
+                    }
+                   
                 }
+                response = new BookingPrice { success = true, final_price = final_price, total_adult_price = total_adult_price, total_child_price = total_child_price };
             }
             catch (Exception ex)
             {
                 //final_price = 0;
-                response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
+                response = new BookingPrice { message = _localizer["CheckAdmin"], success = false };
             }
             return response;
         }
@@ -1715,5 +1746,48 @@ namespace ITravelApp.Data
             }
         }
         #endregion
+
+        #region "Contact"
+
+        public ResponseCls SubscribeNewSletter(newsletter_subscriber row)
+        {
+            ResponseCls response;
+            int maxId = 0;
+            try
+            {
+                row.subscribed_at = DateTime.Now;
+                if (row.id == 0)
+                {
+                    //check duplicate validation
+                    var result = _db.newsletter_subscribers.Where(wr => wr.client_id == row.client_id).SingleOrDefault();
+                    if (result != null)
+                    {
+                        return new ResponseCls { success = false, errors = _localizer["AddSletterDuplicate"] };
+                    }
+                    if (_db.newsletter_subscribers.Count() > 0)
+                    {
+                        maxId = _db.newsletter_subscribers.Max(d => d.id);
+
+                    }
+                    row.id = maxId + 1;
+                    _db.newsletter_subscribers.Add(row);
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    _db.newsletter_subscribers.Update(row);
+                    _db.SaveChanges();
+                }
+
+                response = new ResponseCls { errors = null, success = true, idOut = row.id,msg= _localizer["AddSletterMsg"] };
+            }
+            catch (Exception ex)
+            {
+                response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
+            }
+            return response;
+        }
+        #endregion
+
     }
 }

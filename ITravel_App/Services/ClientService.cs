@@ -30,7 +30,7 @@ namespace ITravel_App.Services
             return _clientDAO.AssignExtraToBooking(lst);
         }
 
-        public ResponseCls CalculateBookingPrice(CalculateBookingPriceReq req)
+        public BookingPrice CalculateBookingPrice(CalculateBookingPriceReq req)
         {
             return _clientDAO.CalculateBookingPrice(req);
         }
@@ -153,6 +153,11 @@ namespace ITravel_App.Services
         public ResponseCls SaveReviewForTrip(tbl_review row)
         {
             return _clientDAO.SaveReviewForTrip(row);
+        }
+
+        public ResponseCls SubscribeNewSletter(newsletter_subscriber row)
+        {
+            return _clientDAO.SubscribeNewSletter(row);
         }
     }
 }

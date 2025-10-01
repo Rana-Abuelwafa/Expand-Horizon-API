@@ -1,0 +1,44 @@
+[2025-09-30 10:19:46.600 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-30 10:19:47.338 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-30 10:19:47.339 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-30 10:19:47.491 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-30 10:19:47.492 +03:00  INF]  Hosting environment: Development
+[2025-09-30 10:19:47.492 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-30 10:19:48.681 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-30 10:19:49.087 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 423.2285ms
+[2025-09-30 10:19:49.207 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-30 10:19:49.368 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 160.8368ms
+[2025-09-30 10:19:49.369 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-30 10:19:49.452 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 82.4063ms
+[2025-09-30 10:19:49.610 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-30 10:19:49.731 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 121.3073ms
+[2025-09-30 10:22:33.494 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelContact/SendContactMail - application/json-patch+json 158
+[2025-09-30 10:22:33.517 +03:00  INF]  CORS policy execution successful.
+[2025-09-30 10:22:36.365 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelContactController.SendContactMail (ITravel_App)'
+[2025-09-30 10:22:36.415 +03:00  INF]  Route matched with {action = "SendContactMail", controller = "TravelContact"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SendContactMail(ITravel_App.Models.ContactReq) on controller ITravel_App.Controllers.TravelContactController (ITravel_App).
+[2025-09-30 10:22:44.141 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Boolean'.
+[2025-09-30 10:22:44.204 +03:00  INF]  Executed action ITravel_App.Controllers.TravelContactController.SendContactMail (ITravel_App) in 7780.7121ms
+[2025-09-30 10:22:44.205 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelContactController.SendContactMail (ITravel_App)'
+[2025-09-30 10:22:44.205 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelContact/SendContactMail - 200 4 application/json; charset=utf-8 10711.4517ms
+[2025-09-30 10:27:14.217 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-09-30 10:27:14.659 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-09-30 10:27:14.659 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-09-30 10:27:14.854 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-09-30 10:27:14.855 +03:00  INF]  Hosting environment: Development
+[2025-09-30 10:27:14.855 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-09-30 10:27:15.665 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-09-30 10:27:15.913 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 254.2757ms
+[2025-09-30 10:27:15.981 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-09-30 10:27:16.017 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-09-30 10:27:16.022 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 45.2017ms
+[2025-09-30 10:27:16.206 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 189.3326ms
+[2025-09-30 10:27:16.387 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-09-30 10:27:16.520 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 132.7703ms
+[2025-09-30 10:27:47.382 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelContact/SendContactMail - application/json-patch+json 137
+[2025-09-30 10:27:47.389 +03:00  INF]  CORS policy execution successful.
+[2025-09-30 10:27:47.645 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelContactController.SendContactMail (ITravel_App)'
+[2025-09-30 10:27:47.703 +03:00  INF]  Route matched with {action = "SendContactMail", controller = "TravelContact"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SendContactMail(ITravel_App.Models.ContactReq) on controller ITravel_App.Controllers.TravelContactController (ITravel_App).
+[2025-09-30 10:27:54.187 +03:00  INF]  Executing OkObjectResult, writing value of type 'System.Boolean'.
+[2025-09-30 10:27:54.251 +03:00  INF]  Executed action ITravel_App.Controllers.TravelContactController.SendContactMail (ITravel_App) in 6540.4351ms
+[2025-09-30 10:27:54.252 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelContactController.SendContactMail (ITravel_App)'
+[2025-09-30 10:27:54.253 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelContact/SendContactMail - 200 4 application/json; charset=utf-8 6870.404ms

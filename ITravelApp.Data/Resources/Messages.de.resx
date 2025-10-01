@@ -165,4 +165,14 @@
   <data name="UpdateBookingPrice" xml:space="preserve">
     <value>Buchungspreis erfolgreich aktualisiert</value>
   </data>
+  <data name="AddSletterDuplicate" xml:space="preserve">
+    <value>Danke, Sie haben sich bereits für Newsletter angemeldet</value>
+  </data>
+  <data name="ContactMsg" xml:space="preserve">
+    <value>Vielen Dank für Ihre Kontaktaufnahme. Wir haben Ihre Nachricht erhalten und werden uns innerhalb weniger Stunden bei Ihnen melden.</value>
+  </data>
+  <data name="AddSletterMsg" xml:space="preserve">
+    <value>Vielen Dank für Ihr Newsletter-Abonnement!
+Sie sind jetzt auf unserer Mailingliste und erhalten Updates, Angebote und Neuigkeiten von Expand-horizon.</value>
+  </data>
 </root>

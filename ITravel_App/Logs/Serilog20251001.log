@@ -1,0 +1,282 @@
+[2025-10-01 14:01:17.568 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-01 14:01:19.067 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-01 14:01:19.068 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-01 14:01:19.496 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-01 14:01:19.497 +03:00  INF]  Hosting environment: Development
+[2025-10-01 14:01:19.497 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-01 14:01:20.834 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-01 14:01:21.690 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 877.0619ms
+[2025-10-01 14:01:21.754 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-01 14:01:21.754 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-01 14:01:21.770 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 16.2173ms
+[2025-10-01 14:01:21.908 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 154.0717ms
+[2025-10-01 14:01:22.058 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-01 14:01:22.212 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 153.2696ms
+[2025-10-01 14:05:40.610 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelContact/SubscribeNewSletter - application/json-patch+json 185
+[2025-10-01 14:05:40.620 +03:00  INF]  CORS policy execution successful.
+[2025-10-01 14:05:43.645 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App)'
+[2025-10-01 14:05:43.697 +03:00  INF]  Route matched with {action = "SubscribeNewSletter", controller = "TravelContact"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SubscribeNewSletter(ITravelApp.Data.Entities.newsletter_subscriber) on controller ITravel_App.Controllers.TravelContactController (ITravel_App).
+[2025-10-01 14:05:44.428 +03:00  INF]  Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+[2025-10-01 14:05:44.537 +03:00  INF]  Executed action ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App) in 833.6501ms
+[2025-10-01 14:05:44.538 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App)'
+[2025-10-01 14:05:44.542 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelContact/SubscribeNewSletter - 400 360 application/problem+json; charset=utf-8 3931.3682ms
+[2025-10-01 14:09:26.597 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-01 14:09:27.921 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-01 14:09:27.970 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-01 14:09:28.375 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-01 14:09:28.376 +03:00  INF]  Hosting environment: Development
+[2025-10-01 14:09:28.377 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-01 14:09:28.657 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-01 14:09:29.240 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 608.6966ms
+[2025-10-01 14:09:29.411 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-01 14:09:29.498 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 87.5498ms
+[2025-10-01 14:09:29.502 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-01 14:09:29.701 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 200.871ms
+[2025-10-01 14:09:29.887 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-01 14:09:30.005 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 117.9585ms
+[2025-10-01 14:12:20.863 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelContact/SubscribeNewSletter - application/json-patch+json 185
+[2025-10-01 14:12:20.885 +03:00  INF]  CORS policy execution successful.
+[2025-10-01 14:12:21.268 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App)'
+[2025-10-01 14:12:21.326 +03:00  INF]  Route matched with {action = "SubscribeNewSletter", controller = "TravelContact"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SubscribeNewSletter(ITravelApp.Data.Entities.newsletter_subscriber) on controller ITravel_App.Controllers.TravelContactController (ITravel_App).
+[2025-10-01 14:12:25.298 +03:00  INF]  Executed DbCommand (133ms) [Parameters=[@__row_client_id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT n.id, n.client_email, n.client_id, n.client_name, n.is_confirmed, n.language_code, n.subscribed_at
+FROM newsletter_subscribers AS n
+WHERE n.client_id = @__row_client_id_0
+LIMIT 2
+[2025-10-01 14:12:25.389 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM newsletter_subscribers AS n
+[2025-10-01 14:12:25.799 +03:00  ERR]  Failed executing DbCommand (22ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?', @p2='?', @p3='?', @p4='?' (DbType = Boolean), @p5='?', @p6='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO newsletter_subscribers (id, client_email, client_id, client_name, is_confirmed, language_code, subscribed_at)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+[2025-10-01 14:12:25.843 +03:00  ERR]  An exception occurred in the database while saving changes for context type 'ITravelApp.Data.Data.horizon_client_dbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Local to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+[2025-10-01 14:12:48.808 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-01 14:12:48.880 +03:00  INF]  Executed action ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App) in 27544.1848ms
+[2025-10-01 14:12:48.880 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App)'
+[2025-10-01 14:12:48.902 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelContact/SubscribeNewSletter - 200 85 application/json; charset=utf-8 28039.9817ms
+[2025-10-01 14:14:55.244 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-01 14:14:56.492 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-01 14:14:56.493 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-01 14:14:56.744 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-01 14:14:56.744 +03:00  INF]  Hosting environment: Development
+[2025-10-01 14:14:56.744 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-01 14:14:57.300 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-01 14:14:57.760 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 484.7345ms
+[2025-10-01 14:14:57.776 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-01 14:14:57.783 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-01 14:14:57.804 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 27.989ms
+[2025-10-01 14:14:57.954 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 171.2787ms
+[2025-10-01 14:14:58.035 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-01 14:14:58.191 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 155.5888ms
+[2025-10-01 14:17:04.956 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelContact/SubscribeNewSletter - application/json-patch+json 185
+[2025-10-01 14:17:04.973 +03:00  INF]  CORS policy execution successful.
+[2025-10-01 14:17:05.357 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App)'
+[2025-10-01 14:17:05.407 +03:00  INF]  Route matched with {action = "SubscribeNewSletter", controller = "TravelContact"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SubscribeNewSletter(ITravelApp.Data.Entities.newsletter_subscriber) on controller ITravel_App.Controllers.TravelContactController (ITravel_App).
+[2025-10-01 14:17:06.079 +03:00  INF]  Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+[2025-10-01 14:17:06.220 +03:00  INF]  Executed action ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App) in 804.5548ms
+[2025-10-01 14:17:06.221 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App)'
+[2025-10-01 14:17:06.224 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelContact/SubscribeNewSletter - 400 360 application/problem+json; charset=utf-8 1267.4254ms
+[2025-10-01 14:18:16.557 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-01 14:18:17.910 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-01 14:18:17.911 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-01 14:18:18.187 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-01 14:18:18.188 +03:00  INF]  Hosting environment: Development
+[2025-10-01 14:18:18.188 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-01 14:18:18.996 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-01 14:18:19.427 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 449.7657ms
+[2025-10-01 14:18:19.466 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-01 14:18:19.466 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-01 14:18:19.475 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 8.7932ms
+[2025-10-01 14:18:19.538 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 72.3376ms
+[2025-10-01 14:18:19.605 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-01 14:18:19.724 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 119.1402ms
+[2025-10-01 14:19:33.567 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelContact/SubscribeNewSletter - application/json-patch+json 185
+[2025-10-01 14:19:33.575 +03:00  INF]  CORS policy execution successful.
+[2025-10-01 14:19:33.947 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App)'
+[2025-10-01 14:19:33.992 +03:00  INF]  Route matched with {action = "SubscribeNewSletter", controller = "TravelContact"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SubscribeNewSletter(ITravelApp.Data.Entities.newsletter_subscriber) on controller ITravel_App.Controllers.TravelContactController (ITravel_App).
+[2025-10-01 14:19:37.641 +03:00  INF]  Executed DbCommand (141ms) [Parameters=[@__row_client_id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT n.id, n.client_email, n.client_id, n.client_name, n.is_confirmed, n.language_code, n.subscribed_at
+FROM newsletter_subscribers AS n
+WHERE n.client_id = @__row_client_id_0
+LIMIT 2
+[2025-10-01 14:19:37.749 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM newsletter_subscribers AS n
+[2025-10-01 14:19:38.084 +03:00  INF]  Executed DbCommand (17ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?', @p2='?', @p3='?', @p4='?' (DbType = Boolean), @p5='?', @p6='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO newsletter_subscribers (id, client_email, client_id, client_name, is_confirmed, language_code, subscribed_at)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+[2025-10-01 14:19:38.193 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-01 14:19:38.297 +03:00  INF]  Executed action ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App) in 4295.7601ms
+[2025-10-01 14:19:38.298 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App)'
+[2025-10-01 14:19:38.323 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelContact/SubscribeNewSletter - 200 204 application/json; charset=utf-8 4756.391ms
+[2025-10-01 14:19:52.803 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelContact/SubscribeNewSletter - application/json-patch+json 185
+[2025-10-01 14:19:52.804 +03:00  INF]  CORS policy execution successful.
+[2025-10-01 14:19:52.818 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App)'
+[2025-10-01 14:19:52.819 +03:00  INF]  Route matched with {action = "SubscribeNewSletter", controller = "TravelContact"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SubscribeNewSletter(ITravelApp.Data.Entities.newsletter_subscriber) on controller ITravel_App.Controllers.TravelContactController (ITravel_App).
+[2025-10-01 14:19:52.891 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?', @p1='?', @p2='?', @p3='?' (DbType = Boolean), @p4='?', @p5='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+UPDATE newsletter_subscribers SET client_email = @p0, client_id = @p1, client_name = @p2, is_confirmed = @p3, language_code = @p4, subscribed_at = @p5
+WHERE id = @p6;
+[2025-10-01 14:19:52.894 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-01 14:19:52.895 +03:00  INF]  Executed action ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App) in 75.5816ms
+[2025-10-01 14:19:52.895 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelContactController.SubscribeNewSletter (ITravel_App)'
+[2025-10-01 14:19:52.895 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelContact/SubscribeNewSletter - 200 204 application/json; charset=utf-8 93.2069ms
+[2025-10-01 16:23:31.187 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-01 16:23:33.521 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-01 16:23:33.522 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-01 16:23:33.791 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-01 16:23:33.791 +03:00  INF]  Hosting environment: Development
+[2025-10-01 16:23:33.791 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-01 16:23:34.309 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-01 16:23:34.623 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 325.5199ms
+[2025-10-01 16:23:34.643 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-01 16:23:34.664 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-01 16:23:34.673 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 29.9627ms
+[2025-10-01 16:23:34.723 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 59.2084ms
+[2025-10-01 16:23:34.798 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-01 16:23:34.851 +03:00  ERR]  An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Ambiguous HTTP method for action - ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App). Actions require an explicit HttpMethod binding for Swagger/OpenAPI 3.0
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2025-10-01 16:23:34.857 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 500 null text/plain; charset=utf-8 59.0682ms
+[2025-10-01 16:24:24.854 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-01 16:24:25.341 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-01 16:24:25.341 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-01 16:24:25.466 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-01 16:24:25.466 +03:00  INF]  Hosting environment: Development
+[2025-10-01 16:24:25.466 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-01 16:24:26.377 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-01 16:24:26.699 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 327.4892ms
+[2025-10-01 16:24:26.839 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-01 16:24:26.853 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 14.0244ms
+[2025-10-01 16:24:26.875 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-01 16:24:27.072 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 197.6537ms
+[2025-10-01 16:24:27.375 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-01 16:24:27.440 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 64.4518ms
+[2025-10-01 16:25:09.733 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - application/json-patch+json 151
+[2025-10-01 16:25:09.742 +03:00  INF]  CORS policy execution successful.
+[2025-10-01 16:25:11.077 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-01 16:25:11.110 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-10-01 16:25:13.469 +03:00  INF]  Executed DbCommand (58ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.is_comm_soon, t.pickup, t.release_days, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_order, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-10-01 16:25:13.664 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@__8__locals2_trip_id_0='?' (DbType = Int64), @__ToLower_1='?', @__capacity_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.child_price, t.created_at, t.created_by, t.currency_code, t.notes, t.pax_from, t.pax_to, t.trip_id, t.trip_origin_price, t.trip_sale_price, t.updated_at
+FROM trip_prices AS t
+WHERE t.trip_id = @__8__locals2_trip_id_0 AND lower(t.currency_code) = @__ToLower_1 AND t.pax_from <= @__capacity_2 AND (t.pax_to >= @__capacity_2 OR t.pax_to = 0)
+LIMIT 2
+[2025-10-01 16:25:13.712 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__age_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to
+LIMIT 1
+[2025-10-01 16:25:13.741 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[@__age_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to
+LIMIT 1
+[2025-10-01 16:25:13.785 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.Bookings.Client.BookingPrice'.
+[2025-10-01 16:25:13.813 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App) in 2699.9166ms
+[2025-10-01 16:25:13.813 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-01 16:25:13.835 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - 200 137 application/json; charset=utf-8 4104.195ms
+[2025-10-01 16:26:06.018 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-01 16:26:07.624 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-01 16:26:07.625 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-01 16:26:07.832 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-01 16:26:07.833 +03:00  INF]  Hosting environment: Development
+[2025-10-01 16:26:07.833 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-01 16:26:08.570 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-01 16:26:08.830 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-01 16:26:08.833 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-01 16:26:08.834 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 278.9545ms
+[2025-10-01 16:26:08.840 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 10.3665ms
+[2025-10-01 16:26:08.896 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 58.7131ms
+[2025-10-01 16:26:08.959 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-01 16:26:09.049 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 90.3752ms
+[2025-10-01 16:26:35.569 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - application/json-patch+json 151
+[2025-10-01 16:26:35.576 +03:00  INF]  CORS policy execution successful.
+[2025-10-01 16:26:35.703 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-01 16:26:35.740 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-10-01 16:26:37.346 +03:00  INF]  Executed DbCommand (61ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.is_comm_soon, t.pickup, t.release_days, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_order, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-10-01 16:26:37.536 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__8__locals2_trip_id_0='?' (DbType = Int64), @__ToLower_1='?', @__capacity_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.child_price, t.created_at, t.created_by, t.currency_code, t.notes, t.pax_from, t.pax_to, t.trip_id, t.trip_origin_price, t.trip_sale_price, t.updated_at
+FROM trip_prices AS t
+WHERE t.trip_id = @__8__locals2_trip_id_0 AND lower(t.currency_code) = @__ToLower_1 AND t.pax_from <= @__capacity_2 AND (t.pax_to >= @__capacity_2 OR t.pax_to = 0)
+LIMIT 2
+[2025-10-01 16:26:37.584 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__age_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to
+LIMIT 1
+[2025-10-01 16:26:37.615 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__age_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to
+LIMIT 1
+[2025-10-01 16:26:46.190 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.Bookings.Client.BookingPrice'.
+[2025-10-01 16:26:46.222 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App) in 10478.9365ms
+[2025-10-01 16:26:46.222 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-01 16:26:46.234 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - 200 102 application/json; charset=utf-8 10664.9242ms

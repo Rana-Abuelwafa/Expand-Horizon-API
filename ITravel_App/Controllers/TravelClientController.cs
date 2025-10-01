@@ -1,5 +1,6 @@
 ﻿using ITravel_App.Services;
 using ITravelApp.Data.Entities;
+using ITravelApp.Data.Models.Bookings;
 using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
 using ITravelApp.Data.Models.profile;
@@ -88,6 +89,11 @@ namespace ITravel_App.Controllers
         {
 
             return Ok(await _clientService.GetMyBookingCount(clientId));
+        }
+        [HttpPost("CalculateBookingPrice")]
+        public IActionResult CalculateBookingPrice(CalculateBookingPriceReq req)
+        {
+            return Ok(_clientService.CalculateBookingPrice(req));
         }
         #endregion
 
