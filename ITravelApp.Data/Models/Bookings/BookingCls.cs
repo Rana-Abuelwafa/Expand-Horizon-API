@@ -11,6 +11,7 @@ namespace ITravelApp.Data.Models.Bookings
     {
         public string? booking_dateStr { get; set; }
         public string? trip_dateStr { get; set; }
+        public string? trip_return_dateStr { get; set; }
         public string? currency_code { get; set; } = "EUR";
     }
 }

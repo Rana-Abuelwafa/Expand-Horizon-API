@@ -33,22 +33,6 @@
   },
   {
     "ContainingType": "ITravel_App.Controllers.BookingController",
-    "Method": "CalculateBookingPrice",
-    "RelativePath": "api/Booking/CalculateBookingPrice",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "req",
-        "Type": "ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ITravel_App.Controllers.BookingController",
     "Method": "ConfirmBooking",
     "RelativePath": "api/Booking/ConfirmBooking",
     "HttpMethod": "POST",
@@ -251,6 +235,26 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.TravelAdminController",
+    "Method": "Get_Currencies",
+    "RelativePath": "api/TravelAdmin/Get_Currencies",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.TravelAdminController",
+    "Method": "Get_Languages",
+    "RelativePath": "api/TravelAdmin/Get_Languages",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -826,6 +830,22 @@
   },
   {
     "ContainingType": "ITravel_App.Controllers.TravelClientController",
+    "Method": "CalculateBookingPrice",
+    "RelativePath": "api/TravelClient/CalculateBookingPrice",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.TravelClientController",
     "Method": "GetClientsReviews",
     "RelativePath": "api/TravelClient/GetClientsReviews",
     "HttpMethod": "POST",
@@ -906,6 +926,16 @@
   },
   {
     "ContainingType": "ITravel_App.Controllers.TravelClientController",
+    "Method": "GetTripCategories",
+    "RelativePath": "api/TravelClient/GetTripCategories",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.TravelClientController",
     "Method": "GetTripDetails",
     "RelativePath": "api/TravelClient/GetTripDetails",
     "HttpMethod": "POST",
@@ -964,6 +994,38 @@
         "Name": "clientId",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.TravelContactController",
+    "Method": "SendContactMail",
+    "RelativePath": "api/TravelContact/SendContactMail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "ITravel_App.Models.ContactReq",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.TravelContactController",
+    "Method": "SubscribeNewSletter",
+    "RelativePath": "api/TravelContact/SubscribeNewSletter",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "ITravelApp.Data.Entities.newsletter_subscriber",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

@@ -55,4 +55,8 @@ public partial class trips_booking
     public long id { get; set; }
 
     public string? client_name { get; set; }
+
+    public bool? is_two_way { get; set; }
+
+    public DateTime? trip_return_date { get; set; }
 }

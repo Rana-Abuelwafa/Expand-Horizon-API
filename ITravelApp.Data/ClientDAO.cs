@@ -88,7 +88,7 @@ namespace ITravelApp.Data
                     .Select(dest => new DestinationResponse
                     {
                         destination_id = dest.destination_id,
-                        id = dest.id,
+                        id = (int) dest.id,
                         country_code = dest.country_code,
                         active = dest.active,
                         dest_code = dest.dest_code,
@@ -346,6 +346,10 @@ namespace ITravelApp.Data
                       id = s.id,
                       img_path = s.img_path,
                       route = s.route,
+                      order=s.order,
+                      //parent_order=s.parent_order,
+                      //parent_name=s.parent_name,
+                      trip_type=s.trip_type,
                       children = GetDestination_TreeMain(lst, s.destination_id).OrderBy(x => x.order).ToList(),
 
                   })
@@ -1125,6 +1129,9 @@ namespace ITravelApp.Data
                         trip_name = result.trip_name,
                         release_days = result.release_days,
                         trip_code_auto = result.trip_code_auto,
+                        is_two_way=result.is_two_way,
+                        trip_return_date=result.trip_return_date,
+                        trip_return_datestr=result.trip_return_datestr,
                         extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code).ToList()
                     };
                 }
@@ -1177,7 +1184,8 @@ namespace ITravelApp.Data
                         client_name = result.client_name,
                         trip_id = result.trip_id,
                         trip_type = result.trip_type,
-
+                        is_two_way=result.is_two_way,
+                        trip_return_datestr=result.trip_return_datestr,
                         pickups = GetPickupsForTrip(new PickupsReq { lang_code = req.lang_code, trip_id = result.trip_id, trip_type = result.trip_type }).Result
 
 
@@ -1218,44 +1226,49 @@ namespace ITravelApp.Data
                 if (trip != null)
                 {
                     var capacity = req.adult_num + req.child_num;
-                    ////mean it trip is transfer type, get price data from tbl transfer_categories 
-                    //if (trip.trip_type == 2)
-                    //{
-                    //    var transfer =  _db.transfer_categories.Where(wr => wr.id == trip.transfer_category_id && wr.min_capacity <= capacity && wr.max_capacity >= capacity && wr.currency_code.ToLower() == req.currency_code.ToLower()).SingleOrDefault();
-                    //    total_price = transfer?.max_price ;
-                    //}
-                    //else
-                    //{
                     //mean trip is diving or excursion or transfer get price data from tbl trip_prices depend on pax capacity
                     //if trip price doesnot contain pax range so skip check againt capacity
                     var price = _db.trip_prices.Where(wr => wr.trip_id == trip.id && wr.currency_code.ToLower() == req.currency_code.ToLower() && wr.pax_from <= capacity && (wr.pax_to >= capacity || wr.pax_to == 0)).SingleOrDefault();
-                    total_adult_price = (price?.trip_sale_price * req.adult_num);
-
-                    //calculte child price depend on policy assigned to trip
-                    foreach (var age in req.childAges)
+                   if(trip.trip_type == 2)
                     {
-                        var policy = _db.child_policy_settings.FirstOrDefault(p => age >= p.age_from && age <= p.age_to);
-                        if (policy == null) continue;
-                        decimal? child_price = 0;
-                        switch (policy.pricing_type)
-                        {
-                            case 1:
-                                child_price = 0;
-                                break;
-                            case 2:
-                                child_price = price?.trip_sale_price * (policy.child_price / 100);
-                                break;
-                            case 3:
-                                child_price = policy.child_price;
-                                break;
-
-                        }
-
-                        total_child_price += child_price;
+                        //mean transfer price per unit
+                        total_adult_price = (price?.trip_sale_price);
                     }
-                    //}
+                    else
+                    {
+                        total_adult_price = (price?.trip_sale_price * req.adult_num);
+                        //calculte child price depend on policy assigned to trip
+                        foreach (var age in req.childAges)
+                        {
+                            var policy = _db.child_policy_settings.FirstOrDefault(p => age >= p.age_from && age <= p.age_to && p.trip_id == req.trip_id && p.currency_code.ToLower() == req.currency_code.ToLower());
+                            if (policy == null) continue;
+                            decimal? child_price = 0;
+                            switch (policy.pricing_type)
+                            {
+                                case 1:
+                                    child_price = 0;
+                                    break;
+                                case 2:
+                                    child_price = price?.trip_sale_price * (policy.child_price / 100);
+                                    break;
+                                case 3:
+                                    child_price = policy.child_price;
+                                    break;
+
+                            }
+
+                            total_child_price += child_price;
+                        }
+                    }
+
+                    final_price = total_adult_price + total_child_price + extras_price;
+                    //check if this two way or not (in case trip is transfer only) => so final price = finalprice * 2;
+                    if (trip.trip_type == 2 && req.is_two_way! == true)
+                    {
+                        final_price = final_price * 2;
+                    }
                 }
-                final_price = total_adult_price + total_child_price + extras_price;
+               
                 if(req.booking_id > 0)
                 {
                     //update booking
@@ -1341,7 +1354,7 @@ namespace ITravelApp.Data
                 trips_booking booking = new trips_booking
                 {
                     booking_code = bookCode,
-                    booking_date = DateTime.Today,
+                    booking_date = DateTime.Now,
                     booking_notes = row.booking_notes,
                     booking_status = row.booking_status,
                     child_num = row.child_num,
@@ -1364,6 +1377,8 @@ namespace ITravelApp.Data
                     trip_type = row.trip_type,
                     client_name = row.client_name,
                     booking_code_auto = row.booking_code_auto,
+                    is_two_way = row.is_two_way,
+                    trip_return_date= row.trip_return_dateStr !=null ? DateTime.Parse(row.trip_return_dateStr) : DateTime.Now
                 };
                 // booking.total_price = CalculateBookingPrice(booking.trip_id, booking.total_pax, booking.child_num, row.currency_code);
                 if (row.id == 0)
@@ -1431,15 +1446,20 @@ namespace ITravelApp.Data
             {
                 foreach (var row in lst)
                 {
-                    row.created_at = DateTime.Now;
-                    if (row.id == 0)
+                    var result = _db.booking_extras.Where(wr => wr.extra_id == row.extra_id && wr.booking_id == row.booking_id).SingleOrDefault();
+                    if (result != null)
                     {
-                        //check duplicate validation
-                        var result = _db.booking_extras.Where(wr => wr.extra_id == row.extra_id && wr.booking_id == row.booking_id).SingleOrDefault();
-                        if (result != null)
-                        {
-                            return new ResponseCls { success = false, errors = _localizer["AddExtraDuplicate"] };
-                        }
+                        //update
+                        result.updated_at = DateTime.Now;
+                        result.extra_count = row.extra_count;
+                        _db.booking_extras.Update(result);
+                        _db.SaveChanges();
+                        //return new ResponseCls { success = false, errors = _localizer["AddExtraDuplicate"] };
+                    }
+                    else
+                    {
+                        //save
+                        row.created_at = DateTime.Now;
                         if (_db.booking_extras.Count() > 0)
                         {
                             maxId = _db.booking_extras.Max(d => d.id);
@@ -1449,11 +1469,32 @@ namespace ITravelApp.Data
                         _db.booking_extras.Add(row);
                         _db.SaveChanges();
                     }
-                    else
-                    {
-                        _db.booking_extras.Update(row);
-                        _db.SaveChanges();
-                    }
+                    //if (row.id == 0)
+                    //{
+                    //    //check duplicate validation
+                    //    var result = _db.booking_extras.Where(wr => wr.extra_id == row.extra_id && wr.booking_id == row.booking_id).SingleOrDefault();
+                    //    if (result != null)
+                    //    {
+                    //        result.extra_count = row.extra_count;
+                    //        _db.booking_extras.Update(result);
+                    //        _db.SaveChanges();
+                    //        continue;
+                    //        //return new ResponseCls { success = false, errors = _localizer["AddExtraDuplicate"] };
+                    //    }
+                    //    if (_db.booking_extras.Count() > 0)
+                    //    {
+                    //        maxId = _db.booking_extras.Max(d => d.id);
+
+                    //    }
+                    //    row.id = maxId + 1;
+                    //    _db.booking_extras.Add(row);
+                    //    _db.SaveChanges();
+                    //}
+                    //else
+                    //{
+                    //    _db.booking_extras.Update(row);
+                    //    _db.SaveChanges();
+                    //}
                     count++;
                 }
                 if (count == lst.Count)
@@ -1486,7 +1527,7 @@ namespace ITravelApp.Data
                                  booking_id = BOOK.booking_id,
                                  extra_count = BOOK.extra_count,
                                  extra_name = TRANS.facility_name,
-                                 extra_price = FAC.extra_price,
+                                 extra_price = FAC.extra_price * BOOK.extra_count,
                                  id = BOOK.id
                              };
 
@@ -1539,6 +1580,7 @@ namespace ITravelApp.Data
                     trip_name = result.trip_name,
                     release_days = result.release_days,
                     trip_code_auto = result.trip_code_auto,
+                    is_two_way=result.is_two_way,
                     extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code).ToList()
                 }).ToList();
             }

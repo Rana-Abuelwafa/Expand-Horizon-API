@@ -2757,11 +2757,24 @@
             "type": "string",
             "nullable": true
           },
+          "is_two_way": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "trip_return_date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "booking_dateStr": {
             "type": "string",
             "nullable": true
           },
           "trip_dateStr": {
+            "type": "string",
+            "nullable": true
+          },
+          "trip_return_dateStr": {
             "type": "string",
             "nullable": true
           },
@@ -2831,6 +2844,10 @@
               "type": "integer",
               "format": "int32"
             },
+            "nullable": true
+          },
+          "is_two_way": {
+            "type": "boolean",
             "nullable": true
           }
         },
@@ -4014,7 +4031,8 @@
             "nullable": true
           },
           "is_confirmed": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "subscribed_at": {
             "type": "string",

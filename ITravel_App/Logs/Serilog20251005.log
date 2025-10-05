@@ -1,0 +1,389 @@
+[2025-10-05 09:44:47.933 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-05 09:44:50.622 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-05 09:44:50.623 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-05 09:44:51.069 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-05 09:44:51.070 +03:00  INF]  Hosting environment: Development
+[2025-10-05 09:44:51.070 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-05 09:44:51.696 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-05 09:44:52.705 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-05 09:44:52.711 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-05 09:44:52.731 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 24.9029ms
+[2025-10-05 09:44:52.760 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 1081.9491ms
+[2025-10-05 09:44:53.005 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 294.1068ms
+[2025-10-05 09:44:53.117 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-05 09:44:53.228 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 110.9686ms
+[2025-10-05 09:54:55.033 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - application/json-patch+json 214
+[2025-10-05 09:54:55.058 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 09:54:57.637 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 09:54:57.713 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-10-05 09:55:06.177 +03:00  INF]  Executed DbCommand (138ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.is_comm_soon, t.pickup, t.release_days, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_order, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-10-05 09:55:13.557 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.Bookings.Client.BookingPrice'.
+[2025-10-05 09:55:13.624 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App) in 15902.145ms
+[2025-10-05 09:55:13.624 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 09:55:13.665 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - 200 132 application/json; charset=utf-8 18632.2441ms
+[2025-10-05 09:55:49.606 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-05 09:55:50.976 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-05 09:55:50.977 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-05 09:55:51.269 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-05 09:55:51.270 +03:00  INF]  Hosting environment: Development
+[2025-10-05 09:55:51.270 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-05 09:55:51.974 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-05 09:55:52.387 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 426.1619ms
+[2025-10-05 09:55:52.470 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-05 09:55:52.471 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-05 09:55:52.502 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 31.3456ms
+[2025-10-05 09:55:52.625 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 154.2426ms
+[2025-10-05 09:55:52.753 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-05 09:55:52.940 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 187.3558ms
+[2025-10-05 09:56:26.721 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - application/json-patch+json 150
+[2025-10-05 09:56:26.739 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 09:56:26.973 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 09:56:27.043 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-10-05 09:56:38.195 +03:00  INF]  Executed DbCommand (119ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.is_comm_soon, t.pickup, t.release_days, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_order, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-10-05 09:56:44.659 +03:00  INF]  Executed DbCommand (19ms) [Parameters=[@__8__locals2_trip_id_0='?' (DbType = Int64), @__ToLower_1='?', @__capacity_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.child_price, t.created_at, t.created_by, t.currency_code, t.notes, t.pax_from, t.pax_to, t.trip_id, t.trip_origin_price, t.trip_sale_price, t.updated_at
+FROM trip_prices AS t
+WHERE t.trip_id = @__8__locals2_trip_id_0 AND lower(t.currency_code) = @__ToLower_1 AND t.pax_from <= @__capacity_2 AND (t.pax_to >= @__capacity_2 OR t.pax_to = 0)
+LIMIT 2
+[2025-10-05 09:56:58.382 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@__age_0='?' (DbType = Int32), @__8__locals1_req_trip_id_1='?' (DbType = Int64), @__ToLower_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to AND c.trip_id = @__8__locals1_req_trip_id_1 AND lower(c.currency_code) = @__ToLower_2
+LIMIT 1
+[2025-10-05 09:57:06.936 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__age_0='?' (DbType = Int32), @__8__locals1_req_trip_id_1='?' (DbType = Int64), @__ToLower_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to AND c.trip_id = @__8__locals1_req_trip_id_1 AND lower(c.currency_code) = @__ToLower_2
+LIMIT 1
+[2025-10-05 09:57:31.360 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.Bookings.Client.BookingPrice'.
+[2025-10-05 09:57:31.421 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App) in 64371.425ms
+[2025-10-05 09:57:31.422 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 09:57:31.439 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - 200 101 application/json; charset=utf-8 64717.9237ms
+[2025-10-05 09:58:22.641 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - application/json-patch+json 172
+[2025-10-05 09:58:22.666 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 09:58:22.674 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 09:58:22.674 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-10-05 09:58:31.824 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.is_comm_soon, t.pickup, t.release_days, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_order, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-10-05 09:58:31.828 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals2_trip_id_0='?' (DbType = Int64), @__ToLower_1='?', @__capacity_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.child_price, t.created_at, t.created_by, t.currency_code, t.notes, t.pax_from, t.pax_to, t.trip_id, t.trip_origin_price, t.trip_sale_price, t.updated_at
+FROM trip_prices AS t
+WHERE t.trip_id = @__8__locals2_trip_id_0 AND lower(t.currency_code) = @__ToLower_1 AND t.pax_from <= @__capacity_2 AND (t.pax_to >= @__capacity_2 OR t.pax_to = 0)
+LIMIT 2
+[2025-10-05 09:58:31.829 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__age_0='?' (DbType = Int32), @__8__locals1_req_trip_id_1='?' (DbType = Int64), @__ToLower_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to AND c.trip_id = @__8__locals1_req_trip_id_1 AND lower(c.currency_code) = @__ToLower_2
+LIMIT 1
+[2025-10-05 09:58:31.831 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__age_0='?' (DbType = Int32), @__8__locals1_req_trip_id_1='?' (DbType = Int64), @__ToLower_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to AND c.trip_id = @__8__locals1_req_trip_id_1 AND lower(c.currency_code) = @__ToLower_2
+LIMIT 1
+[2025-10-05 09:58:57.810 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.Bookings.Client.BookingPrice'.
+[2025-10-05 09:58:57.811 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App) in 35136.5738ms
+[2025-10-05 09:58:57.811 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 09:58:57.812 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - 200 101 application/json; charset=utf-8 35173.0858ms
+[2025-10-05 09:59:15.642 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - application/json-patch+json 172
+[2025-10-05 09:59:15.648 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 09:59:15.655 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 09:59:15.655 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-10-05 09:59:24.774 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.is_comm_soon, t.pickup, t.release_days, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_order, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-10-05 09:59:30.316 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals2_trip_id_0='?' (DbType = Int64), @__ToLower_1='?', @__capacity_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.child_price, t.created_at, t.created_by, t.currency_code, t.notes, t.pax_from, t.pax_to, t.trip_id, t.trip_origin_price, t.trip_sale_price, t.updated_at
+FROM trip_prices AS t
+WHERE t.trip_id = @__8__locals2_trip_id_0 AND lower(t.currency_code) = @__ToLower_1 AND t.pax_from <= @__capacity_2 AND (t.pax_to >= @__capacity_2 OR t.pax_to = 0)
+LIMIT 2
+[2025-10-05 09:59:51.477 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__age_0='?' (DbType = Int32), @__8__locals1_req_trip_id_1='?' (DbType = Int64), @__ToLower_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to AND c.trip_id = @__8__locals1_req_trip_id_1 AND lower(c.currency_code) = @__ToLower_2
+LIMIT 1
+[2025-10-05 10:00:01.232 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__age_0='?' (DbType = Int32), @__8__locals1_req_trip_id_1='?' (DbType = Int64), @__ToLower_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to AND c.trip_id = @__8__locals1_req_trip_id_1 AND lower(c.currency_code) = @__ToLower_2
+LIMIT 1
+[2025-10-05 10:00:30.728 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.Bookings.Client.BookingPrice'.
+[2025-10-05 10:00:30.729 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App) in 75074.1161ms
+[2025-10-05 10:00:30.729 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 10:00:30.730 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - 200 101 application/json; charset=utf-8 75088.2944ms
+[2025-10-05 10:00:44.902 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - application/json-patch+json 173
+[2025-10-05 10:00:44.902 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 10:00:44.902 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 10:00:44.902 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-10-05 10:00:49.967 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.is_comm_soon, t.pickup, t.release_days, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_order, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-10-05 10:00:49.970 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals2_trip_id_0='?' (DbType = Int64), @__ToLower_1='?', @__capacity_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.child_price, t.created_at, t.created_by, t.currency_code, t.notes, t.pax_from, t.pax_to, t.trip_id, t.trip_origin_price, t.trip_sale_price, t.updated_at
+FROM trip_prices AS t
+WHERE t.trip_id = @__8__locals2_trip_id_0 AND lower(t.currency_code) = @__ToLower_1 AND t.pax_from <= @__capacity_2 AND (t.pax_to >= @__capacity_2 OR t.pax_to = 0)
+LIMIT 2
+[2025-10-05 10:00:49.972 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__age_0='?' (DbType = Int32), @__8__locals1_req_trip_id_1='?' (DbType = Int64), @__ToLower_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to AND c.trip_id = @__8__locals1_req_trip_id_1 AND lower(c.currency_code) = @__ToLower_2
+LIMIT 1
+[2025-10-05 10:00:49.973 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__age_0='?' (DbType = Int32), @__8__locals1_req_trip_id_1='?' (DbType = Int64), @__ToLower_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to AND c.trip_id = @__8__locals1_req_trip_id_1 AND lower(c.currency_code) = @__ToLower_2
+LIMIT 1
+[2025-10-05 10:00:58.222 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.Bookings.Client.BookingPrice'.
+[2025-10-05 10:00:58.222 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App) in 13319.8326ms
+[2025-10-05 10:00:58.222 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 10:00:58.223 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - 200 101 application/json; charset=utf-8 13321.1691ms
+[2025-10-05 10:23:20.509 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-05 10:23:21.257 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-05 10:23:21.258 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-05 10:23:22.031 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-05 10:23:22.032 +03:00  INF]  Hosting environment: Development
+[2025-10-05 10:23:22.032 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-05 10:23:22.262 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-05 10:23:23.945 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 1696.9971ms
+[2025-10-05 10:23:25.252 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-05 10:23:25.265 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 13.2723ms
+[2025-10-05 10:23:25.377 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-05 10:23:25.457 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 79.8103ms
+[2025-10-05 10:23:26.791 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-05 10:23:27.515 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 723.3144ms
+[2025-10-05 14:05:03.814 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-05 14:05:04.448 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-05 14:05:04.449 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-05 14:05:05.180 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-05 14:05:05.182 +03:00  INF]  Hosting environment: Development
+[2025-10-05 14:05:05.182 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-05 14:05:05.242 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-05 14:05:05.661 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-05 14:05:05.704 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-05 14:05:05.708 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 401.7394ms
+[2025-10-05 14:05:05.710 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 49.5293ms
+[2025-10-05 14:05:05.816 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 111.6827ms
+[2025-10-05 14:05:05.899 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-05 14:05:05.996 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 97.0973ms
+[2025-10-05 14:08:38.361 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - application/json-patch+json 172
+[2025-10-05 14:08:38.389 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 14:08:39.688 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 14:08:39.724 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-10-05 14:08:51.066 +03:00  INF]  Executed DbCommand (68ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.is_comm_soon, t.pickup, t.release_days, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_order, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-10-05 14:08:57.465 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__8__locals2_trip_id_0='?' (DbType = Int64), @__ToLower_1='?', @__capacity_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.child_price, t.created_at, t.created_by, t.currency_code, t.notes, t.pax_from, t.pax_to, t.trip_id, t.trip_origin_price, t.trip_sale_price, t.updated_at
+FROM trip_prices AS t
+WHERE t.trip_id = @__8__locals2_trip_id_0 AND lower(t.currency_code) = @__ToLower_1 AND t.pax_from <= @__capacity_2 AND (t.pax_to >= @__capacity_2 OR t.pax_to = 0)
+LIMIT 2
+[2025-10-05 14:09:26.778 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.Bookings.Client.BookingPrice'.
+[2025-10-05 14:09:26.812 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App) in 47083.7974ms
+[2025-10-05 14:09:26.812 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 14:09:26.822 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - 200 100 application/json; charset=utf-8 48461.4455ms
+[2025-10-05 14:09:53.181 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - application/json-patch+json 172
+[2025-10-05 14:09:53.188 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 14:09:53.196 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 14:09:53.196 +03:00  INF]  Route matched with {action = "CalculateBookingPrice", controller = "TravelClient"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CalculateBookingPrice(ITravelApp.Data.Models.Bookings.CalculateBookingPriceReq) on controller ITravel_App.Controllers.TravelClientController (ITravel_App).
+[2025-10-05 14:10:01.934 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals1_req_trip_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.active, t.created_at, t.created_by, t.destination_id, t.is_comm_soon, t.pickup, t.release_days, t.route, t.show_in_slider, t.show_in_top, t.transfer_category_id, t.trip_code, t.trip_code_auto, t.trip_default_name, t.trip_duration, t.trip_order, t.trip_type, t.updated_at
+FROM trip_main AS t
+WHERE t.id = @__8__locals1_req_trip_id_0
+LIMIT 2
+[2025-10-05 14:10:08.455 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__8__locals2_trip_id_0='?' (DbType = Int64), @__ToLower_1='?', @__capacity_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t.id, t.child_price, t.created_at, t.created_by, t.currency_code, t.notes, t.pax_from, t.pax_to, t.trip_id, t.trip_origin_price, t.trip_sale_price, t.updated_at
+FROM trip_prices AS t
+WHERE t.trip_id = @__8__locals2_trip_id_0 AND lower(t.currency_code) = @__ToLower_1 AND t.pax_from <= @__capacity_2 AND (t.pax_to >= @__capacity_2 OR t.pax_to = 0)
+LIMIT 2
+[2025-10-05 14:10:24.441 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__age_0='?' (DbType = Int32), @__8__locals1_req_trip_id_1='?' (DbType = Int64), @__ToLower_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to AND c.trip_id = @__8__locals1_req_trip_id_1 AND lower(c.currency_code) = @__ToLower_2
+LIMIT 1
+[2025-10-05 14:10:33.757 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__age_0='?' (DbType = Int32), @__8__locals1_req_trip_id_1='?' (DbType = Int64), @__ToLower_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c.policy_id, c.age_from, c.age_to, c.child_price, c.code_auto, c.created_at, c.created_by, c.currency_code, c.notes, c.pricing_type, c.trip_id, c.updated_at
+FROM child_policy_setting AS c
+WHERE @__age_0 >= c.age_from AND @__age_0 <= c.age_to AND c.trip_id = @__8__locals1_req_trip_id_1 AND lower(c.currency_code) = @__ToLower_2
+LIMIT 1
+[2025-10-05 14:10:56.647 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.Bookings.Client.BookingPrice'.
+[2025-10-05 14:10:56.648 +03:00  INF]  Executed action ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App) in 63451.2673ms
+[2025-10-05 14:10:56.648 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.TravelClientController.CalculateBookingPrice (ITravel_App)'
+[2025-10-05 14:10:56.648 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/TravelClient/CalculateBookingPrice - 200 102 application/json; charset=utf-8 63467.5954ms
+[2025-10-05 16:13:53.456 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-05 16:13:54.178 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-05 16:13:54.179 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-05 16:13:54.868 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-05 16:13:54.869 +03:00  INF]  Hosting environment: Development
+[2025-10-05 16:13:54.869 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-05 16:13:56.174 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-05 16:13:56.571 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 409.9651ms
+[2025-10-05 16:13:57.552 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-05 16:13:57.566 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 16.5087ms
+[2025-10-05 16:13:57.651 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-05 16:13:57.699 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 47.9111ms
+[2025-10-05 16:13:58.141 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-05 16:13:58.467 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 326.0035ms
+[2025-10-05 16:15:13.505 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-05 16:15:13.997 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-05 16:15:13.998 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-05 16:15:14.111 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-05 16:15:14.112 +03:00  INF]  Hosting environment: Development
+[2025-10-05 16:15:14.112 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-05 16:15:14.998 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-05 16:15:15.322 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 348.3247ms
+[2025-10-05 16:15:15.804 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-05 16:15:15.821 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 16.9029ms
+[2025-10-05 16:15:16.232 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-05 16:15:16.283 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 50.7289ms
+[2025-10-05 16:15:16.713 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-05 16:15:16.800 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 87.3514ms
+[2025-10-05 16:19:26.788 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/SaveClientBooking - application/json-patch+json 693
+[2025-10-05 16:19:26.861 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 16:19:27.087 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App)'
+[2025-10-05 16:19:27.119 +03:00  INF]  Route matched with {action = "SaveClientBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SaveClientBooking(ITravelApp.Data.Models.Bookings.BookingCls) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-05 16:19:40.822 +03:00  INF]  Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM trips_booking AS t
+[2025-10-05 16:19:42.566 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT max(t.id)
+FROM trips_booking AS t
+[2025-10-05 16:19:45.865 +03:00  INF]  Executed DbCommand (24ms) [Parameters=[@p0='?' (DbType = Int64), @p1='?', @p2='?', @p3='?' (DbType = DateTime2), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?', @p13='?', @p14='?' (DbType = Int32), @p15='?' (DbType = Boolean), @p16='?', @p17='?', @p18='?' (DbType = Int32), @p19='?' (DbType = Decimal), @p20='?', @p21='?' (DbType = DateTime2), @p22='?' (DbType = Int64), @p23='?' (DbType = DateTime2), @p24='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO trips_booking (id, booking_code, booking_code_auto, booking_date, booking_notes, booking_status, child_num, client_email, client_id, client_name, client_nationality, client_phone, currency_code, gift_code, infant_num, is_two_way, pickup_address, pickup_time, total_pax, total_price, trip_code, trip_date, trip_id, trip_return_date, trip_type)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24);
+[2025-10-05 16:19:49.376 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-05 16:19:49.413 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App) in 22289.6739ms
+[2025-10-05 16:19:49.413 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App)'
+[2025-10-05 16:19:49.425 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/SaveClientBooking - 200 123 application/json; charset=utf-8 22636.5282ms
+[2025-10-05 16:20:44.575 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/SaveClientBooking - application/json-patch+json 647
+[2025-10-05 16:20:44.576 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 16:20:44.585 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App)'
+[2025-10-05 16:20:44.586 +03:00  INF]  Route matched with {action = "SaveClientBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SaveClientBooking(ITravelApp.Data.Models.Bookings.BookingCls) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-05 16:20:52.136 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM trips_booking AS t
+[2025-10-05 16:20:53.613 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT max(t.id)
+FROM trips_booking AS t
+[2025-10-05 16:20:56.044 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Int64), @p1='?', @p2='?', @p3='?' (DbType = DateTime2), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?', @p13='?', @p14='?' (DbType = Int32), @p15='?' (DbType = Boolean), @p16='?', @p17='?', @p18='?' (DbType = Int32), @p19='?' (DbType = Decimal), @p20='?', @p21='?' (DbType = DateTime2), @p22='?' (DbType = Int64), @p23='?' (DbType = DateTime2), @p24='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO trips_booking (id, booking_code, booking_code_auto, booking_date, booking_notes, booking_status, child_num, client_email, client_id, client_name, client_nationality, client_phone, currency_code, gift_code, infant_num, is_two_way, pickup_address, pickup_time, total_pax, total_price, trip_code, trip_date, trip_id, trip_return_date, trip_type)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24);
+[2025-10-05 16:20:57.296 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-05 16:20:57.297 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App) in 12710.5728ms
+[2025-10-05 16:20:57.297 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App)'
+[2025-10-05 16:20:57.297 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/SaveClientBooking - 200 123 application/json; charset=utf-8 12722.4296ms
+[2025-10-05 16:21:50.896 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/GetBookingSummary - application/json-patch+json 62
+[2025-10-05 16:21:50.905 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 16:21:50.912 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.GetBookingWithDetails (ITravel_App)'
+[2025-10-05 16:21:50.920 +03:00  INF]  Route matched with {action = "GetBookingWithDetails", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookingWithDetails(ITravelApp.Data.Models.Bookings.BookingReq) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-05 16:21:51.118 +03:00  INF]  Executed DbCommand (20ms) [Parameters=[@__req_lang_code_0='?', @__req_booking_id_1='?' (DbType = Int64), @__req_client_id_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b.booking_code, b.booking_code_auto, b.booking_date, b.booking_datestr, b.booking_id, b.booking_notes, b.booking_status, b.booking_status_id, b.cancelation_policy, b.child_num, b.client_email, b.client_id, b.client_name, b.client_nationality, b.client_phone, b.currency_code, b.default_img, b.gift_code, b.infant_num, b.is_two_way, b.lang_code, b.pickup_address, b.pickup_time, b.release_days, b.review_rate, b.total_pax, b.total_price, b.trip_code, b.trip_code_auto, b.trip_date, b.trip_datestr, b.trip_description, b.trip_id, b.trip_name, b.trip_return_date, b.trip_return_datestr, b.trip_type
+FROM bookingwithdetails AS b
+WHERE b.lang_code = @__req_lang_code_0 AND b.booking_id = @__req_booking_id_1 AND b.client_id = @__req_client_id_2
+LIMIT 2
+[2025-10-05 16:21:51.248 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@__ToLower_1='?', @__booking_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.extra_id, b.booking_id, b.extra_count, f0.facility_name AS extra_name, f1.extra_price * b.extra_count::numeric AS extra_price, b.id
+FROM booking_extra AS b
+INNER JOIN (
+    SELECT f.facility_id, f.facility_name
+    FROM facility_translations AS f
+    WHERE lower(f.lang_code) = @__ToLower_1
+) AS f0 ON b.extra_id::bigint = f0.facility_id
+INNER JOIN facility_main AS f1 ON f0.facility_id = f1.id
+WHERE b.booking_id = @__booking_id_0
+[2025-10-05 16:21:51.252 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.Bookings.Client.BookingSummary'.
+[2025-10-05 16:21:51.272 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.GetBookingWithDetails (ITravel_App) in 352.0575ms
+[2025-10-05 16:21:51.273 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.GetBookingWithDetails (ITravel_App)'
+[2025-10-05 16:21:51.274 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/GetBookingSummary - 200 1335 application/json; charset=utf-8 380.9287ms
+[2025-10-05 16:22:23.951 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/GetBookingSummary - application/json-patch+json 62
+[2025-10-05 16:22:23.954 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 16:22:23.954 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.GetBookingWithDetails (ITravel_App)'
+[2025-10-05 16:22:23.955 +03:00  INF]  Route matched with {action = "GetBookingWithDetails", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookingWithDetails(ITravelApp.Data.Models.Bookings.BookingReq) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-05 16:22:23.977 +03:00  INF]  Executed DbCommand (20ms) [Parameters=[@__req_lang_code_0='?', @__req_booking_id_1='?' (DbType = Int64), @__req_client_id_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b.booking_code, b.booking_code_auto, b.booking_date, b.booking_datestr, b.booking_id, b.booking_notes, b.booking_status, b.booking_status_id, b.cancelation_policy, b.child_num, b.client_email, b.client_id, b.client_name, b.client_nationality, b.client_phone, b.currency_code, b.default_img, b.gift_code, b.infant_num, b.is_two_way, b.lang_code, b.pickup_address, b.pickup_time, b.release_days, b.review_rate, b.total_pax, b.total_price, b.trip_code, b.trip_code_auto, b.trip_date, b.trip_datestr, b.trip_description, b.trip_id, b.trip_name, b.trip_return_date, b.trip_return_datestr, b.trip_type
+FROM bookingwithdetails AS b
+WHERE b.lang_code = @__req_lang_code_0 AND b.booking_id = @__req_booking_id_1 AND b.client_id = @__req_client_id_2
+LIMIT 2
+[2025-10-05 16:22:23.982 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__ToLower_1='?', @__booking_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.extra_id, b.booking_id, b.extra_count, f0.facility_name AS extra_name, f1.extra_price * b.extra_count::numeric AS extra_price, b.id
+FROM booking_extra AS b
+INNER JOIN (
+    SELECT f.facility_id, f.facility_name
+    FROM facility_translations AS f
+    WHERE lower(f.lang_code) = @__ToLower_1
+) AS f0 ON b.extra_id::bigint = f0.facility_id
+INNER JOIN facility_main AS f1 ON f0.facility_id = f1.id
+WHERE b.booking_id = @__booking_id_0
+[2025-10-05 16:22:23.982 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.Bookings.Client.BookingSummary'.
+[2025-10-05 16:22:23.983 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.GetBookingWithDetails (ITravel_App) in 28.2118ms
+[2025-10-05 16:22:23.983 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.GetBookingWithDetails (ITravel_App)'
+[2025-10-05 16:22:23.983 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/GetBookingSummary - 200 1344 application/json; charset=utf-8 35.3187ms
+[2025-10-05 16:23:04.955 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-05 16:23:05.645 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-05 16:23:05.646 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-05 16:23:05.794 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-05 16:23:05.795 +03:00  INF]  Hosting environment: Development
+[2025-10-05 16:23:05.795 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-05 16:23:06.912 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-05 16:23:07.247 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 346.9055ms
+[2025-10-05 16:23:07.716 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-05 16:23:07.722 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 6.2069ms
+[2025-10-05 16:23:07.964 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-05 16:23:08.011 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 46.6771ms
+[2025-10-05 16:23:08.197 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-05 16:23:08.262 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 65.1433ms
+[2025-10-05 16:24:14.409 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/SaveClientBooking - application/json-patch+json 647
+[2025-10-05 16:24:14.421 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 16:24:14.605 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App)'
+[2025-10-05 16:24:14.627 +03:00  INF]  Route matched with {action = "SaveClientBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult SaveClientBooking(ITravelApp.Data.Models.Bookings.BookingCls) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-05 16:24:19.170 +03:00  INF]  Executed DbCommand (32ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM trips_booking AS t
+[2025-10-05 16:24:19.307 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT max(t.id)
+FROM trips_booking AS t
+[2025-10-05 16:24:19.667 +03:00  INF]  Executed DbCommand (27ms) [Parameters=[@p0='?' (DbType = Int64), @p1='?', @p2='?', @p3='?' (DbType = DateTime2), @p4='?', @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?', @p8='?', @p9='?', @p10='?', @p11='?', @p12='?', @p13='?', @p14='?' (DbType = Int32), @p15='?' (DbType = Boolean), @p16='?', @p17='?', @p18='?' (DbType = Int32), @p19='?' (DbType = Decimal), @p20='?', @p21='?' (DbType = DateTime2), @p22='?' (DbType = Int64), @p23='?' (DbType = DateTime2), @p24='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO trips_booking (id, booking_code, booking_code_auto, booking_date, booking_notes, booking_status, child_num, client_email, client_id, client_name, client_nationality, client_phone, currency_code, gift_code, infant_num, is_two_way, pickup_address, pickup_time, total_pax, total_price, trip_code, trip_date, trip_id, trip_return_date, trip_type)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24);
+[2025-10-05 16:24:19.730 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-05 16:24:19.764 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App) in 5132.0866ms
+[2025-10-05 16:24:19.764 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.SaveClientBooking (ITravel_App)'
+[2025-10-05 16:24:19.776 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/SaveClientBooking - 200 123 application/json; charset=utf-8 5367.6705ms
+[2025-10-05 16:25:10.422 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/GetBookingSummary - application/json-patch+json 62
+[2025-10-05 16:25:10.425 +03:00  INF]  CORS policy execution successful.
+[2025-10-05 16:25:10.439 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.GetBookingWithDetails (ITravel_App)'
+[2025-10-05 16:25:10.449 +03:00  INF]  Route matched with {action = "GetBookingWithDetails", controller = "Booking"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetBookingWithDetails(ITravelApp.Data.Models.Bookings.BookingReq) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-05 16:25:10.594 +03:00  INF]  Executed DbCommand (14ms) [Parameters=[@__req_lang_code_0='?', @__req_booking_id_1='?' (DbType = Int64), @__req_client_id_2='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b.booking_code, b.booking_code_auto, b.booking_date, b.booking_datestr, b.booking_id, b.booking_notes, b.booking_status, b.booking_status_id, b.cancelation_policy, b.child_num, b.client_email, b.client_id, b.client_name, b.client_nationality, b.client_phone, b.currency_code, b.default_img, b.gift_code, b.infant_num, b.is_two_way, b.lang_code, b.pickup_address, b.pickup_time, b.release_days, b.review_rate, b.total_pax, b.total_price, b.trip_code, b.trip_code_auto, b.trip_date, b.trip_datestr, b.trip_description, b.trip_id, b.trip_name, b.trip_return_date, b.trip_return_datestr, b.trip_type
+FROM bookingwithdetails AS b
+WHERE b.lang_code = @__req_lang_code_0 AND b.booking_id = @__req_booking_id_1 AND b.client_id = @__req_client_id_2
+LIMIT 2
+[2025-10-05 16:25:10.719 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__ToLower_1='?', @__booking_id_0='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.extra_id, b.booking_id, b.extra_count, f0.facility_name AS extra_name, f1.extra_price * b.extra_count::numeric AS extra_price, b.id
+FROM booking_extra AS b
+INNER JOIN (
+    SELECT f.facility_id, f.facility_name
+    FROM facility_translations AS f
+    WHERE lower(f.lang_code) = @__ToLower_1
+) AS f0 ON b.extra_id::bigint = f0.facility_id
+INNER JOIN facility_main AS f1 ON f0.facility_id = f1.id
+WHERE b.booking_id = @__booking_id_0
+[2025-10-05 16:25:10.722 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.Bookings.Client.BookingSummary'.
+[2025-10-05 16:25:10.745 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.GetBookingWithDetails (ITravel_App) in 295.86ms
+[2025-10-05 16:25:10.745 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.GetBookingWithDetails (ITravel_App)'
+[2025-10-05 16:25:10.747 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/GetBookingSummary - 200 1559 application/json; charset=utf-8 326.5227ms

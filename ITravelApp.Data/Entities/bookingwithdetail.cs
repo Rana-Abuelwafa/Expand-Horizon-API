@@ -72,4 +72,10 @@ public partial class bookingwithdetail
     public string? trip_code_auto { get; set; }
 
     public int? release_days { get; set; }
+
+    public bool? is_two_way { get; set; }
+
+    public DateTime? trip_return_date { get; set; }
+
+    public string? trip_return_datestr { get; set; }
 }

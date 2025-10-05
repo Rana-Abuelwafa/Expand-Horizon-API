@@ -115,6 +115,7 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.trip_code_auto).HasMaxLength(20);
             entity.Property(e => e.trip_date).HasColumnType("timestamp without time zone");
             entity.Property(e => e.trip_name).HasMaxLength(50);
+            entity.Property(e => e.trip_return_date).HasColumnType("timestamp without time zone");
         });
 
         modelBuilder.Entity<child_policy_setting>(entity =>
@@ -499,9 +500,13 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.client_phone).HasMaxLength(50);
             entity.Property(e => e.currency_code).HasMaxLength(20);
             entity.Property(e => e.gift_code).HasMaxLength(50);
+            entity.Property(e => e.is_two_way).HasDefaultValue(false);
             entity.Property(e => e.pickup_time).HasMaxLength(20);
             entity.Property(e => e.trip_code).HasMaxLength(20);
             entity.Property(e => e.trip_date).HasColumnType("timestamp without time zone");
+            entity.Property(e => e.trip_return_date)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone");
         });
 
         modelBuilder.Entity<trips_wishlist>(entity =>

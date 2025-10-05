@@ -51,6 +51,8 @@ namespace ITravelApp.Data.Models.Bookings
         public string? trip_datestr { get; set; }
 
         public string? booking_datestr { get; set; }
+        public bool? is_two_way { get; set; }
+        public string? trip_return_datestr { get; set; }
         public List<TripsPickupResponse> pickups { get; set; }
     }
 }

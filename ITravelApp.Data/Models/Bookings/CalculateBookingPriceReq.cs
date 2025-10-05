@@ -17,6 +17,7 @@ namespace ITravelApp.Data.Models.Bookings
 
         public List<ExtraWithPrice>? extra_lst { get; set; }
         public List<int>? childAges { get; set; } = new();
+        public bool? is_two_way { get; set; } = false;
         //public decimal? extras_price { get; set; }
     }
     public class ExtraWithPrice {

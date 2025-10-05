@@ -1,0 +1,304 @@
+[2025-10-02 17:01:54.494 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-02 17:01:56.186 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-02 17:01:56.187 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-02 17:01:56.629 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-02 17:01:56.630 +03:00  INF]  Hosting environment: Development
+[2025-10-02 17:01:56.630 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-02 17:01:58.986 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-02 17:01:59.487 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 525.3645ms
+[2025-10-02 17:01:59.532 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-02 17:01:59.539 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-02 17:01:59.556 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 24.8566ms
+[2025-10-02 17:01:59.648 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 109.2282ms
+[2025-10-02 17:01:59.734 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-02 17:01:59.904 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 169.7183ms
+[2025-10-02 17:03:59.632 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - application/json-patch+json 156
+[2025-10-02 17:03:59.640 +03:00  INF]  CORS policy execution successful.
+[2025-10-02 17:04:02.634 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:04:02.693 +03:00  INF]  Route matched with {action = "AssignExtraToBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AssignExtraToBooking(System.Collections.Generic.List`1[ITravelApp.Data.Entities.booking_extra]) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-02 17:04:18.972 +03:00  INF]  Executed DbCommand (126ms) [Parameters=[@__row_extra_id_0='?' (DbType = Int32), @__row_booking_id_1='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.id, b.booking_id, b.created_at, b.created_by, b.extra_count, b.extra_id, b.updated_at
+FROM booking_extra AS b
+WHERE b.extra_id = @__row_extra_id_0 AND b.booking_id = @__row_booking_id_1
+LIMIT 2
+[2025-10-02 17:04:24.144 +03:00  ERR]  Failed executing DbCommand (28ms) [Parameters=[@p0='?' (DbType = Int64), @p1='?' (DbType = DateTime2), @p2='?', @p3='?' (DbType = Int32), @p4='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO booking_extra (booking_id, created_at, created_by, extra_count, extra_id)
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING id, updated_at;
+[2025-10-02 17:04:24.205 +03:00  ERR]  An exception occurred in the database while saving changes for context type 'ITravelApp.Data.Data.horizon_client_dbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23505: duplicate key value violates unique constraint "booking_extra_pkey"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23505
+    MessageText: duplicate key value violates unique constraint "booking_extra_pkey"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: booking_extra
+    ConstraintName: booking_extra_pkey
+    File: nbtinsert.c
+    Line: 673
+    Routine: _bt_check_unique
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23505: duplicate key value violates unique constraint "booking_extra_pkey"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23505
+    MessageText: duplicate key value violates unique constraint "booking_extra_pkey"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: booking_extra
+    ConstraintName: booking_extra_pkey
+    File: nbtinsert.c
+    Line: 673
+    Routine: _bt_check_unique
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+[2025-10-02 17:04:34.885 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-02 17:04:34.963 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App) in 32260.1213ms
+[2025-10-02 17:04:34.963 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:04:34.984 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - 200 101 application/json; charset=utf-8 35351.4437ms
+[2025-10-02 17:05:37.394 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-02 17:05:38.103 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-02 17:05:38.104 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-02 17:05:39.152 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-02 17:05:39.153 +03:00  INF]  Hosting environment: Development
+[2025-10-02 17:05:39.153 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-02 17:05:39.207 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-02 17:05:39.821 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 627.9704ms
+[2025-10-02 17:05:39.919 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-02 17:05:39.933 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 13.4579ms
+[2025-10-02 17:05:39.983 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-02 17:05:40.129 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 146.8416ms
+[2025-10-02 17:05:41.349 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-02 17:05:41.450 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 101.1766ms
+[2025-10-02 17:07:08.889 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - application/json-patch+json 309
+[2025-10-02 17:07:08.905 +03:00  INF]  CORS policy execution successful.
+[2025-10-02 17:07:09.336 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:07:09.397 +03:00  INF]  Route matched with {action = "AssignExtraToBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AssignExtraToBooking(System.Collections.Generic.List`1[ITravelApp.Data.Entities.booking_extra]) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-02 17:07:10.032 +03:00  INF]  Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+[2025-10-02 17:07:10.162 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App) in 756.2106ms
+[2025-10-02 17:07:10.163 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:07:10.167 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - 400 553 application/problem+json; charset=utf-8 1277.7451ms
+[2025-10-02 17:07:35.783 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - application/json-patch+json 308
+[2025-10-02 17:07:35.785 +03:00  INF]  CORS policy execution successful.
+[2025-10-02 17:07:35.801 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:07:35.802 +03:00  INF]  Route matched with {action = "AssignExtraToBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AssignExtraToBooking(System.Collections.Generic.List`1[ITravelApp.Data.Entities.booking_extra]) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-02 17:07:48.685 +03:00  INF]  Executed DbCommand (131ms) [Parameters=[@__row_extra_id_0='?' (DbType = Int32), @__row_booking_id_1='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.id, b.booking_id, b.created_at, b.created_by, b.extra_count, b.extra_id, b.updated_at
+FROM booking_extra AS b
+WHERE b.extra_id = @__row_extra_id_0 AND b.booking_id = @__row_booking_id_1
+LIMIT 2
+[2025-10-02 17:07:59.532 +03:00  INF]  Executed DbCommand (14ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (DbType = Int64), @p1='?' (DbType = DateTime2), @p2='?', @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+UPDATE booking_extra SET booking_id = @p0, created_at = @p1, created_by = @p2, extra_count = @p3, extra_id = @p4, updated_at = @p5
+WHERE id = @p6;
+[2025-10-02 17:08:16.054 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__row_extra_id_0='?' (DbType = Int32), @__row_booking_id_1='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.id, b.booking_id, b.created_at, b.created_by, b.extra_count, b.extra_id, b.updated_at
+FROM booking_extra AS b
+WHERE b.extra_id = @__row_extra_id_0 AND b.booking_id = @__row_booking_id_1
+LIMIT 2
+[2025-10-02 17:08:19.296 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM booking_extra AS b
+[2025-10-02 17:08:20.618 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT max(b.id)
+FROM booking_extra AS b
+[2025-10-02 17:08:23.514 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int64), @p2='?' (DbType = DateTime2), @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO booking_extra (id, booking_id, created_at, created_by, extra_count, extra_id)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING updated_at;
+[2025-10-02 17:08:30.449 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-02 17:08:30.456 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App) in 54628.4348ms
+[2025-10-02 17:08:30.456 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:08:30.470 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - 200 101 application/json; charset=utf-8 54686.3095ms
+[2025-10-02 17:09:05.575 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - application/json-patch+json 308
+[2025-10-02 17:09:05.616 +03:00  INF]  CORS policy execution successful.
+[2025-10-02 17:09:05.623 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:09:05.623 +03:00  INF]  Route matched with {action = "AssignExtraToBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AssignExtraToBooking(System.Collections.Generic.List`1[ITravelApp.Data.Entities.booking_extra]) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-02 17:09:15.066 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__row_extra_id_0='?' (DbType = Int32), @__row_booking_id_1='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.id, b.booking_id, b.created_at, b.created_by, b.extra_count, b.extra_id, b.updated_at
+FROM booking_extra AS b
+WHERE b.extra_id = @__row_extra_id_0 AND b.booking_id = @__row_booking_id_1
+LIMIT 2
+[2025-10-02 17:09:28.260 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (DbType = Int64), @p1='?' (DbType = DateTime2), @p2='?', @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+UPDATE booking_extra SET booking_id = @p0, created_at = @p1, created_by = @p2, extra_count = @p3, extra_id = @p4, updated_at = @p5
+WHERE id = @p6;
+[2025-10-02 17:09:36.775 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__row_extra_id_0='?' (DbType = Int32), @__row_booking_id_1='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.id, b.booking_id, b.created_at, b.created_by, b.extra_count, b.extra_id, b.updated_at
+FROM booking_extra AS b
+WHERE b.extra_id = @__row_extra_id_0 AND b.booking_id = @__row_booking_id_1
+LIMIT 2
+[2025-10-02 17:09:42.093 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM booking_extra AS b
+[2025-10-02 17:09:43.564 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT max(b.id)
+FROM booking_extra AS b
+[2025-10-02 17:09:45.849 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int64), @p2='?' (DbType = DateTime2), @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO booking_extra (id, booking_id, created_at, created_by, extra_count, extra_id)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING updated_at;
+[2025-10-02 17:09:55.893 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-02 17:09:55.894 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App) in 50270.538ms
+[2025-10-02 17:09:55.895 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:09:55.896 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - 200 101 application/json; charset=utf-8 50322.8591ms
+[2025-10-02 17:13:32.959 +03:00  INF]  User profile is available. Using 'C:\Users\Pro\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-10-02 17:13:33.685 +03:00  INF]  Now listening on: https://localhost:7045
+[2025-10-02 17:13:33.686 +03:00  INF]  Now listening on: http://localhost:5124
+[2025-10-02 17:13:34.060 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2025-10-02 17:13:34.060 +03:00  INF]  Hosting environment: Development
+[2025-10-02 17:13:34.060 +03:00  INF]  Content root path: D:\horizen\api\ITravel_App\ITravel_App
+[2025-10-02 17:13:34.987 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/index.html - null null
+[2025-10-02 17:13:35.733 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/index.html - 200 null text/html;charset=utf-8 760.3183ms
+[2025-10-02 17:13:36.705 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - null null
+[2025-10-02 17:13:36.729 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 23.8785ms
+[2025-10-02 17:13:36.772 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/_vs/browserLink - null null
+[2025-10-02 17:13:36.855 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/_vs/browserLink - 200 null text/javascript; charset=UTF-8 83.322ms
+[2025-10-02 17:13:37.191 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - null null
+[2025-10-02 17:13:37.289 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7045/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 97.3399ms
+[2025-10-02 17:15:08.950 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - application/json-patch+json 310
+[2025-10-02 17:15:08.963 +03:00  INF]  CORS policy execution successful.
+[2025-10-02 17:15:09.334 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:15:09.380 +03:00  INF]  Route matched with {action = "AssignExtraToBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AssignExtraToBooking(System.Collections.Generic.List`1[ITravelApp.Data.Entities.booking_extra]) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-02 17:15:10.020 +03:00  INF]  Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+[2025-10-02 17:15:10.126 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App) in 735.353ms
+[2025-10-02 17:15:10.126 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:15:10.129 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - 400 553 application/problem+json; charset=utf-8 1179.0343ms
+[2025-10-02 17:15:44.795 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - application/json-patch+json 308
+[2025-10-02 17:15:44.799 +03:00  INF]  CORS policy execution successful.
+[2025-10-02 17:15:44.816 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:15:44.816 +03:00  INF]  Route matched with {action = "AssignExtraToBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AssignExtraToBooking(System.Collections.Generic.List`1[ITravelApp.Data.Entities.booking_extra]) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-02 17:15:54.781 +03:00  INF]  Executed DbCommand (125ms) [Parameters=[@__row_extra_id_0='?' (DbType = Int32), @__row_booking_id_1='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.id, b.booking_id, b.created_at, b.created_by, b.extra_count, b.extra_id, b.updated_at
+FROM booking_extra AS b
+WHERE b.extra_id = @__row_extra_id_0 AND b.booking_id = @__row_booking_id_1
+LIMIT 2
+[2025-10-02 17:16:00.992 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (DbType = Int64), @p1='?' (DbType = DateTime2), @p2='?', @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+UPDATE booking_extra SET booking_id = @p0, created_at = @p1, created_by = @p2, extra_count = @p3, extra_id = @p4, updated_at = @p5
+WHERE id = @p6;
+[2025-10-02 17:16:09.011 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__row_extra_id_0='?' (DbType = Int32), @__row_booking_id_1='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.id, b.booking_id, b.created_at, b.created_by, b.extra_count, b.extra_id, b.updated_at
+FROM booking_extra AS b
+WHERE b.extra_id = @__row_extra_id_0 AND b.booking_id = @__row_booking_id_1
+LIMIT 2
+[2025-10-02 17:16:14.419 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM booking_extra AS b
+[2025-10-02 17:16:16.178 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT max(b.id)
+FROM booking_extra AS b
+[2025-10-02 17:16:18.527 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int64), @p2='?' (DbType = DateTime2), @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO booking_extra (id, booking_id, created_at, created_by, extra_count, extra_id)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING updated_at;
+[2025-10-02 17:16:25.644 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-02 17:16:25.651 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App) in 40834.2356ms
+[2025-10-02 17:16:25.651 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:16:25.663 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - 200 53 application/json; charset=utf-8 40868.5118ms
+[2025-10-02 17:16:53.321 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - application/json-patch+json 308
+[2025-10-02 17:16:53.329 +03:00  INF]  CORS policy execution successful.
+[2025-10-02 17:16:53.335 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:16:53.335 +03:00  INF]  Route matched with {action = "AssignExtraToBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AssignExtraToBooking(System.Collections.Generic.List`1[ITravelApp.Data.Entities.booking_extra]) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-02 17:17:01.342 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__row_extra_id_0='?' (DbType = Int32), @__row_booking_id_1='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.id, b.booking_id, b.created_at, b.created_by, b.extra_count, b.extra_id, b.updated_at
+FROM booking_extra AS b
+WHERE b.extra_id = @__row_extra_id_0 AND b.booking_id = @__row_booking_id_1
+LIMIT 2
+[2025-10-02 17:17:05.928 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (DbType = Int64), @p1='?' (DbType = DateTime2), @p2='?', @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+UPDATE booking_extra SET booking_id = @p0, created_at = @p1, created_by = @p2, extra_count = @p3, extra_id = @p4, updated_at = @p5
+WHERE id = @p6;
+[2025-10-02 17:17:10.127 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__row_extra_id_0='?' (DbType = Int32), @__row_booking_id_1='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.id, b.booking_id, b.created_at, b.created_by, b.extra_count, b.extra_id, b.updated_at
+FROM booking_extra AS b
+WHERE b.extra_id = @__row_extra_id_0 AND b.booking_id = @__row_booking_id_1
+LIMIT 2
+[2025-10-02 17:17:14.488 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (DbType = Int64), @p1='?' (DbType = DateTime2), @p2='?', @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+UPDATE booking_extra SET booking_id = @p0, created_at = @p1, created_by = @p2, extra_count = @p3, extra_id = @p4, updated_at = @p5
+WHERE id = @p6;
+[2025-10-02 17:17:18.901 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-02 17:17:18.901 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App) in 25565.9ms
+[2025-10-02 17:17:18.901 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:17:18.902 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - 200 53 application/json; charset=utf-8 25581.527ms
+[2025-10-02 17:17:49.368 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - application/json-patch+json 156
+[2025-10-02 17:17:49.369 +03:00  INF]  CORS policy execution successful.
+[2025-10-02 17:17:49.369 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:17:49.370 +03:00  INF]  Route matched with {action = "AssignExtraToBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AssignExtraToBooking(System.Collections.Generic.List`1[ITravelApp.Data.Entities.booking_extra]) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-02 17:17:56.201 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__row_extra_id_0='?' (DbType = Int32), @__row_booking_id_1='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.id, b.booking_id, b.created_at, b.created_by, b.extra_count, b.extra_id, b.updated_at
+FROM booking_extra AS b
+WHERE b.extra_id = @__row_extra_id_0 AND b.booking_id = @__row_booking_id_1
+LIMIT 2
+[2025-10-02 17:18:00.584 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (DbType = Int64), @p1='?' (DbType = DateTime2), @p2='?', @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+UPDATE booking_extra SET booking_id = @p0, created_at = @p1, created_by = @p2, extra_count = @p3, extra_id = @p4, updated_at = @p5
+WHERE id = @p6;
+[2025-10-02 17:18:05.202 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-02 17:18:05.203 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App) in 15833.0623ms
+[2025-10-02 17:18:05.203 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:18:05.205 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - 200 53 application/json; charset=utf-8 15834.9081ms
+[2025-10-02 17:18:23.996 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - application/json-patch+json 155
+[2025-10-02 17:18:23.996 +03:00  INF]  CORS policy execution successful.
+[2025-10-02 17:18:23.997 +03:00  INF]  Executing endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:18:23.997 +03:00  INF]  Route matched with {action = "AssignExtraToBooking", controller = "Booking"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult AssignExtraToBooking(System.Collections.Generic.List`1[ITravelApp.Data.Entities.booking_extra]) on controller ITravel_App.Controllers.BookingController (ITravel_App).
+[2025-10-02 17:18:30.324 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__row_extra_id_0='?' (DbType = Int32), @__row_booking_id_1='?' (DbType = Int64)], CommandType='"Text"', CommandTimeout='30']
+SELECT b.id, b.booking_id, b.created_at, b.created_by, b.extra_count, b.extra_id, b.updated_at
+FROM booking_extra AS b
+WHERE b.extra_id = @__row_extra_id_0 AND b.booking_id = @__row_booking_id_1
+LIMIT 2
+[2025-10-02 17:18:35.501 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM booking_extra AS b
+[2025-10-02 17:18:36.732 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT max(b.id)
+FROM booking_extra AS b
+[2025-10-02 17:18:38.618 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int64), @p2='?' (DbType = DateTime2), @p3='?', @p4='?' (DbType = Int32), @p5='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO booking_extra (id, booking_id, created_at, created_by, extra_count, extra_id)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING updated_at;
+[2025-10-02 17:18:43.370 +03:00  INF]  Executing OkObjectResult, writing value of type 'ITravelApp.Data.Models.ResponseCls'.
+[2025-10-02 17:18:43.370 +03:00  INF]  Executed action ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App) in 19373.1768ms
+[2025-10-02 17:18:43.370 +03:00  INF]  Executed endpoint 'ITravel_App.Controllers.BookingController.AssignExtraToBooking (ITravel_App)'
+[2025-10-02 17:18:43.370 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7045/api/Booking/AssignExtraToBooking - 200 53 application/json; charset=utf-8 19374.8138ms

@@ -9,7 +9,7 @@ public partial class newsletter_subscriber
 
     public string? client_name { get; set; }
 
-    public bool is_confirmed { get; set; }
+    public bool? is_confirmed { get; set; }
 
     public DateTime? subscribed_at { get; set; }
 

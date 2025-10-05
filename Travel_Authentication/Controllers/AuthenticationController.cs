@@ -1,9 +1,12 @@
-﻿using Mails_App;
+﻿using MailKit.Net.Smtp;
+using MailKit.Security;
+using Mails_App;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
+using MimeKit;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -750,9 +753,43 @@ namespace Travel_Authentication.Controllers
         [HttpPost("SendMAil")]
         public async Task<IActionResult> SendMAil()
         {
-            MailData mailData = Utils.GetOTPMailData("en","Rana Mohamed", "1324252r5", "ranaelsherif91@gmail.com");
-            Mail_Service.SendMail(mailData);
-            return Ok();
+
+            string EmailId = "info@expand-horizons.de";
+            string Name = "info@expand-horizons.de";
+            string ToEmail = "ranaelsherif91@gmail.com";
+            string Subject = "test";
+            string Body = "";
+            string UserName = "info@expand-horizons.de";
+            string Host = "mx2eae.netcup.net";
+            int port =465;
+            string Password = "Berlin2025@";
+            //MailData mailData = Utils.GetOTPMailData("en","Rana Mohamed", "1324252r5", "ranaelsherif91@gmail.com");
+            //Mail_Service.SendMail(mailData);
+            try
+            {
+                var email = new MimeMessage();
+                email.Sender = MailboxAddress.Parse(EmailId);
+                email.From.Add(new MailboxAddress(Name, EmailId));
+                email.To.Add(MailboxAddress.Parse(ToEmail));
+                email.Subject = Subject;
+
+                var builder = new BodyBuilder { HtmlBody = Body };
+                email.Body = builder.ToMessageBody();
+
+                using var smtp = new SmtpClient();
+                smtp.ServerCertificateValidationCallback = (s, c, h, e) => true; // temp bypass SSL cert
+                smtp.AuthenticationMechanisms.Remove("XOAUTH2"); // only use username/password
+
+                await smtp.ConnectAsync(Host, port, SecureSocketOptions.SslOnConnect);
+                await smtp.AuthenticateAsync(UserName, Password);
+                await smtp.SendAsync(email);
+                await smtp.DisconnectAsync(true);
+                return Ok();
+            }
+            catch (Exception e) { 
+                return BadRequest(e);
+            }
+           
         }
        
     }
