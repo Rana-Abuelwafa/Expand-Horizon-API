@@ -754,16 +754,16 @@ namespace Travel_Authentication.Controllers
         public async Task<IActionResult> SendMAil()
         {
 
-            string EmailId = "info@expand-horizons.de";
-            string Name = "info@expand-horizons.de";
+            string EmailId = "customercare@expand-horizons.de";
+            string Name = "customercare@expand-horizons.de";
             string ToEmail = "ranaelsherif91@gmail.com";
             string Subject = "test";
-            string Body = "";
-            string UserName = "info@expand-horizons.de";
+            string Body = "test";
+            string UserName = "customercare@expand-horizons.de";
             string Host = "mx2eae.netcup.net";
             int port =465;
             string Password = "Berlin2025@";
-            //MailData mailData = Utils.GetOTPMailData("en","Rana Mohamed", "1324252r5", "ranaelsherif91@gmail.com");
+            //MailData mailData = Utils.GetOTPMailData("en", "Rana Mohamed", "1324252r5", "ranaelsherif91@gmail.com");
             //Mail_Service.SendMail(mailData);
             try
             {
@@ -777,19 +777,20 @@ namespace Travel_Authentication.Controllers
                 email.Body = builder.ToMessageBody();
 
                 using var smtp = new SmtpClient();
-                smtp.ServerCertificateValidationCallback = (s, c, h, e) => true; // temp bypass SSL cert
-                smtp.AuthenticationMechanisms.Remove("XOAUTH2"); // only use username/password
+                //smtp.ServerCertificateValidationCallback = (s, c, h, e) => true; // temp bypass SSL cert
+                //smtp.AuthenticationMechanisms.Remove("XOAUTH2"); // only use username/password
 
-                await smtp.ConnectAsync(Host, port, SecureSocketOptions.SslOnConnect);
+                await smtp.ConnectAsync(Host, port, true);
                 await smtp.AuthenticateAsync(UserName, Password);
                 await smtp.SendAsync(email);
                 await smtp.DisconnectAsync(true);
                 return Ok();
             }
-            catch (Exception e) { 
+            catch (Exception e)
+            {
                 return BadRequest(e);
             }
-           
+
         }
        
     }

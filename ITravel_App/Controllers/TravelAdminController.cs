@@ -5,7 +5,12 @@ using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.Transfer;
 using ITravelApp.Data.Models.trips;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace ITravel_App.Controllers
 {

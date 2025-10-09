@@ -7,9 +7,12 @@ using ITravelApp.Data.Models.profile;
 using ITravelApp.Data.Models.trips;
 using Mails_App;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ITravel_App.Controllers
 {
@@ -114,7 +117,7 @@ namespace ITravel_App.Controllers
             req.client_id = clientId;
             string fileName = "BookingClientEmail_" + req.lang_code.ToLower() + ".cshtml";
             var templatePath = Path.Combine("/Views/Email" + "/", fileName);
-            BookingWithTripDetailsAll model = _clientService.ConfirmBooking(req);
+            BookingWithTripDetailsAll model = await _clientService.ConfirmBooking(req);
             if (model != null)
             {
                 model.client_name = FullName;
@@ -122,7 +125,7 @@ namespace ITravel_App.Controllers
                 //generate pdf from chtml 
 
                 //byte[] pdf = await _pdfService.GeneratePdfFromHtmlAsync(msg);
-                var pdfBytes = _pdfService.GenerateBookingPdf(model);
+                var pdfBytes = await _pdfService.GenerateBookingPdf(model);
                 MailData Mail_Data = new MailData {
                     EmailToId = client_email, EmailToName = FullName,
                     EmailSubject = UtilsCls.GetMailSubjectByLang(req.lang_code, 3),

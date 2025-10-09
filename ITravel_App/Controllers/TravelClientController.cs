@@ -5,8 +5,10 @@ using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
 using ITravelApp.Data.Models.profile;
 using ITravelApp.Data.Models.trips;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace ITravel_App.Controllers
 {

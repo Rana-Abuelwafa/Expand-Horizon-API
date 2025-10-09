@@ -1143,22 +1143,22 @@ namespace ITravelApp.Data
             }
         }
 
-        public BookingWithTripDetailsAll ConfirmBooking(ConfirmBookingReq req)
+        public async Task<BookingWithTripDetailsAll> ConfirmBooking(ConfirmBookingReq req)
         {
 
             try
             {
-                trips_booking booking = _db.trips_bookings.Where(wr => wr.id == req.booking_id).SingleOrDefault();
+                trips_booking booking = await _db.trips_bookings.Where(wr => wr.id == req.booking_id).SingleOrDefaultAsync();
                 if (booking != null)
                 {
                     booking.booking_status = 2;
                     _db.trips_bookings.Update(booking);
                     _db.SaveChanges();
-                    var result = _db.bookingwithdetails.Where(
+                    var result = await _db.bookingwithdetails.Where(
                                                        wr => wr.lang_code == req.lang_code &&
                                                              wr.booking_id == req.booking_id &&
                                                              wr.client_id == req.client_id
-                                                        ).SingleOrDefault();
+                                                        ).SingleOrDefaultAsync();
                     return new BookingWithTripDetailsAll
                     {
                         booking_code = result.booking_code,
@@ -1267,6 +1267,7 @@ namespace ITravelApp.Data
                     {
                         final_price = final_price * 2;
                     }
+                    
                 }
                
                 if(req.booking_id > 0)
@@ -1581,6 +1582,8 @@ namespace ITravelApp.Data
                     release_days = result.release_days,
                     trip_code_auto = result.trip_code_auto,
                     is_two_way=result.is_two_way,
+                    trip_return_date=result.trip_return_date,
+                    trip_return_datestr=result.trip_return_datestr,
                     extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code).ToList()
                 }).ToList();
             }

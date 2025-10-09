@@ -19,6 +19,7 @@
     var Discount = 0;
     var total_amount = Model.total_price;
     var pickups = Model.pickups;
+    var nationality = Model.client_nationality;
 }
 
 <!doctype html>
@@ -88,9 +89,15 @@
                                     <tr>
                                         <td style="padding:16px;">
                                             <div style="font-size:13px; color:#555;">Pickup</div>
-                                            <div style="font-size:15px; color:#000;">@Address at @pickup_time</div>
+                                            <div style="font-size:15px; color:#000;">@Address</div>
                                         </td>
                                         <td style="padding:16px;" align="right">
+                                            <div style="font-size:13px; color:#555;">Nationality</div>
+                                            <div style="font-size:15px; color:#000;">@nationality</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:16px;">
                                             <div style="font-size:13px; color:#555;">Payment</div>
                                             <div style="font-size:15px; color:#000;">Payment on site in cash @currency @total_amount</div>
                                         </td>
@@ -174,22 +181,22 @@
                                     <tr>
                                         <td>
                                             <a href="https://www.facebook.com/Horizon.de" target="_blank">
-                                                <img src="https://api.raccoon24.com/images/icons-facebook.png" alt="Facebook" width="24" style="display:block;">
+                                                <img src="http://api.raccoon24.com/images/icons-facebook.png" alt="Facebook" width="24" style="display:block;">
                                             </a>
                                         </td>
                                         <td>
                                             <a href="https://www.instagram.com/Horizon.de" target="_blank">
-                                                <img src="https://api.raccoon24.com/images/icons-instagram.png" alt="Instagram" width="24" style="display:block;">
+                                                <img src="http://api.raccoon24.com/images/icons-instagram.png" alt="Instagram" width="24" style="display:block;">
                                             </a>
                                         </td>
                                         <td>
                                             <a href="waslaa.2025@gmail.com">
-                                                <img src="https://api.raccoon24.com/images/icons-gmail.png" alt="Email" width="24" style="display:block;">
+                                                <img src="http://api.raccoon24.com/images/icons-gmail.png" alt="Email" width="24" style="display:block;">
                                             </a>
                                         </td>
                                         <td>
                                             <a href="https://x.com/waslaade" target="_blank">
-                                                <img src="https://api.raccoon24.com/images/icons-twitter.png" alt="x" width="24" style="display:block;">
+                                                <img src="http://api.raccoon24.com/images/icons-twitter.png" alt="x" width="24" style="display:block;">
                                             </a>
                                         </td>
 

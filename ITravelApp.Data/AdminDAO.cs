@@ -666,9 +666,12 @@ namespace ITravelApp.Data
                 {
                     response = new ResponseCls { errors = null, success = true };
                 }
+                else
+                {
+                    response = new ResponseCls { errors = _localizer["CheckAdmin"], success = true };
+                }
 
 
-                response = new ResponseCls { errors = _localizer["CheckAdmin"], success = true };
 
             }
 

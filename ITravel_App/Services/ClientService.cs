@@ -7,6 +7,8 @@ using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
 using ITravelApp.Data.Models.profile;
 using ITravelApp.Data.Models.trips;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ITravel_App.Services
 {
@@ -35,9 +37,9 @@ namespace ITravel_App.Services
             return _clientDAO.CalculateBookingPrice(req);
         }
 
-        public BookingWithTripDetailsAll ConfirmBooking(ConfirmBookingReq req)
+        public async Task<BookingWithTripDetailsAll> ConfirmBooking(ConfirmBookingReq req)
         {
-            return _clientDAO.ConfirmBooking(req);
+            return await _clientDAO.ConfirmBooking(req);
         }
 
         public Task<BookingSummary> GetBookingWithDetails(BookingReq req)

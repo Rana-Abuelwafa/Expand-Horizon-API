@@ -20,7 +20,8 @@
                 ["TripPrice"] = "Trip price",
                 ["Discount"] = "Discount",
                 ["Total"] = "Total",
-                ["Help"] = "Need help? Contact us at"
+                ["Help"] = "Need help? Contact us at",
+                ["Nationality"]= "Nationality"
             },
             ["de"] = new Dictionary<string, string>
             {
@@ -38,7 +39,8 @@
                 ["TripPrice"] = "Reisepreis",
                 ["Discount"] = "Rabatt",
                 ["Total"] = "Gesamt",
-                ["Help"] = "Brauchen Sie Hilfe? Kontaktieren Sie uns unter"
+                ["Help"] = "Brauchen Sie Hilfe? Kontaktieren Sie uns unter",
+                ["Nationality"] = "Nationalität"
             }
         };
     }

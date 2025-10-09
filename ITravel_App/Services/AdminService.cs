@@ -6,6 +6,8 @@ using ITravelApp.Data.Models.destination;
 using ITravelApp.Data.Models.global;
 using ITravelApp.Data.Models.Transfer;
 using ITravelApp.Data.Models.trips;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ITravel_App.Services
 {
