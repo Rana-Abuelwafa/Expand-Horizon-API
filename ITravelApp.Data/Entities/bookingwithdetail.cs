@@ -78,4 +78,8 @@ public partial class bookingwithdetail
     public DateTime? trip_return_date { get; set; }
 
     public string? trip_return_datestr { get; set; }
+
+    public short? pricing_type { get; set; }
+
+    public string? child_ages { get; set; }
 }

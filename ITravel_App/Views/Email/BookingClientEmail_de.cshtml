@@ -20,6 +20,8 @@
     var total_amount = Model.total_price;
     var pickups = Model.pickups;
     var nationality = Model.client_nationality;
+    var returnDate = Model.trip_return_datestr;
+    var is_two_way = Model.is_two_way;
 }
 
 <!doctype html>
@@ -86,6 +88,20 @@
                                             <div style="font-size:15px; color:#000;">@adult Adult(s) - @child Child(s) - @infant Infant (s)</div>
                                         </td>
                                     </tr>
+                                    @if (Model.is_two_way == true)
+                                    {
+                                        <tr>
+                                            <td style="padding:16px;">
+                                                <div style="font-size:13px; color:#555;">Rückflugdatum</div>
+                                                <div style="font-size:15px; color:#000;">@returnDate</div>
+                                            </td>
+                                            <td style="padding:16px;" align="right">
+                                                <div style="font-size:13px; color:#555;">Zweiwege</div>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                   
                                     <tr>
                                         <td style="padding:16px;">
                                             <div style="font-size:13px; color:#555;">Abholung</div>

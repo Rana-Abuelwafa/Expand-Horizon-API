@@ -102,6 +102,7 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.booking_code).HasMaxLength(50);
             entity.Property(e => e.booking_code_auto).HasMaxLength(20);
             entity.Property(e => e.booking_date).HasColumnType("timestamp without time zone");
+            entity.Property(e => e.child_ages).HasMaxLength(50);
             entity.Property(e => e.client_email).HasMaxLength(100);
             entity.Property(e => e.client_id).HasMaxLength(100);
             entity.Property(e => e.client_nationality).HasMaxLength(50);
@@ -260,6 +261,10 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.extra_price).HasDefaultValueSql("0");
             entity.Property(e => e.facility_code).HasMaxLength(20);
             entity.Property(e => e.facility_default_name).HasMaxLength(50);
+            entity.Property(e => e.is_obligatory).HasDefaultValue(false);
+            entity.Property(e => e.pricing_type)
+                .HasDefaultValue((short)1)
+                .HasComment("1 = per pax\n2= per unit");
             entity.Property(e => e.updated_at)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone");
@@ -455,6 +460,9 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.currency_code).HasMaxLength(5);
             entity.Property(e => e.pax_from).HasDefaultValue(0);
             entity.Property(e => e.pax_to).HasDefaultValue(0);
+            entity.Property(e => e.pricing_type)
+                .HasDefaultValue((short)1)
+                .HasComment("1 = per pax\n2 = per unit");
             entity.Property(e => e.updated_at)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone");
@@ -485,6 +493,7 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.booking_code_auto).HasMaxLength(20);
             entity.Property(e => e.booking_date).HasColumnType("timestamp without time zone");
             entity.Property(e => e.booking_status).HasComment("1 = requested\n2 = confirmed\n3 = canceled");
+            entity.Property(e => e.child_ages).HasMaxLength(50);
             entity.Property(e => e.client_email).HasMaxLength(100);
             entity.Property(e => e.client_id).HasMaxLength(100);
             entity.Property(e => e.client_nationality).HasMaxLength(50);
@@ -493,11 +502,10 @@ public partial class horizon_client_dbContext : DbContext
             entity.Property(e => e.gift_code).HasMaxLength(50);
             entity.Property(e => e.is_two_way).HasDefaultValue(false);
             entity.Property(e => e.pickup_time).HasMaxLength(20);
+            entity.Property(e => e.pricing_type).HasComment("1 = per pax\n2 = per unit");
             entity.Property(e => e.trip_code).HasMaxLength(20);
             entity.Property(e => e.trip_date).HasColumnType("timestamp without time zone");
-            entity.Property(e => e.trip_return_date)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone");
+            entity.Property(e => e.trip_return_date).HasColumnType("timestamp without time zone");
         });
 
         modelBuilder.Entity<trips_wishlist>(entity =>

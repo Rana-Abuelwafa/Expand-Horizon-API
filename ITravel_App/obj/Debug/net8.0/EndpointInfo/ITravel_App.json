@@ -2766,6 +2766,15 @@
             "format": "date-time",
             "nullable": true
           },
+          "child_ages": {
+            "type": "string",
+            "nullable": true
+          },
+          "pricing_type": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "booking_dateStr": {
             "type": "string",
             "nullable": true
@@ -2780,6 +2789,14 @@
           },
           "currency_code": {
             "type": "string",
+            "nullable": true
+          },
+          "childAgesArr": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
             "nullable": true
           }
         },
@@ -3551,6 +3568,11 @@
             "format": "int32",
             "nullable": true
           },
+          "pricing_type": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "delete": {
             "type": "boolean"
           }
@@ -4014,6 +4036,15 @@
           },
           "currency_code": {
             "type": "string",
+            "nullable": true
+          },
+          "pricing_type": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "is_obligatory": {
+            "type": "boolean",
             "nullable": true
           }
         },

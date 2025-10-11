@@ -17,6 +17,9 @@ namespace ITravelApp.Data.Models.global
         public decimal? extra_price { get; set; }
 
         public string? currency_code { get; set; }
+        public short? pricing_type { get; set; }
+
+        public bool? is_obligatory { get; set; }
     }
 
     public class FacilityWithTranslationGrp
@@ -26,7 +29,9 @@ namespace ITravelApp.Data.Models.global
         public string? facility_code { get; set; }
         public string? facility_default_name { get; set; }
         public bool? is_extra { get; set; }
+        public short? pricing_type { get; set; }
 
+        public bool? is_obligatory { get; set; }
         public decimal? extra_price { get; set; }
 
         public string? currency_code { get; set; }

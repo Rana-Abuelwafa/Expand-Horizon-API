@@ -414,7 +414,6 @@ namespace ITravelApp.Data
         {
             try
             {
-
                 var result =
                    from TFAC in _db.trip_facilities.Where(wr => wr.trip_id == trip_id)
                    join TRANS in _db.facility_translations.Where(wr => wr.lang_code.ToLower() == lang_code.ToLower())
@@ -433,9 +432,9 @@ namespace ITravelApp.Data
                        extra_price = combinedFACM != null ? combinedFACM.extra_price : 0,
                        currency_code = combinedFACM != null ? combinedFACM.currency_code : "",
                        is_extra = combinedFACM != null ? combinedFACM.is_extra : false,
-                       facility_id = TFAC.facility_id
-
-
+                       facility_id = TFAC.facility_id,
+                       pricing_type= combinedFACM != null ? combinedFACM.pricing_type : 0,
+                       is_obligatory= combinedFACM != null ? combinedFACM.is_obligatory : null
                    };
 
                 //var result = from TFAC in _db.trip_facilities.Where(wr => wr.trip_id == trip_id)
@@ -765,6 +764,11 @@ namespace ITravelApp.Data
                     release_days = s.release_days,
                     trip_max_price = _db.trip_prices.Where(wr => wr.trip_id == s.trip_id && wr.currency_code == req.currency_code).Max(m => m.trip_sale_price),
                     trip_min_price = _db.trip_prices.Where(wr => wr.trip_id == s.trip_id && wr.currency_code == req.currency_code).Min(m => m.trip_sale_price),
+                    pricing_type = (_db.trip_prices
+                            .Where(wr => wr.trip_id == s.trip_id
+                                      && wr.currency_code.ToLower() == req.currency_code.ToLower())
+                            .OrderBy(o => o.trip_sale_price)
+                            .FirstOrDefault()?.pricing_type) == 1 ? "Per Pax" : "Per Unit",
                     is_comm_soon = s.is_comm_soon,
 
                 }).ToList();
@@ -782,9 +786,16 @@ namespace ITravelApp.Data
             var wishlist = (string.IsNullOrEmpty(client_id)
             ? null
             : CheckIfTripInWishList(s.trip_id, client_id, s.trip_type));
+
             decimal? trip_max_price = _db.trip_prices
                     .Where(wr => wr.trip_id == s.trip_id && wr.currency_code.ToLower() == currency_code.ToLower())
                     .Max(m => m.trip_sale_price);
+
+            var tripMinRows = _db.trip_prices
+                            .Where(wr => wr.trip_id == s.trip_id
+                                      && wr.currency_code.ToLower() == currency_code.ToLower())
+                            .OrderBy(o => o.trip_sale_price)
+                            .FirstOrDefault();
             return new TripsAll
             {
                 destination_id = s.destination_id,
@@ -824,9 +835,11 @@ namespace ITravelApp.Data
                 cancelation_policy = s.cancelation_policy,
                 release_days = s.release_days,
                 trip_max_price = trip_max_price,
-                trip_min_price = _db.trip_prices
-                    .Where(wr => wr.trip_id == s.trip_id && wr.currency_code.ToLower() == currency_code.ToLower())
-                    .Min(m => m.trip_sale_price),
+                trip_min_price = tripMinRows?.trip_sale_price,
+                pricing_type = tripMinRows?.pricing_type == 1 ? "Per Pax" : "Per Unit",
+                //trip_min_price = _db.trip_prices
+                //    .Where(wr => wr.trip_id == s.trip_id && wr.currency_code.ToLower() == currency_code.ToLower())
+                //    .Min(m => m.trip_sale_price),
                 trip_max_capacity = _db.trip_prices
                     .Where(wr => wr.trip_id == s.trip_id && wr.currency_code.ToLower() == currency_code.ToLower())
                     .Max(m => m.pax_to),
@@ -841,7 +854,7 @@ namespace ITravelApp.Data
                     .Max(m => m.age_to),
                 trip_order = s.trip_order,
                 is_comm_soon = s.is_comm_soon,
-               // child_lst = GetChild_Prices(currency_code ,s.trip_id, trip_max_price)
+                // child_lst = GetChild_Prices(currency_code ,s.trip_id, trip_max_price)
             };
         }
 
@@ -1132,6 +1145,8 @@ namespace ITravelApp.Data
                         is_two_way=result.is_two_way,
                         trip_return_date=result.trip_return_date,
                         trip_return_datestr=result.trip_return_datestr,
+                        child_ages=result.child_ages,
+                        pricing_type=result.pricing_type,
                         extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code).ToList()
                     };
                 }
@@ -1229,13 +1244,19 @@ namespace ITravelApp.Data
                     //mean trip is diving or excursion or transfer get price data from tbl trip_prices depend on pax capacity
                     //if trip price doesnot contain pax range so skip check againt capacity
                     var price = _db.trip_prices.Where(wr => wr.trip_id == trip.id && wr.currency_code.ToLower() == req.currency_code.ToLower() && wr.pax_from <= capacity && (wr.pax_to >= capacity || wr.pax_to == 0)).SingleOrDefault();
-                   if(trip.trip_type == 2)
+                    //if(trip.trip_type == 2)
+                    // {
+                    //     //mean transfer price per unit & skip child calc
+                    //     total_adult_price = (price?.trip_sale_price);
+                    // }
+                    if (price?.pricing_type == 2)
                     {
-                        //mean transfer price per unit
+                        //mean price per unit & skip child calc
                         total_adult_price = (price?.trip_sale_price);
                     }
                     else
                     {
+                        //mean price per pax & child calc
                         total_adult_price = (price?.trip_sale_price * req.adult_num);
                         //calculte child price depend on policy assigned to trip
                         foreach (var age in req.childAges)
@@ -1379,7 +1400,9 @@ namespace ITravelApp.Data
                     client_name = row.client_name,
                     booking_code_auto = row.booking_code_auto,
                     is_two_way = row.is_two_way,
-                    trip_return_date= row.trip_return_dateStr !=null ? DateTime.Parse(row.trip_return_dateStr) : DateTime.Now
+                    child_ages= row.childAgesArr != null ? string.Join(",", row.childAgesArr) : row.child_ages,
+                    pricing_type=row.pricing_type,
+                    trip_return_date= row.trip_return_dateStr !=null ? DateTime.Parse(row.trip_return_dateStr) : null
                 };
                 // booking.total_price = CalculateBookingPrice(booking.trip_id, booking.total_pax, booking.child_num, row.currency_code);
                 if (row.id == 0)
@@ -1584,6 +1607,8 @@ namespace ITravelApp.Data
                     is_two_way=result.is_two_way,
                     trip_return_date=result.trip_return_date,
                     trip_return_datestr=result.trip_return_datestr,
+                    pricing_type=result.pricing_type,
+                    child_ages=result.child_ages,
                     extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code).ToList()
                 }).ToList();
             }

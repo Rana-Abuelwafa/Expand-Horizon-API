@@ -28,4 +28,10 @@ public partial class trip_price
     public int? pax_from { get; set; }
 
     public int? pax_to { get; set; }
+
+    /// <summary>
+    /// 1 = per pax
+    /// 2 = per unit
+    /// </summary>
+    public short? pricing_type { get; set; }
 }

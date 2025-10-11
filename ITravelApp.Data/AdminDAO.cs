@@ -31,6 +31,7 @@ namespace ITravelApp.Data
         }
 
         #region "main_Setting"
+
         public async Task<List<tbl_currency>> Get_Currencies()
         {
             return await _db.tbl_currencies.ToListAsync();
@@ -517,7 +518,8 @@ namespace ITravelApp.Data
                     notes=row.notes,
                     child_price=row.child_price,
                     pax_from=row.pax_from,
-                    pax_to=row.pax_to 
+                    pax_to=row.pax_to,
+                    pricing_type=row.pricing_type
                 };
                 if (row.delete == true)
                 {
@@ -980,6 +982,8 @@ namespace ITravelApp.Data
                        active=FM.active,
                        currency_code = FM.currency_code,
                        extra_price= FM.extra_price,
+                       is_obligatory= FM.is_obligatory,
+                       pricing_type=FM.pricing_type,
                        is_extra= FM.is_extra
 
                    };
@@ -991,7 +995,9 @@ namespace ITravelApp.Data
                     grp.active,
                     grp.is_extra,
                     grp.extra_price,
-                    grp.currency_code
+                    grp.currency_code,
+                    grp.pricing_type,
+                    grp.is_obligatory
                 }).Select(s => new FacilityWithTranslationGrp
                 {
                     facility_code=s.Key.facility_code,
@@ -1001,6 +1007,8 @@ namespace ITravelApp.Data
                     currency_code=s.Key.currency_code,
                     extra_price=s.Key.extra_price,
                     is_extra=s.Key.is_extra,
+                    is_obligatory=s.Key.is_obligatory,
+                    pricing_type=s.Key.pricing_type,
                     translations=result.ToList().Where(wr => wr.facility_id == s.Key.facility_id && wr.id !=0).ToList()
 
                 }).OrderBy(x => x.facility_id).ToList();
@@ -1029,6 +1037,9 @@ namespace ITravelApp.Data
                        facility_default_name = FM.facility_default_name,
                        facility_id = FM.id,
                        fac_trip_id = combined != null ? combined.id : 0,
+                       pricing_type = FM.pricing_type,
+                       extra_price = FM.extra_price,
+                       is_obligatory= FM.is_obligatory,
                        selected = combined != null && combined.id > 0 ? true : false
                    };
                 return result.ToList();

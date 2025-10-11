@@ -22,7 +22,7 @@ namespace ITravelApp.Data.Models.trips
         public List<TripFacility> facilities { get; set; }
         public List<trip_img> imgs {  get; set; }
         public int? max_child_age { get; set; }
-        //public decimal? child_price { get; set; }
+        public string? pricing_type { get; set; }
         public List<Child_Prices> child_lst { get; set; } = new List<Child_Prices>();
     }
     public class TripFacility
@@ -33,7 +33,8 @@ namespace ITravelApp.Data.Models.trips
         public bool? is_extra { get; set; }
 
         public decimal? extra_price { get; set; }
-
+        public short? pricing_type { get; set; }
+        public bool? is_obligatory { get; set; }
         public string? currency_code { get; set; }
         public long? facility_id { get; set; }
     }

@@ -59,4 +59,12 @@ public partial class trips_booking
     public bool? is_two_way { get; set; }
 
     public DateTime? trip_return_date { get; set; }
+
+    public string? child_ages { get; set; }
+
+    /// <summary>
+    /// 1 = per pax
+    /// 2 = per unit
+    /// </summary>
+    public short? pricing_type { get; set; }
 }

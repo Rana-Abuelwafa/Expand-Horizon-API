@@ -157,6 +157,12 @@ namespace ITravel_App.Services
                                         table.Cell().Padding(10).AlignRight()
                                             .Text($"{L["Guests"]}\n{_model.total_pax} Adults - {_model.child_num} Children - {_model.infant_num} Infants");
 
+                                        if (_model.is_two_way ==true)
+                                        {
+                                            table.Cell().Padding(10).Text($"{L["ReturnDate"]}\n{_model.trip_return_datestr}");
+                                            table.Cell().Padding(10).AlignRight().Text("\n");
+                                        }
+
                                         table.Cell().Padding(10).Text($"{L["Pickup"]}\n{_model.pickup_address}");
                                         table.Cell().Padding(10).AlignRight().Text($"{L["Nationality"]}\n{_model.client_nationality}");
 
