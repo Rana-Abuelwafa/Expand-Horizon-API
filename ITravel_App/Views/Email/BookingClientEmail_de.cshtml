@@ -22,6 +22,8 @@
     var nationality = Model.client_nationality;
     var returnDate = Model.trip_return_datestr;
     var is_two_way = Model.is_two_way;
+    var extras = Model.extras;
+    var extras_ob = Model.extras_obligatory;
 }
 
 <!doctype html>
@@ -85,7 +87,7 @@
                                         </td>
                                         <td style="padding:16px;" align="right">
                                             <div style="font-size:13px; color:#555;">Gäste</div>
-                                            <div style="font-size:15px; color:#000;">@adult Adult(s) - @child Child(s) - @infant Infant (s)</div>
+                                            <div style="font-size:15px; color:#000;">@adult Adult(s) - @child Child(s)</div>
                                         </td>
                                     </tr>
                                     @if (Model.is_two_way == true)
@@ -122,8 +124,55 @@
                                 </table>
                             </td>
                         </tr>
+                        <!-- extras -->
+                         @if ((extras != null && extras.Count > 0) || (extras_ob != null && extras_ob.Count > 0))
+                       {
+                        <tr>
+                            <td style="padding:0 24px 24px;">
+                                <div style="font-size:16px; font-weight:700; color:#000; padding-bottom:8px;">Extras</div>
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb; border-radius:8px;">
+                                    @for (var i = 0; i < extras.Count; i++)
+                                    {
+                                        var extra = extras[i];
+                                        <tr>
+                                            <td style="padding:12px; border-bottom:1px solid #e5e7eb;">
+                                                <!-- Icon + Title -->
+                                                <table role="presentation" cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <td valign="top">
+                                                            <div style="font-size:15px; font-weight:600; color:#000;">(@extra.extra_count) @extra.extra_name</div>
+                                                            <div style="font-size:13px; color:#555;">@extra.extra_price @currency</div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    }
 
+                                    @for (var i = 0; i < extras_ob.Count; i++)
+                                    {
+                                        var extra = extras_ob[i];
+                                        <tr>
+                                            <td style="padding:12px; border-bottom:1px solid #e5e7eb;">
+                                                <!-- Icon + Title -->
+                                                <table role="presentation" cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <td valign="top">
+                                                            <div style="font-size:15px; font-weight:600; color:#000;">(@extra.extra_count) @extra.extra_name</div>
+                                                            <div style="font-size:13px; color:#555;">@extra.extra_price @currency</div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </td>
+                        </tr>
+                        }
                         <!-- Itinerary -->
+                      @if (pickups != null && pickups.Count > 0)
+                       {
                         <tr>
                             <td style="padding:0 24px 24px;">
                                 <div style="font-size:16px; font-weight:700; color:#000; padding-bottom:8px;">Reiseplan</div>
@@ -160,7 +209,7 @@
                                 </table>
                             </td>
                         </tr>
-
+                        }
                         <!-- Price Summary -->
                         <tr>
                             <td style="padding:0 24px 24px;">

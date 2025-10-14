@@ -441,6 +441,37 @@
         }
       }
     },
+    "/api/Booking/CancelBooking": {
+      "post": {
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "booking_id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Accept-Language",
+            "in": "header",
+            "description": "Language for the response (e.g., en, ar, de)",
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Booking/GetClientProfiles": {
       "post": {
         "tags": [
@@ -2855,6 +2886,13 @@
             },
             "nullable": true
           },
+          "extra_obligatory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtraWithPrice"
+            },
+            "nullable": true
+          },
           "childAges": {
             "type": "array",
             "items": {
@@ -3196,6 +3234,11 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "pricing_type": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3386,6 +3429,10 @@
             "nullable": true
           },
           "isExtra": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "is_obligatory": {
             "type": "boolean",
             "nullable": true
           }
@@ -3706,7 +3753,8 @@
         "properties": {
           "trip_pickup_id": {
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "nullable": true
           },
           "pickup_name": {
             "type": "string",
@@ -4160,7 +4208,8 @@
           },
           "destination_id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "id": {
             "type": "integer",

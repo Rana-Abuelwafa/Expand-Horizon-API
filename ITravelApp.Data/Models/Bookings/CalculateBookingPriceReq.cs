@@ -16,6 +16,7 @@ namespace ITravelApp.Data.Models.Bookings
         public string? currency_code { get; set; }
 
         public List<ExtraWithPrice>? extra_lst { get; set; }
+        public List<ExtraWithPrice>? extra_obligatory { get; set; }
         public List<int>? childAges { get; set; } = new();
         public bool? is_two_way { get; set; } = false;
         //public decimal? extras_price { get; set; }
@@ -23,5 +24,6 @@ namespace ITravelApp.Data.Models.Bookings
     public class ExtraWithPrice {
         public decimal? extra_price { get; set; }
         public int? extra_count { get; set; }
+        public int? pricing_type { get; set; }
     }
 }

@@ -12,5 +12,6 @@ namespace ITravelApp.Data.Models.Bookings
 
         public string? lang_code { get; set; }
         public bool? isExtra { get; set; }
+        public bool? is_obligatory { get; set; }
     }
 }

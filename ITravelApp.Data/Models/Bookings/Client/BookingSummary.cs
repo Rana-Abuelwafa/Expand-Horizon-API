@@ -10,5 +10,6 @@ namespace ITravelApp.Data.Models.Bookings.Client
     public class BookingSummary :bookingwithdetail 
     {
         public List<BookingExtraCast>? extras {  get; set; }
+        public List<BookingExtraCast>? extras_obligatory { get; set; }
     }
 }

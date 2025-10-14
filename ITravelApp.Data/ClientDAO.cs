@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO.Pipelines;
 using System.Linq;
 
 namespace ITravelApp.Data
@@ -88,7 +89,7 @@ namespace ITravelApp.Data
                     .Select(dest => new DestinationResponse
                     {
                         destination_id = dest.destination_id,
-                        id = (int) dest.id,
+                        id = (int)dest.id,
                         country_code = dest.country_code,
                         active = dest.active,
                         dest_code = dest.dest_code,
@@ -153,7 +154,7 @@ namespace ITravelApp.Data
                               select new DestinationResponse
                               {
                                   destination_id = dest.destination_id,
-                                  id = dest.id,
+                                  id = (int) dest.id!,
                                   country_code = dest.country_code,
                                   active = dest.active,
                                   dest_code = dest.dest_code,
@@ -169,22 +170,22 @@ namespace ITravelApp.Data
                                   trip_type = combined != null ? combined.trip_type : 0
                               };
                 var main = records.ToList().GroupBy(g => new
-                               {
-                                   g.route,
-                                   g.parent_id,
-                                   g.destination_id,
-                                   g.img_path,
-                                   g.active,
-                                   g.country_code,
-                                   g.dest_code,
-                                   g.dest_default_name,
-                                   g.dest_description,
-                                   g.dest_name,
-                                   g.lang_code,
-                                   g.order,
-                                   g.leaf,
-                                   g.id
-                               }).Select(s => new DestinationResponse
+                {
+                    g.route,
+                    g.parent_id,
+                    g.destination_id,
+                    g.img_path,
+                    g.active,
+                    g.country_code,
+                    g.dest_code,
+                    g.dest_default_name,
+                    g.dest_description,
+                    g.dest_name,
+                    g.lang_code,
+                    g.order,
+                    g.leaf,
+                    g.id
+                }).Select(s => new DestinationResponse
                 {
                     destination_id = s.Key.destination_id,
                     id = s.Key.id,
@@ -303,9 +304,9 @@ namespace ITravelApp.Data
                 //           };
 
 
-                var result = GetDestination_TreeMain(main.ToList(),0)
-                         
-               // .Where(r => r.children != null && r.children.Any() && r.children.Count > 0)
+                var result = GetDestination_TreeMain(main.ToList(), 0)
+
+                // .Where(r => r.children != null && r.children.Any() && r.children.Count > 0)
                 .ToList();
                 //var result = GetDestination_TreeMain(main, 0, req.trip_type)
                 //       .Where(r => r != null) // remove null roots
@@ -346,61 +347,61 @@ namespace ITravelApp.Data
                       id = s.id,
                       img_path = s.img_path,
                       route = s.route,
-                      order=s.order,
+                      order = s.order,
                       //parent_order=s.parent_order,
                       //parent_name=s.parent_name,
-                      trip_type=s.trip_type,
+                      trip_type = s.trip_type,
                       children = GetDestination_TreeMain(lst, s.destination_id).OrderBy(x => x.order).ToList(),
 
                   })
                   .OrderBy(x => x.order)
                 .ToList();
         }
-//        public List<DestinationTree> GetDestination_TreeMain(List<DestinationResponse> lst, int? parentId, int tripType)
-//        {
-//#pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
-//            return lst
-//                .Where(x => x.parent_id == parentId)
-//                .Select(s =>
-//                {
-//                    // children must match tripType
-//                    var children = GetDestination_TreeMain(lst.Where(c => c.trip_type == tripType).ToList(), s.destination_id, tripType);
+        //        public List<DestinationTree> GetDestination_TreeMain(List<DestinationResponse> lst, int? parentId, int tripType)
+        //        {
+        //#pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
+        //            return lst
+        //                .Where(x => x.parent_id == parentId)
+        //                .Select(s =>
+        //                {
+        //                    // children must match tripType
+        //                    var children = GetDestination_TreeMain(lst.Where(c => c.trip_type == tripType).ToList(), s.destination_id, tripType);
 
-//                    // ✅ keep node if it matches tripType or has matching children
-//                    if (s.trip_type == tripType || children.Any())
-//                    {
-//                        return new DestinationTree
-//                        {
-//                            leaf = s.leaf,
-//                            lang_code = s.lang_code,
-//                            parent_id = s.parent_id,
-//                            active = s.active,
-//                            country_code = s.country_code,
-//                            destination_id = s.destination_id,
-//                            dest_code = s.dest_code,
-//                            dest_default_name = s.dest_default_name,
-//                            dest_description = s.dest_description,
-//                            dest_name = s.dest_name,
-//                            id = s.id,
-//                            img_path = s.img_path,
-//                            route = s.route,
-//                            trip_type = s.trip_type,
-//                            children = children.OrderBy(x => x.order).ToList(),
-//                            order = s.order
-//                        };
-//                    }
-//                    else
-//                    {
-//                        return null;
-//                    }
+        //                    // ✅ keep node if it matches tripType or has matching children
+        //                    if (s.trip_type == tripType || children.Any())
+        //                    {
+        //                        return new DestinationTree
+        //                        {
+        //                            leaf = s.leaf,
+        //                            lang_code = s.lang_code,
+        //                            parent_id = s.parent_id,
+        //                            active = s.active,
+        //                            country_code = s.country_code,
+        //                            destination_id = s.destination_id,
+        //                            dest_code = s.dest_code,
+        //                            dest_default_name = s.dest_default_name,
+        //                            dest_description = s.dest_description,
+        //                            dest_name = s.dest_name,
+        //                            id = s.id,
+        //                            img_path = s.img_path,
+        //                            route = s.route,
+        //                            trip_type = s.trip_type,
+        //                            children = children.OrderBy(x => x.order).ToList(),
+        //                            order = s.order
+        //                        };
+        //                    }
+        //                    else
+        //                    {
+        //                        return null;
+        //                    }
 
-//                    //return null;
-//                })
-//                .Where(node => node != null) // remove pruned nodes
-//                .OrderBy(x => x.order)
-//                .ToList();
-//#pragma warning restore CS8619 // Nullability of reference types in value doesn't match target type.
-//        }
+        //                    //return null;
+        //                })
+        //                .Where(node => node != null) // remove pruned nodes
+        //                .OrderBy(x => x.order)
+        //                .ToList();
+        //#pragma warning restore CS8619 // Nullability of reference types in value doesn't match target type.
+        //        }
         #endregion
 
         #region trips
@@ -410,32 +411,52 @@ namespace ITravelApp.Data
             return await _db.trip_categories.ToListAsync();
         }
         //get facilities for specific trip
-        public List<TripFacility> getFacilityForTrip(long? trip_id, string lang_code, bool? isExtra)
+        public List<TripFacility> getFacilityForTrip(long? trip_id, string lang_code, bool? isExtra, bool? is_obligatory)
         {
             try
             {
                 var result =
-                   from TFAC in _db.trip_facilities.Where(wr => wr.trip_id == trip_id)
-                   join TRANS in _db.facility_translations.Where(wr => wr.lang_code.ToLower() == lang_code.ToLower())
-                   on TFAC.facility_id equals TRANS.facility_id
-                   into TRIPFAC
+                        from TFAC in _db.trip_facilities
+                            .Where(wr => wr.trip_id == trip_id)
+                        join TRANS in _db.facility_translations
+                            .Where(wr => wr.lang_code.ToLower() == lang_code.ToLower())
+                            on TFAC.facility_id equals TRANS.facility_id
+                        join FACM in _db.facility_mains
+                            .Where(wr => wr.active == true && wr.is_extra ==  (isExtra == false ? wr.is_extra : isExtra) && wr.is_obligatory == (is_obligatory == false ? wr.is_obligatory : is_obligatory))
+                            on TFAC.facility_id equals FACM.id
+                        select new TripFacility
+                        {
+                            facility_desc = TRANS.facility_desc,
+                            facility_name = TRANS.facility_name,
+                            extra_price = FACM.extra_price,
+                            currency_code = FACM.currency_code,
+                            is_extra = FACM.is_extra,
+                            facility_id = TFAC.facility_id,
+                            pricing_type = FACM.pricing_type,
+                            is_obligatory = FACM.is_obligatory
+                        };
+                //var result =
+                //   from TFAC in _db.trip_facilities.Where(wr => wr.trip_id == trip_id)
+                //   join TRANS in _db.facility_translations.Where(wr => wr.lang_code.ToLower() == lang_code.ToLower())
+                //   on TFAC.facility_id equals TRANS.facility_id
+                //   into TRIPFAC
 
-                   from combinedFACT in TRIPFAC.DefaultIfEmpty() // LEFT JOIN Customers
-                   join FACM in _db.facility_mains.Where(wr => wr.active == true && wr.is_extra == isExtra)
+                //   from combinedFACT in TRIPFAC.DefaultIfEmpty() 
+                //   join FACM in _db.facility_mains.Where(wr => wr.active == true && wr.is_extra == isExtra && wr.is_obligatory == is_obligatory)
 
-                      on TFAC.facility_id equals FACM.id into FacAll
-                   from combinedFACM in FacAll.DefaultIfEmpty() // LEFT JOIN Payments
-                   select new TripFacility
-                   {
-                       facility_desc = combinedFACT != null ? combinedFACT.facility_desc : "",
-                       facility_name = combinedFACT != null ? combinedFACT.facility_name : "",
-                       extra_price = combinedFACM != null ? combinedFACM.extra_price : 0,
-                       currency_code = combinedFACM != null ? combinedFACM.currency_code : "",
-                       is_extra = combinedFACM != null ? combinedFACM.is_extra : false,
-                       facility_id = TFAC.facility_id,
-                       pricing_type= combinedFACM != null ? combinedFACM.pricing_type : 0,
-                       is_obligatory= combinedFACM != null ? combinedFACM.is_obligatory : null
-                   };
+                //      on TFAC.facility_id equals FACM.id into FacAll
+                //   from combinedFACM in FacAll.DefaultIfEmpty() 
+                //   select new TripFacility
+                //   {
+                //       facility_desc = combinedFACT != null ? combinedFACT.facility_desc : "",
+                //       facility_name = combinedFACT != null ? combinedFACT.facility_name : "",
+                //       extra_price = combinedFACM != null ? combinedFACM.extra_price : 0,
+                //       currency_code = combinedFACM != null ? combinedFACM.currency_code : "",
+                //       is_extra = combinedFACM != null ? combinedFACM.is_extra : false,
+                //       facility_id = TFAC.facility_id,
+                //       pricing_type= combinedFACM != null ? combinedFACM.pricing_type : 0,
+                //       is_obligatory= combinedFACM != null ? combinedFACM.is_obligatory : null
+                //   };
 
                 //var result = from TFAC in _db.trip_facilities.Where(wr => wr.trip_id == trip_id)
                 //             join TRANS in _db.facility_translations.Where(wr => wr.lang_code.ToLower() == lang_code.ToLower()) on TFAC.facility_id equals TRANS.facility_id into TRIPFAC
@@ -755,7 +776,7 @@ namespace ITravelApp.Data
                     trip_details = s.trip_details,
                     total_reviews = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Count(),
                     review_rate = _db.tbl_reviews.Where(wr => wr.trip_id == s.trip_id && wr.trip_type == s.trip_type).Max(m => m.review_rate),
-                    facilities = getFacilityForTrip(s.trip_id, s.lang_code, false).ToList(),
+                    facilities = getFacilityForTrip(s.trip_id, s.lang_code, false, false).ToList(),
                     imgs = GetImgsByTrip(s.trip_id).Result,
                     trip_category_code = s.trip_category_code,
                     trip_category_name = s.trip_category_name,
@@ -824,7 +845,7 @@ namespace ITravelApp.Data
                 dest_route = s.dest_route,
                 route = s.route,
                 client_id = client_id,
-                facilities = getFacilityForTrip(s.trip_id, s.lang_code, false).ToList(),
+                facilities = getFacilityForTrip(s.trip_id, s.lang_code, false, false).ToList(),
                 imgs = GetImgsByTrip(s.trip_id).Result,
                 important_info = s.important_info,
                 trip_details = s.trip_details,
@@ -837,6 +858,7 @@ namespace ITravelApp.Data
                 trip_max_price = trip_max_price,
                 trip_min_price = tripMinRows?.trip_sale_price,
                 pricing_type = tripMinRows?.pricing_type == 1 ? "Per Pax" : "Per Unit",
+                pricing_type_id = tripMinRows?.pricing_type,
                 //trip_min_price = _db.trip_prices
                 //    .Where(wr => wr.trip_id == s.trip_id && wr.currency_code.ToLower() == currency_code.ToLower())
                 //    .Min(m => m.trip_sale_price),
@@ -858,7 +880,7 @@ namespace ITravelApp.Data
             };
         }
 
-        public List<Child_Prices> GetChild_Prices(string? currency_code,long? trip_id , decimal? adult_price)
+        public List<Child_Prices> GetChild_Prices(string? currency_code, long? trip_id, decimal? adult_price)
         {
             /// <summary>
             /// 1 =Free
@@ -872,11 +894,11 @@ namespace ITravelApp.Data
                 return recorded.Select(s => new Child_Prices
                 {
                     age_from = s.age_from,
-                    age_to =s.age_to,
-                    child_price = s.pricing_type  == 3  ? s.child_price : (adult_price * s.child_price)
+                    age_to = s.age_to,
+                    child_price = s.pricing_type == 3 ? s.child_price : (adult_price * s.child_price)
                 }).ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new List<Child_Prices>();
             }
@@ -916,7 +938,7 @@ namespace ITravelApp.Data
             {
                 var result = await _db.trip_pickups_mains.Where(wr => wr.trip_id == req.trip_id && wr.trip_type == req.trip_type)
                                    .Join(_db.trip_pickups_translations.Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower()),
-                                        MAIN => new { trip_pickup_id = MAIN.id },
+                                        MAIN => new { trip_pickup_id = (long?) MAIN.id },
                                         TRANS => new { TRANS.trip_pickup_id },
                                         (MAIN, TRANS) => new TripsPickupResponse
                                         {
@@ -1142,12 +1164,13 @@ namespace ITravelApp.Data
                         trip_name = result.trip_name,
                         release_days = result.release_days,
                         trip_code_auto = result.trip_code_auto,
-                        is_two_way=result.is_two_way,
-                        trip_return_date=result.trip_return_date,
-                        trip_return_datestr=result.trip_return_datestr,
-                        child_ages=result.child_ages,
-                        pricing_type=result.pricing_type,
-                        extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code).ToList()
+                        is_two_way = result.is_two_way,
+                        trip_return_date = result.trip_return_date,
+                        trip_return_datestr = result.trip_return_datestr,
+                        child_ages = result.child_ages,
+                        pricing_type = result.pricing_type,
+                        extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code, false).ToList(),
+                        extras_obligatory = GetExtraAssignedToBooking(result.booking_id, req.lang_code, true).ToList()
                     };
                 }
                 return new BookingSummary();
@@ -1156,6 +1179,28 @@ namespace ITravelApp.Data
             {
                 return new BookingSummary();
             }
+        }
+
+        public async Task<ResponseCls> CancelBooking(long? booking_id,string? client_id)
+        {
+            ResponseCls response = new ();
+            try
+            {
+                var booking = await _db.trips_bookings.Where(wr => wr.id == booking_id && wr.client_id == client_id).SingleOrDefaultAsync();
+                //var booking = await _db.trips_bookings.FirstOrDefaultAsync(wr => wr.id == booking_id && wr.client_id == client_id);
+                if (booking != null)
+                {
+                    booking.booking_status = 3;
+                    _db.trips_bookings.Update(booking);
+                    await _db.SaveChangesAsync();
+                    response = new ResponseCls { errors = null, msg = "", success = true };
+                }
+            }
+            catch (Exception ex)
+            {
+                response = new ResponseCls { errors = null, msg = "", success = true };
+            }
+            return response;
         }
 
         public async Task<BookingWithTripDetailsAll> ConfirmBooking(ConfirmBookingReq req)
@@ -1199,8 +1244,10 @@ namespace ITravelApp.Data
                         client_name = result.client_name,
                         trip_id = result.trip_id,
                         trip_type = result.trip_type,
-                        is_two_way=result.is_two_way,
-                        trip_return_datestr=result.trip_return_datestr,
+                        is_two_way = result.is_two_way,
+                        trip_return_datestr = result.trip_return_datestr,
+                        extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code, false),
+                        extras_obligatory = GetExtraAssignedToBooking(result.booking_id, req.lang_code, true),
                         pickups = GetPickupsForTrip(new PickupsReq { lang_code = req.lang_code, trip_id = result.trip_id, trip_type = result.trip_type }).Result
 
 
@@ -1226,6 +1273,8 @@ namespace ITravelApp.Data
             decimal? total_child_price = 0;
             decimal? final_price = 0;
             decimal? extras_price = 0;
+            decimal? obligatory_price = 0;
+            //calc price for Optional list of Extras
             if (req.extra_lst != null && req.extra_lst.Count > 0)
             {
                 foreach (var item in req.extra_lst)
@@ -1233,7 +1282,24 @@ namespace ITravelApp.Data
                     extras_price = extras_price + (item.extra_price * item.extra_count);
                 }
             }
-           
+            //calc price for Obligatory list of Extras
+            if (req.extra_obligatory != null && req.extra_obligatory.Count > 0)
+            {
+                foreach (var row in req.extra_obligatory)
+                {
+                    switch (row.pricing_type)
+                    {
+                        case 1:
+                            //per pax
+                            obligatory_price = obligatory_price + (row.extra_price * req.adult_num);
+                            break;
+                        case 2:
+                            //per unit
+                            obligatory_price = obligatory_price + (row.extra_price * row.extra_count);
+                            break;
+                    }
+                }
+            }
             try
             {
                 //get trip details
@@ -1282,16 +1348,14 @@ namespace ITravelApp.Data
                         }
                     }
 
-                    final_price = total_adult_price + total_child_price + extras_price;
+                    final_price = total_adult_price + total_child_price + extras_price + obligatory_price;
                     //check if this two way or not (in case trip is transfer only) => so final price = finalprice * 2;
-                    if (trip.trip_type == 2 && req.is_two_way! == true)
+                    if (trip.trip_type == 2 && req.is_two_way == true)
                     {
                         final_price = final_price * 2;
                     }
-                    
                 }
-               
-                if(req.booking_id > 0)
+                if (req.booking_id > 0)
                 {
                     //update booking
                     var booking = _db.trips_bookings.Where(wr => wr.id == req.booking_id).SingleOrDefault();
@@ -1301,11 +1365,11 @@ namespace ITravelApp.Data
                         booking.total_price = final_price;
                         _db.trips_bookings.Update(booking);
                         _db.SaveChanges();
-                        response = new BookingPrice { success = true, message = _localizer["UpdateBookingPrice"],final_price = final_price, total_adult_price = total_adult_price, total_child_price = total_child_price };
+                        response = new BookingPrice { success = true, message = _localizer["UpdateBookingPrice"], final_price = final_price, total_adult_price = total_adult_price, total_child_price = total_child_price, opligatory_extras_price = obligatory_price, optional_extras_price = extras_price };
                     }
-                   
+
                 }
-                response = new BookingPrice { success = true, final_price = final_price, total_adult_price = total_adult_price, total_child_price = total_child_price };
+                response = new BookingPrice { success = true, final_price = final_price, total_adult_price = total_adult_price, total_child_price = total_child_price, optional_extras_price = extras_price, opligatory_extras_price = obligatory_price };
             }
             catch (Exception ex)
             {
@@ -1369,7 +1433,7 @@ namespace ITravelApp.Data
         public ResponseCls SaveClientBooking(BookingCls row)
         {
             long maxId = 0;
-            ResponseCls response = null;
+            ResponseCls response = new ();
             try
             {
                 string bookCode = "BK" + "-" + row.trip_code + "-" + DateTime.Now.ToString("yyyyMMdd");
@@ -1388,7 +1452,7 @@ namespace ITravelApp.Data
                     total_price = row.total_price,
                     trip_code = row.trip_code,
                     trip_id = row.trip_id,
-                    trip_date = DateTime.Parse(row.trip_dateStr),
+                    trip_date = DateTime.ParseExact(row.trip_dateStr!, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture),
                     //booking_code_auto="BK"+
                     client_nationality = row.client_nationality,
                     client_phone = row.client_phone,
@@ -1400,13 +1464,14 @@ namespace ITravelApp.Data
                     client_name = row.client_name,
                     booking_code_auto = row.booking_code_auto,
                     is_two_way = row.is_two_way,
-                    child_ages= row.childAgesArr != null ? string.Join(",", row.childAgesArr) : row.child_ages,
-                    pricing_type=row.pricing_type,
-                    trip_return_date= row.trip_return_dateStr !=null ? DateTime.Parse(row.trip_return_dateStr) : null
+                    child_ages = row.childAgesArr != null ? string.Join(",", row.childAgesArr) : row.child_ages,
+                    pricing_type = row.pricing_type,
+                    trip_return_date = row.trip_return_dateStr != null ? DateTime.ParseExact(row.trip_return_dateStr, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) : null
                 };
                 // booking.total_price = CalculateBookingPrice(booking.trip_id, booking.total_pax, booking.child_num, row.currency_code);
                 if (row.id == 0)
                 {
+                    //save new booking
                     //check duplicate validation
                     //var result = _db.trips_bookings.Where(wr => wr.trip_id == booking.trip_id && wr.booking_status == booking.booking_status && wr.client_id == booking.client_id && wr.booking_date == booking.booking_date).SingleOrDefault();
                     //if (result != null)
@@ -1422,13 +1487,18 @@ namespace ITravelApp.Data
                     booking.booking_code_auto = "BK_" + booking.id.ToString();
                     _db.trips_bookings.Add(booking);
                     _db.SaveChanges();
+                    //save Obligatory Extra List automatic after save Booking for first time
+                    row.id = booking.id;
+                    var result = CheckObligatoryExtraAndCalcPrice(row);
+                    response = new ResponseCls { errors = result.errors, success = result.success, idOut = booking.id, msg = result.success == false ? result.msg : _localizer["BookingMsg"] };
                 }
                 else
                 {
                     _db.trips_bookings.Update(booking);
                     _db.SaveChanges();
+                    response = new ResponseCls { errors = null, success = true, idOut = booking.id, msg = _localizer["BookingMsg"] };
                 }
-                response = new ResponseCls { errors = null, success = true, idOut = booking.id, msg = _localizer["BookingMsg"] };
+
             }
             catch (Exception ex)
             {
@@ -1436,31 +1506,96 @@ namespace ITravelApp.Data
             }
             return response;
         }
-        public async Task<List<TripExtraCast>> GetTrip_Extra_Mains(LangReq req)
+
+        public ResponseCls CheckObligatoryExtraAndCalcPrice(BookingCls row)
         {
+            ResponseCls response = new ResponseCls();
             try
             {
-                //return await _db.trip_extra_translations.Where(wr => wr.lang_code == req.lang_code)
-                //                                        .Join(_db.trip_extra_mains,
-                //                                                TRANS => new { TRANS.extra_id },
-                //                                                EXTRA => new { extra_id = EXTRA.id },
-                //                                                (TRANS, EXTRA) => new TripExtraCast
-                //                                                {
-                //                                                    id=TRANS.id,
-                //                                                    extra_id= TRANS.extra_id,
-                //                                                    lang_code=TRANS.lang_code,
-                //                                                    currency_code= EXTRA.currency_code,
-                //                                                    extra_code= TRANS.extra_code,
-                //                                                    extra_name=TRANS.extra_name,
-                //                                                    extra_price= EXTRA.extra_price
-                //                                                }).ToListAsync();
-                return new List<TripExtraCast>();
+                
+                CalculateBookingPriceReq req = new CalculateBookingPriceReq
+                {
+                    adult_num = row.total_pax,
+                    booking_id = row.id,
+                    childAges = row.childAgesArr,
+                    child_num = row.child_num,
+                    currency_code = row.currency_code,
+                    is_two_way = row.is_two_way,
+                    trip_id = row.trip_id,
+                };
+                //get list of extra assigned to trip with obligatory check
+                List<TripFacility> extras = getFacilityForTrip(row.trip_id, "en", true, true).ToList();
+                List<booking_extra> lst = new List<booking_extra>();
+                if (extras != null && extras.Count > 0)
+                {
+
+                    lst = extras.Select(s => new booking_extra
+                    {
+                        booking_id = row.id,
+                        id = 0,
+                        extra_count = 1,
+                        extra_id = (int?)s.facility_id,
+                    }).ToList();
+
+                    response = AssignExtraToBooking(lst);
+                    if (response.success)
+                    {
+                        req.extra_obligatory = extras.Select(s => new ExtraWithPrice
+                        {
+                            extra_price = s.extra_price,
+                            extra_count = 1,
+                            pricing_type = s.pricing_type
+                        }).ToList();
+                    }
+                    else
+                    {
+                        new ResponseCls { msg = response.msg, success = (bool)response.success };
+                    }
+                }
+                //calculate price & update booking
+                BookingPrice price = CalculateBookingPrice(req);
+                response = new ResponseCls { msg = price.message, success = (bool)price.success };
+
             }
             catch (Exception ex)
             {
-                return new List<TripExtraCast>();
+                response = new ResponseCls { errors = _localizer["CheckAdmin"], success = false, idOut = 0 };
             }
+            return response;
         }
+
+        public List<TripFacility> GetTrip_Extra_Mains(TripExtraReq req)
+        {
+                try
+                {
+                    var result =
+                            from TFAC in _db.trip_facilities
+                                .Where(wr => wr.trip_id == req.trip_id)
+                            join TRANS in _db.facility_translations
+                                .Where(wr => wr.lang_code.ToLower() == req.lang_code.ToLower())
+                                on TFAC.facility_id equals TRANS.facility_id
+                            join FACM in _db.facility_mains
+                                .Where(wr => wr.active == true && wr.is_extra == req.isExtra && wr.is_obligatory == req.is_obligatory)
+                                on TFAC.facility_id equals FACM.id
+                            select new TripFacility
+                            {
+                                facility_desc = TRANS.facility_desc,
+                                facility_name = TRANS.facility_name,
+                                extra_price = FACM.extra_price,
+                                currency_code = FACM.currency_code,
+                                is_extra = FACM.is_extra,
+                                facility_id = TFAC.facility_id,
+                                pricing_type = FACM.pricing_type,
+                                is_obligatory = FACM.is_obligatory
+                            };
+                   
+                    return result.ToList();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
         public ResponseCls AssignExtraToBooking(List<booking_extra> lst)
         {
             ResponseCls response;
@@ -1537,36 +1672,41 @@ namespace ITravelApp.Data
             return response;
         }
 
-        public List<BookingExtraCast> GetExtraAssignedToBooking(long? booking_id, string lang_code)
+        public List<BookingExtraCast> GetExtraAssignedToBooking(long? booking_id, string lang_code, bool is_obligatory)
         {
             try
             {
 
                 var result = from BOOK in _db.booking_extras.Where(wr => wr.booking_id == booking_id)
                              join TRANS in _db.facility_translations.Where(wr => wr.lang_code.ToLower() == lang_code.ToLower()) on BOOK.extra_id equals TRANS.facility_id
-                             join FAC in _db.facility_mains on TRANS.facility_id equals FAC.id
+                             join FAC in _db.facility_mains.Where(wr => wr.is_obligatory == is_obligatory) on TRANS.facility_id equals FAC.id
                              select new BookingExtraCast
                              {
                                  extra_id = BOOK.extra_id,
                                  booking_id = BOOK.booking_id,
                                  extra_count = BOOK.extra_count,
                                  extra_name = TRANS.facility_name,
-                                 extra_price = FAC.extra_price * BOOK.extra_count,
-                                 id = BOOK.id
+                                 extra_price = FAC.extra_price,
+                                 id = BOOK.id,
+                                 is_obligatory = FAC.is_obligatory,
+                                 isExtra=FAC.is_extra,
+                                 pricing_type = FAC.pricing_type,
+                                 //total_extra_price = FAC!.pricing_type == 1 ? (FAC!.extra_price  * BOOK.extra_count)  : FAC!.extra_price  
                              };
 
-                return result.ToList();
+                return result!=null ? [.. result] : [];
             }
             catch (Exception ex)
             {
-                return new List<BookingExtraCast>();
+                return [];
             }
         }
         public async Task<List<BookingSummary>> GetMyBooking(LangReq req, string client_id)
         {
             try
             {
-                var records = await _db.bookingwithdetails.Where(wr => wr.client_id == client_id && wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.currency_code.ToLower() == req.currency_code.ToLower()).ToListAsync();
+                //get all booking except cancel which status =3
+                var records = await _db.bookingwithdetails.Where(wr => wr.client_id == client_id && wr.lang_code.ToLower() == req.lang_code.ToLower() && wr.currency_code.ToLower() == req.currency_code.ToLower() && wr.booking_status_id !=3).ToListAsync();
 
                 return records.Select(result => new BookingSummary
                 {
@@ -1604,12 +1744,13 @@ namespace ITravelApp.Data
                     trip_name = result.trip_name,
                     release_days = result.release_days,
                     trip_code_auto = result.trip_code_auto,
-                    is_two_way=result.is_two_way,
-                    trip_return_date=result.trip_return_date,
-                    trip_return_datestr=result.trip_return_datestr,
-                    pricing_type=result.pricing_type,
-                    child_ages=result.child_ages,
-                    extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code).ToList()
+                    is_two_way = result.is_two_way,
+                    trip_return_date = result.trip_return_date,
+                    trip_return_datestr = result.trip_return_datestr,
+                    pricing_type = result.pricing_type,
+                    child_ages = result.child_ages,
+                    extras = GetExtraAssignedToBooking(result.booking_id, req.lang_code, false).ToList(),
+                    extras_obligatory = GetExtraAssignedToBooking(result.booking_id, req.lang_code, true).ToList()
                 }).ToList();
             }
             catch (Exception ex)
@@ -1651,9 +1792,9 @@ namespace ITravelApp.Data
                     phone_number = slc.phone_number,
                     profile_id = slc.profile_id,
                     address = slc.address,
-                    client_first_name=slc.client_first_name,
-                    client_last_name=slc.client_last_name,
-                    
+                    client_first_name = slc.client_first_name,
+                    client_last_name = slc.client_last_name,
+
                 }).ToListAsync();
             }
             catch (Exception ex)
@@ -1849,7 +1990,7 @@ namespace ITravelApp.Data
                     _db.SaveChanges();
                 }
 
-                response = new ResponseCls { errors = null, success = true, idOut = row.id,msg= _localizer["AddSletterMsg"] };
+                response = new ResponseCls { errors = null, success = true, idOut = row.id, msg = _localizer["AddSletterMsg"] };
             }
             catch (Exception ex)
             {

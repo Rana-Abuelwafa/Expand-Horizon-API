@@ -23,6 +23,7 @@ namespace ITravelApp.Data.Models.trips
         public List<trip_img> imgs {  get; set; }
         public int? max_child_age { get; set; }
         public string? pricing_type { get; set; }
+        public int? pricing_type_id { get; set; }
         public List<Child_Prices> child_lst { get; set; } = new List<Child_Prices>();
     }
     public class TripFacility

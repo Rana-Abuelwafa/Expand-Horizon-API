@@ -13,7 +13,7 @@ public partial class destinationwithdetail
 
     public int? destination_id { get; set; }
 
-    public int id { get; set; }
+    public int? id { get; set; }
 
     public string? lang_code { get; set; }
 

@@ -22,7 +22,8 @@
                 ["Total"] = "Total",
                 ["Help"] = "Need help? Contact us at",
                 ["Nationality"]= "Nationality",
-                ["ReturnDate"] = "Return Date"
+                ["ReturnDate"] = "Return Date",
+                ["Extra"] = "Extras"
             },
             ["de"] = new Dictionary<string, string>
             {
@@ -42,7 +43,8 @@
                 ["Total"] = "Gesamt",
                 ["Help"] = "Brauchen Sie Hilfe? Kontaktieren Sie uns unter",
                 ["Nationality"] = "Nationalität",
-                ["ReturnDate"] = "Rückflugdatum"
+                ["ReturnDate"] = "Rückflugdatum",
+                ["Extra"] = "Extras"
             }
         };
     }

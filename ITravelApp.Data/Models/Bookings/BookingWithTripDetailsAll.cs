@@ -1,4 +1,5 @@
 ﻿using ITravelApp.Data.Entities;
+using ITravelApp.Data.Models.Bookings.Client;
 using ITravelApp.Data.Models.trips;
 using System;
 using System.Collections.Generic;
@@ -54,5 +55,7 @@ namespace ITravelApp.Data.Models.Bookings
         public bool? is_two_way { get; set; }
         public string? trip_return_datestr { get; set; }
         public List<TripsPickupResponse> pickups { get; set; }
+        public List<BookingExtraCast>? extras { get; set; }
+        public List<BookingExtraCast>? extras_obligatory { get; set; }
     }
 }

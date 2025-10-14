@@ -37,6 +37,11 @@ namespace ITravel_App.Services
             return _clientDAO.CalculateBookingPrice(req);
         }
 
+        public Task<ResponseCls> CancelBooking(long? booking_id, string? client_id)
+        {
+            return _clientDAO.CancelBooking(booking_id, client_id);
+        }
+
         public async Task<BookingWithTripDetailsAll> ConfirmBooking(ConfirmBookingReq req)
         {
             return await _clientDAO.ConfirmBooking(req);
@@ -77,9 +82,9 @@ namespace ITravel_App.Services
             return _clientDAO.GetDestination_Tree(req);
         }
 
-        public List<TripFacility> getFacilityForTrip(long? trip_id, string lang_code, bool? isExtra)
+        public List<TripFacility> getFacilityForTrip(long? trip_id, string lang_code, bool? isExtra, bool? is_obligatory)
         {
-            return _clientDAO.getFacilityForTrip(trip_id, lang_code, isExtra); 
+            return _clientDAO.getFacilityForTrip(trip_id, lang_code, isExtra, is_obligatory); 
         }
 
         public Task<List<BookingSummary>> GetMyBooking(LangReq req, string client_id)
@@ -122,7 +127,7 @@ namespace ITravel_App.Services
             return _clientDAO.GetTripsForSlider(req);
         }
 
-        public Task<List<TripExtraCast>> GetTrip_Extra_Mains(LangReq req)
+        public List<TripFacility> GetTrip_Extra_Mains(TripExtraReq req)
         {
             return _clientDAO.GetTrip_Extra_Mains(req);
         }

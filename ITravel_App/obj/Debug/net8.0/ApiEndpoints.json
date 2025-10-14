@@ -33,6 +33,22 @@
   },
   {
     "ContainingType": "ITravel_App.Controllers.BookingController",
+    "Method": "CancelBooking",
+    "RelativePath": "api/Booking/CancelBooking",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "booking_id",
+        "Type": "System.Nullable\u00601[[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITravel_App.Controllers.BookingController",
     "Method": "ConfirmBooking",
     "RelativePath": "api/Booking/ConfirmBooking",
     "HttpMethod": "POST",

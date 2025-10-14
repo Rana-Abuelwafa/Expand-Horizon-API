@@ -36,12 +36,13 @@ namespace ITravel_App.Services
         public Task<int> GetMyBookingCount(string client_id);
         public Task<List<BookingSummary>> GetMyBooking(LangReq req, string client_id);
         public ResponseCls SaveClientBooking(BookingCls row);
-        public  Task<List<TripExtraCast>> GetTrip_Extra_Mains(LangReq req);
-        public List<TripFacility> getFacilityForTrip(long? trip_id, string lang_code, bool? isExtra);
+        public List<TripFacility> GetTrip_Extra_Mains(TripExtraReq req);
+        public List<TripFacility> getFacilityForTrip(long? trip_id, string lang_code, bool? isExtra,bool? is_obligatory);
         public ResponseCls AssignExtraToBooking(List<booking_extra> lst);
         public BookingPrice CalculateBookingPrice(CalculateBookingPriceReq req);
         public Task<BookingSummary> GetBookingWithDetails(BookingReq req);
         public Task<BookingWithTripDetailsAll> ConfirmBooking(ConfirmBookingReq req);
+        public Task<ResponseCls> CancelBooking(long? booking_id, string? client_id);
         #endregion
 
         #region "Profile"

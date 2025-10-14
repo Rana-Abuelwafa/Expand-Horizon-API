@@ -86,8 +86,8 @@ namespace ITravel_App.Controllers
         [HttpPost("GetTrip_Extra_Mains")]
         public IActionResult GetTrip_Extra_Mains(TripExtraReq req)
         {
-            return Ok( _clientService.getFacilityForTrip(req.trip_id,req.lang_code,req.isExtra));
-            //return Ok(await _clientService.GetTrip_Extra_Mains(req));
+           // return Ok( _clientService.getFacilityForTrip(req.trip_id,req.lang_code,req.isExtra,req.is_obligatory));
+            return Ok( _clientService.GetTrip_Extra_Mains(req));
         }
         [HttpPost("AssignExtraToBooking")]
         public IActionResult AssignExtraToBooking(List<booking_extra> lst)
@@ -150,7 +150,14 @@ namespace ITravel_App.Controllers
         public async Task<IActionResult> GetMyBooking(LangReq req)
         {
             string? clientId = _loginUserData.client_id;
-            return Ok(await _clientService.GetMyBooking(req,clientId));
+            return Ok(await _clientService.GetMyBooking(req, clientId));
+        }
+
+        [HttpPost("CancelBooking")]
+        public async Task<IActionResult> CancelBooking([FromQuery] long? booking_id)
+        {
+            string? clientId = _loginUserData.client_id;
+            return Ok(await _clientService.CancelBooking(booking_id, clientId));
         }
         #endregion
 

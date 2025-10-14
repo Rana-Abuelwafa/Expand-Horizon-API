@@ -1113,7 +1113,7 @@ namespace ITravelApp.Data
                 return await _db.trip_mains.Where(wr => wr.destination_id == (destination_id == 0 ? wr.destination_id : destination_id) && wr.trip_type ==(trip_type == 0 ? wr.trip_type : trip_type))
                       .Join(_db.destination_mains,
                               TRIP => new { TRIP.destination_id },
-                              DEST => new { destination_id = DEST.id },
+                              DEST => new { destination_id = (int?) DEST.id },
                               (TRIP, DEST) => new TripMainCast
                               {
                                   destination_id = TRIP.destination_id,

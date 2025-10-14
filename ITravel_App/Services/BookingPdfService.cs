@@ -149,42 +149,72 @@ namespace ITravel_App.Services
                                     .Table(table =>
                                     {
                                         table.ColumnsDefinition(cols => { cols.RelativeColumn(); cols.RelativeColumn(); });
+                                        table.Cell().Padding(8).Text($"{L["Trip"]}\n{_model.trip_name}");
+                                        table.Cell().Padding(8).AlignRight().Text($"{L["BookingRef"]}\n{_model.booking_code}");
+                                        table.Cell().Padding(8).Text($"{L["Date"]}\n{_model.trip_datestr}");
+                                        table.Cell().Padding(8).AlignRight()
+                                            .Text($"{L["Guests"]}\n{_model.total_pax} Adults - {_model.child_num} Children");
 
-                                        table.Cell().Padding(10).Text($"{L["Trip"]}\n{_model.trip_name}");
-                                        table.Cell().Padding(10).AlignRight().Text($"{L["BookingRef"]}\n{_model.booking_code}");
-
-                                        table.Cell().Padding(10).Text($"{L["Date"]}\n{_model.trip_datestr}");
-                                        table.Cell().Padding(10).AlignRight()
-                                            .Text($"{L["Guests"]}\n{_model.total_pax} Adults - {_model.child_num} Children - {_model.infant_num} Infants");
-
-                                        if (_model.is_two_way ==true)
+                                        if (_model.is_two_way == true)
                                         {
-                                            table.Cell().Padding(10).Text($"{L["ReturnDate"]}\n{_model.trip_return_datestr}");
-                                            table.Cell().Padding(10).AlignRight().Text("\n");
+                                            table.Cell().Padding(8).Text($"{L["ReturnDate"]}\n{_model.trip_return_datestr}");
+                                            table.Cell().Padding(8).AlignRight().Text("\n");
                                         }
+                                        table.Cell().Padding(8)
+                                         .Text($"{L["Pickup"]}\n{(string.IsNullOrWhiteSpace(_model.pickup_address) ? "N/A" : _model.pickup_address)}");
+                                        //table.Cell().Padding(8).Text($"{L["Pickup"]}\n{_model.pickup_address}");
+                                        table.Cell().Padding(8).AlignRight().Text($"{L["Nationality"]}\n{_model.client_nationality}");
 
-                                        table.Cell().Padding(10).Text($"{L["Pickup"]}\n{_model.pickup_address}");
-                                        table.Cell().Padding(10).AlignRight().Text($"{L["Nationality"]}\n{_model.client_nationality}");
-
-                                        table.Cell().Padding(10).Text($"{L["Payment"]}\nPayment on site in cash {_model.total_price} {_model.currency_code}");
+                                        table.Cell().Padding(8).Text($"{L["Payment"]}\nPayment on site in cash {_model.total_price} {_model.currency_code}");
                                     });
 
-                                // ITINERARY
-                                col.Item().PaddingVertical(20).Text(L["Itinerary"]).FontSize(16).Bold();
-                                col.Item().Border(1).BorderColor("#e5e7eb").CornerRadius(8).Table(table =>
+                                // Extras
+                                if ((_model.extras != null && _model.extras.Count > 0) || (_model.extras_obligatory != null && _model.extras_obligatory.Count > 0))
                                 {
-                                    table.ColumnsDefinition(cols => cols.RelativeColumn());
-
-                                    foreach (var i in _model.pickups)
+                                    col.Item().PaddingVertical(20).Text(L["Extra"]).FontSize(16).Bold();
+                                    col.Item().Border(1).BorderColor("#e5e7eb").CornerRadius(8).Table(table =>
                                     {
-                                        table.Cell().Padding(10).Column(c =>
-                                        {
-                                            c.Item().Text(i.pickup_name).Bold().FontSize(14);
-                                            c.Item().Text(i.duration).FontSize(12).FontColor("#555");
-                                        });
-                                    }
-                                });
+                                        table.ColumnsDefinition(cols => cols.RelativeColumn());
 
+                                        foreach (var i in _model.extras!)
+                                        {
+                                            table.Cell().Padding(10).Column(c =>
+                                            {
+                                                c.Item().Text($"({i.extra_count}) {i.extra_name}").Bold().FontSize(12);
+                                                c.Item().Text($"{i.extra_price.ToString()} {_model.currency_code}").FontSize(12).FontColor("#555");
+                                            });
+                                        }
+
+                                        foreach (var i in _model.extras_obligatory!)
+                                        {
+                                            table.Cell().Padding(10).Column(c =>
+                                            {
+                                                c.Item().Text($"({i.extra_count}) {i.extra_name}").Bold().FontSize(14);
+                                                c.Item().Text($"{i.extra_price.ToString()} {_model.currency_code}").FontSize(14).FontColor("#555");
+                                            });
+                                        }
+                                    });
+                                }
+
+
+                                // ITINERARY
+                                if (_model.pickups != null && _model.pickups.Count > 0)
+                                {
+                                    col.Item().PaddingVertical(20).Text(L["Itinerary"]).FontSize(16).Bold();
+                                    col.Item().Border(1).BorderColor("#e5e7eb").CornerRadius(8).Table(table =>
+                                    {
+                                        table.ColumnsDefinition(cols => cols.RelativeColumn());
+
+                                        foreach (var i in _model.pickups)
+                                        {
+                                            table.Cell().Padding(10).Column(c =>
+                                            {
+                                                c.Item().Text(i.pickup_name).Bold().FontSize(14);
+                                                c.Item().Text(i.duration).FontSize(12).FontColor("#555");
+                                            });
+                                        }
+                                    });
+                                }
                                 // PRICE SUMMARY
                                 col.Item().PaddingVertical(20).Text(L["PriceSummary"]).FontSize(16).Bold();
                                 col.Item().Border(1).BorderColor("#e5e7eb").CornerRadius(8).Table(table =>

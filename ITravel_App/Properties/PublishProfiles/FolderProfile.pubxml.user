@@ -3,7 +3,7 @@
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>D:\horizen\api\publish\client</_PublishTargetUrl>
-    <History>True|2025-10-11T13:17:59.6458909Z||;True|2025-10-11T13:15:01.1770855+03:00||;True|2025-10-07T13:50:22.8551666+03:00||;True|2025-10-07T13:41:38.8292980+03:00||;True|2025-10-06T13:09:53.8032035+03:00||;</History>
+    <History>True|2025-10-14T11:09:54.6660928Z||;True|2025-10-14T12:58:33.4983747+03:00||;True|2025-10-13T10:44:22.2455027+03:00||;True|2025-10-12T09:53:39.3570846+03:00||;True|2025-10-11T16:17:59.6458909+03:00||;True|2025-10-11T13:15:01.1770855+03:00||;True|2025-10-07T13:50:22.8551666+03:00||;True|2025-10-07T13:41:38.8292980+03:00||;True|2025-10-06T13:09:53.8032035+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -11,10 +11,10 @@
       <publishTime>09/15/2025 10:52:25</publishTime>
     </File>
     <File Include="Views/Email/BookingClientEmail_de.cshtml">
-      <publishTime>10/11/2025 12:54:37</publishTime>
+      <publishTime>10/14/2025 12:44:21</publishTime>
     </File>
     <File Include="Views/Email/BookingClientEmail_en.cshtml">
-      <publishTime>10/11/2025 13:09:11</publishTime>
+      <publishTime>10/14/2025 12:44:35</publishTime>
     </File>
   </ItemGroup>
 </Project>
